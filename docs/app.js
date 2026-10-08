@@ -64,6 +64,16 @@
     $('cov-unseen').innerHTML = (C.unseen_large || []).filter((f) => f.smoke300 === 0).slice(0, 6).map((f) => `<li>${esc(f.name)} Fire, ${f.year} <small>${f.acres.toLocaleString()} acres · ${esc(f.county)}</small></li>`).join('') || '<li>None</li>';
     $('cov-blind').innerHTML = (C.blind_spots || []).slice(0, 6).map((b) => `<li>${esc(b.name)} <small>${b.km2.toLocaleString()} km² of wildland${b.biggest ? ` · ${esc(b.biggest.name)} Fire ${b.biggest.year}` : ''}</small></li>`).join('');
     $('cov-method').textContent = (S.text && S.text.coverage_method) || '';
+    const SI = C.siting, SF = C.siting_fires;
+    if (SI || SF) {
+      $('cov-siting-card').hidden = false; $('cov-key-site').hidden = false;
+      const parts = [];
+      if (SI) parts.push(`Searching ${SI.candidates.toLocaleString()} hilltops one site at a time, ten new sites would add ${SI.added_km2.toLocaleString()} km² of watched wildland, ${Math.round(SI.added_share * 1000) / 10} points of the state.`);
+      if (SF) parts.push(`Looking back, the ten sites below would have seen a 300 m smoke column from ${SF.fires} of the ${SF.missed_fires} fires no camera could see, ${(SF.acres / 1e6).toFixed(2)} million of their ${(SF.missed_acres / 1e6).toFixed(2)} million acres.`);
+      $('cov-siting-text').textContent = parts.join(' ');
+      const P = SF ? SF.picks : SI.picks;
+      $('cov-siting').innerHTML = P.map((p) => `<li>${esc(p.region)} <small>${SF ? p.acres.toLocaleString() + ' acres · ' + esc(p.examples[0]) + ' Fire' : '+' + p.new_km2.toLocaleString() + ' km²'} · ${p.lat.toFixed(2)}, ${p.lon.toFixed(2)}</small></li>`).join('');
+    }
     const sv = $('cov-hit'), M = C.map;
     sv.setAttribute('viewBox', `0 0 ${M.w} ${M.h}`); sv.innerHTML = '';
     const X = (lon) => (lon - M.west) / M.res, Y = (lat) => (M.north - lat) / M.res;
@@ -76,6 +86,16 @@
         tip.innerHTML = `${esc(f.n)} Fire, ${f.y} · ${f.a.toLocaleString()} acres<br>ground in view of ${f.g} camera site${f.g === 1 ? '' : 's'}<br>300 m smoke in view of ${f.s}`;
       });
       c.addEventListener('pointerleave', () => { $('cov-tip').hidden = true; });
+    });
+    ((SF || SI) ? (SF || SI).picks : []).forEach((p, i) => {
+      const x = X(p.lon), y = Y(p.lat), r = 9;
+      const d = el('path', { d: `M${x} ${y - r}L${x + r} ${y}L${x} ${y + r}L${x - r} ${y}Z`, class: 'pick' }, sv);
+      d.addEventListener('pointerenter', () => {
+        const tip = $('cov-tip'), bb = sv.getBoundingClientRect();
+        tip.hidden = false; tip.style.left = (x / M.w * bb.width) + 'px'; tip.style.top = (y / M.h * bb.height) + 'px';
+        tip.innerHTML = `Proposed site ${i + 1}: ${esc(p.region)}<br>` + (p.acres != null ? `would have seen ${p.fires} missed fire${p.fires === 1 ? '' : 's'}, ${p.acres.toLocaleString()} acres` : `+${p.new_km2.toLocaleString()} km² of unwatched wildland`);
+      });
+      d.addEventListener('pointerleave', () => { $('cov-tip').hidden = true; });
     });
   }
   drawCoverage();

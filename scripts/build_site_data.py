@@ -194,7 +194,8 @@ def narrative(out, summ, timing):
         text['findings'].append(['--cov2', 'Coverage',
             f"{pc(cov['wild_seen'])} of California's wildland is in line of sight of an ALERTCalifornia camera and {pc(cov['wild_seen2'])} "
             f"of two. Of {big['n']} fires over 1,000 acres since {cov['years'][0]}, {pc(1 - big['smoke300'])} started where no camera could see "
-            f"a 300 m smoke column; together they burned {big['acres_nosmoke'] / 1e6:.1f} million acres."])
+            f"a 300 m smoke column; together they burned {big['acres_nosmoke'] / 1e6:.1f} million acres." +
+            (f" Looking back, ten well-placed new sites would have seen {cov['siting_fires']['acres'] / cov['siting_fires']['missed_acres'] * 100:.0f}% of the acres burned by fires no camera could see." if cov.get('siting_fires') else "")])
     text['findings'].append(['--cam', 'Fuel moisture',
         f"A colour-corrected camera beats the calendar at {cam['cams_better']} of {cam['cams']} cameras, and pooled it has "
         f"{pct_change(s0, cam['rmse'])} season alone." +

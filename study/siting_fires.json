@@ -1,0 +1,137 @@
+{
+ "candidates": 13894,
+ "missed_fires": 317,
+ "missed_acres": 1479070,
+ "picks": [
+  {
+   "lat": 37.3229,
+   "lon": -121.4079,
+   "elev": 1145,
+   "fires": 2,
+   "acres": 396705,
+   "examples": [
+    "Scu Lightning Complex",
+    "Canyon"
+   ],
+   "region": "Mariposa foothills"
+  },
+  {
+   "lat": 39.8238,
+   "lon": -120.9363,
+   "elev": 1922,
+   "fires": 2,
+   "acres": 318821,
+   "examples": [
+    "Claremont",
+    "Hartman "
+   ],
+   "region": "Feather River country"
+  },
+  {
+   "lat": 41.4288,
+   "lon": -123.6146,
+   "elev": 1473,
+   "fires": 14,
+   "acres": 312472,
+   "examples": [
+    "Red",
+    "Mccash",
+    "Mosquito"
+   ],
+   "region": "Klamath Mountains"
+  },
+  {
+   "lat": 35.4321,
+   "lon": -115.5454,
+   "elev": 1942,
+   "fires": 5,
+   "acres": 138902,
+   "examples": [
+    "York",
+    "Dome",
+    "Mojave"
+   ],
+   "region": "Mojave National Preserve"
+  },
+  {
+   "lat": 38.4829,
+   "lon": -119.2996,
+   "elev": 3433,
+   "fires": 4,
+   "acres": 47475,
+   "examples": [
+    "Slink",
+    "Mountain View",
+    "Cow Camp"
+   ],
+   "region": "Mono Basin"
+  },
+  {
+   "lat": 36.0004,
+   "lon": -120.2629,
+   "elev": 429,
+   "fires": 11,
+   "acres": 34228,
+   "examples": [
+    "Mineral",
+    "Five",
+    "Five"
+   ],
+   "region": "Diablo Range"
+  },
+  {
+   "lat": 36.3804,
+   "lon": -118.5171,
+   "elev": 3743,
+   "fires": 3,
+   "acres": 18597,
+   "examples": [
+    "Walkers",
+    "Rattlesnake",
+    "Summit"
+   ],
+   "region": "Sequoia backcountry"
+  },
+  {
+   "lat": 41.5729,
+   "lon": -123.3363,
+   "elev": 2075,
+   "fires": 5,
+   "acres": 18225,
+   "examples": [
+    "Elliot",
+    "Ufish",
+    "Summit"
+   ],
+   "region": "Klamath Mountains"
+  },
+  {
+   "lat": 37.8462,
+   "lon": -119.5113,
+   "elev": 3267,
+   "fires": 11,
+   "acres": 14621,
+   "examples": [
+    "Red",
+    "Tiltill",
+    "Wolf"
+   ],
+   "region": "Yosemite high country"
+  },
+  {
+   "lat": 40.9754,
+   "lon": -123.7313,
+   "elev": 1266,
+   "fires": 3,
+   "acres": 8801,
+   "examples": [
+    "Hill",
+    "Waterman",
+    "Mp 21"
+   ],
+   "region": "Klamath Mountains"
+  }
+ ],
+ "fires": 60,
+ "acres": 1308847
+}

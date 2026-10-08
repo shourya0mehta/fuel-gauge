@@ -211,6 +211,9 @@ figcaption { font-size: 0.85rem; color: var(--ink-3); }
 #cov-hit circle { fill: transparent; cursor: pointer; }
 #cov-hit circle:hover { stroke: var(--ink); stroke-width: 2; }
 .key-sq { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+.key-diamond { width: 10px; height: 10px; display: inline-block; background: var(--sat); transform: rotate(45deg); }
+#cov-hit .pick { fill: var(--sat); stroke: var(--paper); stroke-width: 2; }
+.cov-cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
 .cov-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
 .cov-stats div { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
 .cov-stats div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--rule); }
@@ -279,6 +282,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
         <span><i class="key-dot" style="background:var(--ink)"></i>Camera site</span>
         <span><i class="key-dot" style="background:var(--crit)"></i>1,000+ acre fire no camera could see</span>
         <span><i class="key-ring" style="color:var(--ink-2)"></i>One a camera could see</span>
+        <span id="cov-key-site" hidden><i class="key-diamond"></i>Proposed new site</span>
       </div>
     </div>
     <div class="gauges">
@@ -297,6 +301,11 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
     <div>
       <span class="label">Largest blind spots</span>
       <ol class="cov-list" id="cov-blind"></ol>
+    </div>
+    <div id="cov-siting-card" hidden>
+      <span class="label">Where ten more cameras would help most</span>
+      <p class="note" id="cov-siting-text" style="color:var(--ink-2);font-size:0.92rem"></p>
+      <ol class="cov-list" id="cov-siting"></ol>
     </div>
     <div>
       <span class="label">How it was measured</span>

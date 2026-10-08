@@ -1,0 +1,77 @@
+{
+ "candidates": 11847,
+ "picks": [
+  {
+   "lat": 40.9413,
+   "lon": -120.4129,
+   "elev": 2398,
+   "new_km2": 1383,
+   "region": "Modoc Plateau"
+  },
+  {
+   "lat": 35.2587,
+   "lon": -115.3113,
+   "elev": 2249,
+   "new_km2": 1152,
+   "region": "Mojave National Preserve"
+  },
+  {
+   "lat": 35.1138,
+   "lon": -117.8779,
+   "elev": 916,
+   "new_km2": 988,
+   "region": "Tehachapi Mountains"
+  },
+  {
+   "lat": 35.9446,
+   "lon": -120.3063,
+   "elev": 1297,
+   "new_km2": 919,
+   "region": "Diablo Range"
+  },
+  {
+   "lat": 35.9562,
+   "lon": -117.8321,
+   "elev": 1613,
+   "new_km2": 860,
+   "region": "Kern Plateau"
+  },
+  {
+   "lat": 37.3754,
+   "lon": -119.1787,
+   "elev": 2742,
+   "new_km2": 847,
+   "region": "Eastern Sierra"
+  },
+  {
+   "lat": 41.8096,
+   "lon": -121.6879,
+   "elev": 1974,
+   "new_km2": 846,
+   "region": "Modoc Plateau"
+  },
+  {
+   "lat": 37.4454,
+   "lon": -120.1446,
+   "elev": 686,
+   "new_km2": 822,
+   "region": "Yosemite high country"
+  },
+  {
+   "lat": 37.7346,
+   "lon": -118.6554,
+   "elev": 3072,
+   "new_km2": 779,
+   "region": "Eastern Sierra"
+  },
+  {
+   "lat": 38.2346,
+   "lon": -119.0871,
+   "elev": 3089,
+   "new_km2": 736,
+   "region": "Yosemite high country"
+  }
+ ],
+ "added_km2": 9332,
+ "added_share": 0.0345
+}

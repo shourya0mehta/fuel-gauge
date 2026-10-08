@@ -24,7 +24,11 @@ REGIONS = [('Klamath Mountains', 41.3, -123.3), ('Trinity Alps', 40.9, -123.0), 
            ('Mojave National Preserve', 35.2, -115.5), ('Mendocino National Forest', 39.6, -122.9), ('Death Valley', 36.5, -117.0),
            ('Eastern Sierra', 37.5, -118.6), ('Los Padres backcountry', 34.8, -119.6), ('Santa Lucia Range', 36.1, -121.5),
            ('Lassen country', 40.5, -121.4), ('Feather River country', 39.9, -121.2), ('Sequoia backcountry', 36.5, -118.6),
-           ('Owens Valley', 36.8, -118.2), ('Inyo Mountains', 36.7, -117.9), ('Tehachapi Mountains', 35.0, -118.6)]
+           ('Owens Valley', 36.8, -118.2), ('Inyo Mountains', 36.7, -117.9), ('Tehachapi Mountains', 35.0, -118.6),
+           ('Sierra National Forest', 37.3, -119.2), ('Mount Hamilton Range', 37.3, -121.5), ('Mariposa foothills', 37.45, -120.1), ('El Paso Mountains', 35.3, -117.8),
+           ('Coso Range', 36.0, -117.8), ('Mono Basin', 38.1, -119.0), ('Glass Mountains', 37.75, -118.65),
+           ('Medicine Lake Highlands', 41.7, -121.6), ('Warner Mountains', 41.4, -120.2), ('Siskiyou Mountains', 41.85, -123.3),
+           ('Carrizo Plain', 35.2, -119.8), ('San Rafael Wilderness', 34.75, -119.9)]
 
 
 UNITS = {'SCU', 'LNU', 'CZU', 'SQF', 'KNP', 'SHU', 'BTU', 'TCU', 'MEU', 'AMR', 'BEU', 'SLU', 'RRU', 'BDU', 'LMU', 'NEU', 'FKU',
@@ -188,6 +192,17 @@ def main():
     stats['fires_1000'] = [dict(n=fire_name(r.IncidentName), y=int(r.date.year), a=round(float(r.acres)), lat=round(float(r.lat), 4),
                                 lon=round(float(r.lon), 4), g=int(r.cams), s=int(r.smoke300)) for r in big.itertuples()]
     json.dump(stats, open(os.path.join(OUT, 'coverage.json'), 'w'), indent=1)
+    sit = os.path.join(OUT, 'siting.json')            # from scripts/siting.py, if it has been run
+    if os.path.exists(sit):
+        stats['siting'] = json.load(open(sit))
+        for p_ in stats['siting']['picks']:
+            p_['region'] = region_name(p_['lat'], p_['lon'])
+    sf = os.path.join(OUT, 'siting_fires.json')
+    if os.path.exists(sf):
+        stats['siting_fires'] = json.load(open(sf))
+        for p_ in stats['siting_fires']['picks']:
+            p_['region'] = region_name(p_['lat'], p_['lon'])
+            p_['examples'] = [fire_name(n.strip()) for n in p_['examples']]
     os.makedirs(os.path.join(DOCS, 'data'), exist_ok=True)
     json.dump(stats, open(os.path.join(DOCS, 'data', 'coverage.json'), 'w'), separators=(',', ':'))
     print('done')

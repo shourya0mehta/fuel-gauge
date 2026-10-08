@@ -21,6 +21,7 @@ This project answers both on public data alone, and ships the tools as an open p
 - **46%** of California's wildland is in line of sight of at least one camera within 30 km, and **20%** of two, the overlap needed to triangulate a smoke column.
 - Of the **277** fires over 1,000 acres, the ground where each started was in view of a camera for **43%**. Smoke rises, so a looser test asks whether a 300 m column above the ignition was in view: **79%**, and **59%** from two cameras.
 - The **21%** that started where no camera could see even that burned **1.4 million acres**, among them the SCU Lightning Complex and the Claremont Fire in 2020.
+- **Where to add cameras.** A greedy search over 11,847 hilltops finds ten new sites that would add 9,332 km² of watched wildland (3.5 points). Looking back, a different ten would have seen a 300 m smoke column from 60 of the 317 fires no camera could see, 1.31 million of their 1.48 million acres.
 - The largest blind spots: Klamath Mountains (11,406 km²), Yosemite high country (8,250 km²), Modoc Plateau (5,178 km²), Diablo Range (4,164 km²).
 
 ![California shaded by how many fire cameras can see each patch of wildland, with big fires since 2020](docs/assets/coverage/ca_light.png)
@@ -94,7 +95,7 @@ python scripts/fetch_nir.py <cam,cam,...>     # near-infrared twins + exposures 
 python scripts/nir.py <cam> ...               # camera NDVI on the registered regions
 python scripts/study.py && python scripts/timing.py && python scripts/summary.py
 python scripts/fetch_fires.py                 # NIFC WFIGS California wildfire ignitions
-python scripts/coverage.py && python scripts/coverage_report.py   # statewide viewsheds, stats and maps
+python scripts/coverage.py && python scripts/siting.py && python scripts/coverage_report.py   # viewsheds, siting, stats, maps
 python scripts/build_site_data.py             # docs/data/ for the site
 ```
 
