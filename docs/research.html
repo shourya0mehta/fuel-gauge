@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuel Gauge Research</title>
+<meta name="description" content="What can California's 1,309 fire cameras actually see, and can camera photos tell how dry the brush is? A statewide line-of-sight map, a 21-camera fuel moisture study, and a live network of fire cameras tied to the terrain.">
+<meta property="og:title" content="Fuel Gauge">
+<meta property="og:description" content="Fire-lookout and phenology cameras as live fuel moisture sensors: 15+ years of registered photos, field samples and satellites, and a live camera network that updates every day.">
+<meta property="og:image" content="assets/study/cucamongasouth.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23161B1F'/%3E%3Cpath d='M4 21 L10 14 L14 17 L20 9 L28 18' fill='none' stroke='%23F2541B' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+/* Research pages: same system as the landing page (site.css); figures and tables keep their own layout. */
+:root {
+  --paper: #FFFFFF; --panel: #F2F4F5; --panel-2: #E6EAEC; --ink: #161B1F; --ink-2: #3D474F; --ink-3: #5E6A73; --rule: #DCE1E4;
+  --cam: #1F6E50; --sat: #2C62AE; --straw: #B7862A; --crit: #D9441A; --on-photo: #F4F6F7;
+  --display: var(--font); --body: var(--font);
+  --col: 68ch; --wide: 1200px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #111518; --panel: #1A2025; --panel-2: #232A30; --ink: #E9EDEF; --ink-2: #C3CBD1; --ink-3: #94A1AA; --rule: #2B3339;
+    --cam: #46A87E; --sat: #6F9FE3; --straw: #C99A3E; --crit: #FF6A33; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #111518; --panel: #1A2025; --panel-2: #232A30; --ink: #E9EDEF; --ink-2: #C3CBD1; --ink-3: #94A1AA; --rule: #2B3339;
+  --cam: #46A87E; --sat: #6F9FE3; --straw: #C99A3E; --crit: #FF6A33; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+main.r { padding: 0 16px 0; }
+@media (min-width: 700px) { main.r { padding: 0 24px; } }
+a { color: inherit; text-decoration-color: var(--ink-3); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--ink); }
+.col { max-width: var(--col); }
+.wide { max-width: var(--wide); margin-inline: auto; }
+h2 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0; }
+.prose { display: grid; gap: 1em; }
+.prose b { font-weight: 600; }
+.label { font-size: 0.86rem; color: var(--ink-3); }
+.num { font-variant-numeric: tabular-nums; }
+section { padding-block: 80px 8px; display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); }
+section > *, .viewer > *, .gauges > * { min-width: 0; }
+.sec-head { display: grid; gap: 14px; }
+.sec-head .label { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.dek { font-size: 1.2rem; line-height: 1.5; color: var(--ink-2); max-width: 46ch; }
+.sub-dek { font-size: 1.04rem; color: var(--ink-2); max-width: 64ch; }
+
+
+/* masthead */
+.mast { padding-block: 44px 8px; display: grid; gap: 20px; }
+.mast .label { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.mast h1 { font-size: clamp(2.4rem, 5vw, 3.9rem); max-width: 20ch; }
+.byline { font-size: 0.92rem; color: var(--ink-3); }
+.answer { font-size: 1.05rem; max-width: 64ch; border-left: 3px solid var(--signal); padding: 2px 0 2px 14px; }
+.answer b { font-weight: 600; }
+.figures { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-top: 8px; }
+.figures div { padding: 14px 14px 14px 0; display: grid; gap: 2px; }
+.figures div + div { padding-left: 14px; border-left: 1px solid var(--rule); }
+.figures b { font-weight: 750; font-variation-settings: "wdth" 115; font-size: clamp(1.9rem, 3.6vw, 2.6rem); line-height: 1; }
+.figures span { font-size: 0.84rem; color: var(--ink-2); line-height: 1.35; }
+@media (max-width: 760px) { .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); } .figures div:nth-child(odd) { padding-left: 0; border-left: 0; } .figures div { border-top: 1px solid var(--rule); } .figures div:nth-child(-n+2) { border-top: 0; } .figures div:last-child { grid-column: 1 / -1; } }
+.findings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding-top: 6px; }
+.findings div { display: grid; gap: 8px; align-content: start; }
+.findings p { font-size: 0.98rem; }
+.findings .k { font-size: 0.86rem; font-weight: 600; color: var(--ink-2); display: flex; gap: 8px; align-items: center; }
+.findings .k i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+@media (max-width: 860px) { .findings { grid-template-columns: minmax(0, 1fr); } }
+
+/* hillside viewer */
+.viewer { display: grid; gap: 14px; }
+.photo { position: relative; aspect-ratio: 4 / 3; background: var(--panel); overflow: hidden; border-radius: 6px; max-width: 100%; }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.readout { position: absolute; left: 12px; top: 12px; display: grid; gap: 2px; padding: 10px 12px; background: rgba(15, 20, 16, 0.62);
+  color: var(--on-photo); border-radius: 6px; font-size: 0.84rem; line-height: 1.4; backdrop-filter: blur(3px); }
+.readout b { font-size: 1.6rem; font-weight: 750; font-variation-settings: "wdth" 112; line-height: 1.05; }
+.viewer-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.gauges { display: grid; gap: 18px; }
+.gauge { display: grid; gap: 6px; padding-block: 12px; border-top: 1px solid var(--rule); }
+.gauge .big { font-weight: 750; font-variation-settings: "wdth" 115; font-size: 2.6rem; line-height: 1; }
+.gauge .sub { font-size: 0.9rem; color: var(--ink-2); }
+.bar { height: 10px; background: var(--panel); border-radius: 2px; position: relative; overflow: hidden; }
+.bar i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 2px; }
+.bar .tick { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--crit); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+button.btn, select.btn { font-family: var(--font); font-size: 0.88rem; font-weight: 500; height: auto; color: var(--ink);
+  background: transparent; border: 1px solid var(--rule); border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+select.btn { text-transform: none; letter-spacing: 0; font-size: 0.86rem; padding: 7px 10px; background: var(--paper); max-width: 100%; min-width: 0; flex: 1 1 260px; }
+.controls select.btn { max-width: 560px; }
+button.btn:hover, select.btn:hover { border-color: var(--ink-3); }
+button.btn[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.chart { width: 100%; display: block; overflow: visible; }
+.chart text { font-family: var(--font); font-size: 12px; fill: var(--ink-3); }
+.chart .grid line { stroke: var(--rule); stroke-width: 1; }
+.chart-wrap { position: relative; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--paper); font-size: 0.8rem;
+  line-height: 1.45; padding: 7px 9px; border-radius: 3px; white-space: nowrap; transform: translate(-50%, calc(-100% - 12px)); z-index: 3; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.85rem; color: var(--ink-2); }
+.legend span { display: inline-flex; align-items: center; gap: 7px; }
+.key-line { width: 18px; height: 2px; display: inline-block; border-radius: 1px; }
+.key-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.key-ring { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 2px solid currentColor; }
+
+/* study */
+.study-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 28px; align-items: start; }
+@media (max-width: 920px) { .study-grid { grid-template-columns: minmax(0, 1fr); } }
+.mapwrap { position: relative; background: var(--panel); border-radius: 3px; padding: 10px; }
+#westmap { width: 100%; height: auto; display: block; }
+#westmap .state { fill: var(--paper); stroke: var(--rule); stroke-width: 1; }
+#westmap .site { fill: none; stroke: var(--ink-3); stroke-width: 1; }
+#westmap .link { stroke: var(--ink-3); stroke-width: 0.8; stroke-dasharray: 2 2; }
+#westmap .cam { cursor: pointer; stroke: var(--paper); stroke-width: 1.5; }
+#westmap .cam.sel { stroke: var(--ink); stroke-width: 2.5; }
+#westmap text { font-family: var(--font); fill: var(--ink-3); }
+.board { display: grid; gap: 10px; }
+#scoreboard text { font-family: var(--font); font-size: 12px; fill: var(--ink-2); }
+#scoreboard .row { cursor: pointer; }
+#scoreboard .row:hover rect.bg, #scoreboard .row.sel rect.bg { fill: var(--panel); }
+.tbl-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.92rem; }
+th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 600; font-size: 0.82rem; color: var(--ink-3); vertical-align: bottom; }
+tr.hl td { font-weight: 600; }
+.chip { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: 1px; }
+.note { font-size: 0.85rem; color: var(--ink-3); max-width: 90ch; }
+.callout { border-left: 3px solid var(--cam); padding: 4px 0 4px 16px; font-size: 1.05rem; max-width: 70ch; }
+
+/* explorer */
+.ex-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 920px) { .ex-grid { grid-template-columns: minmax(0, 1fr); } }
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.facts div { display: grid; gap: 2px; }
+.facts b { font-weight: 600; font-size: 0.98rem; font-variant-numeric: tabular-nums; }
+.facts .wide2 { grid-column: 1 / -1; }
+.facts .wide2 b { font-family: var(--body); font-weight: 400; font-size: 0.92rem; }
+.mini { width: 100%; border-collapse: collapse; min-width: 0; font-size: 0.86rem; }
+.mini td, .mini th { padding: 6px 4px; }
+#calendar { width: 100%; display: block; image-rendering: pixelated; border-radius: 2px; touch-action: none; }
+.cal-wrap { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 6px; }
+.cal-years { display: grid; font-size: 11px; color: var(--ink-3); text-align: right; }
+.cal-months { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); font-size: 11px; color: var(--ink-3); margin-left: 50px; }
+.ramp { width: 140px; height: 8px; border-radius: 2px; display: inline-block; }
+.scale { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--ink-3); flex-wrap: wrap; }
+
+/* hard parts */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+@media (max-width: 920px) { .cards { grid-template-columns: minmax(0, 1fr); } }
+.cards > div { display: grid; gap: 10px; align-content: start; border-top: 2px solid var(--ink); padding-top: 14px; }
+.cards .stat { font-weight: 750; font-variation-settings: "wdth" 115; font-size: 2.4rem; line-height: 1; }
+.segbar { display: grid; gap: 8px; }
+.seg-row { position: relative; height: 26px; background: var(--panel); border-radius: 2px; }
+.seg-row i { position: absolute; top: 4px; bottom: 4px; border-radius: 2px; }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 14px; }
+.pair figure { margin: 0; display: grid; gap: 6px; }
+.pair img { width: 100%; display: block; border-radius: 3px; }
+figcaption { font-size: 0.85rem; color: var(--ink-3); }
+
+/* live */
+.net { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.cam-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 700px) { .cam-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cam-btn { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; text-align: left; padding: 8px 10px;
+  background: transparent; color: var(--ink); border: 1px solid var(--rule); border-radius: 6px; cursor: pointer; font-family: var(--font); font-size: 0.86rem; line-height: 1.25; }
+.cam-btn[aria-pressed="true"] { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.cam-btn svg { width: 34px; height: 34px; }
+.cam-btn small { display: block; color: var(--ink-3); font-size: 0.76rem; }
+.mapbox { position: relative; aspect-ratio: 1; background: var(--panel); border-radius: 3px; overflow: hidden; max-width: 100%; }
+.mapbox canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.stats div { display: grid; gap: 2px; }
+.stats b { font-weight: 600; font-size: 1rem; font-variant-numeric: tabular-nums; }
+.lc-keys { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.8rem; color: var(--ink-2); }
+.lc-keys span { display: inline-flex; align-items: center; gap: 6px; }
+.lc-keys i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+@media (max-width: 860px) { .viewer-grid, .net { grid-template-columns: minmax(0, 1fr); } body { font-size: 16px; } }
+
+
+/* statewide coverage */
+:root { --cov2: #1F6E50; --cov1: #98C6AC; --cov0: #E4BE78; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --cov2: #46A87E; --cov1: #325C4A; --cov0: #966C28; } }
+:root[data-theme="dark"] { --cov2: #46A87E; --cov1: #325C4A; --cov0: #966C28; }
+.cov-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 920px) { .cov-grid { grid-template-columns: minmax(0, 1fr); } }
+.cov-map { position: relative; }
+.cov-map img { width: 100%; height: auto; display: block; }
+#cov-hit { position: absolute; inset: 0; width: 100%; height: 100%; }
+#cov-hit circle { fill: transparent; cursor: pointer; }
+#cov-hit circle:hover { stroke: var(--ink); stroke-width: 2; }
+.key-sq { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+.key-diamond { width: 10px; height: 10px; display: inline-block; background: var(--sat); transform: rotate(45deg); }
+#cov-hit .pick { fill: var(--sat); stroke: var(--paper); stroke-width: 2; }
+.cov-cards { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.cov-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.cov-stats div { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.cov-stats div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--rule); }
+.cov-stats b { font-weight: 750; font-variation-settings: "wdth" 115; font-size: 2.3rem; line-height: 1; }
+.cov-stats span { font-size: 0.86rem; color: var(--ink-2); line-height: 1.35; }
+.cov-list { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: 0.92rem; }
+.cov-list small { color: var(--ink-3); font-size: 0.8rem; }
+.cov-cards > div { border-top-width: 1px; }
+
+/* toolkit */
+.tk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 920px) { .tk { grid-template-columns: minmax(0, 1fr); } }
+pre { margin: 0; background: var(--code-bg); border-radius: 6px; padding: 16px 18px; overflow-x: auto; font-family: var(--mono); font-size: 0.8rem; line-height: 1.6; color: var(--code-ink); }
+pre .c { color: #8B98A1; }
+.mods { display: grid; gap: 0; }
+.mods div { display: grid; grid-template-columns: 9ch minmax(0, 1fr); gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 0.92rem; }
+.mods code { font-family: var(--mono); font-size: 0.82rem; color: var(--ink); background: none; padding: 0; }
+
+.limits { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 22px 28px; }
+.limits div { display: grid; gap: 6px; align-content: start; border-top: 1px solid var(--rule); padding-top: 12px; }
+.sources { font-size: 0.9rem; color: var(--ink-2); display: grid; gap: 10px; }
+.sources ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 0.85rem; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+.loading { color: var(--ink-3); font-size: 0.86rem; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Fuel Gauge home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M4 25 H28" stroke="var(--bg)" stroke-opacity=".55" stroke-width="1.5"/></svg>
+      Fuel Gauge
+    </a>
+    <nav aria-label="Main">
+      <a href="./#pipeline">How it works</a>
+      <a href="./#results">Results</a>
+      <a href="docs.html">Docs</a>
+      <a href="research.html" aria-current="page">Research</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="btn small" href="https://github.com/shourya0mehta/fuel-gauge">
+      <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+<main class="r">
+
+<header class="mast wide">
+  <p class="label"><span>Research with the Fuel Gauge pipeline</span><span id="mast-span">2003–2026</span></p>
+  <h1>What fire cameras can see, and what their photos can't</h1>
+  <p class="dek">Thousands of cameras watch Western hillsides for wildfire smoke. This project ties them to the ground to measure what they can actually see, and tests whether the same photos can tell how dry the brush is.</p>
+  <p class="answer" id="answer"></p>
+  <p class="byline">Shourya Mehta. Built only on public archives; <a href="https://github.com/shourya0mehta/fuel-gauge">code and data on GitHub</a>, <a href="./">about the pipeline</a>.</p>
+  <div class="figures" id="figures"></div>
+  <div class="findings" id="findings"></div>
+</header>
+
+<section id="coverage" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Statewide</span><span id="cov-span">–</span></p>
+    <h2>What California's fire cameras can see</h2>
+    <p class="sub-dek" id="cov-dek"></p>
+  </div>
+  <div class="cov-grid">
+    <div class="cov-mapwrap">
+      <div class="cov-map" id="cov-map">
+        <picture>
+          <source srcset="assets/coverage/ca_dark.png" media="(prefers-color-scheme: dark)">
+          <img id="cov-img" src="assets/coverage/ca_light.png" alt="Map of California shaded by how many fire cameras have line of sight to each patch of wildland, with large fires since 2020 marked">
+        </picture>
+        <svg id="cov-hit" aria-hidden="true"></svg>
+        <div class="tip" id="cov-tip" hidden></div>
+      </div>
+      <div class="legend" style="padding-top:10px">
+        <span><i class="key-sq" style="background:var(--cov2)"></i>Wildland seen by 2+ cameras</span>
+        <span><i class="key-sq" style="background:var(--cov1)"></i>Seen by 1</span>
+        <span><i class="key-sq" style="background:var(--cov0)"></i>Seen by none</span>
+        <span><i class="key-dot" style="background:var(--ink)"></i>Camera site</span>
+        <span><i class="key-dot" style="background:var(--crit)"></i>1,000+ acre fire no camera could see</span>
+        <span><i class="key-ring" style="color:var(--ink-2)"></i>One a camera could see</span>
+        <span id="cov-key-site" hidden><i class="key-diamond"></i>Proposed new site</span>
+      </div>
+    </div>
+    <div class="gauges">
+      <div class="cov-stats" id="cov-stats"></div>
+      <div>
+        <p class="label" style="margin-bottom:6px">Where the big fires started, 2020–2025</p>
+        <table class="mini" id="cov-ign"><thead><tr><th>Fire size</th><th>Fires</th><th>Ground in view</th><th>300 m smoke in view</th><th>Two cameras</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="cards cov-cards">
+    <div>
+      <span class="label">Biggest fires no camera could see</span>
+      <ol class="cov-list" id="cov-unseen"></ol>
+    </div>
+    <div>
+      <span class="label">Largest blind spots</span>
+      <ol class="cov-list" id="cov-blind"></ol>
+    </div>
+    <div id="cov-siting-card" hidden>
+      <span class="label">Where ten more cameras would help most</span>
+      <p class="note" id="cov-siting-text" style="color:var(--ink-2);font-size:0.92rem"></p>
+      <ol class="cov-list" id="cov-siting"></ol>
+    </div>
+    <div>
+      <span class="label">How it was measured</span>
+      <p class="note" id="cov-method" style="color:var(--ink-2);font-size:0.92rem"></p>
+    </div>
+  </div>
+</section>
+
+<section id="hillside" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>One ridge</span><span id="hs-span">2003–2018</span></p>
+    <h2>One hillside, fifteen years</h2>
+    <p class="sub-dek">A Forest Service camera above the San Jacinto Valley took a photo every day around noon from 2003 to 2018. Every photo here has been shifted, turned and scaled onto one shared view of the same slope, so the only thing that changes is the brush. Drag along the timeline to watch the chamise green up each spring and cure each fall.</p>
+  </div>
+  <div class="viewer-grid">
+    <div class="viewer">
+      <div class="photo" id="hs-photo">
+        <img id="hs-img" alt="Registered daily photo from the ridge camera: chaparral hillside with a dirt road">
+        <canvas id="hs-roi"></canvas>
+        <div class="readout"><span id="hs-date">–</span><b id="hs-season">–</b></div>
+      </div>
+      <div class="controls">
+        <button class="btn" id="hs-play" aria-pressed="false">Play</button>
+        <button class="btn" id="hs-roi-btn" aria-pressed="false">Show measured brush</button>
+        <span class="label">Drag the timeline; arrow keys step a month</span>
+      </div>
+    </div>
+    <div class="gauges">
+      <div class="gauge">
+        <span class="label">Camera greenness</span>
+        <span class="big num" id="g-cam">–</span>
+        <div class="bar"><i id="g-cam-bar" style="background:var(--cam)"></i></div>
+        <span class="sub">How green the measured brush looks (green against red light), smoothed over two weeks and scaled to this camera's own 15-year range.</span>
+      </div>
+      <div class="gauge">
+        <span class="label">Field-measured fuel moisture</span>
+        <span class="big num" id="g-lfm">–</span>
+        <div class="bar"><i id="g-lfm-bar" style="background:var(--ink-2)"></i><span class="tick" id="g-crit"></span></div>
+        <span class="sub" id="g-lfm-sub">Water in live chamise as a share of its dry weight.</span>
+      </div>
+      <div class="gauge">
+        <span class="label">Camera estimate for that sample</span>
+        <span class="big num" id="g-pred">–</span>
+        <span class="sub">From a model fit on the other years only, so it never saw this year's samples.</span>
+      </div>
+    </div>
+  </div>
+  <div class="chart-wrap">
+    <svg class="chart" id="timeline" role="img" aria-label="Camera greenness and field fuel moisture over time"></svg>
+    <div class="tip" id="tl-tip" hidden></div>
+  </div>
+  <div class="legend">
+    <span><i class="key-line" style="background:var(--cam)"></i>Camera greenness (left scale)</span>
+    <span><i class="key-dot" style="background:var(--ink-2)"></i>Field samples of chamise moisture, 4 sites 13–20 km away (right scale)</span>
+    <span><i class="key-line" style="background:var(--crit)"></i>60%, where fire behaviour turns extreme</span>
+  </div>
+</section>
+
+<section id="study" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>The study</span><span id="study-span">–</span></p>
+    <h2 id="study-title">Every camera with field samples nearby</h2>
+  </div>
+  <div class="prose col" id="study-prose"></div>
+  <div class="study-grid">
+    <div class="mapwrap">
+      <svg id="westmap" role="img" aria-label="Map of the western United States with study cameras and their fuel sampling sites"></svg>
+      <div class="legend" style="padding:8px 4px 2px">
+        <span><i class="key-dot" style="background:var(--cam)"></i>Camera helps</span>
+        <span><i class="key-dot" style="background:var(--ink-3)"></i>Camera doesn't help</span>
+        <span><i class="key-ring" style="color:var(--ink-3)"></i>Field sampling site</span>
+      </div>
+    </div>
+    <div class="board">
+      <p class="label" id="board-label">Change in error against season alone, held-out years</p>
+      <div class="chart-wrap">
+        <svg class="chart" id="scoreboard" role="img" aria-label="Per-camera change in error versus season alone, for camera and satellite"></svg>
+        <div class="tip" id="sb-tip" hidden></div>
+      </div>
+      <div class="legend">
+        <span><i class="key-dot" style="background:var(--cam)"></i>Camera, colour-corrected</span>
+        <span><i class="key-dot" style="background:var(--sat)"></i>Satellite infrared, same slope</span>
+        <span><i class="key-line" style="background:var(--straw)"></i>Season alone</span>
+      </div>
+    </div>
+  </div>
+  <div class="tbl-wrap">
+    <table id="pooled">
+      <thead><tr><th>Predictors (each added to a per-site seasonal baseline)</th><th>Cameras where it beats<br>season alone</th><th>Median change<br>in error</th><th>Median skill at<br>unusual years (anomaly r)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <p class="note" id="pooled-note"></p>
+  <p class="callout" id="timing-note" hidden></p>
+  <div id="nir-block" class="prose" style="gap:14px">
+    <h3>Adding near-infrared</h3>
+    <p class="col" id="nir-text"></p>
+    <div class="tbl-wrap">
+      <table id="nir-table"><thead><tr><th>Predictors, on the samples where the camera had an infrared photo</th><th>Cameras where it beats<br>season alone</th><th>Error<br>(RMSE, points)</th><th>Change in<br>error</th><th>Anomaly r</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</section>
+
+<section id="explore" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Explore</span><span id="ex-count">–</span></p>
+    <h2>Pick a camera</h2>
+  </div>
+  <div class="controls">
+    <label class="label" for="ex-select">Camera</label>
+    <select class="btn" id="ex-select"></select>
+    <button class="btn" id="ex-roi" aria-pressed="true">Measured blocks</button>
+  </div>
+  <div class="ex-grid">
+    <div class="viewer">
+      <div class="photo" id="ex-photo">
+        <img id="ex-img" alt="">
+        <canvas id="ex-ov"></canvas>
+      </div>
+      <p class="note" id="ex-photo-note"></p>
+    </div>
+    <div class="gauges">
+      <div class="facts" id="ex-facts"></div>
+      <table class="mini" id="ex-table"><thead><tr><th>Predictors</th><th>Error (pts)</th><th>vs season</th><th>Anomaly r</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+  <div class="sec-head" style="gap:8px">
+    <h3>What the camera saw, every day</h3>
+    <p class="note">Each row is a year and each column a day. Colour is the colour-corrected greenness of the measured blocks (straw is cured, green is flush). Rings mark field samples; hover or tap for values.</p>
+  </div>
+  <div>
+    <div class="cal-months" aria-hidden="true"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span></div>
+    <div class="cal-wrap chart-wrap">
+      <div class="cal-years" id="cal-years"></div>
+      <canvas id="calendar" role="img" aria-label="Daily camera greenness by year and day of year"></canvas>
+      <div class="tip" id="cal-tip" hidden></div>
+    </div>
+    <div class="scale" style="margin:10px 0 0 50px"><span>cured</span><span class="ramp" id="cal-ramp"></span><span>green</span><span>Blank: no clear photo or no archive</span></div>
+  </div>
+  <div class="sec-head" style="gap:8px">
+    <h3>Measured against estimated</h3>
+  </div>
+  <div class="controls" id="ex-units" role="group" aria-label="Sampling site and species"></div>
+  <div class="chart-wrap">
+    <svg class="chart" id="ex-pred" role="img" aria-label="Measured fuel moisture with held-out camera, satellite and season estimates"></svg>
+    <div class="tip" id="ex-tip" hidden></div>
+  </div>
+  <div class="legend">
+    <span><i class="key-dot" style="background:var(--ink)"></i>Measured</span>
+    <span><i class="key-line" style="background:var(--cam)"></i>Camera + season</span>
+    <span><i class="key-line" style="background:var(--sat)"></i>Satellite infrared + season</span>
+    <span><i class="key-line" style="background:var(--straw)"></i>Season alone</span>
+  </div>
+</section>
+
+<section id="hard" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Method</span></p>
+    <h2>Why this is harder than it looks</h2>
+    <p class="sub-dek">A camera on a pole is not a scientific instrument. Over fifteen years it gets bumped, re-aimed, replaced and fogged in, and its colours drift. Most of the work went into making years of photos comparable.</p>
+  </div>
+  <div class="cards">
+    <div>
+      <span class="label">Keeping one hillside in frame</span>
+      <span class="stat" id="hard-reg">–</span>
+      <p class="prose" id="hard-reg-text"></p>
+    </div>
+    <div>
+      <span class="label">Measuring the right pixels</span>
+      <span class="stat" id="hard-roi">–</span>
+      <p class="prose" id="hard-roi-text"></p>
+    </div>
+    <div>
+      <span class="label">Colour that holds still</span>
+      <span class="stat" id="hard-wb">–</span>
+      <p class="prose" id="hard-wb-text"></p>
+    </div>
+  </div>
+  <div class="segbar" id="segbar"></div>
+  <div class="pair" id="raw-reg"></div>
+</section>
+
+<section id="live" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Live network</span><span id="net-span">–</span></p>
+    <h2>Today's fire cameras, tied to the ground</h2>
+  </div>
+  <div class="prose col" id="net-prose"></div>
+  <div class="cam-list" id="cam-list" role="group" aria-label="Live camera"></div>
+  <div class="net">
+    <div class="viewer">
+      <div class="photo" id="net-photo" style="aspect-ratio: 3 / 2">
+        <img id="net-img" alt="">
+        <canvas id="net-ov"></canvas>
+      </div>
+      <div class="controls" id="ov-modes" role="group" aria-label="Overlay">
+        <button class="btn" data-mode="none" aria-pressed="false">Photo</button>
+        <button class="btn" data-mode="dist" aria-pressed="false">Distance</button>
+        <button class="btn" data-mode="lc" aria-pressed="false">Land cover</button>
+        <button class="btn" data-mode="chg" aria-pressed="true">Drying fastest</button>
+      </div>
+      <div id="ov-key"></div>
+    </div>
+    <div class="gauges">
+      <div class="mapbox"><canvas id="map"></canvas></div>
+      <div class="stats" id="cam-stats"></div>
+    </div>
+  </div>
+  <div class="chart-wrap">
+    <svg class="chart" id="net-chart" role="img" aria-label="Daily greenness by land cover for the selected live camera"></svg>
+    <div class="tip" id="net-tip" hidden></div>
+  </div>
+  <div class="legend" id="net-legend"></div>
+</section>
+
+<section id="toolkit" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Code</span><span>MIT licence</span></p>
+    <h2>Use it on your own cameras</h2>
+    <p class="sub-dek">Everything above runs on an open Python package. Point it at a folder of daily photos from any fixed camera and it hands back registered colour measurements you can trust across years; give it a location and it ties each pixel to the ground.</p>
+  </div>
+  <div class="tk">
+    <pre id="tk-code"></pre>
+    <div class="mods" id="tk-mods"></div>
+  </div>
+</section>
+
+<section id="limits" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Read this before trusting it</span></p>
+    <h2>What it can and can't say</h2>
+  </div>
+  <div class="limits" id="limits-grid"></div>
+</section>
+
+<section id="methods" class="wide" style="padding-block-start:60px">
+  <div class="sec-head">
+    <p class="label"><span>Methods and sources</span></p>
+    <h3>How it was built</h3>
+  </div>
+  <div class="sources col" id="methods-body"></div>
+</section>
+
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>Fuel Gauge</a>
+      <p style="margin-top:10px;max-width:40ch">Built by Shourya Mehta on public data only. Images: PhenoCam Network and HPWREN (hpwren.ucsd.edu). A research project, not an operational fire-danger product.</p>
+    </div>
+    <div><h4>Product</h4><ul><li><a href="./#pipeline">How it works</a></li><li><a href="./#start">Get started</a></li><li><a href="docs.html">Docs</a></li></ul></div>
+    <div><h4>Research</h4><ul><li><a href="#coverage">Statewide coverage</a></li><li><a href="#study">Fuel moisture study</a></li><li><a href="#live">Live network</a></li></ul></div>
+    <div><h4>Project</h4><ul><li><a href="https://github.com/shourya0mehta/fuel-gauge">GitHub</a></li><li><a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff">Cite</a></li><li><a href="#methods">Data credits</a></li></ul></div>
+  </div>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>

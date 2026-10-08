@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuel Gauge Docs</title>
+<meta name="description" content="Open-source Python pipeline that turns fixed outdoor cameras into calibrated instruments: multi-year registration, skyline-based camera calibration, pixel-to-ground mapping, drift-corrected vegetation measurement and camera network coverage.">
+<meta property="og:title" content="Fuel Gauge">
+<meta property="og:description" content="Turn any fixed camera into a measuring instrument. Open-source Python pipeline for fire lookouts, phenology cameras and webcams.">
+<meta property="og:image" content="assets/live/rm-e-mobo-c_oct.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23161B1F'/%3E%3Cpath d='M4 21 L10 14 L14 17 L20 9 L28 18' fill='none' stroke='%23F2541B' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M4 25 H28' stroke='%23FFFFFF' stroke-opacity='.5' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+.docs { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding-top: 48px; }
+.side { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; display: grid; gap: 2px; font-size: 0.92rem; padding-bottom: 24px; }
+.side a { text-decoration: none; color: var(--ink-2); padding: 3px 0; }
+.side a:hover { color: var(--ink); }
+.side .grp { font-weight: 650; color: var(--ink); margin: 16px 0 4px; }
+.side .grp:first-child { margin-top: 0; }
+.content { min-width: 0; max-width: 860px; }
+.content section { padding-bottom: 48px; margin-bottom: 48px; border-bottom: 1px solid var(--line); display: grid; gap: 14px; }
+.content h2 { font-size: 1.8rem; }
+.content h2 code { font-size: 0.85em; background: none; padding: 0; }
+.content h3 { font-size: 1.05rem; margin-top: 10px; }
+.content h3 code { background: none; padding: 0; }
+.content p { max-width: 70ch; }
+.ref { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+.ref td { padding: 10px 12px 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.ref td:first-child { white-space: nowrap; }
+.fn { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; }
+.fn.sub { border-top: 0; padding-top: 0; padding-left: 20px; }
+.sig { font-family: var(--mono); font-size: 0.84rem; line-height: 1.55; overflow-wrap: anywhere; }
+.sig .k { color: var(--signal); }
+pre.doc { margin: 0; font-family: var(--font); white-space: pre-wrap; font-size: 0.93rem; line-height: 1.6; color: var(--ink-2); }
+pre.doc.mod { color: var(--ink); font-size: 0.98rem; }
+.intro { display: grid; gap: 12px; padding-top: 56px; }
+@media (max-width: 860px) { .docs { grid-template-columns: minmax(0, 1fr); } .side { position: static; max-height: none; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Fuel Gauge home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M4 25 H28" stroke="var(--bg)" stroke-opacity=".55" stroke-width="1.5"/></svg>
+      Fuel Gauge
+    </a>
+    <nav aria-label="Main">
+      <a href="./#pipeline">How it works</a>
+      <a href="./#results">Results</a>
+      <a href="docs.html" aria-current="page">Docs</a>
+      <a href="research.html">Research</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="btn small" href="https://github.com/shourya0mehta/fuel-gauge">
+      <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="intro">
+    <h1 style="font-size:clamp(2.2rem,4vw,3.2rem)">Documentation</h1>
+    <p class="lede">How to install and run each stage, then the reference for every public function, generated from the code (version 0.3.0).</p>
+  </div>
+  <div class="docs">
+    <nav class="side" aria-label="Docs">
+<p class="grp">Guide</p>
+<a href="#install">Install</a>
+<a href="#quickstart">Quickstart</a>
+<a href="#calibrate">Calibrate a camera</a>
+<a href="#network">Map coverage and site cameras</a>
+<a href="#evaluate">Score against field data</a>
+<a href="#cli">Command line</a>
+<p class="grp">Pipeline</p>
+<a href="#mod-archive">archive</a>
+<a href="#mod-measure">measure</a>
+<a href="#mod-track">track</a>
+<a href="#mod-quality">quality</a>
+<a href="#mod-colour">colour</a>
+<a href="#mod-rois">rois</a>
+<a href="#mod-segment">segment</a>
+<p class="grp">Geometry</p>
+<a href="#mod-camera">camera</a>
+<a href="#mod-terrain">terrain</a>
+<a href="#mod-viewshed">viewshed</a>
+<p class="grp">Evaluation and data</p>
+<a href="#mod-evaluate">evaluate</a>
+<a href="#mod-sources.phenocam">sources.phenocam</a>
+<a href="#mod-sources.hpwren">sources.hpwren</a>
+<a href="#mod-sources.lfmc">sources.lfmc</a>
+<a href="#mod-sources.modis">sources.modis</a>
+    </nav>
+    <div class="content">
+<section id="install"><h2>Install</h2>
+<p>Python 3.10 or newer. The core package needs NumPy, SciPy, pandas, OpenCV and Pillow. Extras add what each stage needs:</p>
+<pre class="code">pip install "fuelgauge[geo,seg,eval] @ git+https://github.com/shourya0mehta/fuel-gauge"</pre>
+<table class="ref"><tbody>
+<tr><td><code>geo</code></td><td>rasterio, pystac-client, planetary-computer: terrain and land cover from Microsoft Planetary Computer, GeoTIFF output</td></tr>
+<tr><td><code>seg</code></td><td>onnxruntime: the SegFormer-B2 model for sky and vegetation (about 100 MB, downloaded once to <code>~/.cache/fuelgauge</code>, override with <code>FUELGAUGE_CACHE</code>)</td></tr>
+<tr><td><code>eval</code></td><td>scikit-learn, pyarrow, openpyxl: scoring against field data</td></tr>
+</tbody></table></section>
+<section id="quickstart"><h2>Quickstart</h2>
+<p>Put the photos from one fixed camera in a folder. Capture times are read from the file name (<code>2019-06-14_1230.jpg</code>, <code>IMG_20190614T123000.jpg</code>, PhenoCam's <code>site_2019_06_14_123005.jpg</code>, or a Unix timestamp as HPWREN uses) and otherwise from EXIF.</p>
+<pre class="code">fuelgauge run photos/ out/ridge</pre>
+<p>That registers every usable photo onto fixed views, then measures them. A thousand photos take about five minutes on two CPU cores. You get:</p>
+<table class="ref"><tbody>
+<tr><td><code>out/ridge_blocks.npz</code></td><td>dates, mean RGB of every 24-pixel block of every registered photo (768 x 576 working size), block validity, haze score, stretch and view index, and each view's anchor frame</td></tr>
+<tr><td><code>out/ridge_qa.json</code></td><td>per-photo screening metrics and registration transform, the stretches and how they were joined into views</td></tr>
+<tr><td><code>out/ridge_daily.csv</code></td><td>daily <code>grvi</code>, <code>grvi_wb</code> and <code>gcc_wb</code> per view (suffix <code>_v0</code>, <code>_v1</code>...) and <code>index</code>, the white-balanced GRVI standardised per view and joined across views</td></tr>
+<tr><td><code>out/ridge_regions.png</code></td><td>the anchor frame with measured vegetation (green) and colour reference blocks (orange)</td></tr>
+</tbody></table>
+<p>Open the regions image first. If the green blocks sit on the vegetation you care about, the series is measuring it. Without the <code>seg</code> extra, run <code>fuelgauge measure out/ridge --no-model</code> and regions are chosen by seasonal swing alone.</p></section>
+<section id="calibrate"><h2>Calibrate a camera</h2>
+<p>Calibration needs one clear photo with a visible skyline, the camera's latitude and longitude, its ground elevation in metres, and a rough heading. Height above ground defaults to 10 m.</p>
+<pre class="code">fuelgauge calibrate ridge frame.jpg --lat 33.4008 --lon -117.1905 --elev 483 --yaw 90</pre>
+<p>It prints the fitted camera (heading, tilt, roll, field of view, distortion) and the skyline loss, and writes <code>ridge_lookup.npz</code> with the distance, latitude and longitude of every 8-pixel block. The default lens (101.15&deg;, k&#8321; = 0.080) is the one fitted to HPWREN's Mobotix cameras; pass <code>--hfov</code> and <code>--k1</code> for other hardware, or fit a shared lens for several cameras of one model with <code>terrain.fit_shared_lens</code>.</p>
+<p>Check the fit by drawing the rendered skyline over the photo (<code>terrain.skyline_residuals</code> gives the per-column error). Errors under 0.2&deg; are typical; a large error usually means the heading guess is more than 20&deg; off or the location is wrong.</p></section>
+<section id="network"><h2>Map coverage and site cameras</h2>
+<p>Both commands take a CSV with <code>lat</code> and <code>lon</code> columns, one row per camera, and pull a 90 m terrain model for the area around them.</p>
+<pre class="code">fuelgauge viewshed cameras.csv coverage.tif --radius 30000 --mast 10
+fuelgauge site cameras.csv --k 10 --block 6000 > new_sites.csv</pre>
+<p><code>coverage.tif</code> counts the cameras with line of sight to each cell. <code>site</code> ranks hilltops (the highest cell in every <code>--block</code>-metre square) by how much unseen ground each would add, counting each cell once; <code>--area</code> (metres) and <code>--lat</code>/<code>--lon</code> set the search area. For a statewide run like the one on this site, see <code>scripts/coverage.py</code> and <code>scripts/siting.py</code>, which tile the work.</p></section>
+<section id="evaluate"><h2>Score against field data</h2>
+<p><code>evaluate.compare</code> runs leave-one-year-out ridge regressions on top of a baseline with its own intercept and seasonal harmonics for every site and species. Predictors only get credit for knowing a year was unusual. The input is one row per field sample with <code>site</code>, <code>date</code>, <code>year</code>, <code>lfmc</code> and your predictor columns.</p>
+<pre class="code">from fuelgauge import evaluate
+samples = evaluate.add_season(samples)
+scores, preds = evaluate.compare(samples, {"camera": ["cam_g", "cam_d"], "season": []})
+scores["camera"]["anomaly_r"], scores["camera"]["years_beat_season"]</pre></section>
+<section id="cli"><h2>Command line</h2><p>Register a folder of photos and measure it, or run each stage on its own.</p><h3 id="cli-run"><code>fuelgauge run</code></h3><pre class="code">fuelgauge run [-h] [--no-model] frames out
+
+positional arguments:
+  frames
+  out
+
+options:
+  -h, --help  show this help message and exit
+  --no-model</pre><h3 id="cli-register-archive"><code>fuelgauge register-archive</code></h3><pre class="code">fuelgauge register-archive [-h] frames out
+
+positional arguments:
+  frames
+  out
+
+options:
+  -h, --help  show this help message and exit</pre><h3 id="cli-measure"><code>fuelgauge measure</code></h3><pre class="code">fuelgauge measure [-h] [--no-model] out
+
+positional arguments:
+  out
+
+options:
+  -h, --help  show this help message and exit
+  --no-model</pre><h3 id="cli-calibrate"><code>fuelgauge calibrate</code></h3><pre class="code">fuelgauge calibrate [-h] --lat LAT --lon LON --elev ELEV [--agl AGL]
+                           [--yaw YAW] [--hfov HFOV] [--k1 K1]
+                           cam image
+
+positional arguments:
+  cam
+  image
+
+options:
+  -h, --help   show this help message and exit
+  --lat LAT
+  --lon LON
+  --elev ELEV
+  --agl AGL
+  --yaw YAW
+  --hfov HFOV
+  --k1 K1</pre><h3 id="cli-viewshed"><code>fuelgauge viewshed</code></h3><pre class="code">fuelgauge viewshed [-h] [--radius RADIUS] [--mast MAST] cameras out
+
+positional arguments:
+  cameras
+  out
+
+options:
+  -h, --help       show this help message and exit
+  --radius RADIUS
+  --mast MAST</pre><h3 id="cli-site"><code>fuelgauge site</code></h3><pre class="code">fuelgauge site [-h] [--k K] [--radius RADIUS] [--mast MAST]
+                      [--block BLOCK] [--area AREA] [--lat LAT] [--lon LON]
+                      cameras
+
+positional arguments:
+  cameras
+
+options:
+  -h, --help       show this help message and exit
+  --k K
+  --radius RADIUS
+  --mast MAST
+  --block BLOCK
+  --area AREA
+  --lat LAT
+  --lon LON</pre></section>
+<section id="mod-archive"><h2><code>fuelgauge.archive</code></h2><pre class="doc mod">Process a camera archive end to end: screen -&gt; track -&gt; link -&gt; warp into each view -&gt; block colours.
+
+A camera that was moved to a new spot gets a second view (its own anchor frame) instead of losing those years.
+Featureless scenes (open-grass close-ups) fragment into short stretches that cannot be joined; when fewer than
+half of the usable frames land in a view, every usable frame is measured in place, the way fixed PhenoCam
+regions are.
+
+    from fuelgauge.archive import process
+    out = process(sorted(glob(&#x27;frames/*.jpg&#x27;)), times, &#x27;out/mycam&#x27;)
+
+Writes &lt;out&gt;_blocks.npz (dates, per-block mean RGB, validity, haze score, segment) and &lt;out&gt;_qa.json.</pre><div class="fn" id="archive.process"><p class="sig"><span class="k">def</span> <b>process</b>(paths, times, out_prefix, log=&lt;built-in function print&gt;)</p></div></section>
+<section id="mod-measure"><h2><code>fuelgauge.measure</code></h2><pre class="doc mod">Registered block colours -&gt; a daily vegetation series you can compare across years.
+
+For each view of the camera (a camera moved to a new spot has more than one):
+  1. flag clear frames by haze score (edge agreement with the view&#x27;s anchor frame, relative to the recent norm)
+  2. pick measurement regions automatically: SegFormer vegetation labels plus a strong seasonal swing, and
+     reference blocks (rock, soil, road, distant ridges) that stay flat through the year
+  3. white-balance every frame against the reference blocks (trailing two-month median, so it follows the camera,
+     not snow or wet soil)
+  4. GRVI and GCC over the vegetation blocks, clear frames only, then a causal smooth (weekly 90th percentile,
+     two-week mean) so each day uses only data up to that day
+
+    from fuelgauge.measure import measure
+    daily, regions, info = measure(&#x27;out/mycam_blocks.npz&#x27;, &#x27;out/mycam&#x27;)
+
+Writes &lt;out&gt;_daily.csv, &lt;out&gt;_regions.png (vegetation in green, reference in orange) and &lt;out&gt;_measure.json.</pre><div class="fn" id="measure.daily"><p class="sig"><span class="k">def</span> <b>daily</b>(series, times, clear, ffill=21)</p><pre class="doc">Per-frame values -&gt; a causal daily series from clear frames only (None if fewer than 30 clear days).</pre></div><div class="fn" id="measure.zscore"><p class="sig"><span class="k">def</span> <b>zscore</b>(s)</p></div><div class="fn" id="measure.combine"><p class="sig"><span class="k">def</span> <b>combine</b>(parts)</p><pre class="doc">Join per-view series in time (views rarely overlap; where they do, average).</pre></div><div class="fn" id="measure.semantic_fractions"><p class="sig"><span class="k">def</span> <b>semantic_fractions</b>(master, gh, gw, use_model=True)</p><pre class="doc">Per-block fraction of vegetation-like and not-ground pixels in a view&#x27;s anchor frame. Without the
+segmentation model every block counts as vegetation and only the seasonal swing picks regions.</pre></div><div class="fn" id="measure.view_series"><p class="sig"><span class="k">def</span> <b>view_series</b>(rgb, valid, times, clear, master, use_model=True)</p><pre class="doc">Automatic regions on one view, and that view&#x27;s daily GRVI (raw and white-balanced).</pre></div><div class="fn" id="measure.regions_image"><p class="sig"><span class="k">def</span> <b>regions_image</b>(master, R, path)</p><pre class="doc">Anchor frame with vegetation blocks tinted green and reference blocks tinted orange.</pre></div><div class="fn" id="measure.measure"><p class="sig"><span class="k">def</span> <b>measure</b>(blocks_npz, out_prefix=None, use_model=True)</p><pre class="doc">Returns (daily DataFrame, regions of the first view, info dict). Columns: grvi (raw), grvi_wb, gcc_wb,
+each per view; `index` is the white-balanced GRVI standardised per view and joined across views, which is
+what to compare across years. With `out_prefix`, also writes the CSV, a regions PNG and a JSON summary.</pre></div></section>
+<section id="mod-track"><h2><code>fuelgauge.track</code></h2><pre class="doc mod">Long-term registration for fixed cameras that drift, get bumped, re-aimed or re-zoomed over years.
+
+Visual-odometry style keyframe tracking inside segments, then loop closure between segments:
+
+  track()          match each frame (SIFT + RANSAC 4-DOF similarity) to the latest keyframes of the
+                   current segment; when tracking is lost for several clear frames, start a new segment.
+  link_segments()  match every segment&#x27;s clearest keyframes against every other segment&#x27;s and join them
+                   with a maximum-inlier spanning tree anchored on the largest segment.
+  to_master()      compose per-frame transforms into the master view.
+
+Transforms are 2x3 affine matrices in registration-resolution pixels.</pre><div class="fn" id="track.compose"><p class="sig"><span class="k">def</span> <b>compose</b>(A, B)</p><pre class="doc">Apply A, then B.</pre></div><div class="fn" id="track.invert"><p class="sig"><span class="k">def</span> <b>invert</b>(A)</p></div><div class="fn" id="track.Matcher"><p class="sig"><span class="k">class</span> <b>Matcher</b>(size=(512, 384), nfeatures=1500, terrain_from=0.15, ratio=0.75, min_scale=0.85, max_scale=1.18)</p><pre class="doc">SIFT on CLAHE-equalised grey, ratio test, RANSAC similarity. Only the frame
+(below the top sky band) contributes features.</pre></div><div class="fn sub"><p class="sig"><b>Matcher.feats</b>(self, img_bgr)</p></div><div class="fn sub"><p class="sig"><b>Matcher.match</b>(self, a, b)</p><pre class="doc">Similarity transform mapping frame a onto frame b and its RANSAC inlier count.</pre></div><div class="fn" id="track.Segment"><p class="sig"><span class="k">class</span> <b>Segment</b>(ref: &#x27;int&#x27;, keyframes: &#x27;list&#x27; = &lt;factory&gt;) -&gt; None</p><pre class="doc">Segment(ref: &#x27;int&#x27;, keyframes: &#x27;list&#x27; = &lt;factory&gt;)</pre></div><div class="fn" id="track.TrackResult"><p class="sig"><span class="k">class</span> <b>TrackResult</b>(seg: &#x27;np.ndarray&#x27;, T: &#x27;list&#x27;, inliers: &#x27;np.ndarray&#x27;, segments: &#x27;list&#x27;) -&gt; None</p><pre class="doc">TrackResult(seg: &#x27;np.ndarray&#x27;, T: &#x27;list&#x27;, inliers: &#x27;np.ndarray&#x27;, segments: &#x27;list&#x27;)</pre></div><div class="fn" id="track.track"><p class="sig"><span class="k">def</span> <b>track</b>(frames, matcher: &#x27;Matcher | None&#x27; = None, min_inliers=35, lost_after=4, kf_inliers=160, kf_clarity=1.6, progress=None) -&gt; &#x27;TrackResult&#x27;</p><pre class="doc">frames: iterable of (bgr_image or None, clarity score). Images flagged None are skipped.</pre></div><div class="fn" id="track.pairwise_links"><p class="sig"><span class="k">def</span> <b>pairwise_links</b>(res: &#x27;TrackResult&#x27;, matcher: &#x27;Matcher | None&#x27; = None, min_size=20, reps=10)</p><pre class="doc">Best match between every pair of segments with at least `min_size` frames, using each segment&#x27;s clearest
+keyframes. Returns (links {(a, b): (inliers, T a-&gt;b)}, big segment ids, sizes).</pre></div><div class="fn" id="track.link_segments"><p class="sig"><span class="k">def</span> <b>link_segments</b>(res: &#x27;TrackResult&#x27;, matcher: &#x27;Matcher | None&#x27; = None, min_size=20, min_inliers=30, reps=10)</p><pre class="doc">Join segments into one map around the largest. Returns (to_master dict seg-&gt;T, master seg, list of links).</pre></div><div class="fn" id="track.group_views"><p class="sig"><span class="k">def</span> <b>group_views</b>(res: &#x27;TrackResult&#x27;, times, matcher: &#x27;Matcher | None&#x27; = None, min_size=20, min_inliers=30, min_frames=60, min_span_days=300, reps=10)</p><pre class="doc">Like link_segments, but a camera that was moved to a new spot keeps its later years: every connected group
+of segments becomes its own view, anchored on its largest segment, if it holds at least `min_frames` frames
+over at least `min_span_days`. Views are ordered by size. Returns a list of dict(anchor, to_view, links).</pre></div><div class="fn" id="track.to_master"><p class="sig"><span class="k">def</span> <b>to_master</b>(res: &#x27;TrackResult&#x27;, links: &#x27;dict&#x27;)</p><pre class="doc">Per-frame transform into the master view (None where the frame or its segment is unregistered).</pre></div><div class="fn" id="track.sustained_moves"><p class="sig"><span class="k">def</span> <b>sustained_moves</b>(times, tx, ty, window=15, min_px=30, min_gap_days=60)</p><pre class="doc">Dates where the median camera offset jumps and stays: bumps, re-aims, re-zooms.</pre></div></section>
+<section id="mod-quality"><h2><code>fuelgauge.quality</code></h2><pre class="doc mod">Cheap frame screening (night, glare, blank, blur) and a haze score after registration.</pre><div class="fn" id="quality.screen"><p class="sig"><span class="k">def</span> <b>screen</b>(img_bgr, work=(512, 384)) -&gt; &#x27;dict&#x27;</p><pre class="doc">Global checks on a frame. Returns metrics plus `ok` and a `clarity` score used to pick keyframes.</pre></div><div class="fn" id="quality.edge_map"><p class="sig"><span class="k">def</span> <b>edge_map</b>(img_bgr)</p></div><div class="fn" id="quality.edge_agreement"><p class="sig"><span class="k">def</span> <b>edge_agreement</b>(warped_bgr, master_edges, cover, lower_from=0.4) -&gt; &#x27;float&#x27;</p><pre class="doc">Correlation of edge strength with the master view over the lower frame. Fog and haze wash out edges.</pre></div><div class="fn" id="quality.clear_flags"><p class="sig"><span class="k">def</span> <b>clear_flags</b>(edge_corr, times, window=&#x27;90D&#x27;, q=0.8, frac=0.8)</p><pre class="doc">Clear if edge agreement is at least `frac` of its recent 80th percentile. Relative to the recent norm,
+so a camera re-aim (which changes how well edges match the master) does not read as months of fog.</pre></div></section>
+<section id="mod-colour"><h2><code>fuelgauge.colour</code></h2><pre class="doc mod">Colour measurements on registered frames.
+
+Indices are computed from block-mean RGB:
+    GCC  = G / (R + G + B)              green chromatic coordinate (the PhenoCam standard)
+    GRVI = (G - R) / (G + R)            green-red vegetation index; tracks browning of evergreen brush better
+A diagonal (von Kries) white balance against stable non-vegetation ground in the same frame removes part of
+the camera&#x27;s colour drift: red and blue are rescaled so the reference blocks keep a constant red/green and
+blue/green balance. Given frame times, the reference balance is first smoothed with a trailing two-month median,
+so the correction follows the camera (sensor drift, replacement, settings) and not the weather on the reference
+ground (snow, rain-darkened soil, shadow).</pre><div class="fn" id="colour.block_means"><p class="sig"><span class="k">def</span> <b>block_means</b>(img_rgb_f32, cover, block)</p><pre class="doc">Mean RGB per block over covered pixels; blocks with &lt;90% coverage are marked invalid.</pre></div><div class="fn" id="colour.gcc"><p class="sig"><span class="k">def</span> <b>gcc</b>(rgb)</p></div><div class="fn" id="colour.grvi"><p class="sig"><span class="k">def</span> <b>grvi</b>(rgb)</p></div><div class="fn" id="colour.white_balance"><p class="sig"><span class="k">def</span> <b>white_balance</b>(rgb_blocks, valid, ref_mask, times=None, window=&#x27;61D&#x27;)</p><pre class="doc">rgb_blocks (N, gh, gw, 3). Returns blocks with red and blue rescaled so the reference blocks&#x27; red/green and
+blue/green ratios stay at their long-run median. With `times`, the per-frame reference ratios are smoothed with
+a trailing median over `window` first (robust to snow or wet ground on the reference blocks).</pre></div><div class="fn" id="colour.smooth_causal"><p class="sig"><span class="k">def</span> <b>smooth_causal</b>(series, p90_window=&#x27;7D&#x27;, mean_days=15)</p><pre class="doc">Trailing 90th percentile over a week, then a trailing two-week mean. Uses only data up to each day.</pre></div></section>
+<section id="mod-rois"><h2><code>fuelgauge.rois</code></h2><pre class="doc mod">Automatic measurement regions on a registered camera.
+
+Vegetation blocks: covered by every camera period, labelled as plants / trees / grass / hillside by the
+segmentation model in the master view, in the lower part of the frame, and with a strong seasonal swing in
+greenness. Reference blocks (for white balance): covered, not vegetation, little seasonal swing. Blocks of sky
+along the horizon can qualify; leaving them out made the correction worse on the 21-camera study (anomaly
+correlation 0.13 -&gt; 0.10), since sky colour carries the same daylight and sensor balance as the ground.
+No hand-drawn masks.</pre><div class="fn" id="rois.seasonal_amplitude"><p class="sig"><span class="k">def</span> <b>seasonal_amplitude</b>(index_blocks, times, good)</p></div><div class="fn" id="rois.choose"><p class="sig"><span class="k">def</span> <b>choose</b>(rgb_blocks, valid, times, good, veg_frac, bad_frac, lower_from=0.45, cover_min=0.85, amp_quantile=0.5)</p><pre class="doc">Returns dict(veg, ref, amp). veg_frac / bad_frac: per-block fraction of vegetation / not-ground pixels
+in the master view (from segment.masks).</pre></div></section>
+<section id="mod-segment"><h2><code>fuelgauge.segment</code></h2><pre class="doc mod">Semantic segmentation with a pretrained SegFormer-B2 (ADE20K, 150 classes) exported to ONNX.
+
+Used to find the sky (for skyline matching) and to drop roads, buildings, water and people from the
+ground measurements. Weights: Xenova/segformer-b2-finetuned-ade-512-512 on Hugging Face (ONNX export of
+NVIDIA&#x27;s SegFormer-B2). Downloaded on first use into ~/.cache/fuelgauge.</pre><div class="fn" id="segment.labels_map"><p class="sig"><span class="k">def</span> <b>labels_map</b>() -&gt; &#x27;dict[int, str]&#x27;</p></div><div class="fn" id="segment.session"><p class="sig"><span class="k">def</span> <b>session</b>()</p></div><div class="fn" id="segment.logits"><p class="sig"><span class="k">def</span> <b>logits</b>(img: &#x27;np.ndarray&#x27;, tiles: &#x27;bool&#x27; = True) -&gt; &#x27;np.ndarray&#x27;</p><pre class="doc">RGB uint8 image -&gt; class logits (150, H, W). Full view plus four overlapping 60% tiles, averaged.</pre></div><div class="fn" id="segment.labels"><p class="sig"><span class="k">def</span> <b>labels</b>(img: &#x27;np.ndarray&#x27;, tiles: &#x27;bool&#x27; = True) -&gt; &#x27;np.ndarray&#x27;</p></div><div class="fn" id="segment.masks"><p class="sig"><span class="k">def</span> <b>masks</b>(lab: &#x27;np.ndarray&#x27;)</p><pre class="doc">sky, vegetation-like ground, and not-ground masks from a label image.</pre></div></section>
+<section id="mod-camera"><h2><code>fuelgauge.camera</code></h2><pre class="doc mod">Camera model for fixed outdoor cameras: equidistant fisheye with one radial term.
+
+A pixel (u, v) maps to a viewing direction (azimuth, elevation) given
+    yaw    - azimuth of the optical axis, degrees clockwise from north
+    pitch  - tilt of the optical axis above the horizon, degrees
+    roll   - rotation about the optical axis, degrees
+    hfov   - angle spanned by the image half-width times two, in the undistorted model, degrees
+    k1     - radial term: off-axis angle = (r / f) * (1 + k1 * (r / f)^2)
+
+Wildfire cameras (Mobotix, Axis) are strongly barrel-distorted, so a pinhole model does not fit them.
+With k1 = 0 and a narrow field of view this reduces to a close approximation of a pinhole camera.</pre><div class="fn" id="camera.Camera"><p class="sig"><span class="k">class</span> <b>Camera</b>(width: &#x27;int&#x27;, height: &#x27;int&#x27;, yaw: &#x27;float&#x27; = 0.0, pitch: &#x27;float&#x27; = 0.0, roll: &#x27;float&#x27; = 0.0, hfov: &#x27;float&#x27; = 100.0, k1: &#x27;float&#x27; = 0.0) -&gt; None</p><pre class="doc">Camera(width: &#x27;int&#x27;, height: &#x27;int&#x27;, yaw: &#x27;float&#x27; = 0.0, pitch: &#x27;float&#x27; = 0.0, roll: &#x27;float&#x27; = 0.0, hfov: &#x27;float&#x27; = 100.0, k1: &#x27;float&#x27; = 0.0)</pre></div><div class="fn sub"><p class="sig"><b>Camera.focal</b></p><pre class="doc">Pixels per radian of the undistorted angle.</pre></div><div class="fn sub"><p class="sig"><b>Camera.params</b>(self) -&gt; &#x27;list[float]&#x27;</p></div><div class="fn sub"><p class="sig"><b>Camera.with_params</b>(self, p) -&gt; &quot;&#x27;Camera&#x27;&quot;</p></div><div class="fn sub"><p class="sig"><b>Camera.to_dict</b>(self) -&gt; &#x27;dict&#x27;</p></div><div class="fn sub"><p class="sig"><b>Camera.pixel_to_dir</b>(self, u, v)</p><pre class="doc">Pixels -&gt; (azimuth deg, elevation deg).</pre></div><div class="fn sub"><p class="sig"><b>Camera.dir_to_pixel</b>(self, az, el)</p><pre class="doc">(azimuth deg, elevation deg) -&gt; pixels. Inverse of pixel_to_dir (Newton on the radial term).</pre></div><div class="fn sub"><p class="sig"><b>Camera.effective_hfov</b>(self) -&gt; &#x27;float&#x27;</p><pre class="doc">Real angular width across the image after distortion, degrees.</pre></div></section>
+<section id="mod-terrain"><h2><code>fuelgauge.terrain</code></h2><pre class="doc mod">Tie a fixed camera to the ground.
+
+1. Render the panorama a camera should see from a DEM: for every azimuth, the elevation angle of the
+   terrain at each distance (with earth curvature and refraction), its running maximum (the visible
+   skyline), and the ground point at each distance.
+2. Fit the camera pose (and optionally lens) by matching the image skyline to the rendered skyline.
+3. Back-project pixels onto the ground: distance, latitude, longitude.
+
+DEM access defaults to Copernicus GLO-30 on Microsoft Planetary Computer, but any (array, transform)
+pair in geographic coordinates works, which is how the tests use a synthetic DEM.</pre><div class="fn" id="terrain.Raster"><p class="sig"><span class="k">class</span> <b>Raster</b>(arr: &#x27;np.ndarray&#x27;, lon0: &#x27;float&#x27;, dlon: &#x27;float&#x27;, lat0: &#x27;float&#x27;, dlat: &#x27;float&#x27;) -&gt; None</p><pre class="doc">Geographic raster: arr[row, col], with lon = lon0 + (col + .5) * dlon, lat = lat0 + (row + .5) * dlat.</pre></div><div class="fn sub"><p class="sig"><b>Raster.sample</b>(self, lat, lon, order=1)</p></div><div class="fn" id="terrain.load_planetary"><p class="sig"><span class="k">def</span> <b>load_planetary</b>(collection: &#x27;str&#x27;, asset: &#x27;str&#x27;, lat: &#x27;float&#x27;, lon: &#x27;float&#x27;, radius_m: &#x27;float&#x27;, cache: &#x27;str | None&#x27; = None, prefer: &#x27;str | None&#x27; = None) -&gt; &#x27;Raster&#x27;</p><pre class="doc">Mosaic tiles of a Planetary Computer collection around a point (e.g. &#x27;cop-dem-glo-30&#x27;/&#x27;data&#x27;,
+&#x27;esa-worldcover&#x27;/&#x27;map&#x27;). Cached as .npz when `cache` is given.</pre></div><div class="fn" id="terrain.destination"><p class="sig"><span class="k">def</span> <b>destination</b>(lat, lon, az_deg, d)</p></div><div class="fn" id="terrain.Panorama"><p class="sig"><span class="k">class</span> <b>Panorama</b>(az: &#x27;np.ndarray&#x27;, d: &#x27;np.ndarray&#x27;, ang: &#x27;np.ndarray&#x27;, cummax: &#x27;np.ndarray&#x27;, lat: &#x27;np.ndarray&#x27;, lon: &#x27;np.ndarray&#x27;) -&gt; None</p><pre class="doc">Panorama(az: &#x27;np.ndarray&#x27;, d: &#x27;np.ndarray&#x27;, ang: &#x27;np.ndarray&#x27;, cummax: &#x27;np.ndarray&#x27;, lat: &#x27;np.ndarray&#x27;, lon: &#x27;np.ndarray&#x27;)</pre></div><div class="fn sub"><p class="sig"><b>Panorama.skyline</b></p></div><div class="fn sub"><p class="sig"><b>Panorama.unwrap</b>(self, az)</p></div><div class="fn sub"><p class="sig"><b>Panorama.skyline_at</b>(self, az)</p></div><div class="fn" id="terrain.render_panorama"><p class="sig"><span class="k">def</span> <b>render_panorama</b>(dem: &#x27;Raster&#x27;, lat: &#x27;float&#x27;, lon: &#x27;float&#x27;, height_m: &#x27;float&#x27;, az_lo: &#x27;float&#x27;, az_hi: &#x27;float&#x27;, az_step: &#x27;float&#x27; = 0.05, max_d: &#x27;float&#x27; = 32000.0, step_d: &#x27;float&#x27; = 30.0) -&gt; &#x27;Panorama&#x27;</p></div><div class="fn" id="terrain.skyline_rows"><p class="sig"><span class="k">def</span> <b>skyline_rows</b>(sky_mask: &#x27;np.ndarray&#x27;, gray: &#x27;np.ndarray | None&#x27; = None, edge_frac=0.05, snap=6, min_level=30)</p><pre class="doc">Row of the first non-sky pixel per column, from a boolean sky mask connected to the top edge.
+Optionally snapped to the strongest vertical gradient within `snap` pixels.</pre></div><div class="fn" id="terrain.skyline_residuals"><p class="sig"><span class="k">def</span> <b>skyline_residuals</b>(cam: &#x27;Camera&#x27;, pano: &#x27;Panorama&#x27;, rows: &#x27;np.ndarray&#x27;)</p></div><div class="fn" id="terrain.trimmed_loss"><p class="sig"><span class="k">def</span> <b>trimmed_loss</b>(r, keep=0.8)</p></div><div class="fn" id="terrain.fit_extrinsics"><p class="sig"><span class="k">def</span> <b>fit_extrinsics</b>(cam: &#x27;Camera&#x27;, pano: &#x27;Panorama&#x27;, rows, yaw0: &#x27;float&#x27;, init=None, yaw_range=20.0)</p><pre class="doc">Fit yaw, pitch, roll with the lens held fixed. Coarse grid, then bounded Powell.</pre></div><div class="fn" id="terrain.fit_shared_lens"><p class="sig"><span class="k">def</span> <b>fit_shared_lens</b>(cams: &#x27;list[Camera]&#x27;, panos: &#x27;list[Panorama]&#x27;, rows: &#x27;list&#x27;, yaw0s: &#x27;list[float]&#x27;, hfov_grid=array([ 94.,  96.,  98., 100., 102., 104., 106., 108., 110., 112.]), k1_grid=array([-0.04,  0.  ,  0.04,  0.08,  0.12,  0.16]))</p><pre class="doc">Joint fit: one lens (hfov, k1) shared by every camera of the same model, extrinsics per camera.
+Cameras with a flat, hazy horizon cannot pin the lens down alone; the network can.</pre></div><div class="fn" id="terrain.backproject"><p class="sig"><span class="k">def</span> <b>backproject</b>(cam: &#x27;Camera&#x27;, pano: &#x27;Panorama&#x27;, step: &#x27;int&#x27; = 8)</p><pre class="doc">Ground hit for a grid of pixels: dict of u, v, az, el, dist (m), lat, lon (NaN = sky / beyond range).</pre></div><div class="fn" id="terrain.slope_aspect"><p class="sig"><span class="k">def</span> <b>slope_aspect</b>(dem: &#x27;Raster&#x27;, lat, lon)</p><pre class="doc">Slope (deg) and the compass direction a slope faces (deg) at points.</pre></div></section>
+<section id="mod-viewshed"><h2><code>fuelgauge.viewshed</code></h2><pre class="doc mod">What can a camera see? Terrain viewsheds and smoke-column line of sight.
+
+Works on any north-up elevation raster (fuelgauge.terrain.Raster, e.g. from load_planetary(&#x27;cop-dem-glo-90&#x27;, &#x27;data&#x27;, ...)).
+Rays are cast from the camera at a fixed angular step; along each ray a sample is visible if its elevation angle,
+after earth curvature and atmospheric refraction, is at least the steepest angle seen so far.
+
+    from fuelgauge import terrain, viewshed
+    dem = terrain.load_planetary(&#x27;cop-dem-glo-90&#x27;, &#x27;data&#x27;, lat, lon, 32000)
+    vis = viewshed.viewshed(dem, lat, lon, mast_m=10)          # boolean grid on the DEM&#x27;s cells
+    viewshed.sees_point(dem, lat, lon, 10, lat2, lon2, 300)     # can it see a 300 m smoke column there?
+    picks = viewshed.site(dem, existing=[(lat, lon)], k=5)      # where would five more cameras see the most?</pre><div class="fn" id="viewshed.rays"><p class="sig"><span class="k">def</span> <b>rays</b>(dem, lat, lon, mast_m=10.0, r_max=30000.0, az_step=0.1, step=None)</p><pre class="doc">Visible samples around a camera. Returns (lat, lon, distance_m) arrays of the visible ray samples.
+The camera stands `mast_m` above the ground at its location.</pre></div><div class="fn" id="viewshed.viewshed"><p class="sig"><span class="k">def</span> <b>viewshed</b>(dem, lat, lon, mast_m=10.0, r_max=30000.0, az_step=0.1)</p><pre class="doc">Boolean grid, same shape as dem.arr, True where the camera has line of sight to the ground.</pre></div><div class="fn" id="viewshed.sees_point"><p class="sig"><span class="k">def</span> <b>sees_point</b>(dem, lat, lon, mast_m, lat2, lon2, above_ground_m=0.0, step=None)</p><pre class="doc">Line of sight from a camera to a point `above_ground_m` over the terrain at (lat2, lon2).</pre></div><div class="fn" id="viewshed.coverage"><p class="sig"><span class="k">def</span> <b>coverage</b>(dem, cameras, mast_m=10.0, r_max=30000.0, az_step=0.1)</p><pre class="doc">Count of cameras with line of sight to each cell. `cameras` is a list of (lat, lon) pairs.</pre></div><div class="fn" id="viewshed.candidates"><p class="sig"><span class="k">def</span> <b>candidates</b>(dem, block_m=6000.0, mask=None)</p><pre class="doc">Hilltops: the highest cell in each block of about `block_m` metres (inside `mask` if given).
+Returns a list of (lat, lon, elevation).</pre></div><div class="fn" id="viewshed.site"><p class="sig"><span class="k">def</span> <b>site</b>(dem, existing=(), k=10, mast_m=10.0, r_max=30000.0, target=None, block_m=6000.0, az_step=0.25, cands=None, progress=None)</p><pre class="doc">Greedy camera siting: pick `k` new sites, one at a time, each the candidate that brings the most
+currently unseen target cells into view (each newly seen cell counts once).
+
+existing  (lat, lon) pairs of cameras already in place
+target    boolean grid like dem.arr of the ground worth watching (default: every cell)
+cands     (lat, lon, elev) candidates; default: the highest cell in every `block_m` square
+Returns a list of dicts: lat, lon, elev, new_cells, new_km2.</pre></div></section>
+<section id="mod-evaluate"><h2><code>fuelgauge.evaluate</code></h2><pre class="doc mod">Leave-one-year-out comparison of predictors of live fuel moisture.
+
+Every model is ridge regression on top of a per-unit seasonal baseline: one intercept and one set of
+day-of-year harmonics per sampling unit (a site and species), so &quot;the calendar&quot; already knows that sagebrush
+and chamise dry down on different schedules. Predictors add to that baseline with shared coefficients. For each
+held-out year, the model (and the baseline-only climatology used to score anomalies) is refit on the other
+years only, and the held-out year&#x27;s predictor values are clipped to the range seen in the training years.</pre><div class="fn" id="evaluate.add_season"><p class="sig"><span class="k">def</span> <b>add_season</b>(df, date_col=&#x27;date&#x27;)</p></div><div class="fn" id="evaluate.loyo"><p class="sig"><span class="k">def</span> <b>loyo</b>(df, feats, site_col=&#x27;site&#x27;, min_train=30, season_per_site=True)</p><pre class="doc">df needs columns: site, date, year, lfmc, the season columns and `feats`. Returns (pred df, metrics).
+
+With season_per_site (default) the baseline is an intercept plus seasonal harmonics for every unit, and any
+SEASON columns listed in `feats` are folded into that baseline.</pre></div><div class="fn" id="evaluate.metrics"><p class="sig"><span class="k">def</span> <b>metrics</b>(t, crit=80.0)</p></div><div class="fn" id="evaluate.compare"><p class="sig"><span class="k">def</span> <b>compare</b>(df, sets: &#x27;dict&#x27;, common=True)</p><pre class="doc">Run every predictor set on the same rows (rows where all sets&#x27; features exist when common=True).</pre></div></section>
+<section id="mod-sources.phenocam"><h2><code>fuelgauge.sources.phenocam</code></h2><pre class="doc mod">PhenoCam Network archive (https://phenocam.nau.edu). Midday images and curated ROI series are public.</pre><div class="fn" id="sources.phenocam.cameras"><p class="sig"><span class="k">def</span> <b>cameras</b>()</p></div><div class="fn" id="sources.phenocam.midday_paths"><p class="sig"><span class="k">def</span> <b>midday_paths</b>(site)</p><pre class="doc">Archive paths of one midday image per day.</pre></div><div class="fn" id="sources.phenocam.path_date"><p class="sig"><span class="k">def</span> <b>path_date</b>(p)</p></div><div class="fn" id="sources.phenocam.download"><p class="sig"><span class="k">def</span> <b>download</b>(path, dst, max_side=960)</p></div><div class="fn" id="sources.phenocam.roi_series"><p class="sig"><span class="k">def</span> <b>roi_series</b>(site)</p><pre class="doc">Curated (hand-drawn ROI) 1-day greenness CSV names for a site.</pre></div></section>
+<section id="mod-sources.hpwren"><h2><code>fuelgauge.sources.hpwren</code></h2><pre class="doc mod">HPWREN camera network (https://hpwren.ucsd.edu). The public CDN keeps roughly the last 90 days.
+
+Image lists:  https://cdn.hpwren.ucsd.edu/hpwren-cameras/&lt;cam&gt;/&lt;YYYY&gt;/&lt;YYYYMMDD&gt;/&lt;YYYYMMDD&gt;_&lt;cam&gt;_Q&lt;n&gt;.txt
+Images:       https://cdn.hpwren.ucsd.edu/MTA/&lt;cam&gt;/large/&lt;YYYYMMDD&gt;/Q&lt;n&gt;/&lt;unix&gt;.jpg
+Q1..Q8 are three-hour blocks of local time starting at midnight (Q5 = 12:00-15:00).
+Camera positions and nominal headings: https://www.hpwren.ucsd.edu/cameras/sites.js
+Attribution: images courtesy of HPWREN (http://hpwren.ucsd.edu).</pre><div class="fn" id="sources.hpwren.sites"><p class="sig"><span class="k">def</span> <b>sites</b>()</p><pre class="doc">Camera sites with lat/long/elev and per-camera azimuth, from the public camera page.</pre></div><div class="fn" id="sources.hpwren.frame_times"><p class="sig"><span class="k">def</span> <b>frame_times</b>(cam, day: &#x27;dt.date&#x27;, quarter=5)</p></div><div class="fn" id="sources.hpwren.nearest_frames"><p class="sig"><span class="k">def</span> <b>nearest_frames</b>(cam, day: &#x27;dt.date&#x27;, targets=((12, 30), (13, 30), (14, 30)), tol_s=1200)</p></div><div class="fn" id="sources.hpwren.frame"><p class="sig"><span class="k">def</span> <b>frame</b>(cam, day: &#x27;dt.date&#x27;, unix_t: &#x27;int&#x27;, max_side=1536)</p></div></section>
+<section id="mod-sources.lfmc"><h2><code>fuelgauge.sources.lfmc</code></h2><pre class="doc mod">Globe-LFMC 2.0 field live fuel moisture (Yebra et al. 2024, Scientific Data; figshare collection 6980418).</pre><div class="fn" id="sources.lfmc.load"><p class="sig"><span class="k">def</span> <b>load</b>(cache_dir=&#x27;data/globe&#x27;, country=&#x27;USA&#x27;)</p><pre class="doc">Returns a DataFrame: site, lat, lon, date, lfmc, species, plus the original columns.</pre></div></section>
+<section id="mod-sources.modis"><h2><code>fuelgauge.sources.modis</code></h2><pre class="doc mod">MODIS MCD43A4 v6.1 nadir BRDF-adjusted reflectance at points, via Microsoft Planetary Computer.
+
+Each point gets the mean of a 3 x 3 window of 500 m pixels. Bands: 1 red, 2 NIR, 3 blue, 4 green, 6 SWIR 1.6 um.</pre><div class="fn" id="sources.modis.catalog"><p class="sig"><span class="k">def</span> <b>catalog</b>()</p></div><div class="fn" id="sources.modis.tile_of"><p class="sig"><span class="k">def</span> <b>tile_of</b>(cat, lat, lon)</p></div><div class="fn" id="sources.modis.read_item"><p class="sig"><span class="k">def</span> <b>read_item</b>(item, points: &#x27;dict&#x27;)</p></div><div class="fn" id="sources.modis.indices"><p class="sig"><span class="k">def</span> <b>indices</b>(df)</p><pre class="doc">Add NDVI, NDII (NIR vs SWIR 1.6 um), visible GCC and GRVI columns to a frame with b1..b6.</pre></div><div class="fn" id="sources.modis.series"><p class="sig"><span class="k">def</span> <b>series</b>(points: &#x27;dict&#x27;, years=range(2000, 2024), every_days=8, workers=16)</p><pre class="doc">Point time series for all points sharing one MODIS tile (call per tile).</pre></div></section>
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>Fuel Gauge</a>
+      <p style="margin-top:10px;max-width:36ch">Built by Shourya Mehta on public data only. A research tool, not an operational fire-danger product.</p>
+    </div>
+    <div><h4>Product</h4><ul><li><a href="./#pipeline">How it works</a></li><li><a href="./#start">Get started</a></li><li><a href="docs.html">Docs</a></li></ul></div>
+    <div><h4>Research</h4><ul><li><a href="research.html#coverage">Statewide coverage</a></li><li><a href="research.html#study">Fuel moisture study</a></li><li><a href="research.html#live">Live network</a></li></ul></div>
+    <div><h4>Project</h4><ul><li><a href="https://github.com/shourya0mehta/fuel-gauge">GitHub</a></li><li><a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff">Cite</a></li><li><a href="research.html#methods">Data credits</a></li></ul></div>
+  </div>
+</footer>
+</body>
+</html>

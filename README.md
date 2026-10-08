@@ -1,86 +1,99 @@
 # Fuel Gauge
 
-**What can California's fire cameras actually see, and can their photos tell how dry the brush is?**
+**Turn any fixed camera into a measuring instrument.**
 
-[Project site with the coverage map, the interactive study and the live camera network](https://shourya0mehta.github.io/fuel-gauge/) · [tests](.github/workflows/tests.yml) · MIT licence
+Fuel Gauge is an open-source Python pipeline for fire lookouts, phenology cameras and webcams. Give it a folder of photos and a location. It keeps years of frames aligned, works out where the camera points from the skyline alone, ties every pixel to the ground and hands back a daily vegetation record you can compare across seasons. It also maps what a whole network of cameras can see and where new ones would help most.
+
+[Project site](https://shourya0mehta.github.io/fuel-gauge/) | [Docs](https://shourya0mehta.github.io/fuel-gauge/docs.html) | [Research results](https://shourya0mehta.github.io/fuel-gauge/research.html) | MIT licence
 
 ![Fifteen years of one hillside in the San Bernardino National Forest, every April and September, registered onto one view](docs/assets/readme/hillside.gif)
 
-*One Forest Service camera, 2003 to 2018, April and September of each year. Every frame was shifted, turned and scaled onto one shared view, so the only thing that changes is the brush.*
+*One Forest Service camera, 2003 to 2018, April and September of each year, registered by the pipeline onto one view.*
 
-## Why
+## Install
 
-Thousands of fixed cameras already watch Western hillsides, most of them to spot smoke. Two questions about them have no public answer. Which ground can they actually see, once terrain gets in the way? And could the same photos measure live fuel moisture, the water in living plants that sets how easily brush ignites and how fast fire runs through it? Crews still measure that by hand every two to four weeks at a few hundred sites, and satellites see it only at 500 m pixels.
+```bash
+pip install "fuelgauge[geo,seg] @ git+https://github.com/shourya0mehta/fuel-gauge"
+```
 
-This project answers both on public data alone, and ships the tools as an open package.
+Python 3.10+. `geo` adds terrain and land cover (Microsoft Planetary Computer, GeoTIFF output), `seg` adds the SegFormer-B2 segmentation model (ONNX Runtime, CPU only, downloaded once), `eval` adds scoring against field data.
 
-## What I found
+## Quickstart
 
-**1. Coverage.** I traced lines of sight from all 1,309 ALERTCalifornia cameras (740 sites) across a 90 m terrain model, then checked every California wildfire from 2020 to 2025 against the result.
+```bash
+# years of photos from one camera -> registered views -> daily vegetation series
+fuelgauge run photos/ out/ridge
+#   out/ridge_daily.csv     daily GRVI / GCC per view, raw and white-balanced, plus a joined index
+#   out/ridge_regions.png   the anchor frame with the measured vegetation and reference blocks marked
+#   out/ridge_blocks.npz    block colours of every registered photo; out/ridge_qa.json per-photo QA
 
-- **46%** of California's wildland is in line of sight of at least one camera within 30 km, and **20%** of two, the overlap needed to triangulate a smoke column.
-- Of the **277** fires over 1,000 acres, the ground where each started was in view of a camera for **43%**. Smoke rises, so a looser test asks whether a 300 m column above the ignition was in view: **79%**, and **59%** from two cameras.
-- The **21%** that started where no camera could see even that burned **1.4 million acres**, among them the SCU Lightning Complex and the Claremont Fire in 2020.
-- **Where to add cameras.** A greedy search over 11,847 hilltops finds ten new sites that would add 9,332 km² of watched wildland (3.5 points). Looking back, a different ten would have seen a 300 m smoke column from 60 of the 317 fires no camera could see, 1.31 million of their 1.48 million acres.
-- The largest blind spots: Klamath Mountains (11,406 km²), Yosemite high country (8,250 km²), Modoc Plateau (5,178 km²), Diablo Range (4,164 km²).
+# one frame + location -> camera pose + pixel-to-ground lookup
+fuelgauge calibrate ridge frame.jpg --lat 33.4008 --lon -117.1905 --elev 483 --yaw 90
+
+# what a set of cameras can see, and where to add more (CSV with lat, lon columns)
+fuelgauge viewshed cameras.csv coverage.tif
+fuelgauge site cameras.csv --k 10 > new_sites.csv
+```
+
+Photo times come from the file name (`2019-06-14_1230.jpg`, `IMG_20190614T123000.jpg`, PhenoCam and HPWREN naming) or EXIF. Each stage is also a Python function:
+
+```python
+from fuelgauge.archive import process
+from fuelgauge.measure import measure
+from fuelgauge import terrain, viewshed, evaluate
+
+blocks = process(paths, times, "out/ridge")                 # register
+daily, regions, info = measure(blocks, "out/ridge")         # measure
+dem = terrain.load_planetary("cop-dem-glo-90", "data", 33.4, -117.2, 40000)
+picks = viewshed.site(dem, existing=[(33.40, -117.19)], k=5) # site new cameras
+```
+
+## The pipeline
+
+| Stage | What it solves | Techniques |
+| --- | --- | --- |
+| **1. Register** `track`, `archive` | Cameras drift, get bumped, re-aimed and moved over years | Frame screening (brightness, Laplacian sharpness, contrast, clipping); SIFT on CLAHE-equalised greyscale, Lowe ratio 0.75; 4-DOF similarity by RANSAC; keyframe tracking with relocalisation; loop closure over stretches via a maximum-inlier spanning tree; relocated cameras kept as second views; in-place fallback for featureless scenes; bump detection |
+| **2. Measure** `measure`, `quality`, `rois`, `colour` | Raw colour is mostly haze, weather and sensor drift | Haze score from Sobel edge correlation with the anchor frame, relative to a trailing 90-day norm; automatic regions from SegFormer-B2 (ADE20K) vegetation labels plus seasonal amplitude; drift-tracking von Kries white balance against flat reference blocks (trailing 61-day median); GRVI, GCC and camera NDVI from IR twins (Petach et al. 2014); causal smoothing safe for nowcasting |
+| **3. Calibrate** `terrain`, `camera` | Public cameras come with a location and nothing else | Sky segmentation to a per-column skyline snapped to edges; terrain panorama from Copernicus 30 m DEM with earth curvature and refraction (k = 0.13); equidistant fisheye with one radial term; heading, tilt and roll by bounded Powell search on a trimmed loss; one lens fitted jointly across a camera network |
+| **4. Georeference** `terrain.backproject` | Photo measurements need a place on the map | Ray to first terrain hit for every pixel block: distance, latitude, longitude, slope, aspect, ESA WorldCover class |
+| **5. Network coverage** `viewshed` | Which ground can a set of cameras actually see, and where would one more help | Radial viewsheds (0.1° rays to 30 km, curvature and refraction); smoke-column line of sight; greedy maximum-coverage siting over hilltop candidates |
+| **Evaluate** `evaluate` | Does a camera signal know anything the calendar doesn't | Leave-one-year-out ridge regression on a per-site, per-species seasonal baseline; held-out predictors clipped to the training range; RMSE, anomaly correlation, years beating season |
+
+Tests cover synthetic drift, re-aims, relocations, terrain, viewsheds, siting, colour drift and leakage in the evaluation (`pytest`, run in CI on Python 3.10 and 3.12).
+
+## What it found
+
+Every result below was produced with the pipeline on public data; each has an interactive page on the [research site](https://shourya0mehta.github.io/fuel-gauge/research.html).
+
+**What California's fire cameras can see.** Line of sight from all 1,309 ALERTCalifornia cameras (740 sites) across a 90 m terrain model, checked against every California wildfire from 2020 to 2025.
+
+- **46%** of the state's wildland is in line of sight of at least one camera within 30 km, **20%** of two (enough to triangulate smoke).
+- Of the **277** fires over 1,000 acres, a camera could see the ground where each started for **43%**, and a 300 m smoke column above it for **79%** (**59%** from two cameras).
+- The **21%** that started where no camera could see even that burned **1.4 million acres**, among them the SCU Lightning Complex and the Claremont Fire.
+- A greedy search over 11,847 hilltops finds ten sites that would add **9,332 km²** of watched wildland. Looking back, a different ten would have seen 60 of the 317 fires no camera could see, **1.31 million of their 1.48 million acres**.
+- Largest blind spots: Klamath Mountains (11,406 km²), Yosemite high country (8,250 km²), Modoc Plateau, Diablo Range.
 
 ![California shaded by how many fire cameras can see each patch of wildland, with big fires since 2020](docs/assets/coverage/ca_light.png)
 
-**2. Fuel moisture.** I registered **29,047 daily photos from 21 PhenoCam cameras in 6 states** onto fixed views, found the brush in each view automatically, and scored the cameras against **3,832 field samples** from Globe-LFMC alongside MODIS satellite data. Every predictor is fit on all years but one and tested on the missing year, on top of a baseline that already knows each site's seasonal cycle.
+**Can camera photos read fuel moisture?** 29,047 daily photos from 21 PhenoCam cameras in 6 states, registered and measured by the pipeline, scored against 3,832 field samples of live fuel moisture (Globe-LFMC) and MODIS.
 
-- **Cameras.** After colour correction, a camera beats season alone at 10 of 21 cameras. Pooled over all 3,832 held-out samples its error matches season alone (20.5 against 20.5 points RMSE), and its anomaly correlation, how well it tracks a year's departure from normal, is 0.13.
-- **Satellites.** MODIS infrared at the sampling site beats season alone at 15 of 21 cameras (sign test p = 0.04), cuts pooled error by 4% and reaches an anomaly correlation of 0.31. Looking at the camera's own slope it reaches 0.29.
-- **Colour correction is the camera's biggest lever.** Uncorrected, cameras reach an anomaly correlation of 0.08. Correcting each photo against rock and soil in the same frame lifts that to 0.13.
-- **Automatic regions beat hand-drawn ones** at 12 of 20 cameras with both (median anomaly correlation 0.13 against 0.07).
-- **Timing doesn't rescue it.** The date a camera sees the brush turn brown barely tracks the date fuel moisture falls below its usual level (r = 0.11 over 141 camera-years); satellite greenness does no better (0.09).
-- **Registration held up.** 92% of 31,451 usable photos landed on a fixed view. Six cameras that were moved to a new spot kept those years as a second view; three featureless grass close-ups were measured in place.
-- **Near-infrared doesn't rescue it.** Ten of the cameras also record a near-infrared photo seconds after each colour one. Camera NDVI from those twins, on the same registered regions, reached an anomaly correlation of **0.02** on 1,267 shared samples and beat the calendar at 1 of 10 cameras.
+- **Registration held up**: 92% of 31,451 usable photos landed on a fixed view; six relocated cameras kept those years as a second view.
+- **Automatic regions beat hand-drawn ones** at 12 of 20 cameras (anomaly correlation 0.13 against 0.07).
+- **White balance is the camera's biggest lever**: anomaly correlation 0.08 uncorrected, 0.13 corrected.
+- **But colour is not moisture.** The corrected camera matches the seasonal baseline (20.5 against 20.5 points RMSE) and beats it at 10 of 21 cameras. Satellite shortwave infrared at the sampling site beats it at 15 of 21 (sign test p = 0.04, anomaly r 0.31). Near-infrared camera NDVI from 10 cameras reached 0.02. Greenness lags moisture.
 
-What it means: fire cameras leave large parts of California's backcountry unwatched, and the gaps line up with where some of the biggest recent fires started. And greenness, from a camera or from orbit, carries little of the year-to-year swing in fuel moisture, so a camera fuel gauge would need a different signal. The reusable part is the toolkit: it makes years of fixed-camera photos comparable, ties every pixel to the ground, and maps what any set of cameras can see.
+**A live fire-camera network.** Eight HPWREN cameras calibrated from their skylines (median error 0.04° to 0.17°, one shared lens). A GitHub Action pulls each day's midday frames, measures every ground block and commits the numbers to the site.
 
 ## What's in here
 
 | Path | What it is |
 | --- | --- |
-| [`fuelgauge/`](fuelgauge) | The Python package: multi-year registration, terrain calibration, automatic regions, colour correction, evaluation, data readers |
-| [`scripts/`](scripts) | The fuel moisture study and the statewide coverage map, end to end: download, register, score, map, build the site data |
-| [`live/`](live) | The daily updater for eight terrain-calibrated HPWREN fire cameras, run by GitHub Actions every morning |
-| [`docs/`](docs) | The project site (GitHub Pages), including the live numbers the Action commits |
-| [`study/`](study) | Camera list, per-camera results and coverage statistics used on the site |
-| [`tests/`](tests) | Synthetic drift, re-aims, relocations and terrain; no-leakage checks on the evaluation |
-
-## Use it on your own camera
-
-```bash
-pip install "fuelgauge[geo,seg,eval] @ git+https://github.com/shourya0mehta/fuel-gauge"
-
-# years of daily photos from one fixed camera -> registered block colours (+ a QA report)
-fuelgauge register-archive photos/ out/mycam
-
-# skyline + 30 m terrain -> camera pose, and a lookup from every pixel block to a spot on the ground
-fuelgauge calibrate mycam frame.jpg --lat 33.40 --lon -117.19 --elev 483
-```
-
-```python
-from fuelgauge import track, colour, rois, evaluate
-
-res = track.track(frames, track.Matcher())                 # keyframe tracking within stretches
-views = track.group_views(res, times)                      # join stretches; a relocated camera gets a second view
-moves = track.sustained_moves(times, tx, ty)               # dates the camera was bumped or re-aimed
-wb = colour.white_balance(blocks, valid, ref, times=times) # follow the camera's colour drift, not the weather
-```
-
-## How it works
-
-**Registration.** SIFT features on contrast-equalised frames, 4-degree-of-freedom similarity transforms by RANSAC. Frames are tracked against a growing set of keyframes; after four lost frames a new stretch starts at the clearest of them. Stretches are then joined by matching their clearest keyframes (loop closure, at least 30 inliers). A camera moved to a new spot becomes a second view with its own calibration rather than being thrown away. Featureless views (open-grass close-ups) fragment into short stretches; when fewer than half of the usable frames land in a view, frames are measured in place, as fixed PhenoCam regions are.
-
-**Measuring the right pixels.** A SegFormer-B2 model (ADE20K, run through ONNX Runtime) labels the master view. Vegetation blocks are those labelled as plants and with a strong seasonal swing; reference blocks are covered, not vegetation, and seasonally flat (rock, soil, road). No hand-drawn masks.
-
-**Colour that holds still.** Red and blue are rescaled so the reference blocks keep a constant balance against green, smoothed over a trailing two months so the correction follows the camera (sensor drift, replacements, settings) and not the weather on the reference ground (snow, wet soil). The daily index is GRVI = (G − R) / (G + R) on clear days, with haze scored by how well each frame's edges agree with the master view.
-
-**Scoring.** Ridge regression with one intercept and one set of day-of-year harmonics per sampling unit (site and species), plus the predictor's level and 30-day change. Leave one year out; report RMSE, anomaly correlation (does it know this year differs from normal?), and the number of held-out years it beats season alone.
-
-**Live network.** For each HPWREN camera, the skyline in the photo (from SegFormer's sky class) is matched to a skyline rendered from the Copernicus 30 m DEM, with earth curvature and refraction. A bounded pose fit with a trimmed loss gives heading, tilt and roll; one equidistant fisheye lens is fitted jointly across all eight cameras. Each 16-pixel block is then traced to the ground for distance, slope, aspect and ESA WorldCover land cover. Every morning a GitHub Action pulls the previous day's midday frames from the HPWREN CDN, corrects small shifts by phase correlation, measures every ground block and commits the numbers to `docs/live/`.
+| [`fuelgauge/`](fuelgauge) | The package and the `fuelgauge` command |
+| [`docs/`](docs) | The site: product page, docs (generated by `scripts/build_docs.py`), research pages and live data |
+| [`scripts/`](scripts) | The studies end to end: download, register, score, map, siting, site data |
+| [`live/`](live) | The daily updater for the calibrated HPWREN cameras, run by GitHub Actions |
+| [`study/`](study) | Camera list, per-camera results and coverage statistics |
+| [`tests/`](tests) | Synthetic cameras and terrain |
 
 ## Reproduce the study
 

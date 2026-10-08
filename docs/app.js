@@ -48,7 +48,7 @@
   function drawCoverage() {
     if (!C) { document.getElementById('coverage').hidden = true; return; }
     const I = C.ignitions, big = I['1,000+ acres'], fmt = (v) => Math.round(v * 100) + '%';
-    $('cov-span').textContent = `${C.cameras.toLocaleString()} cameras · ${C.sites} sites · ${C.years[0]}–${C.years[1]} fires`;
+    $('cov-span').textContent = `${C.cameras.toLocaleString()} cameras at ${C.sites} sites, fires from ${C.years[0]} to ${C.years[1]}`;
     $('cov-dek').textContent = (S.text && S.text.coverage_dek) || '';
     $('cov-stats').innerHTML = [
       [fmt(C.wild_seen), 'of California\'s wildland is in line of sight of at least one ALERTCalifornia camera (within 30 km)'],
@@ -61,8 +61,8 @@
       const v = I[k]; if (!v) return;
       tb.insertAdjacentHTML('beforeend', `<tr><td>${k}</td><td class="num">${v.n.toLocaleString()}</td><td class="num">${fmt(v.seen)}</td><td class="num">${fmt(v.smoke300)}</td><td class="num">${fmt(v.smoke300_2)}</td></tr>`);
     });
-    $('cov-unseen').innerHTML = (C.unseen_large || []).filter((f) => f.smoke300 === 0).slice(0, 6).map((f) => `<li>${esc(f.name)} Fire, ${f.year} <small>${f.acres.toLocaleString()} acres · ${esc(f.county)}</small></li>`).join('') || '<li>None</li>';
-    $('cov-blind').innerHTML = (C.blind_spots || []).slice(0, 6).map((b) => `<li>${esc(b.name)} <small>${b.km2.toLocaleString()} km² of wildland${b.biggest ? ` · ${esc(b.biggest.name)} Fire ${b.biggest.year}` : ''}</small></li>`).join('');
+    $('cov-unseen').innerHTML = (C.unseen_large || []).filter((f) => f.smoke300 === 0).slice(0, 6).map((f) => `<li>${esc(f.name)} Fire, ${f.year} <small>${f.acres.toLocaleString()} acres, ${esc(f.county)} County</small></li>`).join('') || '<li>None</li>';
+    $('cov-blind').innerHTML = (C.blind_spots || []).slice(0, 6).map((b) => `<li>${esc(b.name)} <small>${b.km2.toLocaleString()} km² of wildland${b.biggest ? `, ${esc(b.biggest.name)} Fire ${b.biggest.year}` : ''}</small></li>`).join('');
     $('cov-method').textContent = (S.text && S.text.coverage_method) || '';
     const SI = C.siting, SF = C.siting_fires;
     if (SI || SF) {
@@ -72,7 +72,7 @@
       if (SF) parts.push(`Looking back, the ten sites below would have seen a 300 m smoke column from ${SF.fires} of the ${SF.missed_fires} fires no camera could see, ${(SF.acres / 1e6).toFixed(2)} million of their ${(SF.missed_acres / 1e6).toFixed(2)} million acres.`);
       $('cov-siting-text').textContent = parts.join(' ');
       const P = SF ? SF.picks : SI.picks;
-      $('cov-siting').innerHTML = P.map((p) => `<li>${esc(p.region)} <small>${SF ? p.acres.toLocaleString() + ' acres · ' + esc(p.examples[0]) + ' Fire' : '+' + p.new_km2.toLocaleString() + ' km²'} · ${p.lat.toFixed(2)}, ${p.lon.toFixed(2)}</small></li>`).join('');
+      $('cov-siting').innerHTML = P.map((p) => `<li>${esc(p.region)} <small>${SF ? p.acres.toLocaleString() + ' acres, incl. ' + esc(p.examples[0]) + ' Fire' : '+' + p.new_km2.toLocaleString() + ' km²'}, at ${p.lat.toFixed(2)}, ${p.lon.toFixed(2)}</small></li>`).join('');
     }
     const sv = $('cov-hit'), M = C.map;
     sv.setAttribute('viewBox', `0 0 ${M.w} ${M.h}`); sv.innerHTML = '';
@@ -83,7 +83,7 @@
       c.addEventListener('pointerenter', () => {
         const tip = $('cov-tip'), bb = sv.getBoundingClientRect();
         tip.hidden = false; tip.style.left = (X(f.lon) / M.w * bb.width) + 'px'; tip.style.top = (Y(f.lat) / M.h * bb.height) + 'px';
-        tip.innerHTML = `${esc(f.n)} Fire, ${f.y} · ${f.a.toLocaleString()} acres<br>ground in view of ${f.g} camera site${f.g === 1 ? '' : 's'}<br>300 m smoke in view of ${f.s}`;
+        tip.innerHTML = `${esc(f.n)} Fire, ${f.y}, ${f.a.toLocaleString()} acres<br>ground in view of ${f.g} camera site${f.g === 1 ? '' : 's'}<br>300 m smoke in view of ${f.s}`;
       });
       c.addEventListener('pointerleave', () => { $('cov-tip').hidden = true; });
     });
@@ -186,7 +186,7 @@
     if (t < t0 || t > t1 || !d) { tip.hidden = true; return; }
     const r = tl.getBoundingClientRect();
     tip.hidden = false; tip.style.left = (e.clientX - r.left) + 'px'; tip.style.top = '18px';
-    tip.textContent = fmtDate(d.t) + (d.g != null ? ' · greenness ' + Math.round(g100(d.g)) : ' · no clear view');
+    tip.textContent = fmtDate(d.t) + (d.g != null ? ', greenness ' + Math.round(g100(d.g)) : ', no clear view');
   });
   tl.addEventListener('pointerup', () => { dragging = false; });
   tl.addEventListener('pointerleave', () => { $('tl-tip').hidden = true; });
@@ -221,7 +221,7 @@
 
   /* ---------------- study: map + scoreboard + pooled table ---------------- */
   const yrs = S.cams.flatMap((c) => c.years.map(Number));
-  $('study-span').textContent = `${T.cams} cameras · ${T.samples.toLocaleString()} samples · ${Math.min(...yrs)}–${Math.max(...yrs)}`;
+  $('study-span').textContent = `${T.cams} cameras, ${T.samples.toLocaleString()} samples, ${Math.min(...yrs)} to ${Math.max(...yrs)}`;
   $('study-prose').innerHTML = (S.text && S.text.study) || `<p>I searched the PhenoCam Network, a long-running archive of daily photos from fixed cameras, for every camera with field measurements of live fuel moisture from the Globe-LFMC database within 25 km. ${T.cams} cameras qualified, from Southern California chaparral to Wyoming sagebrush and Montana conifers. For each one, every daily photo was registered onto one view, the brush was found automatically, and its colour was turned into a daily index.</p><p>Each predictor is scored the same way: a model that already knows each site's normal seasonal cycle is fit on all years but one, then asked to predict the samples in the missing year. Beating "season alone" means knowing something about this year that the calendar doesn't.</p>`;
   let selCam = S.cams.reduce((a, c) => (c.n > a.n ? c : a), S.cams[0]).cam;
   const camColor = (c) => (c.res[CAMSET] && c.res[CAMSET].skill > 0 ? css('--cam') : css('--ink-3'));
@@ -238,7 +238,7 @@
     for (const c of S.cams) for (const s of c.sites) { if (seen.has(s.name)) continue; seen.add(s.name); el('circle', { cx: s.xy[0], cy: s.xy[1], r: R * 0.55, class: 'site' }, sv); }
     for (const c of S.cams) {
       const d = el('circle', { cx: c.x, cy: c.y, r: R, fill: camColor(c), class: 'cam' + (c.cam === selCam ? ' sel' : '') }, sv);
-      const t = el('title', {}, d); t.textContent = `${c.name} · ${c.n} samples`;
+      const t = el('title', {}, d); t.textContent = `${c.name}: ${c.n} samples`;
       d.addEventListener('click', () => selectCam(c.cam, true));
     }
   }
@@ -269,7 +269,7 @@
       g.addEventListener('pointermove', (e) => {
         const tip = $('sb-tip'), r = sv.getBoundingClientRect();
         tip.hidden = false; tip.style.left = (e.clientX - r.left) + 'px'; tip.style.top = (y / h * r.height) + 'px';
-        tip.innerHTML = `${esc(c.name)}<br>${c.n} samples, ${c.n_years} years · ${esc(c.veg)}<br>camera ${signed(-a, 1)} error · satellite ${b != null ? signed(-b, 1) : '–'}`;
+        tip.innerHTML = `${esc(c.name)}<br>${c.n} samples, ${c.n_years} years, ${esc(c.veg)}<br>camera ${signed(-a, 1)} error, satellite ${b != null ? signed(-b, 1) : '–'}`;
       });
       g.addEventListener('pointerleave', () => { $('sb-tip').hidden = true; });
     });
@@ -321,7 +321,7 @@
       <div><span class="label">Facing</span><b>${esc(CS.facing || '–')}</b></div>
       <div><span class="label">Photos registered</span><b>${CS.frames.toLocaleString()}</b></div>
       <div><span class="label">Archive used</span><b>${CS.years[0]}–${CS.years[1]}</b></div>
-      <div><span class="label">Field samples scored</span><b>${CS.n.toLocaleString()} · ${CS.n_years} yrs</b></div>
+      <div><span class="label">Field samples scored</span><b>${CS.n.toLocaleString()} over ${CS.n_years} years</b></div>
       <div><span class="label">Sampling units</span><b>${CS.n_units}</b></div>
       <div class="wide2"><span class="label">Sampling sites</span><b>${CS.sites.map((s) => `${esc(s.name)} (${s.km} km)`).join(', ')}</b></div>
       <div class="wide2"><span class="label">Species sampled</span><b><i>${CS.species.map(esc).join(', ')}</i></b></div>`;
@@ -337,7 +337,7 @@
     CD.units.forEach((u, i) => {
       const b = document.createElement('button'); b.className = 'btn'; b.setAttribute('aria-pressed', String(i === unit));
       const [site, sp] = u.split(' | ');
-      b.textContent = `${site} · ${sp.split(' ')[0][0]}. ${sp.split(' ').slice(1).join(' ')}`;
+      b.textContent = `${site}: ${sp.split(' ')[0][0]}. ${sp.split(' ').slice(1).join(' ')}`;
       b.addEventListener('click', () => { unit = i; [...ub.children].forEach((c, j) => c.setAttribute('aria-pressed', String(j === i))); drawExPred(); });
       ub.appendChild(b);
     });
@@ -385,7 +385,7 @@
       const y = cal.years[yi], t = Date.UTC(y, 0, 1) + d * DAY, ch = cal.rows[yi][d];
       let near = null; for (const s of CD.samples) { const dt = Math.abs(toT(s.d) - t); if (dt < 6 * DAY && (!near || dt < Math.abs(toT(near.d) - t))) near = s; }
       const tip = $('cal-tip'); tip.hidden = false; tip.style.left = (px + 50) + 'px'; tip.style.top = (yi * rowH) + 'px';
-      tip.innerHTML = `${fmtDate(t)} · ${ch && ch !== '.' ? 'greenness ' + Math.round(B64.indexOf(ch) / 63 * 100) + '/100' : 'no clear photo'}` + (near ? `<br>${esc(CD.units[near.u].split(' | ')[0])}: measured ${Math.round(near.o)}%${near.c != null ? ', camera est. ' + Math.round(near.c) + '%' : ''}` : '');
+      tip.innerHTML = `${fmtDate(t)}, ${ch && ch !== '.' ? 'greenness ' + Math.round(B64.indexOf(ch) / 63 * 100) + '/100' : 'no clear photo'}` + (near ? `<br>${esc(CD.units[near.u].split(' | ')[0])}: measured ${Math.round(near.o)}%${near.c != null ? ', camera est. ' + Math.round(near.c) + '%' : ''}` : '');
     };
     cv.onpointerleave = () => { $('cal-tip').hidden = true; };
   }
@@ -419,7 +419,7 @@
       cross.setAttribute('x1', x(best.t)); cross.setAttribute('x2', x(best.t)); cross.setAttribute('visibility', 'visible');
       const tip = $('ex-tip'); tip.hidden = false; tip.style.left = (x(best.t) / w * r.width) + 'px'; tip.style.top = (y(best.o) / h * r.height) + 'px';
       const f = (v) => (v != null ? Math.round(v) + '%' : '–');
-      tip.innerHTML = `${fmtDate(best.t)}<br>measured ${f(best.o)}<br>camera ${f(best.c)} · satellite ${f(best.s)}<br>season alone ${f(best.k)}`;
+      tip.innerHTML = `${fmtDate(best.t)}<br>measured ${f(best.o)}<br>camera ${f(best.c)}, satellite ${f(best.s)}<br>season alone ${f(best.k)}`;
     });
     hit.addEventListener('pointerleave', () => { $('ex-tip').hidden = true; cross.setAttribute('visibility', 'hidden'); });
   }
@@ -459,7 +459,7 @@
   const blocksCache = {};
   const liveOf = (c) => (LS && LS.cams && LS.cams[c.id]) || null;
   const anyLive = LS && LS.cams ? Object.values(LS.cams)[0] : null;
-  $('net-span').textContent = L.cams.length + ' cameras' + (anyLive ? ` · updated ${fmtDate(toT(anyLive.dates[anyLive.dates.length - 1]))}` : '');
+  $('net-span').textContent = L.cams.length + ' cameras' + (anyLive ? `, updated ${fmtDate(toT(anyLive.dates[anyLive.dates.length - 1]))}` : '');
   $('net-prose').innerHTML = `<p>The study cameras are mostly retired. The fire cameras on Southern California's ridgetops are not: HPWREN runs hundreds of them and posts a photo every minute. I fitted eight of them to the terrain by matching the skyline in each photo to a skyline rendered from a 30 m elevation model, solving for heading, tilt and roll plus one lens shared by the whole network (median skyline error ${(L.cams.map((c) => c.median_err_deg).sort((a, b) => a - b)[4]).toFixed(2)}°). That ties every 16-pixel block in the frame to a spot on the ground with a distance, a slope and a land-cover class.</p><p>Every morning a GitHub Action pulls yesterday's midday photos from each camera, measures every ground block and commits the numbers back to this site. The overlay shows which slopes have browned fastest over the last 90 days, a first look at where fuels are curing ahead of the rest.</p>`;
   const camList = $('cam-list');
   L.cams.forEach((c, i) => {
@@ -527,7 +527,7 @@
         key.innerHTML = '<div class="scale"><span>Ground distance from the camera, from the terrain model: white lines at 1, 3 and 10 km; deeper blue is farther.</span></div>';
       } else if (mode === 'lc') {
         const present = new Set(B.lc.filter((v, i) => B.usable[i]));
-        key.innerHTML = '<div class="lc-keys">' + Object.entries(LC).filter(([k]) => present.has(+k)).map(([, v]) => `<span><i style="background:${v[1]}"></i>${v[0]}</span>`).join('') + '<span>· ESA WorldCover 10 m at each block\'s ground point</span></div>';
+        key.innerHTML = '<div class="lc-keys">' + Object.entries(LC).filter(([k]) => present.has(+k)).map(([, v]) => `<span><i style="background:${v[1]}"></i>${v[0]}</span>`).join('') + '<span>ESA WorldCover 10 m at each block\'s ground point</span></div>';
       } else if (mode === 'chg') {
         key.innerHTML = lv ? `<div class="scale"><span>dried faster</span><span class="ramp" style="background:linear-gradient(90deg, rgb(194,124,14), rgb(150,150,140), rgb(46,133,64))"></span><span>held up</span></div><div class="scale" style="margin-top:4px"><span>change in greenness from ${fmtShort(toT(lv.first_window[0]))}–${fmtShort(toT(lv.first_window[1]))} to ${fmtShort(toT(lv.last_window[0]))}–${fmtShort(toT(lv.last_window[1]))}, against the view as a whole: brown blocks dried faster than the rest, green ones held up</span></div>` : '<div class="scale"><span>Live numbers unavailable right now.</span></div>';
       }

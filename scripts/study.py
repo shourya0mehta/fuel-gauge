@@ -20,7 +20,8 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-from fuelgauge import colour as C, evaluate as E, quality as Q, rois, segment as S  # noqa: E402
+from fuelgauge import evaluate as E, quality as Q  # noqa: E402
+from fuelgauge.measure import daily, zscore, combine, view_series as _view_series  # noqa: E402
 
 warnings.filterwarnings('ignore')
 DATA = os.environ.get('DATA', 'data')
@@ -33,17 +34,6 @@ def hav(a, b, c, d):
     return 2 * 6371 * math.asin(math.sqrt(h))
 
 
-def daily(series, times, clear, ffill=21):
-    s = pd.Series(np.asarray(series, float), index=pd.to_datetime(times).normalize())
-    s = s[~s.index.duplicated(keep='last')]
-    c = pd.Series(np.asarray(clear, bool), index=pd.to_datetime(times).normalize())
-    c = c[~c.index.duplicated(keep='last')]
-    s = s[c.reindex(s.index).fillna(False).values].dropna()
-    if len(s) < 30:
-        return None
-    return C.smooth_causal(s).resample('D').mean().ffill(limit=ffill)
-
-
 def level_change(s, prefix, days=30):
     if s is None:
         return pd.DataFrame()
@@ -51,29 +41,8 @@ def level_change(s, prefix, days=30):
 
 
 def view_series(rgb, valid, times, clear, master):
-    """Automatic regions on one view, and that view's daily GRVI (raw and white-balanced)."""
-    import cv2
-    gh, gw = rgb.shape[1:3]
-    sky, veg, bad = S.masks(S.labels(master))
-    vf = cv2.resize(veg.astype(np.float32), (gw, gh), interpolation=cv2.INTER_AREA)
-    bf = cv2.resize(bad.astype(np.float32), (gw, gh), interpolation=cv2.INTER_AREA)
-    R = rois.choose(rgb, valid, times, clear, vf, bf)
-    vm = np.where(valid, 1.0, np.nan)
-    grvi = np.nanmean((C.grvi(rgb) * vm)[:, R['veg']], 1)
-    wb = C.white_balance(rgb, valid, R['ref'], times=times)
-    grvi_wb = np.nanmean((C.grvi(wb) * vm)[:, R['veg']], 1)
-    return R, daily(grvi, times, clear), daily(grvi_wb, times, clear)
-
-
-def zscore(s):
-    return None if s is None else (s - s.mean()) / s.std()
-
-
-def combine(parts):
-    parts = [p for p in parts if p is not None]
-    if not parts:
-        return None
-    return pd.concat(parts, axis=1).mean(axis=1) if len(parts) > 1 else parts[0]
+    R, g, gwb, _ = _view_series(rgb, valid, times, clear, master)
+    return R, g, gwb
 
 
 def camera_series(cam):

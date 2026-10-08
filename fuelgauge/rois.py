@@ -2,7 +2,9 @@
 
 Vegetation blocks: covered by every camera period, labelled as plants / trees / grass / hillside by the
 segmentation model in the master view, in the lower part of the frame, and with a strong seasonal swing in
-greenness. Reference blocks (for white balance): covered, not vegetation, little seasonal swing.
+greenness. Reference blocks (for white balance): covered, not vegetation, little seasonal swing. Blocks of sky
+along the horizon can qualify; leaving them out made the correction worse on the 21-camera study (anomaly
+correlation 0.13 -> 0.10), since sky colour carries the same daylight and sensor balance as the ground.
 No hand-drawn masks.
 """
 from __future__ import annotations

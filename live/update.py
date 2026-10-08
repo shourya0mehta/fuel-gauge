@@ -18,7 +18,6 @@ import argparse
 import base64
 import datetime as dt
 import glob
-import io
 import json
 import os
 import sys

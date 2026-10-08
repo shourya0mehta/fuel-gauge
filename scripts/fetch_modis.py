@@ -1,5 +1,5 @@
 """MODIS MCD43A4 nadir reflectance (3x3 px mean, every 8 days) at every study camera view and fuel site."""
-import json, os, time, math, sys
+import json, os, time, math
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np, pandas as pd, rasterio
 from rasterio.warp import transform

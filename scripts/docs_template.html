@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuel Gauge Docs</title>
+<meta name="description" content="Open-source Python pipeline that turns fixed outdoor cameras into calibrated instruments: multi-year registration, skyline-based camera calibration, pixel-to-ground mapping, drift-corrected vegetation measurement and camera network coverage.">
+<meta property="og:title" content="Fuel Gauge">
+<meta property="og:description" content="Turn any fixed camera into a measuring instrument. Open-source Python pipeline for fire lookouts, phenology cameras and webcams.">
+<meta property="og:image" content="assets/live/rm-e-mobo-c_oct.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23161B1F'/%3E%3Cpath d='M4 21 L10 14 L14 17 L20 9 L28 18' fill='none' stroke='%23F2541B' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M4 25 H28' stroke='%23FFFFFF' stroke-opacity='.5' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="site.css">
+<style>
+.docs { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding-top: 48px; }
+.side { position: sticky; top: 84px; align-self: start; max-height: calc(100vh - 100px); overflow-y: auto; display: grid; gap: 2px; font-size: 0.92rem; padding-bottom: 24px; }
+.side a { text-decoration: none; color: var(--ink-2); padding: 3px 0; }
+.side a:hover { color: var(--ink); }
+.side .grp { font-weight: 650; color: var(--ink); margin: 16px 0 4px; }
+.side .grp:first-child { margin-top: 0; }
+.content { min-width: 0; max-width: 860px; }
+.content section { padding-bottom: 48px; margin-bottom: 48px; border-bottom: 1px solid var(--line); display: grid; gap: 14px; }
+.content h2 { font-size: 1.8rem; }
+.content h2 code { font-size: 0.85em; background: none; padding: 0; }
+.content h3 { font-size: 1.05rem; margin-top: 10px; }
+.content h3 code { background: none; padding: 0; }
+.content p { max-width: 70ch; }
+.ref { width: 100%; border-collapse: collapse; font-size: 0.93rem; }
+.ref td { padding: 10px 12px 10px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.ref td:first-child { white-space: nowrap; }
+.fn { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 8px; }
+.fn.sub { border-top: 0; padding-top: 0; padding-left: 20px; }
+.sig { font-family: var(--mono); font-size: 0.84rem; line-height: 1.55; overflow-wrap: anywhere; }
+.sig .k { color: var(--signal); }
+pre.doc { margin: 0; font-family: var(--font); white-space: pre-wrap; font-size: 0.93rem; line-height: 1.6; color: var(--ink-2); }
+pre.doc.mod { color: var(--ink); font-size: 0.98rem; }
+.intro { display: grid; gap: 12px; padding-top: 56px; }
+@media (max-width: 860px) { .docs { grid-template-columns: minmax(0, 1fr); } .side { position: static; max-height: none; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Fuel Gauge home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M4 25 H28" stroke="var(--bg)" stroke-opacity=".55" stroke-width="1.5"/></svg>
+      Fuel Gauge
+    </a>
+    <nav aria-label="Main">
+      <a href="./#pipeline">How it works</a>
+      <a href="./#results">Results</a>
+      <a href="docs.html" aria-current="page">Docs</a>
+      <a href="research.html">Research</a>
+    </nav>
+    <span class="spacer"></span>
+    <a class="btn small" href="https://github.com/shourya0mehta/fuel-gauge">
+      <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+      GitHub
+    </a>
+  </div>
+</header>
+<main class="wrap">
+  <div class="intro">
+    <h1 style="font-size:clamp(2.2rem,4vw,3.2rem)">Documentation</h1>
+    <p class="lede">How to install and run each stage, then the reference for every public function, generated from the code (version {{VERSION}}).</p>
+  </div>
+  <div class="docs">
+    <nav class="side" aria-label="Docs">
+{{NAV}}
+    </nav>
+    <div class="content">
+{{BODY}}
+    </div>
+  </div>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>Fuel Gauge</a>
+      <p style="margin-top:10px;max-width:36ch">Built by Shourya Mehta on public data only. A research tool, not an operational fire-danger product.</p>
+    </div>
+    <div><h4>Product</h4><ul><li><a href="./#pipeline">How it works</a></li><li><a href="./#start">Get started</a></li><li><a href="docs.html">Docs</a></li></ul></div>
+    <div><h4>Research</h4><ul><li><a href="research.html#coverage">Statewide coverage</a></li><li><a href="research.html#study">Fuel moisture study</a></li><li><a href="research.html#live">Live network</a></li></ul></div>
+    <div><h4>Project</h4><ul><li><a href="https://github.com/shourya0mehta/fuel-gauge">GitHub</a></li><li><a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff">Cite</a></li><li><a href="research.html#methods">Data credits</a></li></ul></div>
+  </div>
+</footer>
+</body>
+</html>

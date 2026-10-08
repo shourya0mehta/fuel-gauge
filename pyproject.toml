@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fuelgauge"
-version = "0.2.0"
-description = "Turn fixed outdoor cameras into georeferenced vegetation sensors: long-term registration, terrain pose fitting, pixel-to-ground lookup, and fuel-moisture evaluation."
+version = "0.3.0"
+description = "Turn fixed outdoor cameras into calibrated instruments: multi-year registration, skyline camera calibration, pixel-to-ground mapping, drift-corrected vegetation measurement and camera network coverage."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "Shourya Mehta" }]

@@ -6,7 +6,7 @@ authors:
   - family-names: Mehta
     given-names: Shourya
 license: MIT
-version: 0.2.0
+version: 0.3.0
 date-released: 2026-10-08
 repository-code: "https://github.com/shourya0mehta/fuel-gauge"
 url: "https://shourya0mehta.github.io/fuel-gauge/"

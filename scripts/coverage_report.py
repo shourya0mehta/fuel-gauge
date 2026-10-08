@@ -158,10 +158,10 @@ def main():
     caq, lcq, fq = sub(ca), sub(lc), sub(far)
     wildq = np.isin(lcq, WILD)
     themes = {
-        'light': dict(bg=(236, 239, 232), land=(212, 216, 208), blind=(228, 186, 112), one=(150, 198, 142), two=(46, 133, 64),
-                      site=(24, 33, 27), fire=(178, 58, 43), ring=(24, 33, 27), coast=(150, 160, 150)),
-        'dark': dict(bg=(21, 26, 22), land=(46, 53, 48), blind=(150, 106, 36), one=(58, 98, 64), two=(70, 160, 88),
-                     site=(226, 232, 224), fire=(224, 100, 79), ring=(226, 232, 224), coast=(80, 92, 84)),
+        'light': dict(bg=(255, 255, 255), land=(222, 226, 229), blind=(228, 190, 120), one=(152, 198, 172), two=(31, 110, 80),
+                      site=(22, 27, 31), fire=(242, 84, 27), ring=(22, 27, 31), coast=(150, 160, 166)),
+        'dark': dict(bg=(17, 21, 24), land=(40, 48, 54), blind=(150, 108, 40), one=(50, 92, 74), two=(70, 168, 126),
+                     site=(233, 237, 239), fire=(255, 106, 51), ring=(233, 237, 239), coast=(80, 92, 100)),
     }
     os.makedirs(os.path.join(DOCS, 'assets', 'coverage'), exist_ok=True)
     big = fi[fi.acres >= 1000]

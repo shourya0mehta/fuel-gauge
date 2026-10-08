@@ -15,7 +15,6 @@ from __future__ import annotations
 import json
 import math
 import os
-import sys
 import time
 
 import numpy as np
