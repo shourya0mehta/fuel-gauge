@@ -1081,6 +1081,44 @@
   "sat_skill_vs_km": 0.169,
   "cam_anom_vs_km": 0.051
  },
+ "nir": {
+  "cams": 10,
+  "n": 1267,
+  "pooled": {
+   "season": {
+    "rmse": 21.68,
+    "anomaly_r": 0.0,
+    "cams_better": 0
+   },
+   "camera_auto_wb": {
+    "rmse": 21.97,
+    "anomaly_r": 0.102,
+    "cams_better": 4
+   },
+   "camera_ndvi": {
+    "rmse": 22.62,
+    "anomaly_r": 0.024,
+    "cams_better": 1
+   },
+   "sat_ir_view": {
+    "rmse": 22.43,
+    "anomaly_r": 0.123,
+    "cams_better": 3
+   },
+   "sat_ir_site": {
+    "rmse": 21.89,
+    "anomaly_r": 0.134,
+    "cams_better": 4
+   },
+   "camera_ndvi_plus_rgb": {
+    "rmse": 22.52,
+    "anomaly_r": 0.115,
+    "cams_better": 2
+   }
+  },
+  "hand_better": 5,
+  "hand_cams": 10
+ },
  "timing": {
   "camera": {
    "n": 357,

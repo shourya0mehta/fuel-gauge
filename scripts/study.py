@@ -158,8 +158,14 @@ def main(cams):
         cs, R, info, master = camera_series(cam)
         xs = us[us['Site name'].isin([s[0] for s in r['good']])]
         cur, cur_file = curated_series(cam, xs.date.min() - pd.Timedelta(days=30), xs.date.max())
+        nir = {}
+        npath = os.path.join(DATA, 'nir', f'{cam}_series.csv')
+        if os.path.exists(npath):
+            nd = pd.read_csv(npath, parse_dates=['date']).set_index('date')
+            nir = {c: nd[c] for c in ('ndvi_auto', 'ndvi_hand') if c in nd and nd[c].notna().sum() > 30}
         feats = pd.concat([level_change(cs['auto'], 'auto'), level_change(cs['auto_wb'], 'autowb'),
-                           level_change(cur, 'hand')], axis=1)
+                           level_change(cur, 'hand'), level_change(nir.get('ndvi_auto'), 'nir'),
+                           level_change(nir.get('ndvi_hand'), 'nirh')], axis=1)
         sv = sat.get(f'cam:{cam}')
         sites = [s[0] for s in r['good']]
         x = us[us['Site name'].isin(sites)].copy()
@@ -191,7 +197,7 @@ def main(cams):
             'sat_ir_site': ['ss_ndvi', 'ss_ndii', 'ss_ndvi_d', 'ss_ndii_d'] + E.SEASON,
             'camera_plus_sat_ir': ['auto_g', 'auto_d', 'sv_ndvi', 'sv_ndii', 'sv_ndvi_d', 'sv_ndii_d'] + E.SEASON,
         }
-        for c in sorted(set(sum(sets.values(), [])) | {'hand_g', 'hand_d'}):
+        for c in sorted(set(sum(sets.values(), [])) | {'hand_g', 'hand_d', 'nir_g', 'nir_d', 'nirh_g', 'nirh_d'}):
             if c not in t.columns:
                 t[c] = np.nan
         # main comparison: every predictor scored on the same samples
@@ -199,6 +205,18 @@ def main(cams):
         # registration + automatic regions vs PhenoCam's hand-drawn region, on the samples where both exist
         hand_sets = {'season': E.SEASON, 'camera_auto': sets['camera_auto'], 'camera_hand': ['hand_g', 'hand_d'] + E.SEASON}
         hand_res, _ = E.compare(t, hand_sets, common=True) if t.hand_g.notna().any() else ({}, None)
+        # near-infrared: camera NDVI on the automatic regions (and on PhenoCam's hand-drawn regions), on the samples
+        # where the camera had an IR photo, against the same colour and satellite predictors
+        nir_res, nir_preds = ({}, None)
+        if t.nir_g.notna().sum() >= 30:
+            nir_sets = {'season': E.SEASON, 'camera_auto_wb': sets['camera_auto_wb'], 'camera_ndvi': ['nir_g', 'nir_d'] + E.SEASON,
+                        'sat_ir_view': sets['sat_ir_view'], 'sat_ir_site': sets['sat_ir_site'],
+                        'camera_ndvi_plus_rgb': ['nir_g', 'nir_d', 'autowb_g', 'autowb_d'] + E.SEASON}
+            nir_res, nir_preds = E.compare(t, nir_sets, common=True)
+            if t.nirh_g.notna().sum() >= 30:
+                hres, _ = E.compare(t, {'season': E.SEASON, 'camera_ndvi': nir_sets['camera_ndvi'],
+                                        'camera_ndvi_hand': ['nirh_g', 'nirh_d'] + E.SEASON}, common=True)
+                nir_res['hand'] = hres
         # also: camera alone against all samples where the camera had a view (bigger n, not comparable across sets)
         _, auto_only = E.loyo(t, ['auto_g', 'auto_d'] + E.SEASON)
         _, season_same = E.loyo(t.dropna(subset=['auto_g', 'auto_d']), E.SEASON)
@@ -209,10 +227,12 @@ def main(cams):
                    first=str(first.date()), last=str(last.date()), sites=[dict(name=k, dist_km=v) for k, v in dist.items()],
                    species=sorted(t.species.unique().tolist()), units=sorted(t.site.unique().tolist()),
                    n_samples_total=int(len(t)), curated_roi=cur_file, info=info,
-                   segments=dict(sizes=qa['sizes'], linked=qa['linked']), results=res, hand_vs_auto=hand_res,
+                   segments=dict(sizes=qa['sizes'], linked=qa['linked']), results=res, hand_vs_auto=hand_res, nir=nir_res,
                    camera_vs_season_all=dict(camera=auto_only, season=season_same))
         json.dump(out, open(os.path.join(OUT, f'{cam}.json'), 'w'), indent=1, default=float)
         pd.concat({k: v for k, v in preds.items()}).to_csv(os.path.join(OUT, f'{cam}_preds.csv'))
+        if nir_preds:
+            pd.concat({k: v for k, v in nir_preds.items()}).to_csv(os.path.join(OUT, f'{cam}_nir_preds.csv'))
         np.savez_compressed(os.path.join(OUT, f'{cam}_roi.npz'), veg=R['veg'], ref=R['ref'], amp=R['amp'], master=master)
         sm = {k: (round(v['rmse'], 1) if v.get('n') else None) for k, v in res.items()}
         print(cam, 'n', res['season'].get('n'), 'years', res['season'].get('years'), sm, flush=True)

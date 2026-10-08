@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fuel Gauge</title>
-<meta name="description" content="Can the cameras that watch Western hillsides for wildfire smoke also tell how dry the brush is? A multi-site study across 23 cameras, plus a live network of fire cameras tied to the terrain.">
+<meta name="description" content="What can California's 1,309 fire cameras actually see, and can camera photos tell how dry the brush is? A statewide line-of-sight map, a 21-camera fuel moisture study, and a live network of fire cameras tied to the terrain.">
 <meta property="og:title" content="Fuel Gauge">
 <meta property="og:description" content="Fire-lookout and phenology cameras as live fuel moisture sensors: 15+ years of registered photos, field samples and satellites, and a live camera network that updates every day.">
 <meta property="og:image" content="assets/study/cucamongasouth.jpg">
@@ -198,6 +198,28 @@ figcaption { font-size: 0.85rem; color: var(--ink-3); }
 .lc-keys i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
 @media (max-width: 860px) { .viewer-grid, .net { grid-template-columns: minmax(0, 1fr); } body { font-size: 16px; } }
 
+
+/* statewide coverage */
+:root { --cov2: #2E8540; --cov1: #96C68E; --cov0: #E4BA70; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --cov2: #46A058; --cov1: #3A6240; --cov0: #966A24; } }
+:root[data-theme="dark"] { --cov2: #46A058; --cov1: #3A6240; --cov0: #966A24; }
+.cov-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 920px) { .cov-grid { grid-template-columns: minmax(0, 1fr); } }
+.cov-map { position: relative; }
+.cov-map img { width: 100%; height: auto; display: block; }
+#cov-hit { position: absolute; inset: 0; width: 100%; height: 100%; }
+#cov-hit circle { fill: transparent; cursor: pointer; }
+#cov-hit circle:hover { stroke: var(--ink); stroke-width: 2; }
+.key-sq { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
+.cov-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--rule); }
+.cov-stats div { padding: 14px 12px 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.cov-stats div:nth-child(even) { padding-left: 14px; border-left: 1px solid var(--rule); }
+.cov-stats b { font-family: var(--display); font-weight: 600; font-size: 2.3rem; line-height: 1; }
+.cov-stats span { font-size: 0.86rem; color: var(--ink-2); line-height: 1.35; }
+.cov-list { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: 0.92rem; }
+.cov-list small { color: var(--ink-3); font-family: var(--mono); font-size: 0.74rem; }
+.cov-cards > div { border-top-width: 1px; }
+
 /* toolkit */
 .tk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; }
 @media (max-width: 920px) { .tk { grid-template-columns: minmax(0, 1fr); } }
@@ -220,19 +242,68 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
 <div class="topbar wide">
   <span class="mark">Fuel <span>Gauge</span></span>
   <nav aria-label="Sections">
-    <a href="#study">Study</a><a href="#explore">Cameras</a><a href="#hard">Method</a><a href="#live">Live</a><a href="#toolkit">Code</a>
+    <a href="#coverage">Coverage</a><a href="#study">Study</a><a href="#explore">Cameras</a><a href="#hard">Method</a><a href="#live">Live</a><a href="#toolkit">Code</a>
   </nav>
 </div>
 
 <header class="mast wide">
   <p class="label"><span>Wildfire cameras</span><span>Live fuel moisture</span><span id="mast-span">2003–2026</span></p>
   <h1>Fuel <span>Gauge</span></h1>
-  <p class="dek">Thousands of cameras watch Western hillsides for wildfire smoke. This project tests whether the same photos can tell how dry the brush is, which is the number that sets how fast a fire runs.</p>
+  <p class="dek">Thousands of cameras watch Western hillsides for wildfire smoke. This project ties them to the ground to measure what they can actually see, and tests whether the same photos can tell how dry the brush is.</p>
   <p class="answer" id="answer"></p>
   <p class="byline">Shourya Mehta · <a href="https://github.com/shourya0mehta/fuel-gauge">code and data on GitHub</a> · built only on public archives</p>
   <div class="figures" id="figures"></div>
   <div class="findings" id="findings"></div>
 </header>
+
+<section id="coverage" class="wide">
+  <div class="sec-head">
+    <p class="label"><span>Statewide</span><span id="cov-span">–</span></p>
+    <h2>What California's fire cameras can see</h2>
+    <p class="sub-dek" id="cov-dek"></p>
+  </div>
+  <div class="cov-grid">
+    <div class="cov-mapwrap">
+      <div class="cov-map" id="cov-map">
+        <picture>
+          <source srcset="assets/coverage/ca_dark.png" media="(prefers-color-scheme: dark)">
+          <img id="cov-img" src="assets/coverage/ca_light.png" alt="Map of California shaded by how many fire cameras have line of sight to each patch of wildland, with large fires since 2020 marked">
+        </picture>
+        <svg id="cov-hit" aria-hidden="true"></svg>
+        <div class="tip" id="cov-tip" hidden></div>
+      </div>
+      <div class="legend" style="padding-top:10px">
+        <span><i class="key-sq" style="background:var(--cov2)"></i>Wildland seen by 2+ cameras</span>
+        <span><i class="key-sq" style="background:var(--cov1)"></i>Seen by 1</span>
+        <span><i class="key-sq" style="background:var(--cov0)"></i>Seen by none</span>
+        <span><i class="key-dot" style="background:var(--ink)"></i>Camera site</span>
+        <span><i class="key-dot" style="background:var(--crit)"></i>1,000+ acre fire no camera could see</span>
+        <span><i class="key-ring" style="color:var(--ink-2)"></i>One a camera could see</span>
+      </div>
+    </div>
+    <div class="gauges">
+      <div class="cov-stats" id="cov-stats"></div>
+      <div>
+        <p class="label" style="margin-bottom:6px">Where the big fires started, 2020–2025</p>
+        <table class="mini" id="cov-ign"><thead><tr><th>Fire size</th><th>Fires</th><th>Ground in view</th><th>300 m smoke in view</th><th>Two cameras</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </div>
+  <div class="cards cov-cards">
+    <div>
+      <span class="label">Biggest fires no camera could see</span>
+      <ol class="cov-list" id="cov-unseen"></ol>
+    </div>
+    <div>
+      <span class="label">Largest blind spots</span>
+      <ol class="cov-list" id="cov-blind"></ol>
+    </div>
+    <div>
+      <span class="label">How it was measured</span>
+      <p class="note" id="cov-method" style="color:var(--ink-2);font-size:0.92rem"></p>
+    </div>
+  </div>
+</section>
 
 <section id="hillside" class="wide">
   <div class="sec-head">
@@ -320,6 +391,13 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
   </div>
   <p class="note" id="pooled-note"></p>
   <p class="callout" id="timing-note" hidden></p>
+  <div id="nir-block" class="prose" style="gap:14px">
+    <h3>Adding near-infrared</h3>
+    <p class="col" id="nir-text"></p>
+    <div class="tbl-wrap">
+      <table id="nir-table"><thead><tr><th>Predictors, on the samples where the camera had an infrared photo</th><th>Cameras where it beats<br>season alone</th><th>Error<br>(RMSE, points)</th><th>Change in<br>error</th><th>Anomaly r</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
 </section>
 
 <section id="explore" class="wide">

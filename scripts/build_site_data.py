@@ -179,24 +179,49 @@ def narrative(out, summ, timing):
     cam, raw, sat, sats = sp['camera_auto_wb'], sp['camera_auto'], sp['sat_ir_view'], sp['sat_ir_site']
     hv = P['hand_vs_auto']
     text = {}
-    text['answer'] = (f"<b>Short answer: not from colour alone, not yet.</b> Across {T['cams']} cameras and "
-                      f"{summ['n_samples']:,} field samples, a camera's colour follows the seasons closely but tells you "
-                      f"little about whether this year's brush is drier than usual. Below is the evidence and the code, "
-                      f"with a live camera network that keeps the test running.")
-    text['findings'] = [
-        ['--cam', 'Cameras',
-         f"A colour-corrected camera beats the calendar at {cam['cams_better']} of {cam['cams']} cameras. Pooled over all "
-         f"{summ['n_samples']:,} held-out samples it has {pct_change(s0, cam['rmse'])} season alone, and its anomaly correlation "
-         f"is {cam['anomaly_r']:.2f}: it sees a little of what makes each year different, but only a little."],
-        ['--sat', 'Satellites',
-         f"Satellite infrared looking at the same slope reaches an anomaly correlation of {sat['anomaly_r']:.2f}, and "
-         f"{sats['anomaly_r']:.2f} at the sampling site itself, where it has {pct_change(s0, sats['rmse'])} season alone. "
-         f"Even the best optical signal here leaves most of each year's swing unexplained."],
-        ['--straw', 'What holds cameras back',
-         f"Colour stability comes first. Uncorrected, the camera knows almost nothing beyond the season (anomaly correlation "
-         f"{raw['anomaly_r']:.2f}). Correcting each photo against rock and soil in the same frame lifts it to "
-         f"{cam['anomaly_r']:.2f}, about half of what satellite infrared gets on the same slope."],
-    ]
+    cov = json.load(open(os.path.join(DOCS, 'data', 'coverage.json'))) if os.path.exists(os.path.join(DOCS, 'data', 'coverage.json')) else None
+    nir = summ.get('nir')
+    big = cov['ignitions']['1,000+ acres'] if cov else None
+    pc = lambda v: f"{v * 100:.0f}%"
+    text['answer'] = (
+        (f"<b>Two answers.</b> California's fire cameras see less than you'd think: {pc(cov['wild_seen'])} of the state's wildland "
+         f"is in line of sight of one, and {pc(1 - big['smoke300'])} of the big fires since {cov['years'][0]} started where no camera "
+         f"could see even a 300 m smoke column. " if cov else "") +
+        f"And a camera can't read fuel moisture from how green the brush looks. Across {T['cams']} cameras and "
+        f"{summ['n_samples']:,} field samples, colour and near-infrared barely beat the calendar, and satellites do only a little better.")
+    text['findings'] = []
+    if cov:
+        text['findings'].append(['--cov2', 'Coverage',
+            f"{pc(cov['wild_seen'])} of California's wildland is in line of sight of an ALERTCalifornia camera and {pc(cov['wild_seen2'])} "
+            f"of two. Of {big['n']} fires over 1,000 acres since {cov['years'][0]}, {pc(1 - big['smoke300'])} started where no camera could see "
+            f"a 300 m smoke column; together they burned {big['acres_nosmoke'] / 1e6:.1f} million acres."])
+    text['findings'].append(['--cam', 'Fuel moisture',
+        f"A colour-corrected camera beats the calendar at {cam['cams_better']} of {cam['cams']} cameras, and pooled it has "
+        f"{pct_change(s0, cam['rmse'])} season alone." +
+        (f" Adding near-infrared on {nir['cams']} cameras didn't help: its anomaly correlation was {nir['pooled']['camera_ndvi']['anomaly_r']:.2f}, "
+         f"against {nir['pooled']['camera_auto_wb']['anomaly_r']:.2f} for colour on the same samples." if nir else "")])
+    text['findings'].append(['--straw', 'Why',
+        f"Greenness carries little of the signal. Satellite infrared at the sampling site does best and still reaches an anomaly "
+        f"correlation of only {sats['anomaly_r']:.2f}. Year-to-year swings in fuel moisture barely show in how green a hillside looks, "
+        f"from a ridge or from orbit."])
+    if cov:
+        text['coverage_dek'] = (
+            f"ALERTCalifornia runs {cov['cameras']:,} cameras at {cov['sites']} sites, each panning through a full circle. I traced a line "
+            f"of sight from every site across a 90 m terrain model to see which ground each one can actually reach, then checked "
+            f"every wildfire that started in California from {cov['years'][0]} to {cov['years'][1]} against the result.")
+        text['coverage_method'] = (
+            "Rays every 0.1° out to 30 km from a 10 m mast over the Copernicus 90 m DEM, with earth curvature and refraction. "
+            "Wildland is ESA WorldCover tree, shrub and grass. Ignition points are NIFC WFIGS incident locations. Ground in view is a "
+            "strict test; smoke rises, so a 300 m column above the ignition is checked too. This uses today's network, so it asks what "
+            "today's cameras would have seen. Haze, night and the camera's aim at the moment are ignored.")
+    if nir:
+        np_ = nir['pooled']
+        text['nir'] = (
+            f"{['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve'][nir['cams']] if nir['cams'] <= 12 else nir['cams']} of the study cameras also take a near-infrared photo seconds after each colour one, the band satellites "
+            f"use to see healthy leaves. I downloaded those twins, warped each with its colour photo's registration, and computed "
+            f"camera NDVI with exposure correction (Petach et al. 2014) on the same automatic regions. On {nir['n']:,} shared samples "
+            f"it reached an anomaly correlation of {np_['camera_ndvi']['anomaly_r']:.2f} and beat the calendar at "
+            f"{np_['camera_ndvi']['cams_better']} of {nir['cams']} cameras. PhenoCam's own hand-drawn NDVI regions did no better.")
     text['study'] = (
         f"<p>I searched the PhenoCam Network, an archive of daily photos from fixed research cameras, for every camera with "
         f"field measurements of live fuel moisture from the Globe-LFMC database within 25 km. {T['cams']} cameras had enough "

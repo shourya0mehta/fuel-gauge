@@ -82,11 +82,30 @@ def main():
         n = sum(1 for c in cams.values() if c['results'].get(k, {}).get('n'))
         out['pooled'][k]['cams_better'] = int(wins); out['pooled'][k]['cams'] = int(n)
         out['pooled'][k]['sign_test_p'] = round(float(binomtest(wins, n, 0.5, alternative='greater').pvalue), 4) if n else None
+    # near-infrared comparison, pooled over the cameras with IR photos
+    nrows = []
+    for name in cams:
+        f = os.path.join(DATA, 'study', f'{name}_nir_preds.csv')
+        if not os.path.exists(f):
+            continue
+        p = pd.read_csv(f, parse_dates=['date']); p = p.rename(columns={p.columns[0]: 'set'})
+        w = p.pivot_table(index=['site', 'date'], columns='set', values='pred').reset_index()
+        w = w.merge(p[p.set == 'season'][['site', 'date', 'lfmc', 'clim']], on=['site', 'date']); w['cam'] = name
+        nrows.append(w)
+    if nrows:
+        nt = pd.concat(nrows, ignore_index=True)
+        NS = ['season', 'camera_auto_wb', 'camera_ndvi', 'sat_ir_view', 'sat_ir_site', 'camera_ndvi_plus_rgb']
+        out['nir'] = dict(cams=int(nt.cam.nunique()), n=int(len(nt)), pooled={
+            k: dict(rmse=round(float(np.sqrt(((nt[k] - nt.lfmc) ** 2).mean())), 2), anomaly_r=round(anomaly_r(nt, k), 3),
+                    cams_better=int(sum(cams[c]['nir'][k]['rmse'] < cams[c]['nir']['season']['rmse'] for c in nt.cam.unique())))
+            for k in NS})
+        hs = [cams[c]['nir']['hand'] for c in nt.cam.unique() if cams[c]['nir'].get('hand', {}).get('season', {}).get('n')]
+        out['nir']['hand_better'] = int(sum(h['camera_ndvi']['rmse'] < h['camera_ndvi_hand']['rmse'] for h in hs)); out['nir']['hand_cams'] = len(hs)
     tm = os.path.join(DATA, 'study', 'timing.json')
     if os.path.exists(tm):
         out['timing'] = json.load(open(tm))['pooled']
     json.dump(out, open(os.path.join(DATA, 'study', 'summary.json'), 'w'), indent=1)
-    print(json.dumps({k: out[k] for k in ('n_cams', 'n_samples', 'pooled', 'by_veg', 'by_distance', 'distance_trend') if k in out}, indent=1))
+    print(json.dumps({k: out[k] for k in ('n_cams', 'n_samples', 'pooled', 'distance_trend', 'nir') if k in out}, indent=1))
 
 
 if __name__ == '__main__':

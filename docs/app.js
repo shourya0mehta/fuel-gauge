@@ -19,8 +19,9 @@
   const STATE_AB = { Washington: 'WA', Oregon: 'OR', California: 'CA', Nevada: 'NV', Idaho: 'ID', Montana: 'MT', Wyoming: 'WY', Utah: 'UT', Colorado: 'CO', Arizona: 'AZ', 'New Mexico': 'NM' };
 
   const [S, H, L] = await Promise.all([getJSON('data/study.json'), getJSON('data/hero.json'), getJSON('data/live.json')]);
-  let LS = null;
+  let LS = null, C = null, NIR = null;
   try { LS = await getJSON('live/summary.json'); } catch (e) { LS = null; }
+  try { C = await getJSON('data/coverage.json'); } catch (e) { C = null; }
   const P = S.pooled, T = S.totals;
   const CAMSET = 'camera_auto_wb', SATSET = 'sat_ir_view';
   const shortName = (c) => c.short || c.name.split(',')[0];
@@ -29,10 +30,9 @@
   /* ---------------- masthead ---------------- */
   const camHelps = S.cams.filter((c) => c.res[CAMSET] && c.res[CAMSET].skill > 0).length;
   $('figures').innerHTML = [
-    [T.cams, 'cameras in ' + (T.states || states.size || 7) + ' Western states'],
-    [T.frames.toLocaleString(), 'daily photos registered onto fixed views'],
+    ...(C ? [[C.cameras.toLocaleString(), 'California fire cameras traced across the terrain'], [Math.round(C.wild_seen * 100) + '%', 'of the state\'s wildland in line of sight of one']] : [[T.cams, 'study cameras']]),
+    [T.frames.toLocaleString(), `daily photos from ${T.cams} cameras registered onto fixed views`],
     [T.samples.toLocaleString(), 'field samples of live fuel moisture, ' + T.species + ' species'],
-    [T.years_span || '2003–23', 'years of camera archive'],
     [L.cams.length, 'live fire cameras, re-measured every morning'],
   ].map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join('');
   $('answer').innerHTML = (S.text && S.text.answer) || '';
@@ -42,6 +42,43 @@
     ['--straw', 'What limits cameras', `Colour drift, not resolution. Correcting each photo's colour against rock and soil in the same frame helps at ${S.pooled.wb_helps || '–'} cameras, and automatic regions on registered photos beat hand-drawn ones at ${P.hand_vs_auto.auto_better} of ${P.hand_vs_auto.cams}.`],
   ];
   $('findings').innerHTML = F.map(([c, k, t]) => `<div><span class="k"><i style="background:var(${c})"></i>${k}</span><p>${t}</p></div>`).join('');
+
+
+  /* ---------------- statewide coverage ---------------- */
+  function drawCoverage() {
+    if (!C) { document.getElementById('coverage').hidden = true; return; }
+    const I = C.ignitions, big = I['1,000+ acres'], fmt = (v) => Math.round(v * 100) + '%';
+    $('cov-span').textContent = `${C.cameras.toLocaleString()} cameras · ${C.sites} sites · ${C.years[0]}–${C.years[1]} fires`;
+    $('cov-dek').textContent = (S.text && S.text.coverage_dek) || '';
+    $('cov-stats').innerHTML = [
+      [fmt(C.wild_seen), 'of California\'s wildland is in line of sight of at least one ALERTCalifornia camera (within 30 km)'],
+      [fmt(C.wild_seen2), 'is seen by two or more, enough to triangulate a smoke column'],
+      [fmt(big.smoke300), `of the ${big.n} fires over 1,000 acres started where a camera could see a 300 m smoke column`],
+      [Math.round(big.acres_nosmoke / 1e6 * 10) / 10 + 'M', 'acres burned in big fires that started where no camera could see even that'],
+    ].map(([b, t]) => `<div><b>${b}</b><span>${t}</span></div>`).join('');
+    const tb = $('cov-ign').querySelector('tbody'); tb.innerHTML = '';
+    ['10+ acres', '100+ acres', '1,000+ acres', '10,000+ acres'].forEach((k) => {
+      const v = I[k]; if (!v) return;
+      tb.insertAdjacentHTML('beforeend', `<tr><td>${k}</td><td class="num">${v.n.toLocaleString()}</td><td class="num">${fmt(v.seen)}</td><td class="num">${fmt(v.smoke300)}</td><td class="num">${fmt(v.smoke300_2)}</td></tr>`);
+    });
+    $('cov-unseen').innerHTML = (C.unseen_large || []).filter((f) => f.smoke300 === 0).slice(0, 6).map((f) => `<li>${esc(f.name)} Fire, ${f.year} <small>${f.acres.toLocaleString()} acres · ${esc(f.county)}</small></li>`).join('') || '<li>None</li>';
+    $('cov-blind').innerHTML = (C.blind_spots || []).slice(0, 6).map((b) => `<li>${esc(b.name)} <small>${b.km2.toLocaleString()} km² of wildland${b.biggest ? ` · ${esc(b.biggest.name)} Fire ${b.biggest.year}` : ''}</small></li>`).join('');
+    $('cov-method').textContent = (S.text && S.text.coverage_method) || '';
+    const sv = $('cov-hit'), M = C.map;
+    sv.setAttribute('viewBox', `0 0 ${M.w} ${M.h}`); sv.innerHTML = '';
+    const X = (lon) => (lon - M.west) / M.res, Y = (lat) => (M.north - lat) / M.res;
+    (C.fires_1000 || []).forEach((f) => {
+      const r = 2.5 + 1.6 * Math.log10(Math.max(f.a, 1000) / 1000 + 1) * 3 + 3;
+      const c = el('circle', { cx: X(f.lon), cy: Y(f.lat), r }, sv);
+      c.addEventListener('pointerenter', () => {
+        const tip = $('cov-tip'), bb = sv.getBoundingClientRect();
+        tip.hidden = false; tip.style.left = (X(f.lon) / M.w * bb.width) + 'px'; tip.style.top = (Y(f.lat) / M.h * bb.height) + 'px';
+        tip.innerHTML = `${esc(f.n)} Fire, ${f.y} · ${f.a.toLocaleString()} acres<br>ground in view of ${f.g} camera site${f.g === 1 ? '' : 's'}<br>300 m smoke in view of ${f.s}`;
+      });
+      c.addEventListener('pointerleave', () => { $('cov-tip').hidden = true; });
+    });
+  }
+  drawCoverage();
 
   /* ---------------- hero: one hillside ---------------- */
   const daily = H.daily.d.map((d, i) => ({ t: toT(d), g: H.daily.g[i] }));
@@ -229,6 +266,17 @@
   $('pooled-note').textContent = (S.text && S.text.pooled_note) || 'Error is root-mean-square error in fuel moisture points on held-out years; negative change means smaller error than season alone. Anomaly r is the correlation between how unusual each sample was (measured minus the seasonal baseline) and how unusual the predictor said it would be; 0 means no skill beyond the calendar. Each camera\'s predictors are scored on the same samples. Several cameras share sampling sites, so cameras are not fully independent tests.';
 
   if (S.text && S.text.timing) { $('timing-note').textContent = S.text.timing; $('timing-note').hidden = false; }
+  const NI = S.summary && S.summary.nir;
+  if (NI && S.text.nir) {
+    $('nir-text').textContent = S.text.nir;
+    const lab = { season: ['Season alone', '--straw'], camera_auto_wb: ['Camera colour, corrected', '--cam'], camera_ndvi: ['Camera near-infrared (NDVI)', '--cam'],
+      camera_ndvi_plus_rgb: ['Camera NDVI + colour', '--cam'], sat_ir_view: ['Satellite infrared, same slope', '--sat'], sat_ir_site: ['Satellite infrared, at the site', '--sat'] };
+    const s0 = NI.pooled.season.rmse;
+    $('nir-table').querySelector('tbody').innerHTML = Object.entries(lab).filter(([k]) => NI.pooled[k]).map(([k, [l, c]]) => {
+      const v = NI.pooled[k];
+      return `<tr${k === 'camera_ndvi' ? ' class="hl"' : ''}><td><span class="chip" style="background:var(${c})"></span>${l}</td><td class="num">${k === 'season' ? '–' : v.cams_better + ' of ' + NI.cams}</td><td class="num">${v.rmse.toFixed(1)}</td><td class="num">${k === 'season' ? '–' : signed((v.rmse - s0) / s0, 1)}</td><td class="num">${k === 'season' ? '–' : v.anomaly_r.toFixed(2)}</td></tr>`;
+    }).join('');
+  } else { $('nir-block').hidden = true; }
 
   /* ---------------- explorer ---------------- */
   const sel = $('ex-select');
@@ -560,6 +608,7 @@ moves = track.sustained_moves(times, tx, ty)   <span class="c"># when was it bum
     ['colour', 'Block colours, GCC and GRVI, white balance, causal smoothing.'],
     ['evaluate', 'Leave-one-year-out scoring against field fuel moisture, with a per-site seasonal baseline.'],
     ['sources', 'Readers for PhenoCam, HPWREN, Globe-LFMC and MODIS on Planetary Computer.'],
+    ['coverage', 'Script: statewide terrain viewsheds for any list of camera positions, plus smoke-column line of sight to fire ignitions.'],
   ].map(([k, v]) => `<div><code>${k}</code><span>${v}</span></div>`).join('') + `<div><code>tests</code><span>${(S.text && S.text.tests) || 'Synthetic camera drift and re-aims, synthetic terrain pose recovery, and a check that no held-out year leaks into its own prediction.'}</span></div>`;
   const LIM = (S.text && S.text.limits) || [
     ['Distance', 'Field samples are taken up to 25 km from each camera, sometimes on a different slope and species from the brush in view. A closer match would raise every predictor\'s score, the camera\'s most of all.'],
@@ -567,6 +616,7 @@ moves = track.sustained_moves(times, tx, ty)   <span class="c"># when was it bum
     ['Old archives', 'The study cameras are research cameras, mostly retired. The live fire cameras have no field samples close enough to score yet, so the live section shows change, not fuel moisture.'],
     ['Small samples', 'Crews sample every two to four weeks, so each camera has a few hundred samples over 5 to 16 years. Year-to-year results are noisy, which is why every number here is scored on held-out years.'],
   ];
+  if (C) LIM.unshift(['Coverage assumptions', 'The map uses today\'s cameras against fires from 2020 to 2025. It assumes every site can pan a full circle and see 30 km, and ignores haze, night, trees by the mast and where each camera was pointed. Ignition points can be off by hundreds of metres.']);
   $('limits-grid').innerHTML = LIM.map((l) => `<div><h3>${l[0]}</h3><p>${l[1]}</p></div>`).join('');
   $('methods-body').innerHTML = (S.text && S.text.methods) || `
     <p><b>Cameras.</b> PhenoCam Network midday photos (one per day) for every camera with Globe-LFMC field samples within 25 km, overlapping years only. HPWREN fire cameras for the live network, pulled from the public CDN.</p>
@@ -575,6 +625,8 @@ moves = track.sustained_moves(times, tx, ty)   <span class="c"># when was it bum
     <p><b>Scoring.</b> Ridge regression with one intercept and one set of day-of-year harmonics per sampling unit (site and species); predictors use the index level and its 30-day change. Leave-one-year-out; RMSE, R², anomaly correlation, years better than season alone.</p>
     <p><b>Satellite.</b> MODIS MCD43A4 v6.1 nadir reflectance (500 m, daily product sampled every 8 days, 3 × 3 pixel mean) at a point 1 km along each camera's view and at each sampling site; NDVI, NDII (with shortwave infrared) and green chromatic coordinate; 17-day rolling median.</p>
     <p><b>Live network.</b> Copernicus GLO-30 DEM panoramas with earth curvature and refraction (k = 0.13); skyline from SegFormer; bounded pose fit with a trimmed skyline loss; one equidistant fisheye lens fitted jointly across eight cameras. Land cover: ESA WorldCover 2021.</p>
+    <p><b>Coverage.</b> ALERTCalifornia camera positions from the public camera map, grouped into sites. For each site, rays every 0.1° out to 30 km from a 10 m mast over the Copernicus 90 m DEM, with earth curvature and refraction; a cell is in view if no terrain rises above the line of sight. Ignitions: NIFC WFIGS incident locations, California wildfires 2020 to 2025; for fires of 10 acres or more, line of sight to points 100 m and 300 m above the ignition is tested from every site within 30 km.</p>
+    <p><b>Near-infrared.</b> For the ten IR-capable cameras, the IR photo taken with each colour photo (or that day's midday IR photo) and both exposure settings from the archive's metadata. Each IR photo is warped with its colour photo's registration; camera NDVI per block follows Petach et al. (2014).</p>
     <p><b>Sources.</b></p>
     <ul>
       <li>PhenoCam Network, <a href="https://phenocam.nau.edu">phenocam.nau.edu</a> (Richardson et al. 2018, Scientific Data). Per-camera acknowledgements are in the repository.</li>
@@ -582,6 +634,9 @@ moves = track.sustained_moves(times, tx, ty)   <span class="c"># when was it bum
       <li>Globe-LFMC 2.0 (Yebra et al. 2024, Scientific Data), compiled from the US National Fuel Moisture Database and others.</li>
       <li>MODIS MCD43A4 v6.1 and Copernicus DEM GLO-30 via Microsoft Planetary Computer; ESA WorldCover 10 m 2021.</li>
       <li>SegFormer-B2 fine-tuned on ADE20K (NVIDIA), ONNX export by Xenova on Hugging Face.</li>
+      <li>ALERTCalifornia camera network, <a href="https://alertcalifornia.org">alertcalifornia.org</a> (UC San Diego with CAL FIRE).</li>
+      <li>NIFC WFIGS wildland fire incident locations, National Interagency Fire Center.</li>
+      <li>Petach, Toomey, Aubrecht and Richardson (2014), Agricultural and Forest Meteorology, for camera NDVI.</li>
     </ul>`;
 
   /* ---------------- boot ---------------- */
