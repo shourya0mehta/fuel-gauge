@@ -1,0 +1,199 @@
+{
+ "cam": "ahwahnee",
+ "lat": 37.7467,
+ "lon": -119.5816,
+ "elev": 1199,
+ "veg": "EN",
+ "description": "Ahwahnee Meadow, Yosemite National Park, California",
+ "orientation": "E",
+ "first": "2008-08-28",
+ "last": "2022-07-20",
+ "sites": [
+  {
+   "name": "Crane Flat",
+   "dist_km": 19.7
+  },
+  {
+   "name": "El Portal",
+   "dist_km": 19.4
+  },
+  {
+   "name": "Foresta",
+   "dist_km": 15.2
+  },
+  {
+   "name": "Wawona",
+   "dist_km": 22.7
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum",
+  "Arctostaphylos manzanita",
+  "Arctostaphylos patula"
+ ],
+ "units": [
+  "Crane Flat | Arctostaphylos patula",
+  "El Portal | Adenostoma fasciculatum",
+  "Foresta | Arctostaphylos manzanita",
+  "Wawona | Arctostaphylos manzanita"
+ ],
+ "n_samples_total": 254,
+ "curated_roi": "ahwahnee_GR_0002_1day.csv",
+ "info": {
+  "frames_registered": 927,
+  "clear": 737,
+  "veg_blocks": 202,
+  "ref_blocks": 184,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 927,
+    "clear": 737,
+    "first": "2008-08-28",
+    "last": "2015-01-19",
+    "veg_blocks": 202,
+    "ref_blocks": 184
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   339,
+   1,
+   588
+  ],
+  "linked": [
+   0,
+   2
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 220,
+   "years": 7,
+   "rmse": 22.267209318389348,
+   "mae": 17.57608009090325,
+   "r2": 0.4195191011017031,
+   "anomaly_r": 0.0,
+   "below80": 0.8136363636363636,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 220,
+   "years": 7,
+   "rmse": 22.521165513979483,
+   "mae": 17.705407498746965,
+   "r2": 0.4062028962701686,
+   "anomaly_r": 0.1435188138896937,
+   "below80": 0.7909090909090909,
+   "years_beat_season": 4
+  },
+  "camera_auto_wb": {
+   "n": 220,
+   "years": 7,
+   "rmse": 21.8151722890621,
+   "mae": 17.086767875622076,
+   "r2": 0.4428480629175171,
+   "anomaly_r": 0.23556718554547837,
+   "below80": 0.8045454545454546,
+   "years_beat_season": 4
+  },
+  "sat_visible_view": {
+   "n": 220,
+   "years": 7,
+   "rmse": 21.05460878247077,
+   "mae": 16.40523015106197,
+   "r2": 0.48101990330318134,
+   "anomaly_r": 0.3353028553310665,
+   "below80": 0.7818181818181819,
+   "years_beat_season": 4
+  },
+  "sat_ir_view": {
+   "n": 220,
+   "years": 7,
+   "rmse": 20.371249386687378,
+   "mae": 15.777185298601191,
+   "r2": 0.5141617752006784,
+   "anomaly_r": 0.4092201602719524,
+   "below80": 0.8136363636363636,
+   "years_beat_season": 6
+  },
+  "sat_ir_site": {
+   "n": 220,
+   "years": 7,
+   "rmse": 20.486341227939032,
+   "mae": 15.685979155088742,
+   "r2": 0.5086565683598294,
+   "anomaly_r": 0.3922513685314621,
+   "below80": 0.8318181818181818,
+   "years_beat_season": 3
+  },
+  "camera_plus_sat_ir": {
+   "n": 220,
+   "years": 7,
+   "rmse": 21.034827327991337,
+   "mae": 16.117427175690462,
+   "r2": 0.48199464081244625,
+   "anomaly_r": 0.36535988856732066,
+   "below80": 0.8136363636363636,
+   "years_beat_season": 3
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 120,
+   "years": 3,
+   "rmse": 20.27502207459965,
+   "mae": 15.73395017576894,
+   "r2": 0.45321954910997,
+   "anomaly_r": 0.0,
+   "below80": 0.825,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 120,
+   "years": 3,
+   "rmse": 22.499272483739244,
+   "mae": 17.523941586244757,
+   "r2": 0.32667109558370344,
+   "anomaly_r": -0.2673066821362728,
+   "below80": 0.7916666666666666,
+   "years_beat_season": 0
+  },
+  "camera_hand": {
+   "n": 120,
+   "years": 3,
+   "rmse": 22.44349352643254,
+   "mae": 18.128761127816354,
+   "r2": 0.33000551707601367,
+   "anomaly_r": -0.28285607492111703,
+   "below80": 0.7833333333333333,
+   "years_beat_season": 0
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 230,
+   "years": 7,
+   "rmse": 22.81268455039447,
+   "mae": 17.8205456253109,
+   "r2": 0.39499467068251815,
+   "anomaly_r": 0.12025360600948856,
+   "below80": 0.808695652173913,
+   "years_beat_season": 4
+  },
+  "season": {
+   "n": 230,
+   "years": 7,
+   "rmse": 22.602561243825466,
+   "mae": 17.696557160023755,
+   "r2": 0.4060885210858486,
+   "anomaly_r": 0.0,
+   "below80": 0.8217391304347826,
+   "years_beat_season": 0
+  }
+ }
+}

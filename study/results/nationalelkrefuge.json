@@ -1,0 +1,226 @@
+{
+ "cam": "nationalelkrefuge",
+ "lat": 43.488931,
+ "lon": -110.737824,
+ "elev": 1899,
+ "veg": "GR",
+ "description": "National Elk Refuge, Wyoming",
+ "orientation": null,
+ "first": "2015-08-12",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Cache Creek",
+   "dist_km": 2.7
+  },
+  {
+   "name": "Timbered Island",
+   "dist_km": 24.3
+  },
+  {
+   "name": "Whitegrass Ranch",
+   "dist_km": 16.9
+  }
+ ],
+ "species": [
+  "Artemisia tridentata ssp. vaseyana",
+  "Calamagrostic rubescens",
+  "Pinus contorta",
+  "Pseudotsuga menziesii",
+  "Symphoricarpos oreophilus"
+ ],
+ "units": [
+  "Cache Creek | Calamagrostic rubescens",
+  "Cache Creek | Pseudotsuga menziesii",
+  "Cache Creek | Symphoricarpos oreophilus",
+  "Timbered Island | Artemisia tridentata ssp. vaseyana",
+  "Timbered Island | Calamagrostic rubescens",
+  "Timbered Island | Pinus contorta",
+  "Timbered Island | Pseudotsuga menziesii",
+  "Whitegrass Ranch | Calamagrostic rubescens",
+  "Whitegrass Ranch | Pinus contorta",
+  "Whitegrass Ranch | Symphoricarpos oreophilus"
+ ],
+ "n_samples_total": 602,
+ "curated_roi": "nationalelkrefuge_GR_1000_1day.csv",
+ "info": {
+  "frames_registered": 1032,
+  "clear": 560,
+  "veg_blocks": 55,
+  "ref_blocks": 29,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 1032,
+    "clear": 560,
+    "first": "2015-08-12",
+    "last": "2022-10-06",
+    "veg_blocks": 55,
+    "ref_blocks": 29
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   234,
+   10,
+   254,
+   2,
+   35,
+   121,
+   2,
+   20,
+   61,
+   28,
+   19,
+   84,
+   75,
+   1,
+   5,
+   75,
+   45
+  ],
+  "linked": [
+   0,
+   2,
+   4,
+   5,
+   7,
+   8,
+   9,
+   11,
+   12,
+   15,
+   16
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 208,
+   "years": 8,
+   "rmse": 28.402657892343992,
+   "mae": 19.068607149456458,
+   "r2": 0.610799273345069,
+   "anomaly_r": 0.0,
+   "below80": 0.9423076923076923,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 208,
+   "years": 8,
+   "rmse": 28.92960325429003,
+   "mae": 19.82154233480636,
+   "r2": 0.5962238783320009,
+   "anomaly_r": -0.022891384389593622,
+   "below80": 0.9375,
+   "years_beat_season": 2
+  },
+  "camera_auto_wb": {
+   "n": 208,
+   "years": 8,
+   "rmse": 28.582926024897912,
+   "mae": 19.356913652381202,
+   "r2": 0.6058431781521427,
+   "anomaly_r": -0.043266208576112006,
+   "below80": 0.9471153846153846,
+   "years_beat_season": 3
+  },
+  "sat_visible_view": {
+   "n": 208,
+   "years": 8,
+   "rmse": 27.807506316409253,
+   "mae": 19.070436230730397,
+   "r2": 0.6269390722317034,
+   "anomaly_r": 0.20350293035804737,
+   "below80": 0.9326923076923077,
+   "years_beat_season": 4
+  },
+  "sat_ir_view": {
+   "n": 208,
+   "years": 8,
+   "rmse": 26.941945014630242,
+   "mae": 18.526844277637732,
+   "r2": 0.6498020755582986,
+   "anomaly_r": 0.3372392678627283,
+   "below80": 0.9423076923076923,
+   "years_beat_season": 6
+  },
+  "sat_ir_site": {
+   "n": 208,
+   "years": 8,
+   "rmse": 29.115955328305983,
+   "mae": 20.02536398576489,
+   "r2": 0.5910052195433642,
+   "anomaly_r": -0.08125774389197618,
+   "below80": 0.9326923076923077,
+   "years_beat_season": 2
+  },
+  "camera_plus_sat_ir": {
+   "n": 208,
+   "years": 8,
+   "rmse": 28.576041394395023,
+   "mae": 20.359410853486946,
+   "r2": 0.6060330325615568,
+   "anomaly_r": 0.149509506698941,
+   "below80": 0.9326923076923077,
+   "years_beat_season": 4
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 253,
+   "years": 8,
+   "rmse": 26.647152359939653,
+   "mae": 17.715351332145044,
+   "r2": 0.6168566545626246,
+   "anomaly_r": 0.0,
+   "below80": 0.9407114624505929,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 253,
+   "years": 8,
+   "rmse": 27.056861440896853,
+   "mae": 18.273418792437877,
+   "r2": 0.6049841590932798,
+   "anomaly_r": -0.043819054941589296,
+   "below80": 0.9367588932806324,
+   "years_beat_season": 2
+  },
+  "camera_hand": {
+   "n": 253,
+   "years": 8,
+   "rmse": 26.75925901557499,
+   "mae": 17.978411058378104,
+   "r2": 0.6136260450287613,
+   "anomaly_r": 0.0036705610211424577,
+   "below80": 0.9446640316205533,
+   "years_beat_season": 4
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 253,
+   "years": 8,
+   "rmse": 27.056861440896853,
+   "mae": 18.273418792437877,
+   "r2": 0.6049841590932798,
+   "anomaly_r": -0.043819054941589296,
+   "below80": 0.9367588932806324,
+   "years_beat_season": 2
+  },
+  "season": {
+   "n": 253,
+   "years": 8,
+   "rmse": 26.647152359939653,
+   "mae": 17.715351332145044,
+   "r2": 0.6168566545626246,
+   "anomaly_r": 0.0,
+   "below80": 0.9407114624505929,
+   "years_beat_season": 0
+  }
+ }
+}

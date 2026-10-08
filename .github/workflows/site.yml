@@ -1,0 +1,57 @@
+name: live network + site
+
+# Every morning: pull yesterday's midday frames from the HPWREN cameras, measure every georeferenced
+# block, append to docs/live/history, then publish docs/ to GitHub Pages.
+on:
+  schedule:
+    - cron: "20 10 * * *"     # 03:20 Pacific (PDT), after the previous day is complete
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["docs/**", ".github/workflows/site.yml"]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        if: github.event_name != 'push'
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Measure yesterday
+        if: github.event_name != 'push'
+        run: |
+          pip install .
+          python live/update.py
+      - name: Commit new measurements
+        if: github.event_name != 'push'
+        run: |
+          git config user.name "fuel-gauge bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/live
+          git diff --cached --quiet || git commit -m "live: $(date -u +%F)"
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

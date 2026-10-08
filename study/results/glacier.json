@@ -1,0 +1,254 @@
+{
+ "cam": "glacier",
+ "lat": 48.501384,
+ "lon": -113.986352,
+ "elev": 970,
+ "veg": "EN",
+ "description": "Headquarters Building, Glacier National Park, West Glacier, Montana",
+ "orientation": "E",
+ "first": "2008-08-28",
+ "last": "2022-03-22",
+ "sites": [
+  {
+   "name": "Desert Mountain",
+   "dist_km": 12.7
+  },
+  {
+   "name": "Emery Creek",
+   "dist_km": 18.2
+  },
+  {
+   "name": "West Glacier",
+   "dist_km": 0.1
+  }
+ ],
+ "species": [
+  "Acer glabrum",
+  "Amelanchier utahensis",
+  "Calamagrostic rubescens",
+  "Pinus contorta"
+ ],
+ "units": [
+  "Desert Mountain | Acer glabrum",
+  "Emery Creek | Pinus contorta",
+  "West Glacier | Amelanchier utahensis",
+  "West Glacier | Calamagrostic rubescens",
+  "West Glacier | Pinus contorta"
+ ],
+ "n_samples_total": 362,
+ "curated_roi": "glacier_GR_1000_1day.csv",
+ "info": {
+  "frames_registered": 1999,
+  "clear": 871,
+  "veg_blocks": 116,
+  "ref_blocks": 77,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 887,
+    "clear": 468,
+    "first": "2009-02-12",
+    "last": "2015-01-05",
+    "veg_blocks": 116,
+    "ref_blocks": 77
+   },
+   {
+    "frames": 661,
+    "clear": 253,
+    "first": "2017-11-01",
+    "last": "2021-11-14",
+    "veg_blocks": 142,
+    "ref_blocks": 59
+   },
+   {
+    "frames": 451,
+    "clear": 150,
+    "first": "2015-02-02",
+    "last": "2017-10-30",
+    "veg_blocks": 161,
+    "ref_blocks": 99
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   44,
+   6,
+   1,
+   9,
+   2,
+   109,
+   5,
+   1,
+   34,
+   1,
+   45,
+   92,
+   5,
+   17,
+   1,
+   1,
+   7,
+   1,
+   3,
+   271,
+   148,
+   188,
+   3,
+   2,
+   141,
+   2,
+   160,
+   2,
+   4,
+   150,
+   21,
+   345,
+   295,
+   2,
+   2,
+   3,
+   2,
+   3,
+   1
+  ],
+  "linked": [
+   5,
+   8,
+   10,
+   11,
+   19,
+   20,
+   21
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.491005239668063,
+   "mae": 15.361413054665583,
+   "r2": 0.7987225823378359,
+   "anomaly_r": 0.0,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.462930507619266,
+   "mae": 15.397736022790326,
+   "r2": 0.7992481155591468,
+   "anomaly_r": 0.08123725870026388,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 6
+  },
+  "camera_auto_wb": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.494393072892063,
+   "mae": 15.005207674456296,
+   "r2": 0.7986591187574252,
+   "anomaly_r": 0.1136824325203609,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 9
+  },
+  "sat_visible_view": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.812851621744038,
+   "mae": 15.588504851962274,
+   "r2": 0.7926488338787937,
+   "anomaly_r": -0.04573907548735361,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 4
+  },
+  "sat_ir_view": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.49633176183915,
+   "mae": 15.787020888651927,
+   "r2": 0.7986227971973796,
+   "anomaly_r": 0.11923842486654775,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 6
+  },
+  "sat_ir_site": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.449643960165353,
+   "mae": 15.510544773424197,
+   "r2": 0.7994965880449736,
+   "anomaly_r": 0.12956878733348878,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 8
+  },
+  "camera_plus_sat_ir": {
+   "n": 209,
+   "years": 13,
+   "rmse": 21.71570263273509,
+   "mae": 15.865949580801102,
+   "r2": 0.7944917014170836,
+   "anomaly_r": 0.09778394173912597,
+   "below80": 0.9952153110047847,
+   "years_beat_season": 6
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 234,
+   "years": 13,
+   "rmse": 21.236258768816988,
+   "mae": 15.222786838638516,
+   "r2": 0.7997227452818501,
+   "anomaly_r": 0.0,
+   "below80": 0.9957264957264957,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 234,
+   "years": 13,
+   "rmse": 21.153147553658943,
+   "mae": 15.17902639322074,
+   "r2": 0.8012873065639696,
+   "anomaly_r": 0.10578271359374834,
+   "below80": 0.9957264957264957,
+   "years_beat_season": 7
+  },
+  "camera_hand": {
+   "n": 234,
+   "years": 13,
+   "rmse": 21.433417187321538,
+   "mae": 15.314372977544723,
+   "r2": 0.7959867159012782,
+   "anomaly_r": -0.05075703408202192,
+   "below80": 0.9957264957264957,
+   "years_beat_season": 5
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 234,
+   "years": 13,
+   "rmse": 21.153147553658943,
+   "mae": 15.17902639322074,
+   "r2": 0.8012873065639696,
+   "anomaly_r": 0.10578271359374834,
+   "below80": 0.9957264957264957,
+   "years_beat_season": 7
+  },
+  "season": {
+   "n": 234,
+   "years": 13,
+   "rmse": 21.236258768816988,
+   "mae": 15.222786838638516,
+   "r2": 0.7997227452818501,
+   "anomaly_r": 0.0,
+   "below80": 0.9957264957264957,
+   "years_beat_season": 0
+  }
+ }
+}

@@ -1,0 +1,1113 @@
+{
+ "n_cams": 21,
+ "n_samples": 3832,
+ "pooled": {
+  "season": {
+   "rmse": 20.48,
+   "anomaly_r": 0.0
+  },
+  "camera_auto": {
+   "rmse": 20.67,
+   "anomaly_r": 0.08,
+   "cams_better": 11,
+   "cams": 21,
+   "sign_test_p": 0.5
+  },
+  "camera_auto_wb": {
+   "rmse": 20.47,
+   "anomaly_r": 0.134,
+   "cams_better": 10,
+   "cams": 21,
+   "sign_test_p": 0.6682
+  },
+  "sat_visible_view": {
+   "rmse": 19.79,
+   "anomaly_r": 0.273,
+   "cams_better": 11,
+   "cams": 21,
+   "sign_test_p": 0.5
+  },
+  "sat_ir_view": {
+   "rmse": 19.81,
+   "anomaly_r": 0.287,
+   "cams_better": 11,
+   "cams": 21,
+   "sign_test_p": 0.5
+  },
+  "sat_ir_site": {
+   "rmse": 19.59,
+   "anomaly_r": 0.306,
+   "cams_better": 15,
+   "cams": 21,
+   "sign_test_p": 0.0392
+  },
+  "camera_plus_sat_ir": {
+   "rmse": 20.12,
+   "anomaly_r": 0.264,
+   "cams_better": 9,
+   "cams": 21,
+   "sign_test_p": 0.8083
+  }
+ },
+ "by_veg": {
+  "DB": {
+   "cams": 1,
+   "n": 85,
+   "season": {
+    "rmse": 21.45,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 19.25,
+    "anomaly_r": 0.441
+   },
+   "camera_auto_wb": {
+    "rmse": 19.64,
+    "anomaly_r": 0.402
+   },
+   "sat_visible_view": {
+    "rmse": 17.92,
+    "anomaly_r": 0.551
+   },
+   "sat_ir_view": {
+    "rmse": 17.19,
+    "anomaly_r": 0.6
+   },
+   "sat_ir_site": {
+    "rmse": 18.79,
+    "anomaly_r": 0.486
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 17.34,
+    "anomaly_r": 0.593
+   }
+  },
+  "EN": {
+   "cams": 10,
+   "n": 1655,
+   "season": {
+    "rmse": 19.07,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 19.07,
+    "anomaly_r": 0.12
+   },
+   "camera_auto_wb": {
+    "rmse": 19.12,
+    "anomaly_r": 0.136
+   },
+   "sat_visible_view": {
+    "rmse": 19.19,
+    "anomaly_r": 0.115
+   },
+   "sat_ir_view": {
+    "rmse": 19.51,
+    "anomaly_r": 0.131
+   },
+   "sat_ir_site": {
+    "rmse": 18.26,
+    "anomaly_r": 0.296
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 19.66,
+    "anomaly_r": 0.142
+   }
+  },
+  "GR": {
+   "cams": 5,
+   "n": 807,
+   "season": {
+    "rmse": 22.39,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 22.71,
+    "anomaly_r": 0.09
+   },
+   "camera_auto_wb": {
+    "rmse": 22.31,
+    "anomaly_r": 0.137
+   },
+   "sat_visible_view": {
+    "rmse": 21.68,
+    "anomaly_r": 0.255
+   },
+   "sat_ir_view": {
+    "rmse": 21.52,
+    "anomaly_r": 0.284
+   },
+   "sat_ir_site": {
+    "rmse": 22.6,
+    "anomaly_r": 0.143
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 22.4,
+    "anomaly_r": 0.196
+   }
+  },
+  "SH": {
+   "cams": 3,
+   "n": 1097,
+   "season": {
+    "rmse": 22.13,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 22.49,
+    "anomaly_r": -0.044
+   },
+   "camera_auto_wb": {
+    "rmse": 22.13,
+    "anomaly_r": 0.105
+   },
+   "sat_visible_view": {
+    "rmse": 20.55,
+    "anomaly_r": 0.377
+   },
+   "sat_ir_view": {
+    "rmse": 20.27,
+    "anomaly_r": 0.409
+   },
+   "sat_ir_site": {
+    "rmse": 20.55,
+    "anomaly_r": 0.377
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 20.35,
+    "anomaly_r": 0.403
+   }
+  },
+  "TN": {
+   "cams": 1,
+   "n": 51,
+   "season": {
+    "rmse": 7.38,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 13.27,
+    "anomaly_r": -0.399
+   },
+   "camera_auto_wb": {
+    "rmse": 11.77,
+    "anomaly_r": -0.391
+   },
+   "sat_visible_view": {
+    "rmse": 7.59,
+    "anomaly_r": 0.14
+   },
+   "sat_ir_view": {
+    "rmse": 7.69,
+    "anomaly_r": 0.073
+   },
+   "sat_ir_site": {
+    "rmse": 7.84,
+    "anomaly_r": -0.221
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 9.43,
+    "anomaly_r": -0.138
+   }
+  },
+  "WL": {
+   "cams": 1,
+   "n": 137,
+   "season": {
+    "rmse": 12.82,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 13.0,
+    "anomaly_r": -0.081
+   },
+   "camera_auto_wb": {
+    "rmse": 12.55,
+    "anomaly_r": 0.22
+   },
+   "sat_visible_view": {
+    "rmse": 11.69,
+    "anomaly_r": 0.416
+   },
+   "sat_ir_view": {
+    "rmse": 12.66,
+    "anomaly_r": 0.212
+   },
+   "sat_ir_site": {
+    "rmse": 8.91,
+    "anomaly_r": 0.719
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 12.9,
+    "anomaly_r": 0.166
+   }
+  }
+ },
+ "by_distance": {
+  "0-10 km": {
+   "n": 944,
+   "units": 17,
+   "season": {
+    "rmse": 18.96,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 18.79,
+    "anomaly_r": 0.16
+   },
+   "camera_auto_wb": {
+    "rmse": 18.92,
+    "anomaly_r": 0.136
+   },
+   "sat_visible_view": {
+    "rmse": 18.9,
+    "anomaly_r": 0.162
+   },
+   "sat_ir_view": {
+    "rmse": 18.52,
+    "anomaly_r": 0.241
+   },
+   "sat_ir_site": {
+    "rmse": 17.92,
+    "anomaly_r": 0.331
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 18.68,
+    "anomaly_r": 0.232
+   }
+  },
+  "10-15 km": {
+   "n": 512,
+   "units": 12,
+   "season": {
+    "rmse": 19.04,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 19.01,
+    "anomaly_r": 0.141
+   },
+   "camera_auto_wb": {
+    "rmse": 19.62,
+    "anomaly_r": 0.041
+   },
+   "sat_visible_view": {
+    "rmse": 19.23,
+    "anomaly_r": 0.2
+   },
+   "sat_ir_view": {
+    "rmse": 20.41,
+    "anomaly_r": 0.101
+   },
+   "sat_ir_site": {
+    "rmse": 18.0,
+    "anomaly_r": 0.332
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 20.45,
+    "anomaly_r": 0.131
+   }
+  },
+  "15-20 km": {
+   "n": 1928,
+   "units": 43,
+   "season": {
+    "rmse": 21.39,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 21.81,
+    "anomaly_r": 0.023
+   },
+   "camera_auto_wb": {
+    "rmse": 21.25,
+    "anomaly_r": 0.156
+   },
+   "sat_visible_view": {
+    "rmse": 20.15,
+    "anomaly_r": 0.337
+   },
+   "sat_ir_view": {
+    "rmse": 19.96,
+    "anomaly_r": 0.364
+   },
+   "sat_ir_site": {
+    "rmse": 20.5,
+    "anomaly_r": 0.311
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 20.36,
+    "anomaly_r": 0.328
+   }
+  },
+  "20-26 km": {
+   "n": 448,
+   "units": 16,
+   "season": {
+    "rmse": 21.17,
+    "anomaly_r": 0.0
+   },
+   "camera_auto": {
+    "rmse": 21.23,
+    "anomaly_r": 0.113
+   },
+   "camera_auto_wb": {
+    "rmse": 21.09,
+    "anomaly_r": 0.128
+   },
+   "sat_visible_view": {
+    "rmse": 20.67,
+    "anomaly_r": 0.232
+   },
+   "sat_ir_view": {
+    "rmse": 21.09,
+    "anomaly_r": 0.228
+   },
+   "sat_ir_site": {
+    "rmse": 20.71,
+    "anomaly_r": 0.208
+   },
+   "camera_plus_sat_ir": {
+    "rmse": 21.61,
+    "anomaly_r": 0.193
+   }
+  }
+ },
+ "per_unit": [
+  {
+   "cam": "ahwahnee",
+   "unit": "Crane Flat | Arctostaphylos patula",
+   "dist_km": 19.7,
+   "n": 53,
+   "cam_skill": 0.0087,
+   "sat_skill": -0.0041,
+   "cam_anom": 0.195,
+   "sat_anom": 0.227
+  },
+  {
+   "cam": "ahwahnee",
+   "unit": "El Portal | Adenostoma fasciculatum",
+   "dist_km": 19.4,
+   "n": 54,
+   "cam_skill": 0.0829,
+   "sat_skill": 0.2064,
+   "cam_anom": 0.396,
+   "sat_anom": 0.63
+  },
+  {
+   "cam": "ahwahnee",
+   "unit": "Foresta | Arctostaphylos manzanita",
+   "dist_km": 15.2,
+   "n": 54,
+   "cam_skill": -0.0479,
+   "sat_skill": 0.0891,
+   "cam_anom": 0.061,
+   "sat_anom": 0.423
+  },
+  {
+   "cam": "ahwahnee",
+   "unit": "Wawona | Arctostaphylos manzanita",
+   "dist_km": 22.7,
+   "n": 59,
+   "cam_skill": 0.038,
+   "sat_skill": 0.0888,
+   "cam_anom": 0.293,
+   "sat_anom": 0.418
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Anza | Adenostoma fasciculatum",
+   "dist_km": 16.1,
+   "n": 82,
+   "cam_skill": 0.0138,
+   "sat_skill": 0.2795,
+   "cam_anom": 0.174,
+   "sat_anom": 0.7
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Anza | Adenostoma sparsifolium",
+   "dist_km": 16.1,
+   "n": 83,
+   "cam_skill": -0.0139,
+   "sat_skill": 0.2107,
+   "cam_anom": 0.074,
+   "sat_anom": 0.616
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Anza | Arctostaphylos glandulosa",
+   "dist_km": 16.1,
+   "n": 83,
+   "cam_skill": 0.0011,
+   "sat_skill": 0.07,
+   "cam_anom": 0.125,
+   "sat_anom": 0.422
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Anza | Eriogonum fasciculatum",
+   "dist_km": 16.1,
+   "n": 62,
+   "cam_skill": 0.005,
+   "sat_skill": 0.2436,
+   "cam_anom": 0.116,
+   "sat_anom": 0.677
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Pine Cove | Adenostoma fasciculatum",
+   "dist_km": 17.4,
+   "n": 65,
+   "cam_skill": 0.0177,
+   "sat_skill": -0.1896,
+   "cam_anom": 0.192,
+   "sat_anom": -0.189
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Pine Cove | Arctostaphylos glandulosa",
+   "dist_km": 17.4,
+   "n": 125,
+   "cam_skill": -0.0125,
+   "sat_skill": -0.0334,
+   "cam_anom": 0.046,
+   "sat_anom": 0.209
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "San Jacinto | Adenostoma fasciculatum",
+   "dist_km": 19.9,
+   "n": 75,
+   "cam_skill": 0.0453,
+   "sat_skill": 0.2172,
+   "cam_anom": 0.3,
+   "sat_anom": 0.651
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "San Jacinto | Artemisia nova",
+   "dist_km": 19.9,
+   "n": 56,
+   "cam_skill": 0.0284,
+   "sat_skill": 0.1364,
+   "cam_anom": 0.325,
+   "sat_anom": 0.695
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "San Jacinto | Encelia farinosa",
+   "dist_km": 19.9,
+   "n": 37,
+   "cam_skill": 0.043,
+   "sat_skill": 0.1652,
+   "cam_anom": 0.373,
+   "sat_anom": 0.756
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "San Jacinto | Eriogonum fasciculatum",
+   "dist_km": 19.9,
+   "n": 75,
+   "cam_skill": 0.012,
+   "sat_skill": 0.1397,
+   "cam_anom": 0.159,
+   "sat_anom": 0.511
+  },
+  {
+   "cam": "cucamongasouth",
+   "unit": "Strawberry | Adenostoma fasciculatum",
+   "dist_km": 13.1,
+   "n": 87,
+   "cam_skill": -0.0758,
+   "sat_skill": -0.294,
+   "cam_anom": 0.078,
+   "sat_anom": 0.105
+  },
+  {
+   "cam": "forbes",
+   "unit": "Reader Ranch | Arctostaphylos manzanita",
+   "dist_km": 18.0,
+   "n": 43,
+   "cam_skill": -0.0971,
+   "sat_skill": -0.1183,
+   "cam_anom": -0.264,
+   "sat_anom": -0.136
+  },
+  {
+   "cam": "forbes",
+   "unit": "Reader Ranch | Quercus agrifolia",
+   "dist_km": 18.0,
+   "n": 43,
+   "cam_skill": 0.0192,
+   "sat_skill": 0.1069,
+   "cam_anom": 0.207,
+   "sat_anom": 0.463
+  },
+  {
+   "cam": "forbes",
+   "unit": "Tyler Foote | Arctostaphylos manzanita",
+   "dist_km": 19.3,
+   "n": 44,
+   "cam_skill": -0.0736,
+   "sat_skill": -0.0674,
+   "cam_anom": -0.144,
+   "sat_anom": 0.028
+  },
+  {
+   "cam": "glacier",
+   "unit": "Desert Mountain | Acer glabrum",
+   "dist_km": 12.7,
+   "n": 29,
+   "cam_skill": -0.026,
+   "sat_skill": 0.0216,
+   "cam_anom": -0.088,
+   "sat_anom": 0.214
+  },
+  {
+   "cam": "glacier",
+   "unit": "Emery Creek | Pinus contorta",
+   "dist_km": 18.2,
+   "n": 30,
+   "cam_skill": 0.0281,
+   "sat_skill": -0.0843,
+   "cam_anom": 0.236,
+   "sat_anom": -0.16
+  },
+  {
+   "cam": "glacier",
+   "unit": "West Glacier | Amelanchier utahensis",
+   "dist_km": 0.1,
+   "n": 50,
+   "cam_skill": 0.0371,
+   "sat_skill": 0.0016,
+   "cam_anom": 0.272,
+   "sat_anom": 0.171
+  },
+  {
+   "cam": "glacier",
+   "unit": "West Glacier | Calamagrostic rubescens",
+   "dist_km": 0.1,
+   "n": 49,
+   "cam_skill": 0.0054,
+   "sat_skill": 0.0223,
+   "cam_anom": 0.123,
+   "sat_anom": 0.211
+  },
+  {
+   "cam": "glacier",
+   "unit": "West Glacier | Pinus contorta",
+   "dist_km": 0.1,
+   "n": 51,
+   "cam_skill": 0.0398,
+   "sat_skill": -0.1333,
+   "cam_anom": 0.318,
+   "sat_anom": 0.012
+  },
+  {
+   "cam": "jasperridge",
+   "unit": "Pulgas | Baccharis pilularis",
+   "dist_km": 12.9,
+   "n": 81,
+   "cam_skill": 0.0228,
+   "sat_skill": 0.0683,
+   "cam_anom": 0.216,
+   "sat_anom": 0.364
+  },
+  {
+   "cam": "jasperridge",
+   "unit": "ST RTE 35 & 92 | Baccharis pilularis",
+   "dist_km": 15.8,
+   "n": 77,
+   "cam_skill": 0.0178,
+   "sat_skill": 0.0042,
+   "cam_anom": 0.206,
+   "sat_anom": 0.225
+  },
+  {
+   "cam": "jasperridge",
+   "unit": "Saratoga Summit | Adenostoma fasciculatum",
+   "dist_km": 20.0,
+   "n": 82,
+   "cam_skill": 0.0793,
+   "sat_skill": 0.1099,
+   "cam_anom": 0.391,
+   "sat_anom": 0.46
+  },
+  {
+   "cam": "kaweah",
+   "unit": "Elk Creek (CA) | Adenostoma fasciculatum",
+   "dist_km": 11.9,
+   "n": 162,
+   "cam_skill": 0.0029,
+   "sat_skill": 0.2606,
+   "cam_anom": 0.114,
+   "sat_anom": 0.673
+  },
+  {
+   "cam": "kaweah",
+   "unit": "Jake Flat | Adenostoma fasciculatum",
+   "dist_km": 23.5,
+   "n": 47,
+   "cam_skill": -0.0357,
+   "sat_skill": 0.0707,
+   "cam_anom": -0.117,
+   "sat_anom": 0.399
+  },
+  {
+   "cam": "mayberry",
+   "unit": "Clayton Ranch | Adenostoma fasciculatum",
+   "dist_km": 16.9,
+   "n": 137,
+   "cam_skill": 0.0212,
+   "sat_skill": 0.0123,
+   "cam_anom": 0.22,
+   "sat_anom": 0.212
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Cache Creek | Calamagrostic rubescens",
+   "dist_km": 2.7,
+   "n": 22,
+   "cam_skill": 0.0029,
+   "sat_skill": 0.0533,
+   "cam_anom": 0.057,
+   "sat_anom": 0.412
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Cache Creek | Pseudotsuga menziesii",
+   "dist_km": 2.7,
+   "n": 23,
+   "cam_skill": -0.0309,
+   "sat_skill": -0.0731,
+   "cam_anom": -0.32,
+   "sat_anom": -0.122
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Cache Creek | Symphoricarpos oreophilus",
+   "dist_km": 2.7,
+   "n": 22,
+   "cam_skill": -0.0089,
+   "sat_skill": 0.0793,
+   "cam_anom": -0.16,
+   "sat_anom": 0.471
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Timbered Island | Artemisia tridentata ssp. vaseyana",
+   "dist_km": 24.3,
+   "n": 21,
+   "cam_skill": 0.0128,
+   "sat_skill": 0.0718,
+   "cam_anom": 0.191,
+   "sat_anom": 0.431
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Timbered Island | Calamagrostic rubescens",
+   "dist_km": 24.3,
+   "n": 21,
+   "cam_skill": -0.0308,
+   "sat_skill": 0.0726,
+   "cam_anom": -0.34,
+   "sat_anom": 0.435
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Timbered Island | Pinus contorta",
+   "dist_km": 24.3,
+   "n": 21,
+   "cam_skill": -0.02,
+   "sat_skill": 0.0,
+   "cam_anom": 0.006,
+   "sat_anom": 0.217
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Timbered Island | Pseudotsuga menziesii",
+   "dist_km": 24.3,
+   "n": 21,
+   "cam_skill": -0.0381,
+   "sat_skill": -0.1866,
+   "cam_anom": -0.02,
+   "sat_anom": -0.061
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Whitegrass Ranch | Calamagrostic rubescens",
+   "dist_km": 16.9,
+   "n": 19,
+   "cam_skill": -0.0007,
+   "sat_skill": 0.0607,
+   "cam_anom": 0.019,
+   "sat_anom": 0.411
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Whitegrass Ranch | Pinus contorta",
+   "dist_km": 16.9,
+   "n": 19,
+   "cam_skill": -0.0495,
+   "sat_skill": -0.0206,
+   "cam_anom": -0.175,
+   "sat_anom": 0.195
+  },
+  {
+   "cam": "nationalelkrefuge",
+   "unit": "Whitegrass Ranch | Symphoricarpos oreophilus",
+   "dist_km": 16.9,
+   "n": 19,
+   "cam_skill": 0.004,
+   "sat_skill": 0.0869,
+   "cam_anom": 0.078,
+   "sat_anom": 0.498
+  },
+  {
+   "cam": "niwot2",
+   "unit": "Sledgehammer South | Pinus ponderosa",
+   "dist_km": 18.0,
+   "n": 19,
+   "cam_skill": 0.0471,
+   "sat_skill": -0.2286,
+   "cam_anom": 0.313,
+   "sat_anom": -0.052
+  },
+  {
+   "cam": "niwot2",
+   "unit": "Sugarloaf (CO) | Juniperus scopulorum",
+   "dist_km": 15.9,
+   "n": 20,
+   "cam_skill": -0.0827,
+   "sat_skill": 0.0458,
+   "cam_anom": -0.216,
+   "sat_anom": 0.286
+  },
+  {
+   "cam": "niwot2",
+   "unit": "Sugarloaf (CO) | Pinus ponderosa",
+   "dist_km": 15.9,
+   "n": 20,
+   "cam_skill": 0.1939,
+   "sat_skill": -0.0703,
+   "cam_anom": 0.711,
+   "sat_anom": 0.076
+  },
+  {
+   "cam": "niwot2",
+   "unit": "Sugarloaf (CO) | Pseudotsuga menziesii",
+   "dist_km": 15.9,
+   "n": 20,
+   "cam_skill": 0.1008,
+   "sat_skill": -0.0436,
+   "cam_anom": 0.67,
+   "sat_anom": -0.053
+  },
+  {
+   "cam": "oregonMP",
+   "unit": "Colgate | Arctostaphylos patula",
+   "dist_km": 15.5,
+   "n": 48,
+   "cam_skill": -0.1045,
+   "sat_skill": -0.125,
+   "cam_anom": 0.018,
+   "sat_anom": -0.033
+  },
+  {
+   "cam": "oregonMP",
+   "unit": "Colgate | Purshia tridentata",
+   "dist_km": 15.5,
+   "n": 48,
+   "cam_skill": -0.1844,
+   "sat_skill": -0.2478,
+   "cam_anom": 0.153,
+   "sat_anom": -0.065
+  },
+  {
+   "cam": "oregonYP",
+   "unit": "Colgate | Arctostaphylos patula",
+   "dist_km": 0.8,
+   "n": 64,
+   "cam_skill": -0.007,
+   "sat_skill": -0.0671,
+   "cam_anom": 0.018,
+   "sat_anom": -0.139
+  },
+  {
+   "cam": "oregonYP",
+   "unit": "Colgate | Purshia tridentata",
+   "dist_km": 0.8,
+   "n": 64,
+   "cam_skill": -0.0083,
+   "sat_skill": -0.0764,
+   "cam_anom": 0.047,
+   "sat_anom": -0.053
+  },
+  {
+   "cam": "sagehen",
+   "unit": "Dog Valley RAWS | Arctostaphylos patula",
+   "dist_km": 22.0,
+   "n": 28,
+   "cam_skill": -0.0535,
+   "sat_skill": -0.3264,
+   "cam_anom": -0.165,
+   "sat_anom": -0.091
+  },
+  {
+   "cam": "sagehen",
+   "unit": "Dog Valley RAWS | Pinus ponderosa",
+   "dist_km": 22.0,
+   "n": 28,
+   "cam_skill": -0.0544,
+   "sat_skill": -0.0627,
+   "cam_anom": -0.129,
+   "sat_anom": 0.371
+  },
+  {
+   "cam": "sagehen",
+   "unit": "TahoeDonner | Arctostaphylos patula",
+   "dist_km": 10.6,
+   "n": 34,
+   "cam_skill": 0.0071,
+   "sat_skill": -0.2325,
+   "cam_anom": 0.162,
+   "sat_anom": -0.351
+  },
+  {
+   "cam": "sagehen",
+   "unit": "TahoeDonner | Ceanothus velutinus",
+   "dist_km": 10.6,
+   "n": 34,
+   "cam_skill": 0.0292,
+   "sat_skill": -0.2655,
+   "cam_anom": 0.282,
+   "sat_anom": -0.096
+  },
+  {
+   "cam": "sangabriel",
+   "unit": "Gold Creek | Adenostoma fasciculatum",
+   "dist_km": 15.6,
+   "n": 20,
+   "cam_skill": -0.0191,
+   "sat_skill": 0.0448,
+   "cam_anom": -0.001,
+   "sat_anom": 0.275
+  },
+  {
+   "cam": "sangabriel",
+   "unit": "La Tuna Canyon, Tujunga | Adenostoma fasciculatum",
+   "dist_km": 14.3,
+   "n": 38,
+   "cam_skill": -0.1679,
+   "sat_skill": -0.2615,
+   "cam_anom": -0.359,
+   "sat_anom": -0.351
+  },
+  {
+   "cam": "segabradshaw",
+   "unit": "COF Thompson Lane | Arctostaphylos pungens",
+   "dist_km": 18.5,
+   "n": 69,
+   "cam_skill": 0.0491,
+   "sat_skill": 0.1109,
+   "cam_anom": 0.301,
+   "sat_anom": 0.459
+  },
+  {
+   "cam": "segabradshaw",
+   "unit": "COF Thompson Lane | Juniperus osteosperma",
+   "dist_km": 18.5,
+   "n": 60,
+   "cam_skill": 0.0277,
+   "sat_skill": 0.0279,
+   "cam_anom": 0.244,
+   "sat_anom": 0.288
+  },
+  {
+   "cam": "segabradshaw",
+   "unit": "COF Thompson Lane | Quercus turbinella",
+   "dist_km": 18.5,
+   "n": 69,
+   "cam_skill": -0.0425,
+   "sat_skill": 0.0758,
+   "cam_anom": 0.021,
+   "sat_anom": 0.386
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF Jacob Lake | Pinus ponderosa",
+   "dist_km": 18.4,
+   "n": 28,
+   "cam_skill": -0.0484,
+   "sat_skill": 0.0057,
+   "cam_anom": -0.147,
+   "sat_anom": 0.136
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF Little Mountain | Juniperus communis",
+   "dist_km": 1.9,
+   "n": 27,
+   "cam_skill": 0.1012,
+   "sat_skill": -0.0544,
+   "cam_anom": 0.478,
+   "sat_anom": -0.095
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF Little Mountain | Pinus edulis",
+   "dist_km": 1.9,
+   "n": 23,
+   "cam_skill": -0.1435,
+   "sat_skill": -0.0261,
+   "cam_anom": -0.33,
+   "sat_anom": 0.035
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF Little Mountain | Pinus ponderosa",
+   "dist_km": 1.9,
+   "n": 27,
+   "cam_skill": -0.0075,
+   "sat_skill": 0.0481,
+   "cam_anom": 0.13,
+   "sat_anom": 0.322
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF West | Artemisia tridentata",
+   "dist_km": 23.1,
+   "n": 25,
+   "cam_skill": 0.0463,
+   "sat_skill": 0.0068,
+   "cam_anom": 0.667,
+   "sat_anom": 0.136
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF West | Juniperus osteosperma",
+   "dist_km": 23.1,
+   "n": 25,
+   "cam_skill": 0.1111,
+   "sat_skill": -0.0623,
+   "cam_anom": 0.728,
+   "sat_anom": 0.021
+  },
+  {
+   "cam": "segalittlemountain",
+   "unit": "KNF West | Pinus edulis",
+   "dist_km": 23.1,
+   "n": 25,
+   "cam_skill": -0.1884,
+   "sat_skill": -0.0518,
+   "cam_anom": -0.66,
+   "sat_anom": 0.007
+  },
+  {
+   "cam": "sequoia",
+   "unit": "Elk Creek (CA) | Adenostoma fasciculatum",
+   "dist_km": 6.6,
+   "n": 173,
+   "cam_skill": -0.0099,
+   "sat_skill": -0.0469,
+   "cam_anom": 0.034,
+   "sat_anom": -0.07
+  },
+  {
+   "cam": "tonzi",
+   "unit": "Tonzi Road | Adenostoma fasciculatum",
+   "dist_km": 7.3,
+   "n": 85,
+   "cam_skill": 0.0843,
+   "sat_skill": 0.1986,
+   "cam_anom": 0.402,
+   "sat_anom": 0.6
+  },
+  {
+   "cam": "turtleback",
+   "unit": "Crane Flat | Arctostaphylos patula",
+   "dist_km": 9.7,
+   "n": 57,
+   "cam_skill": -0.0057,
+   "sat_skill": -0.0571,
+   "cam_anom": 0.06,
+   "sat_anom": -0.23
+  },
+  {
+   "cam": "turtleback",
+   "unit": "El Portal | Adenostoma fasciculatum",
+   "dist_km": 7.9,
+   "n": 57,
+   "cam_skill": -0.1021,
+   "sat_skill": 0.0044,
+   "cam_anom": -0.216,
+   "sat_anom": 0.168
+  },
+  {
+   "cam": "turtleback",
+   "unit": "Foresta | Arctostaphylos manzanita",
+   "dist_km": 3.6,
+   "n": 58,
+   "cam_skill": -0.0162,
+   "sat_skill": -0.0166,
+   "cam_anom": 0.023,
+   "sat_anom": 0.037
+  },
+  {
+   "cam": "turtleback",
+   "unit": "Wawona | Arctostaphylos manzanita",
+   "dist_km": 16.7,
+   "n": 63,
+   "cam_skill": 0.0576,
+   "sat_skill": 0.0219,
+   "cam_anom": 0.338,
+   "sat_anom": 0.229
+  },
+  {
+   "cam": "vaira",
+   "unit": "Tonzi Road | Adenostoma fasciculatum",
+   "dist_km": 5.6,
+   "n": 92,
+   "cam_skill": 0.0472,
+   "sat_skill": 0.1491,
+   "cam_anom": 0.33,
+   "sat_anom": 0.534
+  }
+ ],
+ "distance_trend": {
+  "units": 70,
+  "cam_skill_vs_km": 0.043,
+  "sat_skill_vs_km": 0.169,
+  "cam_anom_vs_km": 0.051
+ },
+ "timing": {
+  "camera": {
+   "n": 357,
+   "cams": 20,
+   "years": 141,
+   "r": 0.107,
+   "slope": 0.062,
+   "fuel_sd_days": 27.8,
+   "resid_sd_days": 27.6
+  },
+  "ndvi": {
+   "n": 953,
+   "cams": 21,
+   "years": 312,
+   "r": 0.093,
+   "slope": 0.084,
+   "fuel_sd_days": 25.6,
+   "resid_sd_days": 25.5
+  },
+  "ndii": {
+   "n": 996,
+   "cams": 21,
+   "years": 334,
+   "r": 0.041,
+   "slope": 0.02,
+   "fuel_sd_days": 26.5,
+   "resid_sd_days": 26.5
+  }
+ }
+}

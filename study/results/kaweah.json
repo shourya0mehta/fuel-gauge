@@ -1,0 +1,193 @@
+{
+ "cam": "kaweah",
+ "lat": 36.4435,
+ "lon": -118.90925,
+ "elev": 261,
+ "veg": "SH",
+ "description": "Kaweah / Sequoia and Kings Canyon National Park, Three Rivers, California",
+ "orientation": "NE",
+ "first": "2008-08-28",
+ "last": "2019-09-19",
+ "sites": [
+  {
+   "name": "Elk Creek (CA)",
+   "dist_km": 11.9
+  },
+  {
+   "name": "Jake Flat",
+   "dist_km": 23.5
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum"
+ ],
+ "units": [
+  "Elk Creek (CA) | Adenostoma fasciculatum",
+  "Jake Flat | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 249,
+ "curated_roi": "kaweah_SH_1000_1day.csv",
+ "info": {
+  "frames_registered": 1730,
+  "clear": 1154,
+  "veg_blocks": 149,
+  "ref_blocks": 39,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 1261,
+    "clear": 874,
+    "first": "2011-07-14",
+    "last": "2019-09-18",
+    "veg_blocks": 149,
+    "ref_blocks": 39
+   },
+   {
+    "frames": 469,
+    "clear": 280,
+    "first": "2008-08-28",
+    "last": "2011-07-12",
+    "veg_blocks": 135,
+    "ref_blocks": 41
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   469,
+   1261
+  ],
+  "linked": [
+   1
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 209,
+   "years": 12,
+   "rmse": 13.89500095411783,
+   "mae": 10.510470444804119,
+   "r2": 0.6668108129022772,
+   "anomaly_r": 0.0,
+   "below80": 0.8516746411483254,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 209,
+   "years": 12,
+   "rmse": 13.887032844181185,
+   "mae": 10.25705845965434,
+   "r2": 0.6671928390505892,
+   "anomaly_r": 0.11375781099315767,
+   "below80": 0.8708133971291866,
+   "years_beat_season": 6
+  },
+  "camera_auto_wb": {
+   "n": 209,
+   "years": 12,
+   "rmse": 14.057523275462266,
+   "mae": 10.327519468323539,
+   "r2": 0.6589709623052216,
+   "anomaly_r": 0.03279819659801554,
+   "below80": 0.8516746411483254,
+   "years_beat_season": 5
+  },
+  "sat_visible_view": {
+   "n": 209,
+   "years": 12,
+   "rmse": 11.620811149392313,
+   "mae": 8.341713495155776,
+   "r2": 0.7669513325422291,
+   "anomaly_r": 0.5488255539387991,
+   "below80": 0.8947368421052632,
+   "years_beat_season": 9
+  },
+  "sat_ir_view": {
+   "n": 209,
+   "years": 12,
+   "rmse": 11.33289876098631,
+   "mae": 7.875092544750562,
+   "r2": 0.7783561142740744,
+   "anomaly_r": 0.5804087401294667,
+   "below80": 0.8995215311004785,
+   "years_beat_season": 10
+  },
+  "sat_ir_site": {
+   "n": 209,
+   "years": 12,
+   "rmse": 11.763887730239501,
+   "mae": 8.283635656090949,
+   "r2": 0.7611773685378234,
+   "anomaly_r": 0.5322744412491418,
+   "below80": 0.8851674641148325,
+   "years_beat_season": 10
+  },
+  "camera_plus_sat_ir": {
+   "n": 209,
+   "years": 12,
+   "rmse": 11.510816540925479,
+   "mae": 7.988483985368831,
+   "r2": 0.771342210121139,
+   "anomaly_r": 0.5643468884043567,
+   "below80": 0.8995215311004785,
+   "years_beat_season": 9
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 147,
+   "years": 9,
+   "rmse": 15.279395717009026,
+   "mae": 11.796543590788042,
+   "r2": 0.6369906354922616,
+   "anomaly_r": 0.0,
+   "below80": 0.8503401360544217,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 147,
+   "years": 9,
+   "rmse": 15.450228856312304,
+   "mae": 11.63612334558016,
+   "r2": 0.6288279164707462,
+   "anomaly_r": 0.16285330746944196,
+   "below80": 0.8571428571428571,
+   "years_beat_season": 3
+  },
+  "camera_hand": {
+   "n": 147,
+   "years": 9,
+   "rmse": 14.493623829312643,
+   "mae": 11.14731915195811,
+   "r2": 0.6733674646865311,
+   "anomaly_r": 0.32009049480767093,
+   "below80": 0.8571428571428571,
+   "years_beat_season": 5
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 219,
+   "years": 12,
+   "rmse": 14.239353165374544,
+   "mae": 10.380979470393074,
+   "r2": 0.6785112779259039,
+   "anomaly_r": 0.1854696015774646,
+   "below80": 0.8721461187214612,
+   "years_beat_season": 8
+  },
+  "season": {
+   "n": 219,
+   "years": 12,
+   "rmse": 14.441800557412323,
+   "mae": 10.683216528048368,
+   "r2": 0.6693047892584574,
+   "anomaly_r": 0.0,
+   "below80": 0.8447488584474886,
+   "years_beat_season": 0
+  }
+ }
+}

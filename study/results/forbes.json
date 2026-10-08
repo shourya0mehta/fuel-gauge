@@ -1,0 +1,238 @@
+{
+ "cam": "forbes",
+ "lat": 39.232,
+ "lon": -121.2972,
+ "elev": 360,
+ "veg": "GR",
+ "description": "Forbes plot, Sierra Foothill Research and Extension Center, Browns Valley, CA",
+ "orientation": "N",
+ "first": "2017-01-25",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Reader Ranch",
+   "dist_km": 18.0
+  },
+  {
+   "name": "Tyler Foote",
+   "dist_km": 19.3
+  }
+ ],
+ "species": [
+  "Arctostaphylos manzanita",
+  "Quercus agrifolia"
+ ],
+ "units": [
+  "Reader Ranch | Arctostaphylos manzanita",
+  "Reader Ranch | Quercus agrifolia",
+  "Tyler Foote | Arctostaphylos manzanita"
+ ],
+ "n_samples_total": 356,
+ "curated_roi": "forbes_GR_1000_1day.csv",
+ "info": {
+  "frames_registered": 824,
+  "clear": 387,
+  "veg_blocks": 208,
+  "ref_blocks": 37,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 824,
+    "clear": 387,
+    "first": "2017-01-25",
+    "last": "2023-01-23",
+    "veg_blocks": 208,
+    "ref_blocks": 37
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   18,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   37,
+   16,
+   1,
+   1,
+   4,
+   50,
+   5,
+   2,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   59,
+   19,
+   1,
+   50,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   54,
+   34,
+   57,
+   131,
+   3,
+   1,
+   1,
+   1,
+   1,
+   2,
+   3,
+   3,
+   106
+  ],
+  "linked": [
+   43
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 130,
+   "years": 5,
+   "rmse": 27.43402289794828,
+   "mae": 17.210028649261734,
+   "r2": 0.4670412290764695,
+   "anomaly_r": 0.0,
+   "below80": 0.8153846153846154,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 130,
+   "years": 5,
+   "rmse": 29.245876533767504,
+   "mae": 20.57898114045163,
+   "r2": 0.39431906351931023,
+   "anomaly_r": -0.06022954247626077,
+   "below80": 0.7846153846153846,
+   "years_beat_season": 1
+  },
+  "camera_auto_wb": {
+   "n": 130,
+   "years": 5,
+   "rmse": 28.713511472026877,
+   "mae": 19.05462831043658,
+   "r2": 0.41616888822057774,
+   "anomaly_r": -0.05673330997088433,
+   "below80": 0.7769230769230769,
+   "years_beat_season": 0
+  },
+  "sat_visible_view": {
+   "n": 130,
+   "years": 5,
+   "rmse": 27.607719048011738,
+   "mae": 17.394278119263547,
+   "r2": 0.46027109947341494,
+   "anomaly_r": 0.148757592447976,
+   "below80": 0.8076923076923077,
+   "years_beat_season": 3
+  },
+  "sat_ir_view": {
+   "n": 130,
+   "years": 5,
+   "rmse": 28.023452905613905,
+   "mae": 18.270462883858762,
+   "r2": 0.4438935762300228,
+   "anomaly_r": 0.12876368639852775,
+   "below80": 0.8076923076923077,
+   "years_beat_season": 2
+  },
+  "sat_ir_site": {
+   "n": 130,
+   "years": 5,
+   "rmse": 29.463364722709326,
+   "mae": 19.12853774813805,
+   "r2": 0.38527722462117175,
+   "anomaly_r": 0.08555054829857604,
+   "below80": 0.8384615384615385,
+   "years_beat_season": 0
+  },
+  "camera_plus_sat_ir": {
+   "n": 130,
+   "years": 5,
+   "rmse": 29.335964098354335,
+   "mae": 19.787857768452383,
+   "r2": 0.39058189673955646,
+   "anomaly_r": 0.02378330397904997,
+   "below80": 0.7615384615384615,
+   "years_beat_season": 1
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 115,
+   "years": 5,
+   "rmse": 29.027990079100345,
+   "mae": 18.1879043941157,
+   "r2": 0.39755745081628135,
+   "anomaly_r": 0.0,
+   "below80": 0.8173913043478261,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 115,
+   "years": 5,
+   "rmse": 31.624313329438415,
+   "mae": 22.03646600910541,
+   "r2": 0.2849705752867078,
+   "anomaly_r": 0.04559655210392725,
+   "below80": 0.782608695652174,
+   "years_beat_season": 1
+  },
+  "camera_hand": {
+   "n": 115,
+   "years": 5,
+   "rmse": 32.85498153795737,
+   "mae": 22.497600334738333,
+   "r2": 0.2282366324472257,
+   "anomaly_r": 0.19821127078459994,
+   "below80": 0.7739130434782608,
+   "years_beat_season": 3
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 142,
+   "years": 5,
+   "rmse": 27.52357551465804,
+   "mae": 18.925942864247578,
+   "r2": 0.42151244708545954,
+   "anomaly_r": -0.06194057317574241,
+   "below80": 0.8169014084507042,
+   "years_beat_season": 1
+  },
+  "season": {
+   "n": 142,
+   "years": 5,
+   "rmse": 26.32024304710783,
+   "mae": 16.456643178835375,
+   "r2": 0.47098972557740004,
+   "anomaly_r": 0.0,
+   "below80": 0.8169014084507042,
+   "years_beat_season": 0
+  }
+ }
+}

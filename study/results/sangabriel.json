@@ -1,0 +1,173 @@
+{
+ "cam": "sangabriel",
+ "lat": 34.285557,
+ "lon": -118.153961,
+ "elev": 1688,
+ "veg": "SH",
+ "description": "Josephine Peak, Los Angeles County, California",
+ "orientation": "NE",
+ "first": "2008-05-21",
+ "last": "2016-03-23",
+ "sites": [
+  {
+   "name": "Gold Creek",
+   "dist_km": 15.6
+  },
+  {
+   "name": "La Tuna Canyon, Tujunga",
+   "dist_km": 14.3
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum"
+ ],
+ "units": [
+  "Gold Creek | Adenostoma fasciculatum",
+  "La Tuna Canyon, Tujunga | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 266,
+ "curated_roi": null,
+ "info": {
+  "frames_registered": 365,
+  "clear": 276,
+  "veg_blocks": 149,
+  "ref_blocks": 109,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 209,
+    "clear": 158,
+    "first": "2012-01-24",
+    "last": "2014-09-10",
+    "veg_blocks": 149,
+    "ref_blocks": 109
+   },
+   {
+    "frames": 156,
+    "clear": 118,
+    "first": "2008-07-16",
+    "last": "2011-05-20",
+    "veg_blocks": 82,
+    "ref_blocks": 94
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   2,
+   3,
+   58,
+   2,
+   15,
+   3,
+   5,
+   14,
+   64,
+   9,
+   34,
+   4,
+   209
+  ],
+  "linked": [
+   12
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 58,
+   "years": 6,
+   "rmse": 29.275235921442725,
+   "mae": 20.72256260769676,
+   "r2": -0.13691227143180273,
+   "anomaly_r": 0.0,
+   "below80": 0.7068965517241379,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 58,
+   "years": 6,
+   "rmse": 31.396198047754268,
+   "mae": 23.23062924364051,
+   "r2": -0.30761612292198137,
+   "anomaly_r": -0.11559900072801112,
+   "below80": 0.6206896551724138,
+   "years_beat_season": 2
+  },
+  "camera_auto_wb": {
+   "n": 58,
+   "years": 6,
+   "rmse": 32.68414995385424,
+   "mae": 24.53420932567882,
+   "r2": -0.417100122588977,
+   "anomaly_r": -0.20264538943250504,
+   "below80": 0.5517241379310345,
+   "years_beat_season": 2
+  },
+  "sat_visible_view": {
+   "n": 58,
+   "years": 6,
+   "rmse": 33.05423657634463,
+   "mae": 25.137071914893788,
+   "r2": -0.44937380897265733,
+   "anomaly_r": -0.03332847764494176,
+   "below80": 0.6379310344827587,
+   "years_beat_season": 4
+  },
+  "sat_ir_view": {
+   "n": 58,
+   "years": 6,
+   "rmse": 33.965636240111316,
+   "mae": 27.272515889862436,
+   "r2": -0.5304024602720976,
+   "anomaly_r": -0.14011945667964631,
+   "below80": 0.5,
+   "years_beat_season": 1
+  },
+  "sat_ir_site": {
+   "n": 58,
+   "years": 6,
+   "rmse": 24.74743002462495,
+   "mae": 15.528857272106443,
+   "r2": 0.18756924268738784,
+   "anomaly_r": 0.5561386792049541,
+   "below80": 0.8275862068965517,
+   "years_beat_season": 4
+  },
+  "camera_plus_sat_ir": {
+   "n": 58,
+   "years": 6,
+   "rmse": 33.951879810248066,
+   "mae": 26.701181959998056,
+   "r2": -0.5291630540296308,
+   "anomaly_r": -0.06404095282327943,
+   "below80": 0.5689655172413793,
+   "years_beat_season": 2
+  }
+ },
+ "hand_vs_auto": {},
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 58,
+   "years": 6,
+   "rmse": 31.396198047754268,
+   "mae": 23.23062924364051,
+   "r2": -0.30761612292198137,
+   "anomaly_r": -0.11559900072801112,
+   "below80": 0.6206896551724138,
+   "years_beat_season": 2
+  },
+  "season": {
+   "n": 58,
+   "years": 6,
+   "rmse": 29.275235921442725,
+   "mae": 20.72256260769676,
+   "r2": -0.13691227143180273,
+   "anomaly_r": 0.0,
+   "below80": 0.7068965517241379,
+   "years_beat_season": 0
+  }
+ }
+}

@@ -1,0 +1,206 @@
+{
+ "cam": "farewellgap",
+ "lat": 36.453,
+ "lon": -118.59,
+ "elev": 2500,
+ "veg": "EN",
+ "description": "Farewell Gap / Mineral King, Sequoia National Park, California",
+ "orientation": "S",
+ "first": "2013-05-14",
+ "last": "2022-03-22",
+ "sites": [
+  {
+   "name": "Elk Creek (CA)",
+   "dist_km": 20.3
+  },
+  {
+   "name": "Mineral King",
+   "dist_km": 3.9
+  }
+ ],
+ "species": [
+  "Abies magnifica",
+  "Adenostoma fasciculatum",
+  "Ceanothus cordulatus"
+ ],
+ "units": [
+  "Elk Creek (CA) | Adenostoma fasciculatum",
+  "Mineral King | Abies magnifica",
+  "Mineral King | Ceanothus cordulatus"
+ ],
+ "n_samples_total": 227,
+ "curated_roi": "farewellgap_SH_0002_1day.csv",
+ "info": {
+  "frames_registered": 829,
+  "clear": 334,
+  "veg_blocks": 176,
+  "ref_blocks": 182,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 829,
+    "clear": 334,
+    "first": "2013-05-14",
+    "last": "2021-09-25",
+    "veg_blocks": 176,
+    "ref_blocks": 182
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   477,
+   1,
+   93,
+   1,
+   51,
+   2,
+   73,
+   3,
+   93,
+   5,
+   1,
+   5,
+   42,
+   17,
+   18
+  ],
+  "linked": [
+   0,
+   2,
+   4,
+   6,
+   8,
+   12
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 8,
+   "years": 3,
+   "rmse": 105.19593746998073,
+   "mae": 61.32220740186973,
+   "r2": 0.027402051934899974,
+   "anomaly_r": 0.0,
+   "below80": 1.0,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 8,
+   "years": 3,
+   "rmse": 101.62330509359022,
+   "mae": 59.05569135366711,
+   "r2": 0.09234241097011475,
+   "anomaly_r": 0.25639402527207705,
+   "below80": 1.0,
+   "years_beat_season": 2
+  },
+  "camera_auto_wb": {
+   "n": 8,
+   "years": 3,
+   "rmse": 105.689610897092,
+   "mae": 60.85253139354229,
+   "r2": 0.018252033208326135,
+   "anomaly_r": 0.10278300174473448,
+   "below80": 1.0,
+   "years_beat_season": 1
+  },
+  "sat_visible_view": {
+   "n": 8,
+   "years": 3,
+   "rmse": 102.33695314759748,
+   "mae": 62.81111267802065,
+   "r2": 0.07954962742863647,
+   "anomaly_r": 0.13780723362815903,
+   "below80": 1.0,
+   "years_beat_season": 2
+  },
+  "sat_ir_view": {
+   "n": 8,
+   "years": 3,
+   "rmse": 106.02764830369757,
+   "mae": 69.92445932412386,
+   "r2": 0.011961949329820531,
+   "anomaly_r": -0.09978253184329672,
+   "below80": 1.0,
+   "years_beat_season": 2
+  },
+  "sat_ir_site": {
+   "n": 8,
+   "years": 3,
+   "rmse": 104.45654001180836,
+   "mae": 66.9826703235506,
+   "r2": 0.04102632579040644,
+   "anomaly_r": 0.027449607058934702,
+   "below80": 1.0,
+   "years_beat_season": 1
+  },
+  "camera_plus_sat_ir": {
+   "n": 8,
+   "years": 3,
+   "rmse": 107.41585907274926,
+   "mae": 77.02001122599971,
+   "r2": -0.014080016838400544,
+   "anomaly_r": -0.09601168747276191,
+   "below80": 1.0,
+   "years_beat_season": 1
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 53,
+   "years": 6,
+   "rmse": 29.15179029723294,
+   "mae": 18.338432216830757,
+   "r2": 0.36651148129351496,
+   "anomaly_r": 0.0,
+   "below80": 0.8679245283018868,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 53,
+   "years": 6,
+   "rmse": 28.14388303304739,
+   "mae": 18.200015410298505,
+   "r2": 0.40955925425771844,
+   "anomaly_r": 0.26168971766625565,
+   "below80": 0.8301886792452831,
+   "years_beat_season": 5
+  },
+  "camera_hand": {
+   "n": 53,
+   "years": 6,
+   "rmse": 27.199713741071534,
+   "mae": 17.067875606380223,
+   "r2": 0.44851087541397805,
+   "anomaly_r": 0.3665061149202379,
+   "below80": 0.8679245283018868,
+   "years_beat_season": 6
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 73,
+   "years": 8,
+   "rmse": 40.678836295446864,
+   "mae": 21.440679407210883,
+   "r2": 0.33070004150080956,
+   "anomaly_r": 0.27025017018245223,
+   "below80": 0.863013698630137,
+   "years_beat_season": 6
+  },
+  "season": {
+   "n": 73,
+   "years": 8,
+   "rmse": 42.25078335042032,
+   "mae": 22.603428671158024,
+   "r2": 0.2779732499693348,
+   "anomaly_r": 0.0,
+   "below80": 0.9041095890410958,
+   "years_beat_season": 0
+  }
+ }
+}

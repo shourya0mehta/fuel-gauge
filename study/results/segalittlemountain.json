@@ -1,0 +1,197 @@
+{
+ "cam": "segalittlemountain",
+ "lat": 36.5865,
+ "lon": -112.3634,
+ "elev": 2276,
+ "veg": "EN",
+ "description": "SEGA Little Mountain",
+ "orientation": "N",
+ "first": "2016-04-01",
+ "last": "2022-12-28",
+ "sites": [
+  {
+   "name": "KNF Jacob Lake",
+   "dist_km": 18.4
+  },
+  {
+   "name": "KNF Little Mountain",
+   "dist_km": 1.9
+  },
+  {
+   "name": "KNF West",
+   "dist_km": 23.1
+  }
+ ],
+ "species": [
+  "Artemisia tridentata",
+  "Juniperus communis",
+  "Juniperus osteosperma",
+  "Pinus edulis",
+  "Pinus ponderosa"
+ ],
+ "units": [
+  "KNF Jacob Lake | Pinus ponderosa",
+  "KNF Little Mountain | Juniperus communis",
+  "KNF Little Mountain | Pinus edulis",
+  "KNF Little Mountain | Pinus ponderosa",
+  "KNF West | Artemisia tridentata",
+  "KNF West | Juniperus osteosperma",
+  "KNF West | Pinus edulis"
+ ],
+ "n_samples_total": 286,
+ "curated_roi": "segalittlemountain_GR_1000_1day.csv",
+ "info": {
+  "frames_registered": 802,
+  "clear": 467,
+  "veg_blocks": 168,
+  "ref_blocks": 46,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 802,
+    "clear": 467,
+    "first": "2016-04-02",
+    "last": "2022-10-11",
+    "veg_blocks": 168,
+    "ref_blocks": 46
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   802
+  ],
+  "linked": [
+   0
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 180,
+   "years": 5,
+   "rmse": 19.874824286341386,
+   "mae": 12.258399408813268,
+   "r2": -0.1330507835549779,
+   "anomaly_r": 0.0,
+   "below80": 0.8333333333333334,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 180,
+   "years": 5,
+   "rmse": 19.801779739228614,
+   "mae": 12.30323777095742,
+   "r2": -0.12473764394741793,
+   "anomaly_r": 0.09693260526804583,
+   "below80": 0.8611111111111112,
+   "years_beat_season": 3
+  },
+  "camera_auto_wb": {
+   "n": 180,
+   "years": 5,
+   "rmse": 19.397846920732434,
+   "mae": 12.393115715025786,
+   "r2": -0.07931903271109886,
+   "anomaly_r": 0.23527012353258459,
+   "below80": 0.8666666666666667,
+   "years_beat_season": 4
+  },
+  "sat_visible_view": {
+   "n": 180,
+   "years": 5,
+   "rmse": 20.04108075071443,
+   "mae": 12.444964622536048,
+   "r2": -0.15208641559334057,
+   "anomaly_r": -0.0025293430787234872,
+   "below80": 0.8333333333333334,
+   "years_beat_season": 2
+  },
+  "sat_ir_view": {
+   "n": 180,
+   "years": 5,
+   "rmse": 19.829834319569482,
+   "mae": 12.413394164271944,
+   "r2": -0.12792689212925423,
+   "anomaly_r": 0.08658496596815166,
+   "below80": 0.8333333333333334,
+   "years_beat_season": 3
+  },
+  "sat_ir_site": {
+   "n": 180,
+   "years": 5,
+   "rmse": 19.88025830838444,
+   "mae": 12.330545432059049,
+   "r2": -0.13367044836791053,
+   "anomaly_r": 0.033010987498690476,
+   "below80": 0.8444444444444444,
+   "years_beat_season": 3
+  },
+  "camera_plus_sat_ir": {
+   "n": 180,
+   "years": 5,
+   "rmse": 19.77143843928551,
+   "mae": 12.383580077095159,
+   "r2": -0.1212935234836856,
+   "anomaly_r": 0.12303524487449408,
+   "below80": 0.85,
+   "years_beat_season": 3
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 179,
+   "years": 4,
+   "rmse": 21.174865270594914,
+   "mae": 13.075660719554023,
+   "r2": -0.2664339191291012,
+   "anomaly_r": 0.0,
+   "below80": 0.8156424581005587,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 179,
+   "years": 4,
+   "rmse": 21.055501683733116,
+   "mae": 13.01217412132931,
+   "r2": -0.2521962813982237,
+   "anomaly_r": 0.11583915793487753,
+   "below80": 0.8603351955307262,
+   "years_beat_season": 4
+  },
+  "camera_hand": {
+   "n": 179,
+   "years": 4,
+   "rmse": 21.049120123558936,
+   "mae": 12.921283532416512,
+   "r2": -0.2514373581412508,
+   "anomaly_r": 0.12016088744250095,
+   "below80": 0.8435754189944135,
+   "years_beat_season": 1
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 197,
+   "years": 5,
+   "rmse": 19.746389189964145,
+   "mae": 12.104157059190463,
+   "r2": -0.1407380178480102,
+   "anomaly_r": 0.09025786737449981,
+   "below80": 0.8477157360406091,
+   "years_beat_season": 3
+  },
+  "season": {
+   "n": 197,
+   "years": 5,
+   "rmse": 19.800933099836723,
+   "mae": 12.028576772402744,
+   "r2": -0.14704866474045586,
+   "anomaly_r": 0.0,
+   "below80": 0.8324873096446701,
+   "years_beat_season": 0
+  }
+ }
+}

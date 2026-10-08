@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "Fuel Gauge: fire-lookout and phenology cameras as live fuel moisture sensors"
+message: "If you use this software or its results, please cite it as below."
+type: software
+authors:
+  - family-names: Mehta
+    given-names: Shourya
+license: MIT
+version: 0.2.0
+date-released: 2026-10-08
+repository-code: "https://github.com/shourya0mehta/fuel-gauge"
+url: "https://shourya0mehta.github.io/fuel-gauge/"
+keywords:
+  - wildfire
+  - live fuel moisture
+  - phenocam
+  - image registration
+  - camera calibration
+  - remote sensing

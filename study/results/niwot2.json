@@ -1,0 +1,217 @@
+{
+ "cam": "niwot2",
+ "lat": 40.03286358,
+ "lon": -105.54697017,
+ "elev": 3050,
+ "veg": "EN",
+ "description": "Niwot Ridge Mountain Research Station, Roosevelt National Forest, Colorado",
+ "orientation": "N",
+ "first": "2009-07-23",
+ "last": "2015-07-16",
+ "sites": [
+  {
+   "name": "Pickle Gulch",
+   "dist_km": 21.1
+  },
+  {
+   "name": "Sledgehammer South",
+   "dist_km": 18.0
+  },
+  {
+   "name": "Sugarloaf (CO)",
+   "dist_km": 15.9
+  }
+ ],
+ "species": [
+  "Juniperus scopulorum",
+  "Pinus contorta",
+  "Pinus ponderosa",
+  "Pseudotsuga menziesii"
+ ],
+ "units": [
+  "Pickle Gulch | Pinus contorta",
+  "Sledgehammer South | Pinus ponderosa",
+  "Sugarloaf (CO) | Juniperus scopulorum",
+  "Sugarloaf (CO) | Pinus ponderosa",
+  "Sugarloaf (CO) | Pseudotsuga menziesii"
+ ],
+ "n_samples_total": 300,
+ "curated_roi": "niwot2_EN_1000_1day.csv",
+ "info": {
+  "frames_registered": 858,
+  "clear": 393,
+  "veg_blocks": 202,
+  "ref_blocks": 167,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 858,
+    "clear": 393,
+    "first": "2009-07-23",
+    "last": "2015-07-14",
+    "veg_blocks": 202,
+    "ref_blocks": 167
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   236,
+   1,
+   1,
+   142,
+   37,
+   2,
+   15,
+   235,
+   1,
+   1,
+   1,
+   2,
+   1,
+   1,
+   1,
+   155,
+   1,
+   1,
+   53
+  ],
+  "linked": [
+   0,
+   3,
+   4,
+   7,
+   15,
+   18
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 92,
+   "years": 5,
+   "rmse": 13.988743693684656,
+   "mae": 9.718213905352451,
+   "r2": -0.00250003049366998,
+   "anomaly_r": 0.0,
+   "below80": 0.8804347826086957,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 92,
+   "years": 5,
+   "rmse": 14.073269142449556,
+   "mae": 9.751382805690524,
+   "r2": -0.014651625108228927,
+   "anomaly_r": 0.010421711543575017,
+   "below80": 0.8804347826086957,
+   "years_beat_season": 2
+  },
+  "camera_auto_wb": {
+   "n": 92,
+   "years": 5,
+   "rmse": 13.4620828297442,
+   "mae": 9.114181005779008,
+   "r2": 0.07156504009119058,
+   "anomaly_r": 0.2658435176600209,
+   "below80": 0.9239130434782609,
+   "years_beat_season": 2
+  },
+  "sat_visible_view": {
+   "n": 92,
+   "years": 5,
+   "rmse": 12.7918500735998,
+   "mae": 8.822843558006735,
+   "r2": 0.16171114968742306,
+   "anomaly_r": 0.40627320890699886,
+   "below80": 0.9130434782608695,
+   "years_beat_season": 3
+  },
+  "sat_ir_view": {
+   "n": 92,
+   "years": 5,
+   "rmse": 14.027015920865143,
+   "mae": 10.08733659264618,
+   "r2": -0.007993074861101679,
+   "anomaly_r": 0.1388975245258898,
+   "below80": 0.8913043478260869,
+   "years_beat_season": 3
+  },
+  "sat_ir_site": {
+   "n": 92,
+   "years": 5,
+   "rmse": 13.654456485009792,
+   "mae": 9.357441849727131,
+   "r2": 0.04484070993060296,
+   "anomaly_r": 0.20085773577283203,
+   "below80": 0.9130434782608695,
+   "years_beat_season": 3
+  },
+  "camera_plus_sat_ir": {
+   "n": 92,
+   "years": 5,
+   "rmse": 14.12496954996769,
+   "mae": 10.168319664159712,
+   "r2": -0.022120289030892915,
+   "anomaly_r": 0.12972797358645233,
+   "below80": 0.9021739130434783,
+   "years_beat_season": 1
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 216,
+   "years": 6,
+   "rmse": 12.695106968419532,
+   "mae": 8.239416863841418,
+   "r2": 0.2266599957628571,
+   "anomaly_r": 0.0,
+   "below80": 0.9537037037037037,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 216,
+   "years": 6,
+   "rmse": 13.024240198815097,
+   "mae": 8.639783881979994,
+   "r2": 0.1860409777053047,
+   "anomaly_r": -0.08367048658824475,
+   "below80": 0.9490740740740741,
+   "years_beat_season": 3
+  },
+  "camera_hand": {
+   "n": 216,
+   "years": 6,
+   "rmse": 12.700270481569754,
+   "mae": 8.384571386504522,
+   "r2": 0.2260307827339798,
+   "anomaly_r": 0.0743032119684439,
+   "below80": 0.9490740740740741,
+   "years_beat_season": 2
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 216,
+   "years": 6,
+   "rmse": 13.024240198815097,
+   "mae": 8.639783881979994,
+   "r2": 0.1860409777053047,
+   "anomaly_r": -0.08367048658824475,
+   "below80": 0.9490740740740741,
+   "years_beat_season": 3
+  },
+  "season": {
+   "n": 216,
+   "years": 6,
+   "rmse": 12.695106968419532,
+   "mae": 8.239416863841418,
+   "r2": 0.2266599957628571,
+   "anomaly_r": 0.0,
+   "below80": 0.9537037037037037,
+   "years_beat_season": 0
+  }
+ }
+}

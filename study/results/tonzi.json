@@ -1,0 +1,183 @@
+{
+ "cam": "tonzi",
+ "lat": 38.43091667,
+ "lon": -120.9658861,
+ "elev": 177,
+ "veg": "DB",
+ "description": "Tonzi Ranch, Amador County, California",
+ "orientation": "NW",
+ "first": "2011-10-26",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Tonzi Road",
+   "dist_km": 7.3
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum"
+ ],
+ "units": [
+  "Tonzi Road | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 140,
+ "curated_roi": "tonzi_GR_1000_1day.csv",
+ "info": {
+  "frames_registered": 1676,
+  "clear": 647,
+  "veg_blocks": 167,
+  "ref_blocks": 25,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 1676,
+    "clear": 647,
+    "first": "2011-10-26",
+    "last": "2022-11-21",
+    "veg_blocks": 167,
+    "ref_blocks": 25
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   72,
+   339,
+   1265
+  ],
+  "linked": [
+   0,
+   1,
+   2
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 85,
+   "years": 11,
+   "rmse": 21.453265058471466,
+   "mae": 14.920247163729966,
+   "r2": 0.6459063222845941,
+   "anomaly_r": 0.0,
+   "below80": 0.8823529411764706,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 85,
+   "years": 11,
+   "rmse": 19.253846240035855,
+   "mae": 13.412073620346126,
+   "r2": 0.714788932636431,
+   "anomaly_r": 0.44118446610350737,
+   "below80": 0.8941176470588236,
+   "years_beat_season": 10
+  },
+  "camera_auto_wb": {
+   "n": 85,
+   "years": 11,
+   "rmse": 19.644309730843258,
+   "mae": 13.224867218112554,
+   "r2": 0.7031036069459047,
+   "anomaly_r": 0.4019647310647191,
+   "below80": 0.8823529411764706,
+   "years_beat_season": 11
+  },
+  "sat_visible_view": {
+   "n": 85,
+   "years": 11,
+   "rmse": 17.91982816259591,
+   "mae": 11.72213529049725,
+   "r2": 0.7529419228319106,
+   "anomaly_r": 0.5511154312645106,
+   "below80": 0.9176470588235294,
+   "years_beat_season": 10
+  },
+  "sat_ir_view": {
+   "n": 85,
+   "years": 11,
+   "rmse": 17.191939663360486,
+   "mae": 11.322146499922145,
+   "r2": 0.7726048843396602,
+   "anomaly_r": 0.6004975645611436,
+   "below80": 0.9058823529411765,
+   "years_beat_season": 10
+  },
+  "sat_ir_site": {
+   "n": 85,
+   "years": 11,
+   "rmse": 18.789821097442307,
+   "mae": 12.080572170990678,
+   "r2": 0.7283706679888878,
+   "anomaly_r": 0.4856839622027691,
+   "below80": 0.9058823529411765,
+   "years_beat_season": 9
+  },
+  "camera_plus_sat_ir": {
+   "n": 85,
+   "years": 11,
+   "rmse": 17.343583610335923,
+   "mae": 11.635554680894739,
+   "r2": 0.7685756502857505,
+   "anomaly_r": 0.5926486743496177,
+   "below80": 0.9058823529411765,
+   "years_beat_season": 10
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 89,
+   "years": 11,
+   "rmse": 21.16208328276837,
+   "mae": 14.816496407253092,
+   "r2": 0.6466277504444318,
+   "anomaly_r": 0.0,
+   "below80": 0.8764044943820225,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 89,
+   "years": 11,
+   "rmse": 18.963059813017672,
+   "mae": 13.377402821447363,
+   "r2": 0.7162522459842307,
+   "anomaly_r": 0.443945865908225,
+   "below80": 0.898876404494382,
+   "years_beat_season": 10
+  },
+  "camera_hand": {
+   "n": 89,
+   "years": 11,
+   "rmse": 19.54453706056319,
+   "mae": 13.580909547188547,
+   "r2": 0.698583946770212,
+   "anomaly_r": 0.38432793813009064,
+   "below80": 0.898876404494382,
+   "years_beat_season": 9
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 89,
+   "years": 11,
+   "rmse": 18.963059813017672,
+   "mae": 13.377402821447363,
+   "r2": 0.7162522459842307,
+   "anomaly_r": 0.443945865908225,
+   "below80": 0.898876404494382,
+   "years_beat_season": 10
+  },
+  "season": {
+   "n": 89,
+   "years": 11,
+   "rmse": 21.16208328276837,
+   "mae": 14.816496407253092,
+   "r2": 0.6466277504444318,
+   "anomaly_r": 0.0,
+   "below80": 0.8764044943820225,
+   "years_beat_season": 0
+  }
+ }
+}

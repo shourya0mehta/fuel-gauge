@@ -1,0 +1,110 @@
+{
+ "n_pairs": 1178,
+ "per_cam": {
+  "NEON.D13.NIWO.DP1.00042": {
+   "n": 15,
+   "r": 0.138
+  },
+  "ahwahnee": {
+   "n": 24,
+   "r": -0.239
+  },
+  "cucamongasouth": {
+   "n": 43,
+   "r": 0.168
+  },
+  "forbes": {
+   "n": 12,
+   "r": 0.139
+  },
+  "glacier": {
+   "n": 29,
+   "r": 0.217
+  },
+  "jasperridge": {
+   "n": 23,
+   "r": 0.57
+  },
+  "kaweah": {
+   "n": 14,
+   "r": 0.338
+  },
+  "mayberry": {
+   "n": 11,
+   "r": -0.17
+  },
+  "nationalelkrefuge": {
+   "n": 53,
+   "r": 0.02
+  },
+  "niwot2": {
+   "n": 20,
+   "r": -0.054
+  },
+  "oregonMP": {
+   "n": 10,
+   "r": -0.071
+  },
+  "oregonYP": {
+   "n": 17,
+   "r": 0.262
+  },
+  "sagehen": {
+   "n": 11,
+   "r": 0.531
+  },
+  "segabradshaw": {
+   "n": 11,
+   "r": 0.706
+  },
+  "segalittlemountain": {
+   "n": 12,
+   "r": 0.785
+  },
+  "sequoia": {
+   "n": 14,
+   "r": 0.172
+  },
+  "tonzi": {
+   "n": 7,
+   "r": -0.721
+  },
+  "turtleback": {
+   "n": 24,
+   "r": 0.07
+  },
+  "vaira": {
+   "n": 5,
+   "r": 0.387
+  }
+ },
+ "pooled": {
+  "camera": {
+   "n": 357,
+   "cams": 20,
+   "years": 141,
+   "r": 0.107,
+   "slope": 0.062,
+   "fuel_sd_days": 27.8,
+   "resid_sd_days": 27.6
+  },
+  "ndvi": {
+   "n": 953,
+   "cams": 21,
+   "years": 312,
+   "r": 0.093,
+   "slope": 0.084,
+   "fuel_sd_days": 25.6,
+   "resid_sd_days": 25.5
+  },
+  "ndii": {
+   "n": 996,
+   "cams": 21,
+   "years": 334,
+   "r": 0.041,
+   "slope": 0.02,
+   "fuel_sd_days": 26.5,
+   "resid_sd_days": 26.5
+  }
+ }
+}

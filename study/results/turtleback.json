@@ -1,0 +1,200 @@
+{
+ "cam": "turtleback",
+ "lat": 37.7133333333,
+ "lon": -119.706111111,
+ "elev": 1605,
+ "veg": "EN",
+ "description": "Turtleback Dome, Yosemite National Park, California",
+ "orientation": "SW",
+ "first": "2005-10-27",
+ "last": "2019-03-27",
+ "sites": [
+  {
+   "name": "Crane Flat",
+   "dist_km": 9.7
+  },
+  {
+   "name": "El Portal",
+   "dist_km": 7.9
+  },
+  {
+   "name": "Foresta",
+   "dist_km": 3.6
+  },
+  {
+   "name": "Wawona",
+   "dist_km": 16.7
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum",
+  "Arctostaphylos manzanita",
+  "Arctostaphylos patula"
+ ],
+ "units": [
+  "Crane Flat | Arctostaphylos patula",
+  "El Portal | Adenostoma fasciculatum",
+  "Foresta | Arctostaphylos manzanita",
+  "Wawona | Arctostaphylos manzanita"
+ ],
+ "n_samples_total": 349,
+ "curated_roi": "turtleback_EN_0001_1day.csv",
+ "info": {
+  "frames_registered": 1901,
+  "clear": 1395,
+  "veg_blocks": 174,
+  "ref_blocks": 94,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 1901,
+    "clear": 1395,
+    "first": "2005-10-28",
+    "last": "2015-01-20",
+    "veg_blocks": 174,
+    "ref_blocks": 94
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   1,
+   1754,
+   7,
+   147
+  ],
+  "linked": [
+   1,
+   3
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 235,
+   "years": 8,
+   "rmse": 22.445023103650385,
+   "mae": 16.72681121186312,
+   "r2": 0.47026085147758223,
+   "anomaly_r": 0.0,
+   "below80": 0.8468085106382979,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 235,
+   "years": 8,
+   "rmse": 22.83551014006304,
+   "mae": 17.245008407426955,
+   "r2": 0.45166825221591633,
+   "anomaly_r": 0.0024663064805909318,
+   "below80": 0.825531914893617,
+   "years_beat_season": 3
+  },
+  "camera_auto_wb": {
+   "n": 235,
+   "years": 8,
+   "rmse": 22.850957841587892,
+   "mae": 16.55515697751578,
+   "r2": 0.4509261334576665,
+   "anomaly_r": 0.05718797828646095,
+   "below80": 0.8595744680851064,
+   "years_beat_season": 3
+  },
+  "sat_visible_view": {
+   "n": 235,
+   "years": 8,
+   "rmse": 23.385406420324504,
+   "mae": 16.997407637094433,
+   "r2": 0.4249418013330848,
+   "anomaly_r": -0.046322396159726636,
+   "below80": 0.8297872340425532,
+   "years_beat_season": 4
+  },
+  "sat_ir_view": {
+   "n": 235,
+   "years": 8,
+   "rmse": 22.911109109301137,
+   "mae": 16.73273238097603,
+   "r2": 0.4480316413318245,
+   "anomaly_r": 0.029699364462624764,
+   "below80": 0.8382978723404255,
+   "years_beat_season": 4
+  },
+  "sat_ir_site": {
+   "n": 235,
+   "years": 8,
+   "rmse": 19.891112184401702,
+   "mae": 14.973816517068155,
+   "r2": 0.5839552087400344,
+   "anomaly_r": 0.4714346876591241,
+   "below80": 0.8553191489361702,
+   "years_beat_season": 7
+  },
+  "camera_plus_sat_ir": {
+   "n": 235,
+   "years": 8,
+   "rmse": 23.17360497642866,
+   "mae": 17.181182772586958,
+   "r2": 0.43531122507912123,
+   "anomaly_r": 0.039319670260333735,
+   "below80": 0.8212765957446808,
+   "years_beat_season": 4
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 110,
+   "years": 4,
+   "rmse": 26.627699255448682,
+   "mae": 20.50072098634115,
+   "r2": 0.40352907441536323,
+   "anomaly_r": 0.0,
+   "below80": 0.7909090909090909,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 110,
+   "years": 4,
+   "rmse": 28.268940112484824,
+   "mae": 22.042988088253388,
+   "r2": 0.3277341592050239,
+   "anomaly_r": -0.1197871249771245,
+   "below80": 0.7545454545454545,
+   "years_beat_season": 0
+  },
+  "camera_hand": {
+   "n": 110,
+   "years": 4,
+   "rmse": 32.64714284629941,
+   "mae": 24.73539670538866,
+   "r2": 0.10337188675285458,
+   "anomaly_r": -0.044575212465229455,
+   "below80": 0.7454545454545455,
+   "years_beat_season": 0
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 235,
+   "years": 8,
+   "rmse": 22.83551014006304,
+   "mae": 17.245008407426955,
+   "r2": 0.45166825221591633,
+   "anomaly_r": 0.0024663064805909318,
+   "below80": 0.825531914893617,
+   "years_beat_season": 3
+  },
+  "season": {
+   "n": 235,
+   "years": 8,
+   "rmse": 22.445023103650385,
+   "mae": 16.72681121186312,
+   "r2": 0.47026085147758223,
+   "anomaly_r": 0.0,
+   "below80": 0.8468085106382979,
+   "years_beat_season": 0
+  }
+ }
+}

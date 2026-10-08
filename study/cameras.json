@@ -1,0 +1,1653 @@
+[
+ {
+  "cam": "jasperridge",
+  "lat": 37.402028,
+  "lon": -122.22104,
+  "veg": "GR",
+  "first": "1999-12-31",
+  "last": "2026-10-06",
+  "n_dates": 493,
+  "sites": [
+   [
+    "Pulgas",
+    12.9,
+    162,
+    20,
+    "Baccharis pilularis"
+   ],
+   [
+    "ST RTE 35 & 92",
+    15.8,
+    162,
+    20,
+    "Baccharis pilularis"
+   ],
+   [
+    "Saratoga Summit",
+    20.0,
+    169,
+    20,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "good": [
+   [
+    "Pulgas",
+    12.9,
+    162,
+    20,
+    "Baccharis pilularis"
+   ],
+   [
+    "ST RTE 35 & 92",
+    15.8,
+    162,
+    20,
+    "Baccharis pilularis"
+   ],
+   [
+    "Saratoga Summit",
+    20.0,
+    169,
+    20,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 493,
+  "processed": true
+ },
+ {
+  "cam": "cucamongasouth",
+  "lat": 33.622,
+  "lon": -116.867,
+  "veg": "SH",
+  "first": "2003-09-29",
+  "last": "2019-01-25",
+  "n_dates": 443,
+  "sites": [
+   [
+    "Anza",
+    16.1,
+    100,
+    11,
+    "Adenostoma sparsifolium"
+   ],
+   [
+    "Pine Cove",
+    17.4,
+    139,
+    14,
+    "Arctostaphylos glandulosa"
+   ],
+   [
+    "San Jacinto",
+    19.9,
+    95,
+    13,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Strawberry",
+    13.1,
+    109,
+    13,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "good": [
+   [
+    "Anza",
+    16.1,
+    100,
+    11,
+    "Adenostoma sparsifolium"
+   ],
+   [
+    "Pine Cove",
+    17.4,
+    139,
+    14,
+    "Arctostaphylos glandulosa"
+   ],
+   [
+    "San Jacinto",
+    19.9,
+    95,
+    13,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Strawberry",
+    13.1,
+    109,
+    13,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 443,
+  "processed": true
+ },
+ {
+  "cam": "turtleback",
+  "lat": 37.7133333333,
+  "lon": -119.706111111,
+  "veg": "EN",
+  "first": "2005-10-27",
+  "last": "2019-03-27",
+  "n_dates": 349,
+  "sites": [
+   [
+    "Crane Flat",
+    9.7,
+    86,
+    10,
+    "Arctostaphylos patula"
+   ],
+   [
+    "El Portal",
+    7.9,
+    85,
+    9,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Foresta",
+    3.6,
+    86,
+    9,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Wawona",
+    16.7,
+    92,
+    9,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "good": [
+   [
+    "Crane Flat",
+    9.7,
+    86,
+    10,
+    "Arctostaphylos patula"
+   ],
+   [
+    "El Portal",
+    7.9,
+    85,
+    9,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Foresta",
+    3.6,
+    86,
+    9,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Wawona",
+    16.7,
+    92,
+    9,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "score": 349,
+  "processed": true
+ },
+ {
+  "cam": "sangabriel",
+  "lat": 34.285557,
+  "lon": -118.153961,
+  "veg": "SH",
+  "first": "2008-05-21",
+  "last": "2016-03-23",
+  "n_dates": 273,
+  "sites": [
+   [
+    "Gold Creek",
+    15.6,
+    91,
+    8,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "La Tuna Canyon, Tujunga",
+    14.3,
+    175,
+    9,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Lady Bug",
+    4.5,
+    7,
+    2,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "good": [
+   [
+    "Gold Creek",
+    15.6,
+    91,
+    8,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "La Tuna Canyon, Tujunga",
+    14.3,
+    175,
+    9,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 266,
+  "processed": true
+ },
+ {
+  "cam": "ahwahnee",
+  "lat": 37.7467,
+  "lon": -119.5816,
+  "veg": "EN",
+  "first": "2008-08-28",
+  "last": "2022-07-20",
+  "n_dates": 254,
+  "sites": [
+   [
+    "Crane Flat",
+    19.7,
+    63,
+    8,
+    "Arctostaphylos patula"
+   ],
+   [
+    "El Portal",
+    19.4,
+    62,
+    7,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Foresta",
+    15.2,
+    62,
+    7,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Wawona",
+    22.7,
+    67,
+    7,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "good": [
+   [
+    "Crane Flat",
+    19.7,
+    63,
+    8,
+    "Arctostaphylos patula"
+   ],
+   [
+    "El Portal",
+    19.4,
+    62,
+    7,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Foresta",
+    15.2,
+    62,
+    7,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Wawona",
+    22.7,
+    67,
+    7,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "score": 254,
+  "processed": true
+ },
+ {
+  "cam": "kaweah",
+  "lat": 36.4435,
+  "lon": -118.90925,
+  "veg": "SH",
+  "first": "2008-08-28",
+  "last": "2019-09-19",
+  "n_dates": 306,
+  "sites": [
+   [
+    "Elk Creek (CA)",
+    11.9,
+    183,
+    12,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Jake Flat",
+    23.5,
+    66,
+    8,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Mineral King",
+    24.9,
+    30,
+    6,
+    "Abies magnifica"
+   ],
+   [
+    "Red Fir",
+    21.9,
+    27,
+    5,
+    "Abies magnifica"
+   ]
+  ],
+  "good": [
+   [
+    "Elk Creek (CA)",
+    11.9,
+    183,
+    12,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Jake Flat",
+    23.5,
+    66,
+    8,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 249,
+  "processed": true
+ },
+ {
+  "cam": "sequoia",
+  "lat": 36.5658333333,
+  "lon": -118.777222222,
+  "veg": "EN",
+  "first": "2002-12-31",
+  "last": "2019-03-27",
+  "n_dates": 288,
+  "sites": [
+   [
+    "Elk Creek (CA)",
+    6.6,
+    239,
+    17,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Mineral King",
+    17.3,
+    26,
+    5,
+    "Abies magnifica"
+   ],
+   [
+    "Red Fir",
+    4.4,
+    23,
+    4,
+    "Abies magnifica"
+   ]
+  ],
+  "good": [
+   [
+    "Elk Creek (CA)",
+    6.6,
+    239,
+    17,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 239,
+  "processed": true
+ },
+ {
+  "cam": "forbes",
+  "lat": 39.232,
+  "lon": -121.2972,
+  "veg": "GR",
+  "first": "2017-01-25",
+  "last": "2023-06-30",
+  "n_dates": 286,
+  "sites": [
+   [
+    "Oregon House",
+    11.3,
+    22,
+    3,
+    "Arctostaphylos patula"
+   ],
+   [
+    "Reader Ranch",
+    18.0,
+    119,
+    7,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Sweetland",
+    19.2,
+    25,
+    3,
+    "Arctostaphylos patula"
+   ],
+   [
+    "Tyler Foote",
+    19.3,
+    120,
+    7,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "good": [
+   [
+    "Reader Ranch",
+    18.0,
+    119,
+    7,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Tyler Foote",
+    19.3,
+    120,
+    7,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "score": 239,
+  "processed": true
+ },
+ {
+  "cam": "grandteton",
+  "lat": 43.915017,
+  "lon": -110.578036,
+  "veg": "GR",
+  "first": "2015-07-29",
+  "last": "2021-01-29",
+  "n_dates": 256,
+  "sites": [
+   [
+    "Burro Hill",
+    19.5,
+    42,
+    6,
+    "Artemisia tridentata ssp. wyomingensis"
+   ],
+   [
+    "Flagg Ranch",
+    23.3,
+    42,
+    6,
+    "Carex geyeri"
+   ],
+   [
+    "Lost Creek, WY",
+    18.9,
+    45,
+    6,
+    "Artemisia tridentata ssp. vaseyana"
+   ],
+   [
+    "Moran",
+    10.5,
+    44,
+    6,
+    "Calamagrostic rubescens"
+   ],
+   [
+    "RKO Road",
+    10.5,
+    44,
+    6,
+    "Artemisia tridentata ssp. vaseyana"
+   ],
+   [
+    "Signal Mountain",
+    7.2,
+    39,
+    6,
+    "Calamagrostic rubescens"
+   ]
+  ],
+  "good": [
+   [
+    "Burro Hill",
+    19.5,
+    42,
+    6,
+    "Artemisia tridentata ssp. wyomingensis"
+   ],
+   [
+    "Flagg Ranch",
+    23.3,
+    42,
+    6,
+    "Carex geyeri"
+   ],
+   [
+    "Lost Creek, WY",
+    18.9,
+    45,
+    6,
+    "Artemisia tridentata ssp. vaseyana"
+   ],
+   [
+    "Moran",
+    10.5,
+    44,
+    6,
+    "Calamagrostic rubescens"
+   ],
+   [
+    "RKO Road",
+    10.5,
+    44,
+    6,
+    "Artemisia tridentata ssp. vaseyana"
+   ]
+  ],
+  "score": 217,
+  "processed": true
+ },
+ {
+  "cam": "glacier",
+  "lat": 48.501384,
+  "lon": -113.986352,
+  "veg": "EN",
+  "first": "2008-08-28",
+  "last": "2022-03-22",
+  "n_dates": 208,
+  "sites": [
+   [
+    "Desert Mountain",
+    12.7,
+    52,
+    8,
+    "Acer glabrum"
+   ],
+   [
+    "Emery Creek",
+    18.2,
+    55,
+    8,
+    "Pinus contorta"
+   ],
+   [
+    "West Glacier",
+    0.1,
+    101,
+    14,
+    "Pinus contorta"
+   ]
+  ],
+  "good": [
+   [
+    "Desert Mountain",
+    12.7,
+    52,
+    8,
+    "Acer glabrum"
+   ],
+   [
+    "Emery Creek",
+    18.2,
+    55,
+    8,
+    "Pinus contorta"
+   ],
+   [
+    "West Glacier",
+    0.1,
+    101,
+    14,
+    "Pinus contorta"
+   ]
+  ],
+  "score": 208,
+  "processed": true
+ },
+ {
+  "cam": "mayberry",
+  "lat": 38.04977222,
+  "lon": -121.7650694,
+  "veg": "WL",
+  "first": "2010-11-17",
+  "last": "2026-08-27",
+  "n_dates": 196,
+  "sites": [
+   [
+    "Clayton Ranch",
+    16.9,
+    196,
+    12,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "good": [
+   [
+    "Clayton Ranch",
+    16.9,
+    196,
+    12,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 196,
+  "processed": true
+ },
+ {
+  "cam": "vaira",
+  "lat": 38.41328056,
+  "lon": -120.9506361,
+  "veg": "GR",
+  "first": "2009-01-01",
+  "last": "2026-09-24",
+  "n_dates": 186,
+  "sites": [
+   [
+    "Tonzi Road",
+    5.6,
+    186,
+    14,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "good": [
+   [
+    "Tonzi Road",
+    5.6,
+    186,
+    14,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 186,
+  "processed": true
+ },
+ {
+  "cam": "farewellgap",
+  "lat": 36.453,
+  "lon": -118.59,
+  "veg": "EN",
+  "first": "2013-05-14",
+  "last": "2022-03-22",
+  "n_dates": 243,
+  "sites": [
+   [
+    "Elk Creek (CA)",
+    20.3,
+    141,
+    9,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Jake Flat",
+    25.0,
+    20,
+    5,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Mineral King",
+    3.9,
+    43,
+    8,
+    "Abies magnifica"
+   ],
+   [
+    "Red Fir",
+    23.2,
+    39,
+    7,
+    "Abies magnifica"
+   ]
+  ],
+  "good": [
+   [
+    "Elk Creek (CA)",
+    20.3,
+    141,
+    9,
+    "Adenostoma fasciculatum"
+   ],
+   [
+    "Mineral King",
+    3.9,
+    43,
+    8,
+    "Abies magnifica"
+   ]
+  ],
+  "score": 184,
+  "processed": true
+ },
+ {
+  "cam": "nationalelkrefuge",
+  "lat": 43.488931,
+  "lon": -110.737824,
+  "veg": "GR",
+  "first": "2015-08-12",
+  "last": "2026-07-31",
+  "n_dates": 184,
+  "sites": [
+   [
+    "Cache Creek",
+    2.7,
+    57,
+    8,
+    "Pseudotsuga menziesii"
+   ],
+   [
+    "Timbered Island",
+    24.3,
+    64,
+    8,
+    "Artemisia tridentata ssp. vaseyana"
+   ],
+   [
+    "Whitegrass Ranch",
+    16.9,
+    63,
+    8,
+    "Pinus contorta"
+   ]
+  ],
+  "good": [
+   [
+    "Cache Creek",
+    2.7,
+    57,
+    8,
+    "Pseudotsuga menziesii"
+   ],
+   [
+    "Timbered Island",
+    24.3,
+    64,
+    8,
+    "Artemisia tridentata ssp. vaseyana"
+   ],
+   [
+    "Whitegrass Ranch",
+    16.9,
+    63,
+    8,
+    "Pinus contorta"
+   ]
+  ],
+  "score": 184,
+  "processed": true
+ },
+ {
+  "cam": "niwot2",
+  "lat": 40.03286358,
+  "lon": -105.54697017,
+  "veg": "EN",
+  "first": "2009-07-23",
+  "last": "2015-07-16",
+  "n_dates": 179,
+  "sites": [
+   [
+    "Pickle Gulch",
+    21.1,
+    57,
+    7,
+    "Pinus contorta"
+   ],
+   [
+    "Sledgehammer South",
+    18.0,
+    61,
+    7,
+    "Pinus ponderosa"
+   ],
+   [
+    "Sugarloaf (CO)",
+    15.9,
+    61,
+    7,
+    "Juniperus scopulorum"
+   ]
+  ],
+  "good": [
+   [
+    "Pickle Gulch",
+    21.1,
+    57,
+    7,
+    "Pinus contorta"
+   ],
+   [
+    "Sledgehammer South",
+    18.0,
+    61,
+    7,
+    "Pinus ponderosa"
+   ],
+   [
+    "Sugarloaf (CO)",
+    15.9,
+    61,
+    7,
+    "Juniperus scopulorum"
+   ]
+  ],
+  "score": 179,
+  "processed": true
+ },
+ {
+  "cam": "tonzi",
+  "lat": 38.43091667,
+  "lon": -120.9658861,
+  "veg": "DB",
+  "first": "2011-10-26",
+  "last": "2026-09-24",
+  "n_dates": 140,
+  "sites": [
+   [
+    "Tonzi Road",
+    7.3,
+    140,
+    12,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "good": [
+   [
+    "Tonzi Road",
+    7.3,
+    140,
+    12,
+    "Adenostoma fasciculatum"
+   ]
+  ],
+  "score": 140,
+  "processed": true
+ },
+ {
+  "cam": "oregonYP",
+  "lat": 44.32384,
+  "lon": -121.605993,
+  "veg": "EN",
+  "first": "2011-08-18",
+  "last": "2026-10-06",
+  "n_dates": 138,
+  "sites": [
+   [
+    "Colgate",
+    0.8,
+    138,
+    12,
+    "Arctostaphylos patula"
+   ]
+  ],
+  "good": [
+   [
+    "Colgate",
+    0.8,
+    138,
+    12,
+    "Arctostaphylos patula"
+   ]
+  ],
+  "score": 138,
+  "processed": true
+ },
+ {
+  "cam": "segalittlemountain",
+  "lat": 36.5865,
+  "lon": -112.3634,
+  "veg": "EN",
+  "first": "2016-04-01",
+  "last": "2022-12-28",
+  "n_dates": 150,
+  "sites": [
+   [
+    "KNF Dry Park",
+    18.6,
+    9,
+    2,
+    "Abies concolor"
+   ],
+   [
+    "KNF Jacob Lake",
+    18.4,
+    51,
+    7,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF Lefevre",
+    23.5,
+    9,
+    2,
+    "Juniperus communis"
+   ],
+   [
+    "KNF Little Mountain",
+    1.9,
+    41,
+    6,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF West",
+    23.1,
+    40,
+    5,
+    "Artemisia tridentata"
+   ]
+  ],
+  "good": [
+   [
+    "KNF Jacob Lake",
+    18.4,
+    51,
+    7,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF Little Mountain",
+    1.9,
+    41,
+    6,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF West",
+    23.1,
+    40,
+    5,
+    "Artemisia tridentata"
+   ]
+  ],
+  "score": 132,
+  "processed": true
+ },
+ {
+  "cam": "segawhitepockets",
+  "lat": 36.6081,
+  "lon": -112.4082,
+  "veg": "EN",
+  "first": "2016-04-01",
+  "last": "2026-10-06",
+  "n_dates": 150,
+  "sites": [
+   [
+    "KNF Dry Park",
+    23.0,
+    9,
+    2,
+    "Abies concolor"
+   ],
+   [
+    "KNF Jacob Lake",
+    20.1,
+    51,
+    7,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF Lefevre",
+    23.3,
+    9,
+    2,
+    "Juniperus communis"
+   ],
+   [
+    "KNF Little Mountain",
+    3.4,
+    41,
+    6,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF West",
+    22.1,
+    40,
+    5,
+    "Artemisia tridentata"
+   ]
+  ],
+  "good": [
+   [
+    "KNF Jacob Lake",
+    20.1,
+    51,
+    7,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF Little Mountain",
+    3.4,
+    41,
+    6,
+    "Pinus ponderosa"
+   ],
+   [
+    "KNF West",
+    22.1,
+    40,
+    5,
+    "Artemisia tridentata"
+   ]
+  ],
+  "score": 132,
+  "processed": false
+ },
+ {
+  "cam": "NEON.D13.NIWO.DP1.00042",
+  "lat": 40.05425,
+  "lon": -105.58237,
+  "veg": "TN",
+  "first": "2017-03-09",
+  "last": "2026-10-06",
+  "n_dates": 121,
+  "sites": [
+   [
+    "Pickle Gulch",
+    24.0,
+    61,
+    6,
+    "Pinus contorta"
+   ],
+   [
+    "Sugarloaf (CO)",
+    19.3,
+    60,
+    6,
+    "Juniperus scopulorum"
+   ]
+  ],
+  "good": [
+   [
+    "Pickle Gulch",
+    24.0,
+    61,
+    6,
+    "Pinus contorta"
+   ],
+   [
+    "Sugarloaf (CO)",
+    19.3,
+    60,
+    6,
+    "Juniperus scopulorum"
+   ]
+  ],
+  "score": 121,
+  "processed": true
+ },
+ {
+  "cam": "segabradshaw",
+  "lat": 34.9109,
+  "lon": -111.9285,
+  "veg": "EN",
+  "first": "2017-03-15",
+  "last": "2026-09-08",
+  "n_dates": 120,
+  "sites": [
+   [
+    "COF Thompson Lane",
+    18.5,
+    120,
+    6,
+    "Arctostaphylos pungens"
+   ]
+  ],
+  "good": [
+   [
+    "COF Thompson Lane",
+    18.5,
+    120,
+    6,
+    "Arctostaphylos pungens"
+   ]
+  ],
+  "score": 120,
+  "processed": true
+ },
+ {
+  "cam": "oregonMP",
+  "lat": 44.4523,
+  "lon": -121.5574,
+  "veg": "EN",
+  "first": "2011-06-14",
+  "last": "2020-08-20",
+  "n_dates": 105,
+  "sites": [
+   [
+    "Colgate",
+    15.5,
+    105,
+    10,
+    "Arctostaphylos patula"
+   ]
+  ],
+  "good": [
+   [
+    "Colgate",
+    15.5,
+    105,
+    10,
+    "Arctostaphylos patula"
+   ]
+  ],
+  "score": 105,
+  "processed": true
+ },
+ {
+  "cam": "bridger",
+  "lat": 43.004,
+  "lon": -109.756,
+  "veg": "EN",
+  "first": "2006-10-11",
+  "last": "2020-11-16",
+  "n_dates": 103,
+  "sites": [
+   [
+    "Half Moon",
+    10.1,
+    46,
+    7,
+    "Artemisia tridentata ssp. wyomingensis"
+   ],
+   [
+    "Mesa (WY)",
+    23.8,
+    57,
+    11,
+    "Artemisia tridentata ssp. wyomingensis"
+   ]
+  ],
+  "good": [
+   [
+    "Half Moon",
+    10.1,
+    46,
+    7,
+    "Artemisia tridentata ssp. wyomingensis"
+   ],
+   [
+    "Mesa (WY)",
+    23.8,
+    57,
+    11,
+    "Artemisia tridentata ssp. wyomingensis"
+   ]
+  ],
+  "score": 103,
+  "processed": true
+ },
+ {
+  "cam": "sagehen",
+  "lat": 39.4315,
+  "lon": -120.2398,
+  "veg": "EN",
+  "first": "2017-10-05",
+  "last": "2026-10-06",
+  "n_dates": 100,
+  "sites": [
+   [
+    "Dog Valley RAWS",
+    22.0,
+    40,
+    5,
+    "Arctostaphylos patula"
+   ],
+   [
+    "TahoeDonner",
+    10.6,
+    60,
+    6,
+    "Arctostaphylos patula"
+   ]
+  ],
+  "good": [
+   [
+    "Dog Valley RAWS",
+    22.0,
+    40,
+    5,
+    "Arctostaphylos patula"
+   ],
+   [
+    "TahoeDonner",
+    10.6,
+    60,
+    6,
+    "Arctostaphylos patula"
+   ]
+  ],
+  "score": 100,
+  "processed": true
+ },
+ {
+  "cam": "vallesmixedconifer",
+  "lat": 35.9192,
+  "lon": -106.6142,
+  "veg": "EN",
+  "first": "2018-12-19",
+  "last": "2026-08-16",
+  "n_dates": 122,
+  "sites": [
+   [
+    "SNF Banco Bonito",
+    8.2,
+    34,
+    3,
+    "Pinus ponderosa"
+   ],
+   [
+    "SNF Joaquin",
+    22.5,
+    44,
+    4,
+    "Pinus ponderosa"
+   ],
+   [
+    "SNF Las Vacas",
+    20.2,
+    44,
+    4,
+    "Abies concolor"
+   ]
+  ],
+  "good": [
+   [
+    "SNF Joaquin",
+    22.5,
+    44,
+    4,
+    "Pinus ponderosa"
+   ],
+   [
+    "SNF Las Vacas",
+    20.2,
+    44,
+    4,
+    "Abies concolor"
+   ]
+  ],
+  "score": 88,
+  "processed": false
+ },
+ {
+  "cam": "NEON.D17.SOAP.DP1.00033",
+  "lat": 37.03337,
+  "lon": -119.26219,
+  "veg": "EN",
+  "first": "2017-11-02",
+  "last": "2026-10-06",
+  "n_dates": 309,
+  "sites": [
+   [
+    "Apperson",
+    9.8,
+    31,
+    5,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Barnes",
+    3.4,
+    33,
+    6,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Buckeye",
+    10.9,
+    31,
+    5,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Highway 168",
+    12.8,
+    51,
+    3,
+    "Arctostaphylos patula"
+   ],
+   [
+    "Kinsman - Saginaw",
+    23.0,
+    35,
+    3,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Shaver Lake",
+    8.8,
+    51,
+    3,
+    "Arctostaphylos patula"
+   ],
+   [
+    "Tollhouse",
+    12.6,
+    77,
+    4,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "good": [
+   [
+    "Tollhouse",
+    12.6,
+    77,
+    4,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "score": 77,
+  "processed": false
+ },
+ {
+  "cam": "NEON.D17.BIGC.DP1.20002",
+  "lat": 37.059719,
+  "lon": -119.257549,
+  "veg": null,
+  "first": "2018-09-13",
+  "last": "2026-10-06",
+  "n_dates": 285,
+  "sites": [
+   [
+    "Apperson",
+    12.3,
+    27,
+    5,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Barnes",
+    5.6,
+    28,
+    5,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Buckeye",
+    11.7,
+    27,
+    5,
+    "Arctostaphylos manzanita"
+   ],
+   [
+    "Highway 168",
+    9.9,
+    51,
+    3,
+    "Arctostaphylos patula"
+   ],
+   [
+    "Kinsman - Saginaw",
+    21.1,
+    24,
+    3,
+    "Ceanothus cuneatus"
+   ],
+   [
+    "Shaver Lake",
+    6.6,
+    51,
+    3,
+    "Arctostaphylos patula"
+   ],
+   [
+    "Tollhouse",
+    13.1,
+    77,
+    4,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "good": [
+   [
+    "Tollhouse",
+    13.1,
+    77,
+    4,
+    "Arctostaphylos manzanita"
+   ]
+  ],
+  "score": 77,
+  "processed": false
+ },
+ {
+  "cam": "NEON.D15.ONAQ.DP1.00033",
+  "lat": 40.177599,
+  "lon": -112.452452,
+  "veg": "SH",
+  "first": "2016-12-19",
+  "last": "2026-10-06",
+  "n_dates": 73,
+  "sites": [
+   [
+    "Vernon",
+    16.9,
+    73,
+    6,
+    "Artemisia tridentata ssp. wyomingensis"
+   ]
+  ],
+  "good": [
+   [
+    "Vernon",
+    16.9,
+    73,
+    6,
+    "Artemisia tridentata ssp. wyomingensis"
+   ]
+  ],
+  "score": 73,
+  "processed": false
+ },
+ {
+  "cam": "NEON.D13.MOAB.DP1.00033",
+  "lat": 38.24833,
+  "lon": -109.38827,
+  "veg": "GR",
+  "first": "2017-02-24",
+  "last": "2026-10-06",
+  "n_dates": 61,
+  "sites": [
+   [
+    "Big Indian",
+    10.5,
+    61,
+    6,
+    "Artemisia tridentata ssp. wyomingensis"
+   ]
+  ],
+  "good": [
+   [
+    "Big Indian",
+    10.5,
+    61,
+    6,
+    "Artemisia tridentata ssp. wyomingensis"
+   ]
+  ],
+  "score": 61,
+  "processed": false
+ },
+ {
+  "cam": "sevmvepj8ambinc",
+  "lat": 34.38801424,
+  "lon": -106.5240355,
+  "veg": "EN",
+  "first": "2009-12-31",
+  "last": "2026-10-06",
+  "n_dates": 59,
+  "sites": [
+   [
+    "CIF Thunderbird",
+    23.4,
+    59,
+    8,
+    "Pinus ponderosa"
+   ]
+  ],
+  "good": [
+   [
+    "CIF Thunderbird",
+    23.4,
+    59,
+    8,
+    "Pinus ponderosa"
+   ]
+  ],
+  "score": 59,
+  "processed": false
+ },
+ {
+  "cam": "glees",
+  "lat": 41.3644,
+  "lon": -106.2394,
+  "veg": "EN",
+  "first": "2015-11-11",
+  "last": "2026-10-06",
+  "n_dates": 55,
+  "sites": [
+   [
+    "North Fork C.G.",
+    6.1,
+    55,
+    7,
+    "Abies lasiocarpa"
+   ]
+  ],
+  "good": [
+   [
+    "North Fork C.G.",
+    6.1,
+    55,
+    7,
+    "Abies lasiocarpa"
+   ]
+  ],
+  "score": 55,
+  "processed": false
+ },
+ {
+  "cam": "gatesofthemountains",
+  "lat": 46.8262,
+  "lon": -111.7107,
+  "veg": "EN",
+  "first": "2001-06-05",
+  "last": "2019-02-01",
+  "n_dates": 48,
+  "sites": [
+   [
+    "Jimtown",
+    15.2,
+    48,
+    7,
+    "Pinus ponderosa"
+   ]
+  ],
+  "good": [
+   [
+    "Jimtown",
+    15.2,
+    48,
+    7,
+    "Pinus ponderosa"
+   ]
+  ],
+  "score": 48,
+  "processed": false
+ },
+ {
+  "cam": "NEON.D10.RMNP.DP1.00033",
+  "lat": 40.275903,
+  "lon": -105.545955,
+  "veg": "EN",
+  "first": "2016-12-19",
+  "last": "2026-10-06",
+  "n_dates": 112,
+  "sites": [
+   [
+    "Beaver Meadows",
+    12.0,
+    35,
+    6,
+    "Pinus ponderosa"
+   ],
+   [
+    "Harbison Meadow",
+    24.3,
+    46,
+    6,
+    "Pinus contorta"
+   ],
+   [
+    "Kawuneeche",
+    24.3,
+    31,
+    6,
+    "Pinus contorta"
+   ]
+  ],
+  "good": [
+   [
+    "Harbison Meadow",
+    24.3,
+    46,
+    6,
+    "Pinus contorta"
+   ]
+  ],
+  "score": 46,
+  "processed": false
+ },
+ {
+  "cam": "bitterootvalley",
+  "lat": 46.507,
+  "lon": -114.091,
+  "veg": "DB",
+  "first": "2002-04-18",
+  "last": "2019-05-16",
+  "n_dates": 41,
+  "sites": [
+   [
+    "Smith Cr",
+    12.8,
+    41,
+    14,
+    "Pinus ponderosa"
+   ]
+  ],
+  "good": [
+   [
+    "Smith Cr",
+    12.8,
+    41,
+    14,
+    "Pinus ponderosa"
+   ]
+  ],
+  "score": 41,
+  "processed": false
+ }
+]

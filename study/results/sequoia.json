@@ -1,0 +1,209 @@
+{
+ "cam": "sequoia",
+ "lat": 36.5658333333,
+ "lon": -118.777222222,
+ "elev": 1890,
+ "veg": "EN",
+ "description": "Lower Kaweah, Sequoia / Kings Canyon National Park, California",
+ "orientation": "W",
+ "first": "2002-12-31",
+ "last": "2019-03-27",
+ "sites": [
+  {
+   "name": "Elk Creek (CA)",
+   "dist_km": 6.6
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum"
+ ],
+ "units": [
+  "Elk Creek (CA) | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 239,
+ "curated_roi": "sequoia_EN_0001_1day.csv",
+ "info": {
+  "frames_registered": 2208,
+  "clear": 1312,
+  "veg_blocks": 159,
+  "ref_blocks": 98,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 2208,
+    "clear": 1312,
+    "first": "2003-01-07",
+    "last": "2018-12-12",
+    "veg_blocks": 159,
+    "ref_blocks": 98
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   20,
+   76,
+   6,
+   2,
+   2,
+   1,
+   1,
+   9,
+   2,
+   3,
+   2,
+   108,
+   1,
+   14,
+   11,
+   150,
+   1,
+   991,
+   1,
+   780,
+   4,
+   83,
+   3,
+   1,
+   7
+  ],
+  "linked": [
+   0,
+   1,
+   11,
+   15,
+   17,
+   19,
+   21
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 173,
+   "years": 16,
+   "rmse": 12.601187619067494,
+   "mae": 9.502634121448523,
+   "r2": 0.6184608655324928,
+   "anomaly_r": 0.0,
+   "below80": 0.8554913294797688,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 173,
+   "years": 16,
+   "rmse": 12.808389673937675,
+   "mae": 9.651418936396015,
+   "r2": 0.6058103672236212,
+   "anomaly_r": -0.06651345266436194,
+   "below80": 0.861271676300578,
+   "years_beat_season": 6
+  },
+  "camera_auto_wb": {
+   "n": 173,
+   "years": 16,
+   "rmse": 12.726358170691533,
+   "mae": 9.372393034890111,
+   "r2": 0.6108433840025711,
+   "anomaly_r": 0.034430201021700704,
+   "below80": 0.8554913294797688,
+   "years_beat_season": 7
+  },
+  "sat_visible_view": {
+   "n": 173,
+   "years": 16,
+   "rmse": 12.752967286293202,
+   "mae": 9.787588129324964,
+   "r2": 0.6092143336768006,
+   "anomaly_r": -0.0223891230840262,
+   "below80": 0.8728323699421965,
+   "years_beat_season": 7
+  },
+  "sat_ir_view": {
+   "n": 173,
+   "years": 16,
+   "rmse": 13.192270321437654,
+   "mae": 10.078262827883703,
+   "r2": 0.5818277417491442,
+   "anomaly_r": -0.07034406773047312,
+   "below80": 0.8554913294797688,
+   "years_beat_season": 6
+  },
+  "sat_ir_site": {
+   "n": 173,
+   "years": 16,
+   "rmse": 10.609588795693195,
+   "mae": 7.5152452026408065,
+   "r2": 0.7295336511209153,
+   "anomaly_r": 0.5396755498569221,
+   "below80": 0.9017341040462428,
+   "years_beat_season": 10
+  },
+  "camera_plus_sat_ir": {
+   "n": 173,
+   "years": 16,
+   "rmse": 13.299736846442235,
+   "mae": 10.262217161590845,
+   "r2": 0.5749869841065396,
+   "anomaly_r": -0.037961008308459,
+   "below80": 0.861271676300578,
+   "years_beat_season": 7
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 101,
+   "years": 7,
+   "rmse": 16.2031506670073,
+   "mae": 12.048707537107683,
+   "r2": 0.5787284305256115,
+   "anomaly_r": 0.0,
+   "below80": 0.8613861386138614,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 101,
+   "years": 7,
+   "rmse": 16.258102185270225,
+   "mae": 12.450445454868435,
+   "r2": 0.5758661764421165,
+   "anomaly_r": 0.06834650553994578,
+   "below80": 0.8415841584158416,
+   "years_beat_season": 5
+  },
+  "camera_hand": {
+   "n": 101,
+   "years": 7,
+   "rmse": 15.664262354676106,
+   "mae": 11.908029453479788,
+   "r2": 0.6062839614780302,
+   "anomaly_r": 0.2673440379788319,
+   "below80": 0.8712871287128713,
+   "years_beat_season": 5
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 191,
+   "years": 16,
+   "rmse": 13.824251189298678,
+   "mae": 10.193962103620688,
+   "r2": 0.6217691811928951,
+   "anomaly_r": 0.04896099821051314,
+   "below80": 0.8481675392670157,
+   "years_beat_season": 7
+  },
+  "season": {
+   "n": 191,
+   "years": 16,
+   "rmse": 13.737565132163809,
+   "mae": 10.0516146968526,
+   "r2": 0.6264977614431306,
+   "anomaly_r": 0.0,
+   "below80": 0.8429319371727748,
+   "years_beat_season": 0
+  }
+ }
+}

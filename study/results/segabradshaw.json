@@ -1,0 +1,183 @@
+{
+ "cam": "segabradshaw",
+ "lat": 34.9109,
+ "lon": -111.9285,
+ "elev": 1402,
+ "veg": "EN",
+ "description": "SEGA Bradshaw Ranch",
+ "orientation": "N",
+ "first": "2017-03-15",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "COF Thompson Lane",
+   "dist_km": 18.5
+  }
+ ],
+ "species": [
+  "Arctostaphylos pungens",
+  "Juniperus osteosperma",
+  "Quercus turbinella"
+ ],
+ "units": [
+  "COF Thompson Lane | Arctostaphylos pungens",
+  "COF Thompson Lane | Juniperus osteosperma",
+  "COF Thompson Lane | Quercus turbinella"
+ ],
+ "n_samples_total": 324,
+ "curated_roi": "segabradshaw_EN_2000_1day.csv",
+ "info": {
+  "frames_registered": 779,
+  "clear": 478,
+  "veg_blocks": 155,
+  "ref_blocks": 5,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 779,
+    "clear": 478,
+    "first": "2017-03-16",
+    "last": "2022-09-06",
+    "veg_blocks": 155,
+    "ref_blocks": 5
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   779
+  ],
+  "linked": [
+   0
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 198,
+   "years": 5,
+   "rmse": 16.36680117453355,
+   "mae": 12.725579411618694,
+   "r2": -0.09264632893439906,
+   "anomaly_r": 0.0,
+   "below80": 0.5202020202020202,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 198,
+   "years": 5,
+   "rmse": 15.916102404909473,
+   "mae": 12.561293274245765,
+   "r2": -0.03329766326104244,
+   "anomaly_r": 0.23622621552244127,
+   "below80": 0.5808080808080808,
+   "years_beat_season": 2
+  },
+  "camera_auto_wb": {
+   "n": 198,
+   "years": 5,
+   "rmse": 16.159729182375685,
+   "mae": 12.512404758878112,
+   "r2": -0.06517301185685276,
+   "anomaly_r": 0.19073787705328638,
+   "below80": 0.5858585858585859,
+   "years_beat_season": 4
+  },
+  "sat_visible_view": {
+   "n": 198,
+   "years": 5,
+   "rmse": 15.730169216378545,
+   "mae": 12.18455335247335,
+   "r2": -0.009296545595600447,
+   "anomaly_r": 0.2761956438269018,
+   "below80": 0.6212121212121212,
+   "years_beat_season": 2
+  },
+  "sat_ir_view": {
+   "n": 198,
+   "years": 5,
+   "rmse": 15.225292543218304,
+   "mae": 11.93998348462361,
+   "r2": 0.054452632504916054,
+   "anomaly_r": 0.35859080449895986,
+   "below80": 0.6313131313131313,
+   "years_beat_season": 4
+  },
+  "sat_ir_site": {
+   "n": 198,
+   "years": 5,
+   "rmse": 14.265225297778855,
+   "mae": 11.180255597429325,
+   "r2": 0.16994041688688666,
+   "anomaly_r": 0.503380188602376,
+   "below80": 0.6363636363636364,
+   "years_beat_season": 4
+  },
+  "camera_plus_sat_ir": {
+   "n": 198,
+   "years": 5,
+   "rmse": 15.426305686533995,
+   "mae": 12.221957504952991,
+   "r2": 0.029320486334179274,
+   "anomaly_r": 0.3560640738265699,
+   "below80": 0.6515151515151515,
+   "years_beat_season": 4
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 108,
+   "years": 2,
+   "rmse": 12.355100594320344,
+   "mae": 9.439831869092025,
+   "r2": -0.019733973844479058,
+   "anomaly_r": 0.0,
+   "below80": 0.7222222222222222,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 108,
+   "years": 2,
+   "rmse": 11.424733894592036,
+   "mae": 8.269885062648227,
+   "r2": 0.1280601959100679,
+   "anomaly_r": 0.4207983642012888,
+   "below80": 0.7407407407407407,
+   "years_beat_season": 2
+  },
+  "camera_hand": {
+   "n": 108,
+   "years": 2,
+   "rmse": 12.948912486383598,
+   "mae": 10.4084382482406,
+   "r2": -0.12011060398603779,
+   "anomaly_r": -0.04524079867845268,
+   "below80": 0.6851851851851852,
+   "years_beat_season": 0
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 201,
+   "years": 5,
+   "rmse": 15.917410273418998,
+   "mae": 12.574314305993227,
+   "r2": -0.047608870066206066,
+   "anomaly_r": 0.2141288920485737,
+   "below80": 0.572139303482587,
+   "years_beat_season": 2
+  },
+  "season": {
+   "n": 201,
+   "years": 5,
+   "rmse": 16.286216096252346,
+   "mae": 12.683280653902045,
+   "r2": -0.09671739557552983,
+   "anomaly_r": 0.0,
+   "below80": 0.5174129353233831,
+   "years_beat_season": 0
+  }
+ }
+}

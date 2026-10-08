@@ -1,0 +1,199 @@
+{
+ "cam": "bridger",
+ "lat": 43.004,
+ "lon": -109.756,
+ "elev": 2849,
+ "veg": "EN",
+ "description": "Bridger Wilderness, Wyoming",
+ "orientation": "E",
+ "first": "2006-10-11",
+ "last": "2020-11-16",
+ "sites": [
+  {
+   "name": "Half Moon",
+   "dist_km": 10.1
+  },
+  {
+   "name": "Mesa (WY)",
+   "dist_km": 23.8
+  }
+ ],
+ "species": [
+  "Artemisia tridentata ssp. wyomingensis",
+  "Pinus contorta"
+ ],
+ "units": [
+  "Half Moon | Artemisia tridentata ssp. wyomingensis",
+  "Half Moon | Pinus contorta",
+  "Mesa (WY) | Artemisia tridentata ssp. wyomingensis"
+ ],
+ "n_samples_total": 148,
+ "curated_roi": "bridger_EN_1000_1day.csv",
+ "info": {
+  "frames_registered": 1213,
+  "clear": 710,
+  "veg_blocks": 77,
+  "ref_blocks": 103,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 688,
+    "clear": 493,
+    "first": "2012-10-25",
+    "last": "2020-08-11",
+    "veg_blocks": 77,
+    "ref_blocks": 103
+   },
+   {
+    "frames": 525,
+    "clear": 217,
+    "first": "2008-06-19",
+    "last": "2012-08-28",
+    "veg_blocks": 168,
+    "ref_blocks": 109
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   10,
+   525,
+   2,
+   4,
+   8,
+   688
+  ],
+  "linked": [
+   5
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 39,
+   "years": 10,
+   "rmse": 35.5275693165981,
+   "mae": 27.056765548246823,
+   "r2": 0.540344859126098,
+   "anomaly_r": 0.0,
+   "below80": 0.8974358974358975,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 39,
+   "years": 10,
+   "rmse": 34.72198286036145,
+   "mae": 26.52257339652581,
+   "r2": 0.5609538556973386,
+   "anomaly_r": 0.22804349531692528,
+   "below80": 0.9230769230769231,
+   "years_beat_season": 7
+  },
+  "camera_auto_wb": {
+   "n": 39,
+   "years": 10,
+   "rmse": 34.45798374629583,
+   "mae": 26.62965969283372,
+   "r2": 0.5676048097611623,
+   "anomaly_r": 0.25317816299430124,
+   "below80": 0.9230769230769231,
+   "years_beat_season": 6
+  },
+  "sat_visible_view": {
+   "n": 39,
+   "years": 10,
+   "rmse": 36.95027577390908,
+   "mae": 28.410412198626982,
+   "r2": 0.5027938419242636,
+   "anomaly_r": -0.1993099848708272,
+   "below80": 0.9487179487179487,
+   "years_beat_season": 3
+  },
+  "sat_ir_view": {
+   "n": 39,
+   "years": 10,
+   "rmse": 36.47706919791578,
+   "mae": 27.549833483464962,
+   "r2": 0.5154473144680631,
+   "anomaly_r": -0.05876442445784575,
+   "below80": 0.9487179487179487,
+   "years_beat_season": 3
+  },
+  "sat_ir_site": {
+   "n": 39,
+   "years": 10,
+   "rmse": 40.370224803252455,
+   "mae": 31.80323158676321,
+   "r2": 0.40649625128711353,
+   "anomaly_r": -0.3040533279739561,
+   "below80": 0.9230769230769231,
+   "years_beat_season": 1
+  },
+  "camera_plus_sat_ir": {
+   "n": 39,
+   "years": 10,
+   "rmse": 36.391469859795606,
+   "mae": 28.893877029609776,
+   "r2": 0.5177188084986046,
+   "anomaly_r": 0.1397228931005366,
+   "below80": 0.9230769230769231,
+   "years_beat_season": 4
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 41,
+   "years": 10,
+   "rmse": 34.54830245427999,
+   "mae": 26.55559011129078,
+   "r2": 0.5585575783714116,
+   "anomaly_r": 0.0,
+   "below80": 0.9024390243902439,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 41,
+   "years": 10,
+   "rmse": 33.621443514240575,
+   "mae": 25.83236644878695,
+   "r2": 0.5819258159042666,
+   "anomaly_r": 0.2437311856611066,
+   "below80": 0.9024390243902439,
+   "years_beat_season": 7
+  },
+  "camera_hand": {
+   "n": 41,
+   "years": 10,
+   "rmse": 36.36159038766725,
+   "mae": 27.739940428553904,
+   "r2": 0.5110027914378064,
+   "anomaly_r": -0.0528086650385254,
+   "below80": 0.9512195121951219,
+   "years_beat_season": 4
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 41,
+   "years": 10,
+   "rmse": 33.621443514240575,
+   "mae": 25.83236644878695,
+   "r2": 0.5819258159042666,
+   "anomaly_r": 0.2437311856611066,
+   "below80": 0.9024390243902439,
+   "years_beat_season": 7
+  },
+  "season": {
+   "n": 41,
+   "years": 10,
+   "rmse": 34.54830245427999,
+   "mae": 26.55559011129078,
+   "r2": 0.5585575783714116,
+   "anomaly_r": 0.0,
+   "below80": 0.9024390243902439,
+   "years_beat_season": 0
+  }
+ }
+}

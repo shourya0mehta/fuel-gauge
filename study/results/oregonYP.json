@@ -1,0 +1,234 @@
+{
+ "cam": "oregonYP",
+ "lat": 44.32384,
+ "lon": -121.605993,
+ "elev": 977,
+ "veg": "EN",
+ "description": "Metolius New Young Pine/US-Me6, near Sisters, Oregon",
+ "orientation": "N",
+ "first": "2011-08-18",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Colgate",
+   "dist_km": 0.8
+  }
+ ],
+ "species": [
+  "Arctostaphylos patula",
+  "Purshia tridentata"
+ ],
+ "units": [
+  "Colgate | Arctostaphylos patula",
+  "Colgate | Purshia tridentata"
+ ],
+ "n_samples_total": 276,
+ "curated_roi": "oregonYP_EN_2000_1day.csv",
+ "info": {
+  "frames_registered": 1365,
+  "clear": 637,
+  "veg_blocks": 127,
+  "ref_blocks": 67,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 694,
+    "clear": 418,
+    "first": "2011-08-18",
+    "last": "2016-12-31",
+    "veg_blocks": 127,
+    "ref_blocks": 67
+   },
+   {
+    "frames": 395,
+    "clear": 151,
+    "first": "2020-03-26",
+    "last": "2022-10-18",
+    "veg_blocks": 188,
+    "ref_blocks": 133
+   },
+   {
+    "frames": 276,
+    "clear": 68,
+    "first": "2017-03-18",
+    "last": "2019-01-02",
+    "veg_blocks": 199,
+    "ref_blocks": 37
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   96,
+   42,
+   1,
+   1,
+   139,
+   1,
+   1,
+   8,
+   1,
+   5,
+   107,
+   2,
+   2,
+   136,
+   1,
+   174,
+   1,
+   16,
+   276,
+   1,
+   6,
+   1,
+   3,
+   1,
+   60,
+   30,
+   1,
+   4,
+   1,
+   1,
+   7,
+   9,
+   395
+  ],
+  "linked": [
+   0,
+   1,
+   4,
+   10,
+   13,
+   15
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 128,
+   "years": 10,
+   "rmse": 12.905874852453769,
+   "mae": 9.442269762464878,
+   "r2": 0.6424082500772472,
+   "anomaly_r": 0.0,
+   "below80": 0.875,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 128,
+   "years": 10,
+   "rmse": 12.763654716462845,
+   "mae": 9.26610592877667,
+   "r2": 0.6502460034006301,
+   "anomaly_r": 0.15746925880198515,
+   "below80": 0.8671875,
+   "years_beat_season": 7
+  },
+  "camera_auto_wb": {
+   "n": 128,
+   "years": 10,
+   "rmse": 13.00208452240275,
+   "mae": 9.391660717395567,
+   "r2": 0.6370568856943373,
+   "anomaly_r": 0.02968641237925853,
+   "below80": 0.8359375,
+   "years_beat_season": 7
+  },
+  "sat_visible_view": {
+   "n": 128,
+   "years": 10,
+   "rmse": 13.091240011964727,
+   "mae": 9.58264547332983,
+   "r2": 0.6320624077854888,
+   "anomaly_r": 0.08017623020765904,
+   "below80": 0.8671875,
+   "years_beat_season": 8
+  },
+  "sat_ir_view": {
+   "n": 128,
+   "years": 10,
+   "rmse": 13.814615976870417,
+   "mae": 10.172006641323833,
+   "r2": 0.5902771121081889,
+   "anomaly_r": -0.10124241778887429,
+   "below80": 0.8359375,
+   "years_beat_season": 4
+  },
+  "sat_ir_site": {
+   "n": 128,
+   "years": 10,
+   "rmse": 13.724544037862458,
+   "mae": 10.259028936492541,
+   "r2": 0.5956025189652892,
+   "anomaly_r": 0.0050776410001808275,
+   "below80": 0.828125,
+   "years_beat_season": 5
+  },
+  "camera_plus_sat_ir": {
+   "n": 128,
+   "years": 10,
+   "rmse": 14.254895215316143,
+   "mae": 10.517791665782706,
+   "r2": 0.5637447663607331,
+   "anomaly_r": -0.1957022941691609,
+   "below80": 0.828125,
+   "years_beat_season": 2
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 96,
+   "years": 7,
+   "rmse": 9.831154946282282,
+   "mae": 7.759781875021292,
+   "r2": 0.6902863109416668,
+   "anomaly_r": 0.0,
+   "below80": 0.8541666666666666,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 96,
+   "years": 7,
+   "rmse": 10.193403591247058,
+   "mae": 8.221596057171322,
+   "r2": 0.6670417664895245,
+   "anomaly_r": -0.10009230732172568,
+   "below80": 0.8229166666666666,
+   "years_beat_season": 3
+  },
+  "camera_hand": {
+   "n": 96,
+   "years": 7,
+   "rmse": 10.33466173662198,
+   "mae": 8.104258305739053,
+   "r2": 0.6577496886257436,
+   "anomaly_r": -0.20157662133580925,
+   "below80": 0.84375,
+   "years_beat_season": 0
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 134,
+   "years": 10,
+   "rmse": 12.48706800019943,
+   "mae": 9.028421303889262,
+   "r2": 0.6518592850291198,
+   "anomaly_r": 0.15768271645363563,
+   "below80": 0.8805970149253731,
+   "years_beat_season": 6
+  },
+  "season": {
+   "n": 134,
+   "years": 10,
+   "rmse": 12.628285520291278,
+   "mae": 9.117143970545884,
+   "r2": 0.6439404419020873,
+   "anomaly_r": 0.0,
+   "below80": 0.8805970149253731,
+   "years_beat_season": 0
+  }
+ }
+}

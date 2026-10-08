@@ -1,0 +1,201 @@
+{
+ "cam": "vaira",
+ "lat": 38.41328056,
+ "lon": -120.9506361,
+ "elev": 129,
+ "veg": "GR",
+ "description": "Vaira Ranch, Amador County, California",
+ "orientation": "NW",
+ "first": "2009-01-01",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Tonzi Road",
+   "dist_km": 5.6
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum"
+ ],
+ "units": [
+  "Tonzi Road | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 186,
+ "curated_roi": "vaira_GR_1000_1day.csv",
+ "info": {
+  "frames_registered": 2014,
+  "clear": 1202,
+  "veg_blocks": 174,
+  "ref_blocks": 49,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 1787,
+    "clear": 1068,
+    "first": "2011-10-18",
+    "last": "2022-11-22",
+    "veg_blocks": 174,
+    "ref_blocks": 49
+   },
+   {
+    "frames": 227,
+    "clear": 134,
+    "first": "2009-01-09",
+    "last": "2010-12-15",
+    "veg_blocks": 187,
+    "ref_blocks": 183
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   3,
+   136,
+   10,
+   23,
+   9,
+   3,
+   2,
+   91,
+   494,
+   1010,
+   141,
+   142
+  ],
+  "linked": [
+   8,
+   9,
+   10,
+   11
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 92,
+   "years": 14,
+   "rmse": 16.563803130142496,
+   "mae": 11.636091329661213,
+   "r2": 0.7045345059763295,
+   "anomaly_r": 0.0,
+   "below80": 0.8804347826086957,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 92,
+   "years": 14,
+   "rmse": 16.078957338992264,
+   "mae": 11.573567595190973,
+   "r2": 0.7215787269907863,
+   "anomaly_r": 0.29758351659717486,
+   "below80": 0.7934782608695652,
+   "years_beat_season": 7
+  },
+  "camera_auto_wb": {
+   "n": 92,
+   "years": 14,
+   "rmse": 15.781454612665012,
+   "mae": 10.798909726901394,
+   "r2": 0.7317864525632258,
+   "anomaly_r": 0.32975981972224205,
+   "below80": 0.8804347826086957,
+   "years_beat_season": 7
+  },
+  "sat_visible_view": {
+   "n": 92,
+   "years": 14,
+   "rmse": 14.606165418463622,
+   "mae": 9.56663409152393,
+   "r2": 0.7702481174421985,
+   "anomaly_r": 0.474169349707191,
+   "below80": 0.8913043478260869,
+   "years_beat_season": 9
+  },
+  "sat_ir_view": {
+   "n": 92,
+   "years": 14,
+   "rmse": 14.093373796837472,
+   "mae": 9.535647619016094,
+   "r2": 0.7860971403709438,
+   "anomaly_r": 0.5342435456156196,
+   "below80": 0.9130434782608695,
+   "years_beat_season": 10
+  },
+  "sat_ir_site": {
+   "n": 92,
+   "years": 14,
+   "rmse": 14.869297267664077,
+   "mae": 9.954134461508712,
+   "r2": 0.7618955364051714,
+   "anomaly_r": 0.4520957241589297,
+   "below80": 0.8586956521739131,
+   "years_beat_season": 9
+  },
+  "camera_plus_sat_ir": {
+   "n": 92,
+   "years": 14,
+   "rmse": 14.08417172520885,
+   "mae": 9.493988146576783,
+   "r2": 0.7863763789494558,
+   "anomaly_r": 0.5382281663280273,
+   "below80": 0.8913043478260869,
+   "years_beat_season": 10
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 85,
+   "years": 12,
+   "rmse": 17.47848320663229,
+   "mae": 12.482015672271949,
+   "r2": 0.6836713342591936,
+   "anomaly_r": 0.0,
+   "below80": 0.8823529411764706,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 85,
+   "years": 12,
+   "rmse": 16.03003807457867,
+   "mae": 11.137726232154897,
+   "r2": 0.7339273873504719,
+   "anomaly_r": 0.41107785278184683,
+   "below80": 0.8705882352941177,
+   "years_beat_season": 7
+  },
+  "camera_hand": {
+   "n": 85,
+   "years": 12,
+   "rmse": 16.31123869346849,
+   "mae": 11.243002795056233,
+   "r2": 0.7245105623546011,
+   "anomaly_r": 0.3848125191539392,
+   "below80": 0.8588235294117647,
+   "years_beat_season": 7
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 99,
+   "years": 14,
+   "rmse": 15.619376522874704,
+   "mae": 11.04953965648581,
+   "r2": 0.7271016418795035,
+   "anomaly_r": 0.3069163010997734,
+   "below80": 0.8181818181818182,
+   "years_beat_season": 8
+  },
+  "season": {
+   "n": 99,
+   "years": 14,
+   "rmse": 16.199674641063417,
+   "mae": 11.248889595173141,
+   "r2": 0.706447273359041,
+   "anomaly_r": 0.0,
+   "below80": 0.8888888888888888,
+   "years_beat_season": 0
+  }
+ }
+}

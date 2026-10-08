@@ -1,0 +1,223 @@
+{
+ "cam": "mayberry",
+ "lat": 38.04977222,
+ "lon": -121.7650694,
+ "elev": -5,
+ "veg": "WL",
+ "description": "Mayberry Slough, Twitchell Island, Antioch, California",
+ "orientation": "W",
+ "first": "2010-11-17",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Clayton Ranch",
+   "dist_km": 16.9
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum"
+ ],
+ "units": [
+  "Clayton Ranch | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 196,
+ "curated_roi": "mayberry_WL_1000_1day.csv",
+ "info": {
+  "frames_registered": 1847,
+  "clear": 1115,
+  "veg_blocks": 186,
+  "ref_blocks": 326,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 1847,
+    "clear": 1115,
+    "first": "2010-11-17",
+    "last": "2022-12-15",
+    "veg_blocks": 186,
+    "ref_blocks": 326
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   43,
+   53,
+   2,
+   23,
+   67,
+   20,
+   70,
+   1,
+   1,
+   138,
+   24,
+   1,
+   4,
+   3,
+   1,
+   115,
+   2,
+   1,
+   1,
+   2,
+   71,
+   28,
+   166,
+   42,
+   96,
+   142,
+   1,
+   2,
+   11,
+   29,
+   87,
+   1,
+   108,
+   31,
+   2,
+   105,
+   89,
+   1,
+   1,
+   4,
+   2,
+   1,
+   3,
+   3,
+   37
+  ],
+  "linked": [
+   22
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 137,
+   "years": 12,
+   "rmse": 12.81826108291856,
+   "mae": 9.346906395360861,
+   "r2": 0.7013444543915899,
+   "anomaly_r": 0.0,
+   "below80": 0.8613138686131386,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 137,
+   "years": 12,
+   "rmse": 12.999341535170469,
+   "mae": 9.718713241301746,
+   "r2": 0.6928467848215794,
+   "anomaly_r": -0.08084855707037347,
+   "below80": 0.8467153284671532,
+   "years_beat_season": 6
+  },
+  "camera_auto_wb": {
+   "n": 137,
+   "years": 12,
+   "rmse": 12.546268217906851,
+   "mae": 9.473676526164528,
+   "r2": 0.7138844295531488,
+   "anomaly_r": 0.2195957735864128,
+   "below80": 0.8613138686131386,
+   "years_beat_season": 8
+  },
+  "sat_visible_view": {
+   "n": 137,
+   "years": 12,
+   "rmse": 11.685801721715853,
+   "mae": 8.969871489440266,
+   "r2": 0.751784222383682,
+   "anomaly_r": 0.4157961890581661,
+   "below80": 0.8686131386861314,
+   "years_beat_season": 6
+  },
+  "sat_ir_view": {
+   "n": 137,
+   "years": 12,
+   "rmse": 12.660313572443176,
+   "mae": 9.738796469179194,
+   "r2": 0.708659217585847,
+   "anomaly_r": 0.21192299385049573,
+   "below80": 0.8686131386861314,
+   "years_beat_season": 6
+  },
+  "sat_ir_site": {
+   "n": 137,
+   "years": 12,
+   "rmse": 8.913897329753235,
+   "mae": 6.620810737692694,
+   "r2": 0.8555732586893912,
+   "anomaly_r": 0.7194915866329257,
+   "below80": 0.9197080291970803,
+   "years_beat_season": 10
+  },
+  "camera_plus_sat_ir": {
+   "n": 137,
+   "years": 12,
+   "rmse": 12.899954037823518,
+   "mae": 9.947241372435835,
+   "r2": 0.6975255587813098,
+   "anomaly_r": 0.1655811773443845,
+   "below80": 0.8686131386861314,
+   "years_beat_season": 6
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 134,
+   "years": 11,
+   "rmse": 12.61208234612134,
+   "mae": 9.550998923499131,
+   "r2": 0.6980337869155095,
+   "anomaly_r": 0.0,
+   "below80": 0.8507462686567164,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 134,
+   "years": 11,
+   "rmse": 12.724076066269408,
+   "mae": 9.912253195753863,
+   "r2": 0.6926471315064149,
+   "anomaly_r": 0.02336241696293961,
+   "below80": 0.8507462686567164,
+   "years_beat_season": 6
+  },
+  "camera_hand": {
+   "n": 134,
+   "years": 11,
+   "rmse": 12.685215935940354,
+   "mae": 9.976026480621405,
+   "r2": 0.6945216148005247,
+   "anomaly_r": 0.06976208468376875,
+   "below80": 0.8432835820895522,
+   "years_beat_season": 5
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 148,
+   "years": 12,
+   "rmse": 13.005349158478111,
+   "mae": 9.860649839521777,
+   "r2": 0.683124828084338,
+   "anomaly_r": -0.027814301502529355,
+   "below80": 0.8581081081081081,
+   "years_beat_season": 7
+  },
+  "season": {
+   "n": 148,
+   "years": 12,
+   "rmse": 12.897210642608158,
+   "mae": 9.482102008856527,
+   "r2": 0.6883725071825437,
+   "anomaly_r": 0.0,
+   "below80": 0.8581081081081081,
+   "years_beat_season": 0
+  }
+ }
+}

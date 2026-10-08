@@ -1,0 +1,274 @@
+{
+ "cam": "NEON.D13.NIWO.DP1.00042",
+ "lat": 40.05425,
+ "lon": -105.58237,
+ "elev": 3493,
+ "veg": "TN",
+ "description": "NEON Site - D13 (Southern Rockies and Colorado Plateau) Niwot Ridge Mountain Research Station, Colorado - mid-tower",
+ "orientation": "N",
+ "first": "2017-03-09",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Pickle Gulch",
+   "dist_km": 24.0
+  },
+  {
+   "name": "Sugarloaf (CO)",
+   "dist_km": 19.3
+  }
+ ],
+ "species": [
+  "Juniperus scopulorum",
+  "Pinus contorta",
+  "Pinus ponderosa",
+  "Pseudotsuga menziesii"
+ ],
+ "units": [
+  "Pickle Gulch | Pinus contorta",
+  "Sugarloaf (CO) | Juniperus scopulorum",
+  "Sugarloaf (CO) | Pinus ponderosa",
+  "Sugarloaf (CO) | Pseudotsuga menziesii"
+ ],
+ "n_samples_total": 241,
+ "curated_roi": "NEON.D13.NIWO.DP1.00042_TN_1001_1day.csv",
+ "info": {
+  "frames_registered": 754,
+  "clear": 305,
+  "veg_blocks": 204,
+  "ref_blocks": 154,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 754,
+    "clear": 305,
+    "first": "2017-03-09",
+    "last": "2022-10-16",
+    "veg_blocks": 204,
+    "ref_blocks": 154
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   3,
+   3,
+   1,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   55,
+   15,
+   2,
+   7,
+   1,
+   2,
+   2,
+   1,
+   2,
+   4,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   73,
+   1,
+   4,
+   2,
+   3,
+   1,
+   2,
+   17,
+   1,
+   2,
+   1,
+   1,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   58,
+   1,
+   1,
+   6,
+   1,
+   2,
+   1,
+   2,
+   1,
+   6,
+   1,
+   1,
+   1,
+   3,
+   2,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   10,
+   9,
+   1,
+   3,
+   1,
+   3,
+   60,
+   1,
+   4,
+   2,
+   9,
+   2,
+   3,
+   2,
+   6,
+   2,
+   1,
+   71
+  ],
+  "linked": [
+   9,
+   25,
+   43,
+   70,
+   81
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 51,
+   "years": 6,
+   "rmse": 7.381647487106484,
+   "mae": 5.907624078159272,
+   "r2": 0.42869344487980054,
+   "anomaly_r": 0.0,
+   "below80": 0.9803921568627451,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 51,
+   "years": 6,
+   "rmse": 13.265264179147056,
+   "mae": 10.155361884483613,
+   "r2": -0.8449916756603073,
+   "anomaly_r": -0.3987069105818371,
+   "below80": 0.8431372549019608,
+   "years_beat_season": 1
+  },
+  "camera_auto_wb": {
+   "n": 51,
+   "years": 6,
+   "rmse": 11.773441607500596,
+   "mae": 9.321879922615938,
+   "r2": -0.4533475155151463,
+   "anomaly_r": -0.39129780441763434,
+   "below80": 0.8235294117647058,
+   "years_beat_season": 1
+  },
+  "sat_visible_view": {
+   "n": 51,
+   "years": 6,
+   "rmse": 7.58881753720862,
+   "mae": 6.197547833165503,
+   "r2": 0.39617536704855727,
+   "anomaly_r": 0.14047738650329283,
+   "below80": 0.9803921568627451,
+   "years_beat_season": 3
+  },
+  "sat_ir_view": {
+   "n": 51,
+   "years": 6,
+   "rmse": 7.693520941526,
+   "mae": 6.238095605496558,
+   "r2": 0.3793984089034823,
+   "anomaly_r": 0.07258945268872394,
+   "below80": 0.9803921568627451,
+   "years_beat_season": 1
+  },
+  "sat_ir_site": {
+   "n": 51,
+   "years": 6,
+   "rmse": 7.83899889689899,
+   "mae": 6.34537526347309,
+   "r2": 0.3557064096785495,
+   "anomaly_r": -0.22087897767210868,
+   "below80": 0.9803921568627451,
+   "years_beat_season": 1
+  },
+  "camera_plus_sat_ir": {
+   "n": 51,
+   "years": 6,
+   "rmse": 9.434681042278187,
+   "mae": 7.860555433297936,
+   "r2": 0.06670906121154185,
+   "anomaly_r": -0.13849093584470976,
+   "below80": 0.9803921568627451,
+   "years_beat_season": 1
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 107,
+   "years": 4,
+   "rmse": 7.823081250797797,
+   "mae": 6.219286492323731,
+   "r2": 0.3147931503949476,
+   "anomaly_r": 0.0,
+   "below80": 0.9719626168224299,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 107,
+   "years": 4,
+   "rmse": 7.71216779889468,
+   "mae": 6.016005879544503,
+   "r2": 0.3340847596001637,
+   "anomaly_r": 0.16951149492938813,
+   "below80": 0.9626168224299065,
+   "years_beat_season": 2
+  },
+  "camera_hand": {
+   "n": 107,
+   "years": 4,
+   "rmse": 7.806011174861974,
+   "mae": 6.127976826433102,
+   "r2": 0.31778015042173335,
+   "anomaly_r": 0.06750353752546939,
+   "below80": 0.9719626168224299,
+   "years_beat_season": 1
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 147,
+   "years": 6,
+   "rmse": 7.556224411917316,
+   "mae": 5.807838823931582,
+   "r2": 0.46078901097976666,
+   "anomaly_r": -0.21891786520302078,
+   "below80": 0.9795918367346939,
+   "years_beat_season": 2
+  },
+  "season": {
+   "n": 147,
+   "years": 6,
+   "rmse": 7.36581983256782,
+   "mae": 5.732502260747682,
+   "r2": 0.48762111642624006,
+   "anomaly_r": 0.0,
+   "below80": 0.9795918367346939,
+   "years_beat_season": 0
+  }
+ }
+}

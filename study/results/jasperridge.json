@@ -1,0 +1,211 @@
+{
+ "cam": "jasperridge",
+ "lat": 37.402028,
+ "lon": -122.22104,
+ "elev": 197,
+ "veg": "GR",
+ "description": "Jasper Ridge Biological Preserve, Woodside, California",
+ "orientation": "N",
+ "first": "1999-12-31",
+ "last": "2023-06-30",
+ "sites": [
+  {
+   "name": "Pulgas",
+   "dist_km": 12.9
+  },
+  {
+   "name": "ST RTE 35 & 92",
+   "dist_km": 15.8
+  },
+  {
+   "name": "Saratoga Summit",
+   "dist_km": 20.0
+  }
+ ],
+ "species": [
+  "Adenostoma fasciculatum",
+  "Baccharis pilularis"
+ ],
+ "units": [
+  "Pulgas | Baccharis pilularis",
+  "ST RTE 35 & 92 | Baccharis pilularis",
+  "Saratoga Summit | Adenostoma fasciculatum"
+ ],
+ "n_samples_total": 493,
+ "curated_roi": "jasperridge_GR_0001_1day.csv",
+ "info": {
+  "frames_registered": 1737,
+  "clear": 1070,
+  "veg_blocks": 186,
+  "ref_blocks": 18,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 887,
+    "clear": 594,
+    "first": "2012-03-11",
+    "last": "2017-03-07",
+    "veg_blocks": 186,
+    "ref_blocks": 18
+   },
+   {
+    "frames": 429,
+    "clear": 246,
+    "first": "2020-05-24",
+    "last": "2022-12-14",
+    "veg_blocks": 199,
+    "ref_blocks": 29
+   },
+   {
+    "frames": 421,
+    "clear": 230,
+    "first": "2017-06-13",
+    "last": "2020-05-16",
+    "veg_blocks": 192,
+    "ref_blocks": 8
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   1,
+   887,
+   23,
+   2,
+   421,
+   429
+  ],
+  "linked": [
+   1
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 240,
+   "years": 11,
+   "rmse": 15.270633744690215,
+   "mae": 11.179026342786456,
+   "r2": 0.8301984367310946,
+   "anomaly_r": 0.0,
+   "below80": 0.9458333333333333,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 240,
+   "years": 11,
+   "rmse": 14.350274367959793,
+   "mae": 10.747667636699116,
+   "r2": 0.8500494816645413,
+   "anomaly_r": 0.34200301867784444,
+   "below80": 0.95,
+   "years_beat_season": 7
+  },
+  "camera_auto_wb": {
+   "n": 240,
+   "years": 11,
+   "rmse": 14.751647389746292,
+   "mae": 11.003176019518841,
+   "r2": 0.841544029448602,
+   "anomaly_r": 0.259992628781721,
+   "below80": 0.9458333333333333,
+   "years_beat_season": 7
+  },
+  "sat_visible_view": {
+   "n": 240,
+   "years": 11,
+   "rmse": 13.928041307129996,
+   "mae": 9.90170933956925,
+   "r2": 0.8587437559271579,
+   "anomaly_r": 0.410253502483606,
+   "below80": 0.9416666666666667,
+   "years_beat_season": 8
+  },
+  "sat_ir_view": {
+   "n": 240,
+   "years": 11,
+   "rmse": 14.4265817564848,
+   "mae": 10.397129858497271,
+   "r2": 0.8484505220361056,
+   "anomaly_r": 0.34145004153382513,
+   "below80": 0.9458333333333333,
+   "years_beat_season": 7
+  },
+  "sat_ir_site": {
+   "n": 240,
+   "years": 11,
+   "rmse": 14.288830511865656,
+   "mae": 10.37666141277781,
+   "r2": 0.8513308248555085,
+   "anomaly_r": 0.3522234051952056,
+   "below80": 0.95,
+   "years_beat_season": 9
+  },
+  "camera_plus_sat_ir": {
+   "n": 240,
+   "years": 11,
+   "rmse": 14.513342486013453,
+   "mae": 10.449616540029405,
+   "r2": 0.846622219139973,
+   "anomaly_r": 0.3408908098023448,
+   "below80": 0.9416666666666667,
+   "years_beat_season": 5
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 127,
+   "years": 7,
+   "rmse": 13.671167215843438,
+   "mae": 10.043508106074318,
+   "r2": 0.8777787030354747,
+   "anomaly_r": 0.0,
+   "below80": 0.968503937007874,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 127,
+   "years": 7,
+   "rmse": 13.756964532047634,
+   "mae": 10.797721450800164,
+   "r2": 0.8762398199460318,
+   "anomaly_r": 0.21646698053371916,
+   "below80": 0.9606299212598425,
+   "years_beat_season": 4
+  },
+  "camera_hand": {
+   "n": 127,
+   "years": 7,
+   "rmse": 13.311912135766988,
+   "mae": 10.11633439903131,
+   "r2": 0.8841178398627163,
+   "anomaly_r": 0.23858624557279023,
+   "below80": 0.968503937007874,
+   "years_beat_season": 4
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 245,
+   "years": 11,
+   "rmse": 14.519630778203917,
+   "mae": 10.752983929587367,
+   "r2": 0.8439308002271462,
+   "anomaly_r": 0.2993627762437416,
+   "below80": 0.9510204081632653,
+   "years_beat_season": 7
+  },
+  "season": {
+   "n": 245,
+   "years": 11,
+   "rmse": 15.198529665765898,
+   "mae": 11.081069858720056,
+   "r2": 0.8289948424178802,
+   "anomaly_r": 0.0,
+   "below80": 0.9469387755102041,
+   "years_beat_season": 0
+  }
+ }
+}

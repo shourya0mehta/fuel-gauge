@@ -1,0 +1,245 @@
+{
+ "cam": "grandteton",
+ "lat": 43.915017,
+ "lon": -110.578036,
+ "elev": 2054,
+ "veg": "GR",
+ "description": "Grand Teton National Park, Wyoming",
+ "orientation": "N",
+ "first": "2015-07-29",
+ "last": "2021-01-29",
+ "sites": [
+  {
+   "name": "Burro Hill",
+   "dist_km": 19.5
+  },
+  {
+   "name": "Flagg Ranch",
+   "dist_km": 23.3
+  },
+  {
+   "name": "Lost Creek, WY",
+   "dist_km": 18.9
+  },
+  {
+   "name": "Moran",
+   "dist_km": 10.5
+  },
+  {
+   "name": "RKO Road",
+   "dist_km": 10.5
+  }
+ ],
+ "species": [
+  "Artemisia tridentata ssp. vaseyana",
+  "Artemisia tridentata ssp. wyomingensis",
+  "Calamagrostic rubescens",
+  "Carex geyeri",
+  "Festuca idahoensis",
+  "Pinus contorta",
+  "Pseudotsuga menziesii",
+  "Shepherdia argentea",
+  "Symphoricarpos oreophilus"
+ ],
+ "units": [
+  "Burro Hill | Artemisia tridentata ssp. wyomingensis",
+  "Burro Hill | Calamagrostic rubescens",
+  "Burro Hill | Pseudotsuga menziesii",
+  "Burro Hill | Symphoricarpos oreophilus",
+  "Flagg Ranch | Carex geyeri",
+  "Flagg Ranch | Pinus contorta",
+  "Lost Creek, WY | Artemisia tridentata ssp. vaseyana",
+  "Lost Creek, WY | Festuca idahoensis",
+  "Moran | Calamagrostic rubescens",
+  "Moran | Pinus contorta",
+  "Moran | Shepherdia argentea",
+  "RKO Road | Artemisia tridentata ssp. vaseyana",
+  "RKO Road | Festuca idahoensis"
+ ],
+ "n_samples_total": 549,
+ "curated_roi": "grandteton_SH_1000_1day.csv",
+ "info": {
+  "frames_registered": 426,
+  "clear": 164,
+  "veg_blocks": 182,
+  "ref_blocks": 141,
+  "grid": [
+   32,
+   24
+  ],
+  "views": [
+   {
+    "frames": 426,
+    "clear": 164,
+    "first": "2015-07-29",
+    "last": "2020-10-23",
+    "veg_blocks": 182,
+    "ref_blocks": 141
+   }
+  ]
+ },
+ "segments": {
+  "sizes": [
+   53,
+   1,
+   4,
+   96,
+   1,
+   1,
+   8,
+   52,
+   1,
+   2,
+   10,
+   1,
+   83,
+   2,
+   3,
+   1,
+   3,
+   76,
+   1,
+   13,
+   1,
+   1,
+   66,
+   3,
+   1,
+   6
+  ],
+  "linked": [
+   0,
+   3,
+   7,
+   12,
+   17,
+   22
+  ]
+ },
+ "results": {
+  "season": {
+   "n": 137,
+   "years": 4,
+   "rmse": 20.521473562784124,
+   "mae": 15.092076897460919,
+   "r2": 0.771448856477589,
+   "anomaly_r": 0.0,
+   "below80": 0.8540145985401459,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 137,
+   "years": 4,
+   "rmse": 20.518492892296987,
+   "mae": 15.163836846004958,
+   "r2": 0.7715152441249182,
+   "anomaly_r": 0.15795697000567283,
+   "below80": 0.8759124087591241,
+   "years_beat_season": 2
+  },
+  "camera_auto_wb": {
+   "n": 137,
+   "years": 4,
+   "rmse": 18.977015380337487,
+   "mae": 14.083847480352558,
+   "r2": 0.8045560943405476,
+   "anomaly_r": 0.38781210148470324,
+   "below80": 0.8905109489051095,
+   "years_beat_season": 4
+  },
+  "sat_visible_view": {
+   "n": 137,
+   "years": 4,
+   "rmse": 19.69146631568853,
+   "mae": 14.246949097976024,
+   "r2": 0.7895628422618213,
+   "anomaly_r": 0.28237583990301907,
+   "below80": 0.8686131386861314,
+   "years_beat_season": 3
+  },
+  "sat_ir_view": {
+   "n": 137,
+   "years": 4,
+   "rmse": 19.56827321364277,
+   "mae": 14.226302300818121,
+   "r2": 0.7921876658402707,
+   "anomaly_r": 0.2995619452236213,
+   "below80": 0.8686131386861314,
+   "years_beat_season": 4
+  },
+  "sat_ir_site": {
+   "n": 137,
+   "years": 4,
+   "rmse": 19.817638161492702,
+   "mae": 15.132788733507976,
+   "r2": 0.7868574767075334,
+   "anomaly_r": 0.2624940668585576,
+   "below80": 0.8759124087591241,
+   "years_beat_season": 3
+  },
+  "camera_plus_sat_ir": {
+   "n": 137,
+   "years": 4,
+   "rmse": 19.956861285509667,
+   "mae": 14.673853398075156,
+   "r2": 0.7838522142151195,
+   "anomaly_r": 0.25406855520455146,
+   "below80": 0.8832116788321168,
+   "years_beat_season": 2
+  }
+ },
+ "hand_vs_auto": {
+  "season": {
+   "n": 137,
+   "years": 4,
+   "rmse": 20.521473562784124,
+   "mae": 15.092076897460919,
+   "r2": 0.771448856477589,
+   "anomaly_r": 0.0,
+   "below80": 0.8540145985401459,
+   "years_beat_season": 0
+  },
+  "camera_auto": {
+   "n": 137,
+   "years": 4,
+   "rmse": 20.518492892296987,
+   "mae": 15.163836846004958,
+   "r2": 0.7715152441249182,
+   "anomaly_r": 0.15795697000567283,
+   "below80": 0.8759124087591241,
+   "years_beat_season": 2
+  },
+  "camera_hand": {
+   "n": 137,
+   "years": 4,
+   "rmse": 23.730074091265298,
+   "mae": 18.75447627783547,
+   "r2": 0.6943921524858339,
+   "anomaly_r": -0.14851677076422432,
+   "below80": 0.8394160583941606,
+   "years_beat_season": 0
+  }
+ },
+ "camera_vs_season_all": {
+  "camera": {
+   "n": 137,
+   "years": 4,
+   "rmse": 20.518492892296987,
+   "mae": 15.163836846004958,
+   "r2": 0.7715152441249182,
+   "anomaly_r": 0.15795697000567283,
+   "below80": 0.8759124087591241,
+   "years_beat_season": 2
+  },
+  "season": {
+   "n": 137,
+   "years": 4,
+   "rmse": 20.521473562784124,
+   "mae": 15.092076897460919,
+   "r2": 0.771448856477589,
+   "anomaly_r": 0.0,
+   "below80": 0.8540145985401459,
+   "years_beat_season": 0
+  }
+ }
+}

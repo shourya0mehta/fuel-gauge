@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fuelgauge"
+version = "0.2.0"
+description = "Turn fixed outdoor cameras into georeferenced vegetation sensors: long-term registration, terrain pose fitting, pixel-to-ground lookup, and fuel-moisture evaluation."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Shourya Mehta" }]
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+  "pandas>=2.0",
+  "opencv-python-headless>=4.8",
+  "pillow>=10",
+]
+
+[project.optional-dependencies]
+geo = ["rasterio>=1.3", "pystac-client>=0.7", "planetary-computer>=1.0"]
+seg = ["onnxruntime>=1.16"]
+eval = ["scikit-learn>=1.3", "pyarrow>=14", "openpyxl>=3.1"]
+dev = ["pytest>=7"]
+
+[project.scripts]
+fuelgauge = "fuelgauge.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["fuelgauge*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
