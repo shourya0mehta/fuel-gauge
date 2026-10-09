@@ -26,14 +26,18 @@ Thousands of cameras already watch wildland for fire. California alone runs 1,30
 
 ## Highlights
 
-| | |
-| --- | --- |
-| **0.04°** | median skyline error after solving a fire camera's pose from one photo, about a pixel |
-| **29,047** | photos from 21 cameras and 20 years locked onto fixed views (92% of every usable frame) |
-| **1,309** | California fire cameras audited for terrain line of sight in a single run |
-| **1.4M acres** | burned since 2020 by fires that started where no camera could see the smoke |
-| **88%** | of the acreage that burned out of view would have been seen by ten cameras placed by the siting search |
-| **8 cameras, daily** | a live, terrain-calibrated fire-camera network measured every morning by GitHub Actions |
+<table>
+  <tr>
+    <td align="center" width="33%"><h3>0.04°</h3><sub>median skyline error after solving a fire camera's pose from one photo</sub></td>
+    <td align="center" width="33%"><h3>29,047</h3><sub>photos from 21 cameras and 20 years locked onto fixed views</sub></td>
+    <td align="center" width="33%"><h3>1,309</h3><sub>California fire cameras audited for line of sight in one run</sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="33%"><h3>1.4M acres</h3><sub>burned since 2020 by fires that started where no camera could see the smoke</sub></td>
+    <td align="center" width="33%"><h3>88%</h3><sub>of that out-of-view acreage seen by ten cameras placed by the siting search</sub></td>
+    <td align="center" width="33%"><h3>8 cameras</h3><sub>calibrated, live, and measured every morning by GitHub Actions</sub></td>
+  </tr>
+</table>
 
 ## Quickstart
 
