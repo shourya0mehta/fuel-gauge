@@ -4,541 +4,376 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fuel Gauge</title>
-<meta name="description" content="Open-source Python pipeline that turns fixed outdoor cameras into calibrated instruments: multi-year registration, skyline-based camera calibration, pixel-to-ground mapping, drift-corrected vegetation measurement and camera network coverage.">
-<meta property="og:title" content="Fuel Gauge">
-<meta property="og:description" content="Turn any fixed camera into a measuring instrument. Open-source Python pipeline for fire lookouts, phenology cameras and webcams.">
+<meta name="description" content="Fuel Gauge is open-source computer vision that turns any fixed outdoor camera into a calibrated sensor: pose from the skyline, decades of footage on one view, every pixel mapped to the ground.">
+<meta property="og:title" content="Fuel Gauge: turn any fixed camera into a calibrated sensor">
+<meta property="og:description" content="Pose from the skyline to 0.04 degrees, 20 years of footage on one view, every pixel on the map. Open source.">
 <meta property="og:image" content="assets/live/rm-e-mobo-c_oct.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23161B1F'/%3E%3Cpath d='M4 21 L10 14 L14 17 L20 9 L28 18' fill='none' stroke='%23F2541B' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M4 25 H28' stroke='%23FFFFFF' stroke-opacity='.5' stroke-width='1.5'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FF5B1F'/%3E%3Cpath d='M5 22 L11 14.5 L15 18 L20.5 10.5 L27 19' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Ccircle cx='23.5' cy='8' r='2' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap">
 <link rel="stylesheet" href="site.css">
-<style>
-/* ---------- hero ---------- */
-.hero { padding-block: 72px 0; }
-.hero-top { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 32px 56px; align-items: end; }
-.hero h1 { max-width: 15ch; }
-.hero .lede { margin-top: 0; }
-.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; align-items: center; }
-.cta .install { flex: 1 1 380px; }
-@media (max-width: 900px) { .hero-top { grid-template-columns: minmax(0, 1fr); } .hero { padding-top: 44px; } }
-
-.instrument { margin-top: 48px; }
-.frame-wrap { position: relative; }
-.frame { position: relative; aspect-ratio: 16 / 9; background: #0E1215; border-radius: var(--radius); overflow: hidden; touch-action: pan-y; cursor: crosshair; }
-.frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; display: block; }
-.frame canvas, .frame svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.frame svg { pointer-events: none; overflow: visible; }
-.sk-det { fill: none; stroke: var(--signal); stroke-width: 3; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
-.sk-dem { fill: none; stroke: #FFFFFF; stroke-width: 1.5; stroke-dasharray: 5 5; vector-effect: non-scaling-stroke; opacity: 0.95; }
-.draw { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.6s cubic-bezier(.3,.1,.2,1) 0.25s forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-.ruler line { stroke: #FFFFFF; stroke-width: 1; vector-effect: non-scaling-stroke; opacity: 0.9; }
-.ruler text, .contour-label { fill: #FFFFFF; font-family: var(--font); font-size: 22px; font-weight: 600; paint-order: stroke; stroke: rgba(10, 14, 16, 0.55); stroke-width: 4px; }
-.readout { position: absolute; right: 14px; bottom: 14px; width: 270px; background: rgba(14, 18, 21, 0.82); color: #F3F6F7; border-radius: var(--radius);
-  padding: 12px 14px; font-size: 0.86rem; line-height: 1.45; backdrop-filter: blur(6px); pointer-events: none; }
-.readout .big { font-size: 1.6rem; font-weight: 700; font-variation-settings: "wdth" 112; line-height: 1.1; }
-.readout dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: 8px 0 0; }
-.readout dt { color: #A9B4BB; }
-.readout dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
-.readout .hint { color: #A9B4BB; }
-@media (max-width: 640px) { .readout { position: static; width: auto; margin-top: 8px; background: var(--bg-2); color: var(--ink); backdrop-filter: none; }
-  .readout dt, .readout .hint { color: var(--slate); } }
-.inst-bar { display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between; margin-top: 14px; }
-.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; flex-wrap: wrap; }
-.seg button { border: 0; background: transparent; color: var(--ink-2); font: inherit; font-size: 0.9rem; padding: 8px 14px; cursor: pointer; }
-.seg button + button { border-left: 1px solid var(--line); }
-.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.86rem; color: var(--slate); }
-.key span { display: inline-flex; align-items: center; gap: 8px; }
-.key i { display: inline-block; width: 22px; height: 0; border-top: 3px solid var(--signal); }
-.key i.dash { border-top: 2px dashed var(--ink-2); }
-
-/* sources strip */
-.sources { margin-top: 64px; padding-block: 22px; border-block: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 10px 36px; align-items: baseline; }
-.sources p { color: var(--slate); font-size: 0.9rem; }
-.sources ul { display: flex; flex-wrap: wrap; gap: 8px 30px; list-style: none; margin: 0; padding: 0; }
-.sources li { font-weight: 700; font-variation-settings: "wdth" 112; color: var(--ink-2); font-size: 1rem; letter-spacing: -0.01em; }
-
-/* pipeline map */
-.flow { display: grid; gap: 14px; }
-.lane { display: grid; grid-template-columns: 170px repeat(2, minmax(0, 1fr)) 210px; gap: 0; align-items: stretch; }
-.lane > * { position: relative; }
-.io { padding: 14px 16px; font-size: 0.9rem; color: var(--ink-2); display: grid; align-content: center; gap: 2px; }
-.io code { background: none; padding: 0; font-size: 0.82rem; color: var(--ink); }
-.io.out { border-left: 0; }
-.node { display: grid; gap: 4px; align-content: start; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); text-decoration: none; margin-inline: 14px; }
-.node:hover { border-color: var(--ink); }
-.node b { font-size: 1.05rem; font-variation-settings: "wdth" 112; }
-.node b span { color: var(--signal); margin-right: 8px; }
-.node small { color: var(--slate); font-size: 0.86rem; line-height: 1.4; }
-.node code { font-size: 0.78rem; justify-self: start; margin-top: 6px; }
-.node.wide-node { grid-column: span 2; }
-.node .cmds { display: flex; flex-wrap: wrap; gap: 8px; }
-@media (max-width: 900px) { .node.wide-node { grid-column: auto; } }
-.lane .node::after { content: ""; position: absolute; top: 50%; right: -15px; width: 16px; border-top: 2px solid var(--ink); }
-.lane .node::before { content: ""; position: absolute; top: calc(50% - 4px); right: -16px; border: 5px solid transparent; border-left: 6px solid var(--ink); border-right: 0; transform: translateX(0); }
-.lane .io.in::after { content: ""; position: absolute; top: 50%; right: 0; width: 14px; border-top: 2px solid var(--ink); }
-.lane-name { font-size: 0.9rem; color: var(--slate); margin: 6px 0 -4px; }
-.join { font-size: 0.95rem; color: var(--ink-2); max-width: 70ch; padding-top: 6px; }
-@media (max-width: 900px) {
-  .lane { grid-template-columns: minmax(0, 1fr); gap: 10px; }
-  .node { margin: 0; }
-  .lane .node::after, .lane .node::before, .lane .io.in::after { display: none; }
-  .io { padding: 4px 0; }
-}
-
-/* stage chapters */
-.stage { padding-block: 104px 0; display: grid; gap: 36px; }
-.stage-head { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 0 20px; align-items: start; max-width: 900px; }
-.stage-num { font-size: 3.2rem; line-height: 0.9; font-weight: 800; font-variation-settings: "wdth" 125; color: var(--signal); }
-.stage-head h2 { margin-bottom: 14px; }
-.stage-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
-.stage-body.flip > :first-child { order: 2; }
-@media (max-width: 960px) { .stage-body { grid-template-columns: minmax(0, 1fr); gap: 32px; } .stage-body.flip > :first-child { order: 0; } .stage-head { grid-template-columns: minmax(0, 1fr); } .stage-num { font-size: 2.4rem; margin-bottom: 8px; } }
-.how h3 { font-size: 1.02rem; margin-bottom: 4px; font-variation-settings: "wdth" 108; }
-.tech { list-style: none; margin: 0 0 24px; padding: 0; }
-.tech li { display: grid; gap: 3px; padding: 14px 0; border-top: 1px solid var(--line); }
-.tech li:last-child { border-bottom: 1px solid var(--line); }
-.tech b { font-weight: 650; font-size: 0.98rem; }
-.tech p { font-size: 0.94rem; color: var(--ink-2); line-height: 1.55; }
-.proof { display: grid; gap: 14px; }
-.stat-line { display: flex; flex-wrap: wrap; gap: 8px 32px; padding-top: 4px; }
-.stat-line div { display: grid; gap: 0; }
-.stat-line b { font-size: 2rem; font-weight: 750; font-variation-settings: "wdth" 115; line-height: 1.1; letter-spacing: -0.02em; }
-.stat-line span { font-size: 0.88rem; color: var(--slate); max-width: 26ch; line-height: 1.35; }
-.cap { font-size: 0.88rem; color: var(--slate); line-height: 1.5; }
-
-.how pre.code { font-size: 0.8rem; }
-
-/* registration compare */
-.compare { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--bg-2); user-select: none; touch-action: pan-y; }
-.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.compare .after { clip-path: inset(0 0 0 var(--cut, 50%)); }
-.compare .handle { position: absolute; top: 0; bottom: 0; left: var(--cut, 50%); width: 2px; background: #FFFFFF; transform: translateX(-1px); }
-.compare .handle::after { content: ""; position: absolute; top: 50%; left: 50%; width: 34px; height: 34px; border-radius: 50%; background: var(--signal); transform: translate(-50%, -50%);
-  box-shadow: 0 0 0 3px #FFFFFF; }
-.compare .tag { position: absolute; top: 12px; padding: 4px 10px; border-radius: 4px; background: rgba(14, 18, 21, 0.75); color: #FFFFFF; font-size: 0.82rem; }
-.compare .tag.l { left: 12px; } .compare .tag.r { right: 12px; }
-.compare input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
-.track { display: grid; gap: 6px; }
-.track .row { position: relative; height: 22px; background: var(--bg-2); border-radius: 3px; }
-.track .row i { position: absolute; top: 4px; bottom: 4px; border-radius: 2px; background: var(--field); }
-.track .moves { position: relative; height: 14px; }
-.track .moves i { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--signal); }
-.track .axis { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--slate); font-variant-numeric: tabular-nums; }
-
-/* skyline chart */
-.chart { width: 100%; display: block; overflow: visible; }
-.chart text { font-family: var(--font); font-size: 12px; fill: var(--slate); }
-.chart .grid line { stroke: var(--line); }
-.errs { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-.errs td { padding: 7px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
-.errs td:last-child { text-align: right; }
-.errs .bar { display: inline-block; height: 6px; background: var(--signal); border-radius: 3px; vertical-align: middle; margin-right: 10px; }
-
-/* georeference */
-.geo { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 14px; align-items: start; }
-.geo .photo { position: relative; aspect-ratio: 3 / 2; border-radius: var(--radius); overflow: hidden; background: var(--bg-2); }
-.geo .photo img, .geo .photo canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.geo .photo img { object-fit: cover; }
-.geo .map { position: relative; aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; background: var(--bg-2); }
-.geo .map canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-@media (max-width: 640px) { .geo { grid-template-columns: minmax(0, 1fr); } }
-.swatches { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.84rem; color: var(--slate); }
-.swatches span { display: inline-flex; align-items: center; gap: 6px; }
-.swatches i { width: 11px; height: 11px; border-radius: 2px; display: inline-block; }
-
-/* measure */
-.roi { position: relative; aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--bg-2); }
-.roi img, .roi canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-.roi img { object-fit: cover; }
-
-/* coverage */
-.cov img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
-
-/* honest evaluation */
-.eval { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
-@media (max-width: 960px) { .eval { grid-template-columns: minmax(0, 1fr); } }
-.score { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
-.score th, .score td { text-align: right; padding: 10px 0 10px 12px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
-.score th:first-child, .score td:first-child { text-align: left; padding-left: 0; }
-.score th { font-weight: 600; font-size: 0.84rem; color: var(--slate); vertical-align: bottom; }
-.score tr.hi td { font-weight: 650; }
-
-/* results */
-.results { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; }
-.results a { text-decoration: none; display: grid; gap: 10px; align-content: start; }
-.results a:hover h3 { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
-.results img { width: 100%; display: block; border-radius: var(--radius); background: var(--bg-2); }
-.results .lead img { aspect-ratio: 600 / 370; object-fit: cover; }
-.results .side { display: grid; gap: 28px; align-content: start; }
-.results .side a { grid-template-columns: 150px minmax(0, 1fr); gap: 16px; align-items: start; }
-.results .side img { aspect-ratio: 4 / 3; object-fit: cover; }
-.results p { font-size: 0.95rem; color: var(--ink-2); }
-@media (max-width: 960px) { .results { grid-template-columns: minmax(0, 1fr); } }
-@media (max-width: 520px) { .results .side a { grid-template-columns: minmax(0, 1fr); } }
-
-/* get started */
-.start { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; }
-.outputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; }
-@media (max-width: 860px) { .outputs { grid-template-columns: minmax(0, 1fr); } }
-.tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
-.tabs button { border: 0; background: none; font: inherit; font-size: 0.95rem; color: var(--slate); padding: 8px 14px 10px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
-.tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--signal); font-weight: 600; }
-.outputs { list-style: none; margin: 0; padding: 0; }
-.outputs li { display: grid; grid-template-columns: minmax(0, 15ch) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 0.94rem; }
-.outputs { border-bottom: 1px solid var(--line); }
-.outputs code { background: none; padding: 0; font-size: 0.82rem; }
-.outputs p { color: var(--ink-2); }
-.closing { margin-top: 112px; padding: 56px 0 0; border-top: 1px solid var(--line); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; }
-@media (max-width: 760px) { .closing { grid-template-columns: minmax(0, 1fr); } }
-</style>
+<link rel="stylesheet" href="landing.css">
 </head>
 <body>
-<header class="nav">
+<div class="announce"><a href="#live"><span class="pulse"></span><b id="ann-text">Live now: 8 wildfire cameras calibrated and measured every day</b><span class="go">See the network</span></a></div>
+<header class="nav" id="nav">
   <div class="wrap">
     <a class="brand" href="./" aria-label="Fuel Gauge home">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/><path d="M4 25 H28" stroke="var(--bg)" stroke-opacity=".55" stroke-width="1.5"/></svg>
-      Fuel Gauge
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#FF5B1F"/><path d="M5 22 L11 14.5 L15 18 L20.5 10.5 L27 19" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="23.5" cy="8" r="2" fill="#fff"/></svg>
+      fuelgauge
     </a>
     <nav aria-label="Main">
-      <a href="#pipeline">How it works</a>
+      <a href="#how">How it works</a>
       <a href="#results">Results</a>
+      <a href="#live">Live</a>
       <a href="docs.html">Docs</a>
       <a href="research.html">Research</a>
     </nav>
     <span class="spacer"></span>
-    <a class="btn small" href="https://github.com/shourya0mehta/fuel-gauge">
-      <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
-      GitHub
-    </a>
+    <div class="actions">
+      <a class="btn small" href="https://github.com/shourya0mehta/fuel-gauge" aria-label="GitHub">
+        <svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        <span class="gh-label">GitHub</span>
+      </a>
+      <a class="btn small primary" href="#start">Get started</a>
+    </div>
   </div>
 </header>
 
 <main>
-<section class="hero wrap">
-  <div class="hero-top">
-    <h1>Turn any fixed camera into a measuring instrument</h1>
-    <div>
-      <p class="lede">Fuel Gauge is an open-source Python pipeline for fire lookouts, phenology cameras and webcams. Give it a folder of photos and a location. It keeps years of frames aligned, works out where the camera points from the skyline alone, ties every pixel to the ground and hands back a daily vegetation record you can compare across seasons.</p>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap hero-copy">
+    <a class="chip" href="#results"><span class="chip-new">New</span>A line-of-sight audit of all 1,309 California fire cameras<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <h1>Turn any <span class="typed" id="typed">fire lookout</span><span class="caret" aria-hidden="true"></span><br>into a calibrated sensor</h1>
+    <p class="lede">Fuel Gauge is open-source computer vision that tells a camera exactly where it is looking. It solves the pose from the skyline alone, holds twenty years of footage on one view, and maps every pixel to a spot on the ground. No survey and no labels, and it runs on a laptop.</p>
+    <div class="cta">
+      <a class="btn primary" href="#start">Get started<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="btn" href="#how">See how it works</a>
     </div>
-  </div>
-  <div class="cta">
     <div class="install">
       <code><span class="p">$ </span>pip install "fuelgauge[geo,seg] @ git+https://github.com/shourya0mehta/fuel-gauge"</code>
       <button type="button" data-copy='pip install "fuelgauge[geo,seg] @ git+https://github.com/shourya0mehta/fuel-gauge"'>Copy</button>
     </div>
-    <a class="btn primary" href="#start">Get started</a>
-    <a class="btn" href="docs.html">Read the docs</a>
   </div>
 
-  <figure class="instrument" style="margin-inline:0">
-    <div class="frame-wrap">
-    <div class="frame" id="frame">
-      <img id="frame-img" alt="">
-      <canvas id="frame-ov"></canvas>
-      <svg id="frame-svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
-    </div>
-    <div class="readout" id="readout" aria-live="polite"></div>
-    </div>
-    <div class="inst-bar">
-      <div class="seg" id="cam-switch" role="group" aria-label="Fire camera"></div>
-      <div class="key">
-        <span><i></i>Skyline found in the photo</span>
-        <span><i class="dash"></i>Skyline the terrain model predicts</span>
+  <div class="wrap">
+    <div class="console reveal in" id="console">
+      <div class="console-bar">
+        <div class="cb-left"><span class="live-tag"><span class="pulse"></span>LIVE</span><span id="cb-name">Red Mountain East</span><span class="cb-sub" id="cb-sub">San Diego County</span></div>
+        <div class="seg" id="cam-switch" role="group" aria-label="Fire camera"></div>
       </div>
-    </div>
-    <figcaption class="cap" id="frame-cap" style="margin-top:10px"></figcaption>
-  </figure>
-
-  <div class="sources">
-    <p>Built and tested on public archives from</p>
-    <ul>
-      <li>PhenoCam Network</li><li>HPWREN</li><li>ALERTCalifornia</li><li>Copernicus DEM</li><li>ESA WorldCover</li><li>Globe-LFMC</li>
-    </ul>
-  </div>
-</section>
-
-<section class="section wrap" id="pipeline">
-  <div class="section-head">
-    <h2>From a folder of photos to a calibrated record</h2>
-    <p class="lede">Fixed cameras get bumped, re-aimed and replaced, their colours drift, and nobody wrote down which way they point. The pipeline fixes each of those in turn. Every stage is a command and a Python function, so you can run the whole thing or take the piece you need.</p>
-  </div>
-  <div class="flow">
-    <p class="lane-name">Through time</p>
-    <div class="lane">
-      <div class="io in"><code>photos/</code><span>years of photos from one camera</span></div>
-      <a class="node" href="#register"><b><span>1</span>Register</b><small>Lock every photo onto a fixed view</small><code>fuelgauge register-archive</code></a>
-      <a class="node" href="#measure"><b><span>2</span>Measure</b><small>Clear days, automatic regions, drift-free colour</small><code>fuelgauge measure</code></a>
-      <div class="io out"><code>_daily.csv</code><span>daily greenness per view, plus a regions image</span></div>
-    </div>
-    <p class="lane-name">Across the ground</p>
-    <div class="lane">
-      <div class="io in"><code>frame.jpg</code><span>one photo, plus latitude, longitude and height</span></div>
-      <a class="node" href="#calibrate"><b><span>3</span>Calibrate</b><small>Heading, tilt, roll and lens from the skyline</small><code>fuelgauge calibrate</code></a>
-      <a class="node" href="#georeference"><b><span>4</span>Georeference</b><small>Distance, place and land cover for every pixel block</small><code>terrain.backproject</code></a>
-      <div class="io out"><code>_lookup.npz</code><span>pixel to ground lookup</span></div>
-    </div>
-    <p class="lane-name">Across a network</p>
-    <div class="lane">
-      <div class="io in"><code>cameras.csv</code><span>where your cameras stand</span></div>
-      <a class="node wide-node" href="#coverage"><b><span>5</span>Map coverage and site new cameras</b><small>Terrain line of sight from every camera, then a greedy search for the hilltops that would see the most of what is missed</small><span class="cmds"><code>fuelgauge viewshed</code><code>fuelgauge site</code></span></a>
-      <div class="io out"><code>coverage.tif</code><span>cameras in view of each cell, and ranked sites</span></div>
-    </div>
-    <p class="join">Run the first two lanes on the same camera and each patch of hillside gets both a history and a place on the map, which is how the live fire-camera network on this site is built.</p>
-  </div>
-</section>
-
-<section class="stage wrap" id="register">
-  <div class="stage-head"><span class="stage-num">1</span><div><h2>Keep years of photos on one view</h2>
-    <p class="lede">A camera on a pole drifts a few pixels a month, gets knocked by wind and maintenance crews, and is sometimes re-aimed or moved to a new mast. Registration puts every usable photo back onto one shared view, so a pixel means the same patch of ground in 2004 and 2018.</p></div></div>
-  <div class="stage-body">
-    <div class="how">
-      <h3>Under the hood</h3>
-      <ul class="tech">
-        <li><b>Frame screening</b><p>Brightness, Laplacian variance (sharpness), contrast and clipped-pixel checks drop night, glare, blank and blurred frames before any matching.</p></li>
-        <li><b>SIFT on CLAHE greyscale</b><p>Contrast-limited adaptive histogram equalisation evens out light between seasons and times of day, then SIFT keypoints are matched with Lowe's ratio test at 0.75.</p></li>
-        <li><b>4-degree-of-freedom similarity by RANSAC</b><p>Shift, rotation and scale only. Fixed cameras pan, tilt and zoom a little; a full homography overfits to clouds and moving shadows.</p></li>
-        <li><b>Keyframe tracking</b><p>Each photo is matched to the recent keyframes of its stretch, relocalised against older ones when that fails, and a new stretch starts after four frames in a row are lost.</p></li>
-        <li><b>Loop closure</b><p>Stretches are joined by matching their clearest keyframes and keeping a maximum-inlier spanning tree, with at least 30 inliers per link.</p></li>
-        <li><b>Relocated and featureless cameras</b><p>A camera moved to a new spot keeps those years as a second view with its own regions. Open grass close-ups with nothing to match are measured in place instead of dropped.</p></li>
-      </ul>
-<pre class="code"><span class="k">from</span> fuelgauge <span class="k">import</span> track
-res = track.track(frames, track.Matcher())
-views = track.group_views(res, times)   <span class="c"># loop closure</span>
-moves = track.sustained_moves(times, tx, ty)</pre>
-    </div>
-    <div class="proof">
-      <div class="compare" id="compare">
-        <img src="assets/hero/raw_avg.jpg" alt="Three photos from 2007, 2008 and 2013 averaged as recorded: three hills and a smeared road">
-        <img class="after" src="assets/hero/reg_avg.jpg" alt="The same three photos averaged after registration: one sharp hill and road">
-        <span class="tag l">Averaged as recorded</span><span class="tag r">After registration</span>
-        <div class="handle"></div>
-        <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after registration">
+      <div class="frame-wrap">
+        <div class="frame" id="frame">
+          <img id="frame-img" alt="">
+          <canvas id="frame-ov"></canvas>
+          <svg id="frame-svg" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+          <div class="xhair" id="xhair" aria-hidden="true"><i></i></div>
+          <button class="pip" id="pip" type="button" aria-label="Show the live feed in the main view">
+            <img id="pip-img" alt="This camera's live feed">
+            <span class="pip-tag"><span class="pulse"></span>Feed right now</span>
+          </button>
+        </div>
+        <div class="readout" id="readout" aria-live="polite"></div>
       </div>
-      <p class="cap">Three photos from one San Bernardino National Forest camera, taken in 2007, 2008 and 2013, averaged together. As recorded they smear into three hills. Registered, they agree to the pixel.</p>
-      <div class="track" id="seg-track"></div>
-      <div class="stat-line" id="reg-stats"></div>
+      <div class="telemetry" id="telemetry"></div>
+    </div>
+    <p class="console-cap" id="frame-cap"></p>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="marquee" aria-label="Data sources">
+  <p>Runs on open data from</p>
+  <div class="mq"><div class="mq-track">
+    <span>PhenoCam Network</span><span>HPWREN</span><span>ALERTCalifornia</span><span>Copernicus DEM</span><span>ESA WorldCover</span><span>NIFC Wildfire Incidents</span><span>Globe-LFMC</span><span>MODIS</span><span>Microsoft Planetary Computer</span>
+    <span aria-hidden="true">PhenoCam Network</span><span aria-hidden="true">HPWREN</span><span aria-hidden="true">ALERTCalifornia</span><span aria-hidden="true">Copernicus DEM</span><span aria-hidden="true">ESA WorldCover</span><span aria-hidden="true">NIFC Wildfire Incidents</span><span aria-hidden="true">Globe-LFMC</span><span aria-hidden="true">MODIS</span><span aria-hidden="true">Microsoft Planetary Computer</span>
+  </div></div>
+</section>
+
+<!-- ============ PROBLEM -> PRODUCT ============ -->
+<section class="section wrap pixel" id="why">
+  <div class="pixel-copy reveal">
+    <span class="kicker">The problem</span>
+    <h2>Thousands of cameras watch for fire. None of them know what they are looking at.</h2>
+    <p class="lede">California alone runs 1,309 wildfire cameras, each posting a frame a minute. But to the software behind them, a pixel is only a colour. It has no distance, no place on a map, and years of footage never line up because the mount drifts.</p>
+    <p class="lede">Fuel Gauge turns that colour into a measurement.</p>
+  </div>
+  <div class="pixel-demo reveal" id="pixel-demo" aria-live="polite">
+    <div class="pd-before">
+      <span class="pd-label">What the camera records</span>
+      <div class="pd-swatch" id="pd-swatch"></div>
+      <code id="pd-rgb">rgb(—)</code>
+    </div>
+    <div class="pd-arrow" aria-hidden="true"><svg viewBox="0 0 80 24"><path d="M2 12 H74 M64 4 L76 12 L64 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="pd-after">
+      <span class="pd-label">What Fuel Gauge returns</span>
+      <pre id="pd-json" class="pd-json"></pre>
     </div>
   </div>
 </section>
 
-<section class="stage wrap" id="measure">
-  <div class="stage-head"><span class="stage-num">2</span><div><h2>Measure change you can compare across years</h2>
-    <p class="lede">Raw camera colour is mostly weather, haze and sensor drift. The measure step keeps the clear days, finds the vegetation on its own and corrects colour against rock and soil in the same frame, then writes a daily series that only ever looks backward.</p></div></div>
-  <div class="stage-body flip">
-    <div class="how">
-      <h3>Under the hood</h3>
-      <ul class="tech">
-        <li><b>Haze scoring</b><p>Sobel edge strength of each registered frame is correlated with the anchor frame. A day counts as clear at 80% or more of its trailing 90-day norm, so a re-aim does not read as months of fog.</p></li>
-        <li><b>Automatic regions</b><p>Blocks the segmentation model calls vegetation and that swing strongly with the seasons (5th to 95th percentile of weekly medians) are measured. No hand-drawn masks.</p></li>
-        <li><b>Drift-tracking white balance</b><p>Blocks that stay flat all year (rock, soil, road, distant ridgelines) set a von Kries correction of red and blue against green, smoothed over a trailing 61 days so it follows the sensor, not snow or wet soil.</p></li>
-        <li><b>Vegetation indices</b><p>GRVI = (G − R)/(G + R) and GCC = G/(R + G + B) per block. Cameras that take near-infrared twins also give camera NDVI, with exposure correction after Petach et al. (2014).</p></li>
-        <li><b>Causal smoothing</b><p>A weekly 90th percentile, then a 15-day mean, using only data up to each day, so the series is safe to use as a nowcast.</p></li>
-      </ul>
-<pre class="code"><span class="k">from</span> fuelgauge.measure <span class="k">import</span> measure
-daily, regions, info = measure(<span class="s">"out/mycam_blocks.npz"</span>, <span class="s">"out/mycam"</span>)
-daily[<span class="s">"index"</span>].plot()   <span class="c"># joined across views</span></pre>
-    </div>
-    <div class="proof">
-      <div class="roi"><img id="roi-img" src="assets/study/cucamongasouth.jpg" alt="The ridge camera's anchor view, with measured vegetation and reference blocks marked"><canvas id="roi-ov"></canvas></div>
-      <div class="swatches"><span><i style="background:var(--field)"></i>Vegetation blocks, found automatically</span><span><i style="background:var(--signal)"></i>Reference blocks for colour correction</span></div>
-      <canvas id="green-chart" style="width:100%;display:block" role="img" aria-label="Fifteen years of daily greenness from the ridge camera, one row per year"></canvas>
-      <p class="cap">The output for this camera: one row per year, one column per day, from straw (cured) to green (flush). Spring green-up, fall curing and the drought years that never flushed all show without a single hand-drawn mask. Blank days had no clear photo.</p>
-      <div class="stat-line" id="measure-stats"></div>
-    </div>
+<!-- ============ NUMBERS ============ -->
+<section class="numbers" aria-label="Key results">
+  <div class="wrap nums">
+    <div><b data-count="0.04" data-dec="2" data-suffix="°">0.04°</b><span>median skyline error after solving a camera's pose, about one pixel</span></div>
+    <div><b data-count="29047" data-dec="0">29,047</b><span>photos locked onto fixed views across 21 cameras and 20 years</span></div>
+    <div><b data-count="1309" data-dec="0">1,309</b><span>fire cameras audited for line of sight across California</span></div>
+    <div><b data-count="1.4" data-dec="1" data-suffix="M">1.4M</b><span>acres burned since 2020 by fires no camera could see start</span></div>
   </div>
 </section>
 
-<section class="stage wrap" id="calibrate">
-  <div class="stage-head"><span class="stage-num">3</span><div><h2>Solve where the camera points from its skyline</h2>
-    <p class="lede">Most public cameras come with a location and nothing else. The ridgeline in the photo is a fingerprint of where the camera stands and which way it faces. Match it against the skyline a terrain model predicts and you get the pose without a survey or a single ground control point.</p></div></div>
-  <div class="stage-body">
-    <div class="how">
-      <h3>Under the hood</h3>
-      <ul class="tech">
-        <li><b>Sky segmentation</b><p>SegFormer-B2 trained on ADE20K, run through ONNX Runtime with no GPU, labels the sky. The skyline is the first non-sky row in each column, snapped to the strongest nearby edge.</p></li>
-        <li><b>Rendered terrain panorama</b><p>Copernicus 30 m elevation, marched outward along every bearing with earth curvature and atmospheric refraction (k = 0.13), gives the elevation angle of the true skyline in each direction.</p></li>
-        <li><b>Fisheye lens model</b><p>Equidistant projection with one radial term, θ = (r/f)(1 + k₁(r/f)²). Fire cameras are strongly barrel-distorted; a pinhole model leaves degrees of error at the frame edges.</p></li>
-        <li><b>Robust pose fit</b><p>Heading, tilt and roll by bounded Powell search on a trimmed loss that ignores the worst 20% of columns, so trees by the mast and low cloud do not pull the fit.</p></li>
-        <li><b>One lens for the whole network</b><p>Cameras of the same model share a field of view and distortion term fitted jointly across all of them (101.15°, k₁ = 0.080 for the eight HPWREN cameras here).</p></li>
-      </ul>
-<pre class="code">fuelgauge calibrate rm-e frame.jpg --yaw <span class="s">90</span> \
-    --lat <span class="s">33.4008</span> --lon <span class="s">-117.1905</span> --elev <span class="s">483</span>
-<span class="c"># {"camera": {"yaw": 90.33, "pitch": -0.86, ...}}</span></pre>
-    </div>
-    <div class="proof">
-      <svg class="chart" id="sky-chart" role="img" aria-label="Detected and predicted skyline across the camera's bearings"></svg>
-      <p class="cap" id="sky-cap"></p>
-      <table class="errs" id="errs"></table>
-    </div>
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section wrap" id="how">
+  <div class="section-head center">
+    <span class="kicker">How it works</span>
+    <h2>Five steps from raw footage to a calibrated sensor</h2>
+    <p class="lede">Each step is one command and one Python function. Run the whole pipeline or take the piece you need.</p>
   </div>
-</section>
 
-<section class="stage wrap" id="georeference">
-  <div class="stage-head"><span class="stage-num">4</span><div><h2>Put every pixel on the map</h2>
-    <p class="lede">With the pose solved, each pixel's line of sight can be followed out until it hits the terrain. Every block in the frame gets a ground distance, coordinates, slope, aspect and a land-cover class, so photo measurements can be joined with any map layer.</p></div></div>
-  <div class="stage-body flip">
-    <div class="how">
-      <h3>Under the hood</h3>
-      <ul class="tech">
-        <li><b>Back-projection</b><p>The viewing ray of each block is intersected with the rendered panorama; the first terrain cell it reaches is where that block sits on the ground.</p></li>
-        <li><b>Terrain attributes</b><p>Slope and aspect from elevation gradients at the ground point, and the ESA WorldCover 10 m class (tree, shrub, grass, built, bare, water).</p></li>
-        <li><b>Usable-ground mask</b><p>Sky, the camera's own housing and blocks beyond the terrain model's reach are dropped before anything is measured.</p></li>
-      </ul>
-<pre class="code"><span class="k">from</span> fuelgauge <span class="k">import</span> terrain
-pano = terrain.render_panorama(dem, lat, lon, z,
-                               yaw - <span class="s">85</span>, yaw + <span class="s">85</span>)
-cam, loss = terrain.fit_extrinsics(cam, pano, sky, yaw)
-ground = terrain.backproject(cam, pano)</pre>
-    </div>
-    <div class="proof">
-      <div class="seg" id="geo-mode" role="group" aria-label="Overlay">
-        <button type="button" data-mode="dist" aria-pressed="true">Distance</button>
-        <button type="button" data-mode="lc" aria-pressed="false">Land cover</button>
-        <button type="button" data-mode="aspect" aria-pressed="false">Slope facing</button>
-      </div>
-      <div class="geo">
-        <div class="photo"><img id="geo-img" alt=""><canvas id="geo-ov"></canvas></div>
-        <div class="map"><canvas id="geo-map"></canvas></div>
-      </div>
-      <div class="swatches" id="geo-key"></div>
-      <p class="cap" id="geo-cap"></p>
-    </div>
-  </div>
-</section>
+  <div class="tour">
+    <aside class="rail" aria-label="Steps">
+      <div class="rail-bar"><i id="rail-fill"></i></div>
+      <ol>
+        <li><a href="#s-align" data-step="s-align"><span>1</span>Align</a></li>
+        <li><a href="#s-calibrate" data-step="s-calibrate"><span>2</span>Calibrate</a></li>
+        <li><a href="#s-map" data-step="s-map"><span>3</span>Map</a></li>
+        <li><a href="#s-measure" data-step="s-measure"><span>4</span>Measure</a></li>
+        <li><a href="#s-scale" data-step="s-scale"><span>5</span>Scale</a></li>
+      </ol>
+    </aside>
 
+    <div class="steps">
+      <!-- 1 ALIGN -->
+      <article class="step" id="s-align">
+        <p class="step-pill">Step 1 of 5 <span>Align</span></p>
+        <h3 class="step-title">Twenty years of footage, one fixed view</h3>
+        <p class="step-lede">Cameras drift a few pixels a month, get knocked by wind and crews, and get re-aimed or moved. Fuel Gauge locks every usable frame back onto one view, so a pixel means the same patch of hillside in 2004 and 2018.</p>
+        <div class="compare auto" id="compare">
+          <img src="assets/hero/raw_avg.jpg" alt="Three photos from 2007, 2008 and 2013 averaged as recorded: three hills and a smeared road">
+          <img class="after" src="assets/hero/reg_avg.jpg" alt="The same three photos averaged after alignment: one sharp hill and road">
+          <span class="tag l">Before<span class="wide-only">: averaged as recorded</span></span><span class="tag r">After Fuel Gauge</span>
+          <div class="handle"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after alignment">
+        </div>
+        <div class="track" id="seg-track"></div>
+        <div class="stat-row" id="reg-stats"></div>
+        <details class="hood" open>
+          <summary>Under the hood</summary>
+          <ul>
+            <li><b>Frame screening</b>Brightness, Laplacian sharpness, contrast and clipping checks drop night, glare and blur before matching.</li>
+            <li><b>SIFT on CLAHE greyscale</b>Contrast-limited histogram equalisation evens out season and time of day; matches pass Lowe's ratio test at 0.75.</li>
+            <li><b>4-DOF similarity by RANSAC</b>Shift, rotation and scale only. A full homography overfits to clouds and moving shadows.</li>
+            <li><b>Keyframe tracking</b>Frames match recent keyframes, relocalise against older ones, and start a new stretch after four lost frames.</li>
+            <li><b>Loop closure</b>Stretches join through a maximum-inlier spanning tree over their clearest keyframes.</li>
+            <li><b>Relocations and bumps</b>A camera moved to a new mast becomes a second view; sustained shifts are logged as move dates.</li>
+          </ul>
+<pre class="code">fuelgauge register-archive photos/ out/ridge</pre>
+        </details>
+        <a class="next" href="#s-calibrate">Next: solve the camera's pose<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
 
+      <!-- 2 CALIBRATE -->
+      <article class="step" id="s-calibrate">
+        <p class="step-pill">Step 2 of 5 <span>Calibrate</span></p>
+        <h3 class="step-title">The skyline is a fingerprint. Fuel Gauge reads it.</h3>
+        <p class="step-lede">Public cameras come with a location and nothing else. Fuel Gauge renders the skyline a 30&nbsp;m terrain model predicts from that spot and fits heading, tilt, roll and lens until the two agree, with no survey and no ground control points.</p>
+        <div class="card-vis">
+          <svg class="chart" id="sky-chart" role="img" aria-label="Detected and predicted skyline across the camera's bearings"></svg>
+          <p class="cap" id="sky-cap"></p>
+        </div>
+        <div class="errs" id="errs"></div>
+        <details class="hood" open>
+          <summary>Under the hood</summary>
+          <ul>
+            <li><b>Sky segmentation</b>SegFormer-B2 (ADE20K) through ONNX Runtime on CPU; the skyline is the first non-sky row per column, snapped to the nearest strong edge.</li>
+            <li><b>Rendered terrain panorama</b>Copernicus 30 m elevation ray-marched along every bearing with earth curvature and refraction (k = 0.13).</li>
+            <li><b>Fisheye lens model</b>Equidistant projection with one radial term, θ = (r/f)(1 + k₁(r/f)²). Fire cameras are strongly barrel-distorted.</li>
+            <li><b>Robust pose fit</b>Bounded Powell search on a trimmed loss that ignores the worst 20% of columns: trees by the mast, low cloud.</li>
+            <li><b>Network lens</b>One field of view and distortion fitted jointly across all cameras of a model (101.15°, k₁ = 0.080 here).</li>
+          </ul>
+<pre class="code">fuelgauge calibrate ridge frame.jpg --lat <span class="s">33.4008</span> --lon <span class="s">-117.1905</span> --elev <span class="s">483</span> --yaw <span class="s">90</span></pre>
+        </details>
+        <a class="next" href="#s-map">Next: put every pixel on the map<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
 
+      <!-- 3 MAP -->
+      <article class="step" id="s-map">
+        <p class="step-pill">Step 3 of 5 <span>Map</span></p>
+        <h3 class="step-title">Every pixel gets a place on the ground</h3>
+        <p class="step-lede">With the pose solved, each pixel's line of sight is traced out until it hits the terrain. Every block in the frame gets a distance, coordinates, slope, aspect and land cover, ready to join with any map layer.</p>
+        <div class="geo-controls">
+          <div class="seg light" id="geo-mode" role="group" aria-label="Overlay">
+            <button type="button" data-mode="dist" aria-pressed="true">Distance</button>
+            <button type="button" data-mode="lc" aria-pressed="false">Land cover</button>
+            <button type="button" data-mode="aspect" aria-pressed="false">Slope facing</button>
+          </div>
+          <select class="sel" id="geo-cam" aria-label="Camera"></select>
+        </div>
+        <div class="geo">
+          <div class="photo"><img id="geo-img" alt=""><canvas id="geo-ov"></canvas></div>
+          <div class="map"><canvas id="geo-map"></canvas><span class="map-tag"><span class="pulse"></span>Tracing lines of sight</span></div>
+        </div>
+        <div class="swatches" id="geo-key"></div>
+        <p class="cap" id="geo-cap"></p>
+        <details class="hood" open>
+          <summary>Under the hood</summary>
+          <ul>
+            <li><b>Back-projection</b>Each block's viewing ray is intersected with the rendered panorama; the first terrain cell it reaches is its ground point.</li>
+            <li><b>Terrain attributes</b>Slope and aspect from elevation gradients; ESA WorldCover 10 m land cover at the ground point.</li>
+            <li><b>Usable-ground mask</b>Sky, the camera housing and blocks past the terrain model's reach are dropped before measuring.</li>
+          </ul>
+<pre class="code">ground = terrain.backproject(cam, pano)   <span class="c"># distance, lat, lon per block</span></pre>
+        </details>
+        <a class="next" href="#s-measure">Next: measure change over time<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
 
+      <!-- 4 MEASURE -->
+      <article class="step" id="s-measure">
+        <p class="step-pill">Step 4 of 5 <span>Measure</span></p>
+        <h3 class="step-title">Colour you can trust across seasons</h3>
+        <p class="step-lede">Raw camera colour is mostly haze, weather and sensor drift. Fuel Gauge keeps the clear days, finds the vegetation on its own, corrects colour against rock and soil in the same frame, and writes a daily record that only ever looks backward.</p>
+        <div class="measure-vis">
+          <div class="roi"><img id="roi-img" src="assets/study/cucamongasouth.jpg" alt="A ridge camera's anchor view with the automatically found vegetation and reference blocks marked"><canvas id="roi-ov"></canvas></div>
+          <div class="cal-card">
+            <canvas id="green-chart" role="img" aria-label="Fifteen years of daily greenness from the ridge camera, one row per year"></canvas>
+            <div class="swatches"><span><i style="background:#D6B05C"></i>cured</span><span><i style="background:#186848"></i>green flush</span><span><i style="background:var(--signal)"></i>colour reference</span></div>
+          </div>
+        </div>
+        <p class="cap">A Forest Service ridge camera, 2003 to 2018: green blocks were found automatically and measured; orange blocks anchor the colour correction. Right, the output: one row per year, one column per day.</p>
+        <div class="stat-row" id="measure-stats"></div>
+        <details class="hood" open>
+          <summary>Under the hood</summary>
+          <ul>
+            <li><b>Haze scoring</b>Sobel edge correlation with the anchor frame; a day is clear at 80% of its trailing 90-day norm.</li>
+            <li><b>Automatic regions</b>Segmentation vegetation labels plus a strong seasonal swing (5th to 95th percentile of weekly medians). No hand-drawn masks.</li>
+            <li><b>Drift-tracking white balance</b>A von Kries correction against blocks that stay flat all year, smoothed over 61 days so it follows the sensor, not snow.</li>
+            <li><b>Indices</b>GRVI and GCC per block; camera NDVI from near-infrared twins with exposure correction (Petach et al. 2014).</li>
+            <li><b>Causal smoothing</b>Weekly 90th percentile then a 15-day mean, using only past data, so it is safe as a nowcast.</li>
+          </ul>
+<pre class="code">fuelgauge measure out/ridge   <span class="c"># _daily.csv + _regions.png</span></pre>
+        </details>
+        <a class="next" href="#s-scale">Next: scale to a whole network<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
 
-
-
-<section class="stage wrap" id="coverage">
-  <div class="stage-head"><span class="stage-num">5</span><div><h2>Know what a camera network can see, and where to add one</h2>
-    <p class="lede">Give it a list of camera sites and it traces terrain line of sight from each, counts how many cameras see every patch of ground, tests whether a smoke column above any point is in view, and ranks the hilltops that would close the biggest gaps.</p></div></div>
-  <div class="stage-body">
-    <div class="how">
-      <h3>Under the hood</h3>
-      <ul class="tech">
-        <li><b>Radial viewsheds</b><p>Rays every 0.1° out to 30 km, sampled at half the elevation cell size, with earth curvature and refraction. A sample is visible when its elevation angle beats every sample before it on the ray.</p></li>
-        <li><b>Smoke line of sight</b><p>For any point, whether a column 100 or 300 m above the ground there would rise into a camera's view, the way a lookout spots a fire before its base is visible.</p></li>
-        <li><b>Greedy siting</b><p>Candidates are the highest cell in every 6 km square. Each round picks the candidate that brings the most unseen target ground into view and counts each cell once, the standard greedy answer to maximum coverage.</p></li>
-      </ul>
+      <!-- 5 SCALE -->
+      <article class="step" id="s-scale">
+        <p class="step-pill">Step 5 of 5 <span>Scale</span></p>
+        <h3 class="step-title">See what a whole network sees, and where it is blind</h3>
+        <p class="step-lede">Give it a list of camera sites. It traces terrain line of sight from every one, tests whether smoke rising anywhere would be in view, and ranks the hilltops that would close the biggest gaps.</p>
+        <div class="cov" id="cov">
+          <div class="cov-in"><img src="assets/coverage/ca_light.png" alt="California shaded by how many fire cameras can see each patch of wildland, with large fires since 2020 marked"><svg id="cov-ov" aria-hidden="true"></svg></div>
+          <div class="cov-key"><span><i style="background:#1F6E50"></i>Seen by 2+ cameras</span><span><i style="background:#98C6AC"></i>Seen by 1</span><span><i style="background:#E4BE78"></i>Unseen wildland</span><span><i class="ring"></i>Largest unseen fires</span><span><i class="dia"></i>Proposed sites</span></div>
+        </div>
+        <div class="stat-row" id="cov-stats"></div>
+        <details class="hood" open>
+          <summary>Under the hood</summary>
+          <ul>
+            <li><b>Radial viewsheds</b>Rays every 0.1° out to 30 km with curvature and refraction; a sample is visible when it beats every elevation angle before it.</li>
+            <li><b>Smoke line of sight</b>Would a column 100 or 300 m above a point rise into view? That is how a lookout spots a fire before its base is visible.</li>
+            <li><b>Greedy siting</b>Hilltop candidates in every 6 km square; each round takes the one that adds the most unseen ground, counted once.</li>
+          </ul>
 <pre class="code">fuelgauge viewshed cameras.csv coverage.tif
-fuelgauge site cameras.csv --k <span class="s">10</span> > new_sites.csv</pre>
-    </div>
-    <div class="proof">
-      <div class="cov">
-        <picture>
-          <source srcset="assets/coverage/ca_dark.png" media="(prefers-color-scheme: dark)">
-          <img src="assets/coverage/ca_light.png" alt="California shaded by how many fire cameras can see each patch of wildland, with large fires since 2020 marked" loading="lazy">
-        </picture>
-      </div>
-      <p class="cap">All 1,309 ALERTCalifornia cameras against a 90 m terrain model. Dark green is wildland two or more cameras can see, light green one, tan none. Orange dots are 1,000-acre fires since 2020 that started where no camera could see a 300 m smoke column.</p>
-      <div class="stat-line" id="cov-stats"></div>
+fuelgauge site cameras.csv --k <span class="s">10</span></pre>
+        </details>
+        <a class="next" href="#results">See what we found with it<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="section wrap" id="evaluation">
-  <div class="eval">
-    <div class="section-head" style="margin-bottom:0">
-      <h2>Scored against field data, including when it loses</h2>
-      <p class="lede">The evaluate module scores any camera series the way you would want a paper reviewed: leave one year out, on top of a baseline that already knows each site's seasonal cycle, so a predictor only gets credit for knowing a year was unusual.</p>
-      <p class="muted" id="eval-text"></p>
-<pre class="code"><span class="k">from</span> fuelgauge <span class="k">import</span> evaluate
-<span class="c"># samples: site, date, year, lfmc and your predictor columns</span>
-samples = evaluate.add_season(samples)
-scores, preds = evaluate.compare(samples, {
-    <span class="s">"camera"</span>: [<span class="s">"cam_g"</span>, <span class="s">"cam_d"</span>],
-    <span class="s">"satellite"</span>: [<span class="s">"ndii_g"</span>, <span class="s">"ndii_d"</span>]})</pre>
-    </div>
-    <div>
-      <table class="score" id="score"></table>
-      <p class="cap" style="margin-top:10px" id="score-cap"></p>
-    </div>
-  </div>
-</section>
-
+<!-- ============ RESULTS ============ -->
 <section class="section wrap" id="results">
-  <div class="section-head">
-    <h2>What it found</h2>
-    <p class="lede">Every result here was produced with the pipeline on public data, and each one has its own interactive page.</p>
+  <div class="section-head center">
+    <span class="kicker">Results</span>
+    <h2>Pointed at real cameras, it found things nobody had measured</h2>
+    <p class="lede">Every result was produced end to end by the pipeline on public data. Each one has its own interactive page.</p>
   </div>
-  <div class="results">
-    <a class="lead" href="research.html#hillside">
-      <img src="assets/readme/hillside.gif" alt="Fifteen years of one chaparral hillside, every April and September, registered onto one view">
-      <h3>One hillside, fifteen years</h3>
-      <p>Every daily photo from a Forest Service ridge camera above the San Jacinto Valley, 2003 to 2018, registered onto one view and set next to field samples of chamise moisture. Drag through the record and watch the brush green up and cure.</p>
+  <div class="bento">
+    <a class="tile t-cov reveal" href="research.html#coverage">
+      <div class="t-media"><img src="assets/coverage/ca_light.png" alt="" loading="lazy"></div>
+      <div class="t-body">
+        <span class="t-tag">Statewide audit</span>
+        <b class="t-num" id="res-cov-num">21%</b>
+        <h3>of California's biggest recent fires started where no camera could see the smoke</h3>
+        <p id="res-cov"></p>
+        <span class="t-link">Explore the coverage map</span>
+      </div>
     </a>
-    <div class="side">
-      <a href="research.html#coverage"><picture><source srcset="assets/coverage/ca_dark.png" media="(prefers-color-scheme: dark)"><img src="assets/coverage/ca_light.png" alt="" loading="lazy"></picture><div><h3>What California's 1,309 fire cameras can see</h3><p id="res-cov"></p></div></a>
-      <a href="research.html#study"><img src="assets/study/kaweah.jpg" alt="" loading="lazy"><div><h3>21 cameras against 3,832 field samples</h3><p id="res-study"></p></div></a>
-      <a href="research.html#live"><img src="assets/live/pi-s-mobo-c_oct.jpg" alt="" loading="lazy"><div><h3>A live fire-camera network</h3><p>Eight HPWREN cameras calibrated to the terrain. A GitHub Action measures every ground block each morning and publishes which slopes are drying fastest.</p></div></a>
+    <a class="tile t-hill reveal" href="research.html#hillside">
+      <div class="t-media"><img src="assets/readme/hillside.gif" alt="" loading="lazy"></div>
+      <div class="t-body">
+        <span class="t-tag">Alignment</span>
+        <h3>Fifteen years of one hillside, frame-locked</h3>
+        <p>Every daily photo from a Forest Service ridge camera, 2003 to 2018, on one view next to field samples of chamise moisture.</p>
+        <span class="t-link">Scrub through it</span>
+      </div>
+    </a>
+    <a class="tile t-site reveal" href="research.html#coverage">
+      <div class="t-body">
+        <span class="t-tag">Siting</span>
+        <b class="t-num" id="res-site-num">88%</b>
+        <h3>of the missed burn area would have been in view with ten more cameras</h3>
+        <p id="res-site"></p>
+        <span class="t-link">See the proposed sites</span>
+      </div>
+    </a>
+    <a class="tile t-bench reveal" href="research.html#study">
+      <div class="t-body">
+        <span class="t-tag">Benchmark</span>
+        <h3>Can a camera read how dry the brush is?</h3>
+        <p id="res-bench"></p>
+        <div class="mini-bars" id="bench-bars"></div>
+        <span class="t-link">Read the study</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ============ LIVE ============ -->
+<section class="section wrap" id="live">
+  <div class="live-head">
+    <div class="section-head" style="margin-bottom:0">
+      <span class="kicker"><span class="pulse"></span>Running right now</span>
+      <h2>A live, calibrated fire-camera network</h2>
+      <p class="lede">Eight HPWREN cameras in Southern California, calibrated from their skylines. These frames come straight from the cameras and refresh every minute. Every morning a GitHub Action measures each ground block and publishes which slopes are drying fastest.</p>
+    </div>
+    <div class="live-clock"><span class="muted small">California time</span><b id="clock">--:--</b><span class="muted small" id="live-updated"></span></div>
+  </div>
+  <p class="night-note" id="live-night" hidden><span>It is night on the ridges right now, so the cards show each camera's daytime view. The feed in the top panel is still live: tap it to see the valley lights.</span></p>
+  <div class="live-grid" id="live-grid"></div>
+</section>
+
+<!-- ============ START ============ -->
+<section class="section wrap" id="start">
+  <div class="start">
+    <div class="section-head" style="margin-bottom:0">
+      <span class="kicker">Get started</span>
+      <h2>From a folder of photos to a calibrated record in one command</h2>
+      <p class="lede">Python 3.10 or newer. CPU only. Photo dates are read from file names or EXIF, so most archives work as they are.</p>
+      <div class="start-links">
+        <a class="link-card" href="docs.html#quickstart"><b>Quickstart</b><span>Run your first camera in five minutes</span></a>
+        <a class="link-card" href="docs.html#cli"><b>Command line</b><span>run, calibrate, viewshed, site</span></a>
+        <a class="link-card" href="docs.html#mod-measure"><b>Python API</b><span>Every function, generated from the code</span></a>
+      </div>
+    </div>
+    <div class="term" id="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>~/cameras</span></div>
+      <pre id="term-body" aria-label="Example terminal session"></pre>
     </div>
   </div>
 </section>
 
-<section class="section wrap" id="start">
-  <div class="section-head">
-    <h2>Get started</h2>
-    <p class="lede">Python 3.10 or newer. The core install needs only NumPy, SciPy, pandas, OpenCV and Pillow; add <code>geo</code> for terrain and <code>seg</code> for the segmentation model, which downloads once (about 100 MB) on first use.</p>
-  </div>
-  <div class="start">
-    <div>
-      <div class="tabs" role="tablist">
-        <button role="tab" aria-selected="true" aria-controls="tab-cli" id="t-cli">Command line</button>
-        <button role="tab" aria-selected="false" aria-controls="tab-py" id="t-py">Python</button>
-      </div>
-<pre class="code" id="tab-cli" role="tabpanel" aria-labelledby="t-cli"><span class="c"># install</span>
-pip install <span class="s">"fuelgauge[geo,seg] @ git+https://github.com/shourya0mehta/fuel-gauge"</span>
-
-<span class="c"># a folder of photos from one camera, dates in the file names or EXIF</span>
-fuelgauge run photos/ out/ridge
-
-<span class="c"># solve the pose of a camera from one frame</span>
-fuelgauge calibrate ridge frame.jpg --lat <span class="s">33.40</span> --lon <span class="s">-117.19</span> \
-    --elev <span class="s">483</span> --yaw <span class="s">90</span>   <span class="c"># rough heading</span>
-
-<span class="c"># what a set of cameras can see, and where to add more</span>
-fuelgauge viewshed cameras.csv coverage.tif
-fuelgauge site cameras.csv --k <span class="s">5</span></pre>
-<pre class="code" id="tab-py" role="tabpanel" aria-labelledby="t-py" hidden><span class="k">from</span> glob <span class="k">import</span> glob
-<span class="k">from</span> fuelgauge.archive <span class="k">import</span> process
-<span class="k">from</span> fuelgauge.measure <span class="k">import</span> measure
-<span class="k">from</span> fuelgauge.cli <span class="k">import</span> photo_time
-
-paths = sorted(glob(<span class="s">"photos/*.jpg"</span>))
-times = [photo_time(p) <span class="k">for</span> p <span class="k">in</span> paths]
-blocks = process(paths, times, <span class="s">"out/ridge"</span>)       <span class="c"># register</span>
-daily, regions, info = measure(blocks, <span class="s">"out/ridge"</span>) <span class="c"># measure</span>
-
-<span class="k">from</span> fuelgauge <span class="k">import</span> terrain, viewshed
-dem = terrain.load_planetary(<span class="s">"cop-dem-glo-90"</span>, <span class="s">"data"</span>, <span class="s">33.4</span>, <span class="s">-117.2</span>, <span class="s">40000</span>)
-picks = viewshed.site(dem, existing=[(<span class="s">33.40</span>, <span class="s">-117.19</span>)], k=<span class="s">5</span>)</pre>
-    </div>
-    <div>
-      <h3 style="margin-bottom:12px">What you get back</h3>
-      <ul class="outputs">
-        <li><code>_blocks.npz</code><p>Mean colour of every 24-pixel block in every registered photo, with validity, haze score, stretch and view.</p></li>
-        <li><code>_qa.json</code><p>Per-photo screening metrics, the transform that registered it and the views it was joined into.</p></li>
-        <li><code>_daily.csv</code><p>Daily GRVI and GCC per view, raw and white-balanced, and one standardised index joined across views.</p></li>
-        <li><code>_regions.png</code><p>The anchor frame with the measured vegetation and reference blocks marked, to check at a glance.</p></li>
-        <li><code>_lookup.npz</code><p>From calibrate: distance, latitude and longitude for every pixel block.</p></li>
-        <li><code>coverage.tif</code><p>From viewshed: how many cameras see each cell, as a GeoTIFF any GIS opens.</p></li>
-      </ul>
-    </div>
-  </div>
-  <div class="closing">
-    <div>
-      <h2 style="max-width:20ch">Bring your own camera archive</h2>
-      <p class="lede" style="margin-top:12px">MIT licensed, tested on synthetic drift, re-aims, relocations and terrain in CI.</p>
-    </div>
-    <div class="cta" style="margin:0">
-      <a class="btn primary" href="https://github.com/shourya0mehta/fuel-gauge">View on GitHub</a>
-      <a class="btn" href="docs.html">Read the docs</a>
+<!-- ============ CTA ============ -->
+<section class="cta-band">
+  <div class="wrap cta-inner">
+    <h2>Your cameras are already watching. Make them measure.</h2>
+    <div class="cta">
+      <a class="btn dark" href="#start">Get started</a>
+      <a class="btn" href="https://github.com/shourya0mehta/fuel-gauge">Star on GitHub</a>
     </div>
   </div>
 </section>
@@ -547,10 +382,10 @@ picks = viewshed.site(dem, existing=[(<span class="s">33.40</span>, <span class=
 <footer class="foot">
   <div class="wrap">
     <div>
-      <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="var(--ink)"/><path d="M4 21 L10 14 L14 17 L20 9 L28 18" fill="none" stroke="var(--signal)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg>Fuel Gauge</a>
-      <p style="margin-top:10px;max-width:36ch">Built by Shourya Mehta on public data only. A research tool, not an operational fire-danger product.</p>
+      <a class="brand" href="./"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#FF5B1F"/><path d="M5 22 L11 14.5 L15 18 L20.5 10.5 L27 19" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><circle cx="23.5" cy="8" r="2" fill="#fff"/></svg>fuelgauge</a>
+      <p style="margin-top:12px;max-width:38ch">Open-source perception for the cameras already on every ridge. Built by Shourya Mehta. MIT licensed.</p>
     </div>
-    <div><h4>Product</h4><ul><li><a href="#pipeline">How it works</a></li><li><a href="#start">Get started</a></li><li><a href="docs.html">Docs</a></li></ul></div>
+    <div><h4>Product</h4><ul><li><a href="#how">How it works</a></li><li><a href="#start">Get started</a></li><li><a href="docs.html">Docs</a></li></ul></div>
     <div><h4>Research</h4><ul><li><a href="research.html#coverage">Statewide coverage</a></li><li><a href="research.html#study">Fuel moisture study</a></li><li><a href="research.html#live">Live network</a></li></ul></div>
     <div><h4>Project</h4><ul><li><a href="https://github.com/shourya0mehta/fuel-gauge">GitHub</a></li><li><a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff">Cite</a></li><li><a href="research.html#methods">Data credits</a></li></ul></div>
   </div>

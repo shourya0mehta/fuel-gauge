@@ -637,7 +637,7 @@ moves = track.sustained_moves(times, tx, ty)   <span class="c"># when was it bum
     ['Small samples', 'Crews sample every two to four weeks, so each camera has a few hundred samples over 5 to 16 years. Year-to-year results are noisy, which is why every number here is scored on held-out years.'],
   ];
   if (C) LIM.unshift(['Coverage assumptions', 'The map uses today\'s cameras against fires from 2020 to 2025. It assumes every site can pan a full circle and see 30 km, and ignores haze, night, trees by the mast and where each camera was pointed. Ignition points can be off by hundreds of metres.']);
-  $('limits-grid').innerHTML = LIM.map((l) => `<div><h3>${l[0]}</h3><p>${l[1]}</p></div>`).join('');
+  if ($('limits-grid')) $('limits-grid').innerHTML = LIM.map((l) => `<div><h3>${l[0]}</h3><p>${l[1]}</p></div>`).join('');
   $('methods-body').innerHTML = (S.text && S.text.methods) || `
     <p><b>Cameras.</b> PhenoCam Network midday photos (one per day) for every camera with Globe-LFMC field samples within 25 km, overlapping years only. HPWREN fire cameras for the live network, pulled from the public CDN.</p>
     <p><b>Registration.</b> SIFT features on contrast-equalised frames, 4-degree-of-freedom similarity transforms by RANSAC, keyframe tracking within stretches, new stretch after four lost frames, stretches joined by their clearest keyframes (at least 30 inliers). A camera moved to a new spot becomes a second view with its own calibration.</p>

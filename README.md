@@ -1,6 +1,6 @@
 # Fuel Gauge
 
-**Turn any fixed camera into a measuring instrument.**
+**Turn any fixed camera into a calibrated sensor.**
 
 Fuel Gauge is an open-source Python pipeline for fire lookouts, phenology cameras and webcams. Give it a folder of photos and a location. It keeps years of frames aligned, works out where the camera points from the skyline alone, ties every pixel to the ground and hands back a daily vegetation record you can compare across seasons. It also maps what a whole network of cameras can see and where new ones would help most.
 
