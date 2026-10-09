@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://shourya0mehta.github.io/fuel-gauge/"><img src="docs/assets/readme/banner.png" alt="fuelgauge: turn any fixed camera into a calibrated sensor" width="100%"></a>
+  <a href="https://shourya0mehta.github.io/fuel-gauge/"><img src="https://raw.githubusercontent.com/shourya0mehta/fuel-gauge/main/docs/assets/readme/banner.png" alt="fuelgauge: turn any fixed camera into a calibrated sensor" width="100%"></a>
 </p>
 
 <p align="center">
@@ -7,7 +7,7 @@
   <a href="https://github.com/shourya0mehta/fuel-gauge/actions/workflows/site.yml"><img src="https://img.shields.io/badge/live_network-updated_daily-FF5B1F" alt="Live network updated daily"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-0E0E0E" alt="Python 3.10+">
   <img src="https://img.shields.io/badge/runs_on-CPU-0E0E0E" alt="Runs on CPU">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0E0E0E" alt="MIT licence"></a>
+  <a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-0E0E0E" alt="MIT licence"></a>
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@
 
 Thousands of cameras already watch wildland for fire. California alone runs 1,309 of them, each posting a frame a minute. To the software behind them a pixel is only a colour, with no distance and no place on a map. Fuel Gauge turns that colour into a measurement.
 
-<p align="center"><img src="docs/assets/readme/console.gif" alt="A live HPWREN fire camera calibrated by Fuel Gauge: the skyline found in the photo locks onto the skyline the terrain predicts, then every point on the hillside reads out its distance, bearing, land cover and coordinates" width="90%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/shourya0mehta/fuel-gauge/main/docs/assets/readme/console.gif" alt="A live HPWREN fire camera calibrated by Fuel Gauge: the skyline found in the photo locks onto the skyline the terrain predicts, then every point on the hillside reads out its distance, bearing, land cover and coordinates" width="90%"></p>
 <p align="center"><sub>A live HPWREN fire camera after calibration. Orange: the skyline Fuel Gauge found in the photo. Dashed: the skyline a 30 m terrain model predicts from the solved pose, 0.04° apart.</sub></p>
 
 ## Highlights
@@ -42,7 +42,7 @@ Thousands of cameras already watch wildland for fire. California alone runs 1,30
 ## Quickstart
 
 ```bash
-pip install "fuelgauge[geo,seg] @ git+https://github.com/shourya0mehta/fuel-gauge"
+pip install "fuelgauge[geo,seg]"
 
 # years of photos from one camera -> aligned views -> daily vegetation record
 fuelgauge run photos/ out/ridge
@@ -96,11 +96,11 @@ Every result below was produced end to end by the pipeline on public data, and e
 - A siting search over 11,847 hilltops finds ten new sites that add **9,332 km²** of watched wildland. Looking back, a different ten would have seen **1.31 million of the 1.48 million acres** that burned out of view.
 - The biggest blind spots: the Klamath Mountains, Yosemite's high country, the Modoc Plateau and the Diablo Range.
 
-<p align="center"><img src="docs/assets/coverage/ca_light.png" alt="California shaded by how many fire cameras can see each patch of wildland, with large fires since 2020 marked" width="60%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/shourya0mehta/fuel-gauge/main/docs/assets/coverage/ca_light.png" alt="California shaded by how many fire cameras can see each patch of wildland, with large fires since 2020 marked" width="60%"></p>
 
 **Twenty years of footage on one view.** 29,047 daily photos from 21 PhenoCam cameras in 6 states were locked onto fixed views, including six cameras that were moved to a new mast mid-record. Automatic regions beat the network's own hand-drawn masks at 12 of 20 cameras, and drift-tracking white balance lifts the year-to-year signal by 68%.
 
-<p align="center"><img src="docs/assets/readme/hillside.gif" alt="Fifteen years of one hillside in the San Bernardino National Forest, every April and September, aligned onto one view" width="70%"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/shourya0mehta/fuel-gauge/main/docs/assets/readme/hillside.gif" alt="Fifteen years of one hillside in the San Bernardino National Forest, every April and September, aligned onto one view" width="70%"></p>
 
 **A benchmark for camera fuel moisture.** The cameras were scored against 3,832 field samples of live fuel moisture, one held-out year at a time. Satellite shortwave infrared leads (anomaly correlation 0.31, ahead of season at 15 of 21 cameras), camera colour matches the seasonal baseline, and near-infrared camera NDVI adds little. That gives the field a clear target, and the harness ships with the package so the next signal can be scored the same way.
 
@@ -117,12 +117,12 @@ Every result below was produced end to end by the pipeline on public data, and e
 
 | Path | What it is |
 | --- | --- |
-| [`fuelgauge/`](fuelgauge) | The package and the `fuelgauge` command |
-| [`docs/`](docs) | The website: product page, docs (generated by `scripts/build_docs.py`), research pages and live data |
-| [`scripts/`](scripts) | The studies end to end: download, align, score, map, siting and site data |
-| [`live/`](live) | The daily updater for the calibrated HPWREN cameras, run by GitHub Actions |
-| [`study/`](study) | Camera list, per-camera results and coverage statistics |
-| [`tests/`](tests) | Synthetic cameras and terrain |
+| [`fuelgauge/`](https://github.com/shourya0mehta/fuel-gauge/tree/main/fuelgauge) | The package and the `fuelgauge` command |
+| [`docs/`](https://github.com/shourya0mehta/fuel-gauge/tree/main/docs) | The website: product page, docs (generated by `scripts/build_docs.py`), research pages and live data |
+| [`scripts/`](https://github.com/shourya0mehta/fuel-gauge/tree/main/scripts) | The studies end to end: download, align, score, map, siting and site data |
+| [`live/`](https://github.com/shourya0mehta/fuel-gauge/tree/main/live) | The daily updater for the calibrated HPWREN cameras, run by GitHub Actions |
+| [`study/`](https://github.com/shourya0mehta/fuel-gauge/tree/main/study) | Camera list, per-camera results and coverage statistics |
+| [`tests/`](https://github.com/shourya0mehta/fuel-gauge/tree/main/tests) | Synthetic cameras and terrain |
 
 <details>
 <summary><b>Reproduce the studies</b></summary>
@@ -147,7 +147,7 @@ The full run downloads about 60,000 photos and takes a few hours on two CPU core
 
 ## Data and credits
 
-- **PhenoCam Network** (phenocam.nau.edu). Richardson et al. (2018), *Tracking vegetation phenology across diverse North American biomes using PhenoCam imagery*, Scientific Data 5:180028. Per-camera acknowledgements are in [study/ACKNOWLEDGEMENTS.md](study/ACKNOWLEDGEMENTS.md).
+- **PhenoCam Network** (phenocam.nau.edu). Richardson et al. (2018), *Tracking vegetation phenology across diverse North American biomes using PhenoCam imagery*, Scientific Data 5:180028. Per-camera acknowledgements are in [study/ACKNOWLEDGEMENTS.md](https://github.com/shourya0mehta/fuel-gauge/blob/main/study/ACKNOWLEDGEMENTS.md).
 - **HPWREN** camera network, University of California San Diego (hpwren.ucsd.edu). Images courtesy of HPWREN.
 - **ALERTCalifornia** camera network (UC San Diego, with CAL FIRE): camera positions from the public camera map.
 - **Globe-LFMC 2.0**. Yebra et al. (2024), Scientific Data 11:332, compiled in part from the US National Fuel Moisture Database.
@@ -156,4 +156,4 @@ The full run downloads about 60,000 photos and takes a few hours on two CPU core
 - **NIFC WFIGS** wildland fire incident locations (National Interagency Fire Center).
 - Camera NDVI method: Petach et al. (2014), *Monitoring vegetation phenology using an infrared-enabled security camera*, Agricultural and Forest Meteorology 195-196:143-151.
 
-Built by Shourya Mehta. To cite, see [CITATION.cff](CITATION.cff).
+Built by Shourya Mehta. To cite, see [CITATION.cff](https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff).

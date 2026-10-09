@@ -1,14 +1,28 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "fuelgauge"
 version = "0.3.0"
-description = "Turn fixed outdoor cameras into calibrated instruments: multi-year registration, skyline camera calibration, pixel-to-ground mapping, drift-corrected vegetation measurement and camera network coverage."
+description = "Turn any fixed camera into a calibrated sensor: pose from the skyline, decades of footage on one view, every pixel mapped to the ground."
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "Shourya Mehta" }]
+keywords = ["computer-vision", "camera-calibration", "image-registration", "wildfire", "remote-sensing", "viewshed", "phenocam", "geospatial"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Image Recognition",
+  "Topic :: Scientific/Engineering :: GIS",
+  "Topic :: Scientific/Engineering :: Atmospheric Science",
+]
 requires-python = ">=3.10"
 dependencies = [
   "numpy>=1.24",
@@ -17,6 +31,12 @@ dependencies = [
   "opencv-python-headless>=4.8",
   "pillow>=10",
 ]
+
+[project.urls]
+Homepage = "https://shourya0mehta.github.io/fuel-gauge/"
+Documentation = "https://shourya0mehta.github.io/fuel-gauge/docs.html"
+Source = "https://github.com/shourya0mehta/fuel-gauge"
+Research = "https://shourya0mehta.github.io/fuel-gauge/research.html"
 
 [project.optional-dependencies]
 geo = ["rasterio>=1.3", "pystac-client>=0.7", "planetary-computer>=1.0"]
