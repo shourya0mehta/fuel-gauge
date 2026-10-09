@@ -149,9 +149,6 @@
 .hood li b { color: var(--ink); font-weight: 600; font-size: 0.93rem; }
 .hood pre.code { margin-bottom: 16px; }
 @media (max-width: 760px) { .hood ul { grid-template-columns: minmax(0, 1fr); } }
-.next { display: inline-flex; align-items: center; gap: 8px; justify-self: start; font-weight: 600; text-decoration: none; color: var(--signal-ink); padding: 8px 0; }
-.next .arr { width: 16px; height: 16px; transition: transform .15s; }
-.next:hover .arr { transform: translateX(4px); }
 @media (max-width: 960px) {
   .tour { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   .rail { position: sticky; top: 64px; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); grid-template-columns: 1fr; gap: 0; padding: 8px 0; margin-inline: -16px; padding-inline: 16px; border-bottom: 1px solid var(--line); }

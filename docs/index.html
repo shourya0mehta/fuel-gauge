@@ -173,7 +173,6 @@
           </ul>
 <pre class="code">fuelgauge register-archive photos/ out/ridge</pre>
         </details>
-        <a class="next" href="#s-calibrate">Next: solve the camera's pose<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <!-- 2 CALIBRATE -->
@@ -197,7 +196,6 @@
           </ul>
 <pre class="code">fuelgauge calibrate ridge frame.jpg --lat <span class="s">33.4008</span> --lon <span class="s">-117.1905</span> --elev <span class="s">483</span> --yaw <span class="s">90</span></pre>
         </details>
-        <a class="next" href="#s-map">Next: put every pixel on the map<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <!-- 3 MAP -->
@@ -211,7 +209,7 @@
             <button type="button" data-mode="lc" aria-pressed="false">Land cover</button>
             <button type="button" data-mode="aspect" aria-pressed="false">Slope facing</button>
           </div>
-          <select class="sel" id="geo-cam" aria-label="Camera"></select>
+          <select id="geo-cam" aria-label="Camera" data-combo data-placeholder="Search cameras"></select>
         </div>
         <div class="geo">
           <div class="photo"><img id="geo-img" alt=""><canvas id="geo-ov"></canvas></div>
@@ -228,7 +226,6 @@
           </ul>
 <pre class="code">ground = terrain.backproject(cam, pano)   <span class="c"># distance, lat, lon per block</span></pre>
         </details>
-        <a class="next" href="#s-measure">Next: measure change over time<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <!-- 4 MEASURE -->
@@ -256,7 +253,6 @@
           </ul>
 <pre class="code">fuelgauge measure out/ridge   <span class="c"># _daily.csv + _regions.png</span></pre>
         </details>
-        <a class="next" href="#s-scale">Next: scale to a whole network<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <!-- 5 SCALE -->
@@ -279,7 +275,6 @@
 <pre class="code">fuelgauge viewshed cameras.csv coverage.tif
 fuelgauge site cameras.csv --k <span class="s">10</span></pre>
         </details>
-        <a class="next" href="#results">See what we found with it<svg class="arr" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
     </div>
   </div>
@@ -390,6 +385,8 @@ fuelgauge site cameras.csv --k <span class="s">10</span></pre>
     <div><h4>Project</h4><ul><li><a href="https://github.com/shourya0mehta/fuel-gauge">GitHub</a></li><li><a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff">Cite</a></li><li><a href="research.html#methods">Data credits</a></li></ul></div>
   </div>
 </footer>
+<script src="combo.js" defer></script>
+<script src="anchors.js" defer></script>
 <script src="landing.js" defer></script>
 </body>
 </html>

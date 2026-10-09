@@ -327,7 +327,7 @@
   function geo(L) {
     const modeBox = $('geo-mode'), sel = $('geo-cam'); if (!modeBox) return;
     let mode = 'dist', idx = Math.max(0, L.cams.findIndex((c) => c.id === L.default)), B = null, c = null, bg = null, visible = false, t0 = 0, anim = 0;
-    L.cams.forEach((cc, i) => { const o = document.createElement('option'); o.value = i; o.textContent = cc.short; if (i === idx) o.selected = true; sel.appendChild(o); });
+    L.cams.forEach((cc, i) => { const o = document.createElement('option'); o.value = i; o.textContent = cc.short; o.dataset.sub = `${cc.dir_label}, ${cc.name.split(' - ').pop()}, skyline fit ${cc.median_err_deg.toFixed(2)}°`; if (i === idx) o.selected = true; sel.appendChild(o); });
     sel.addEventListener('change', () => { idx = +sel.value; load(); });
     modeBox.querySelectorAll('button').forEach((b) => b.addEventListener('click', () => {
       mode = b.dataset.mode; modeBox.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); photo(); key();

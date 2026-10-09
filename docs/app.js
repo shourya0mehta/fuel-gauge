@@ -300,7 +300,7 @@
 
   /* ---------------- explorer ---------------- */
   const sel = $('ex-select');
-  S.cams.slice().sort((a, b) => a.name.localeCompare(b.name)).forEach((c) => { const o = document.createElement('option'); o.value = c.cam; o.textContent = `${c.name} (${c.veg})`; sel.appendChild(o); });
+  S.cams.slice().sort((a, b) => a.name.localeCompare(b.name)).forEach((c) => { const o = document.createElement('option'); o.value = c.cam; o.textContent = c.name; o.dataset.sub = `${c.state}, ${c.veg}, ${c.years[0]}–${c.years[1]}`; sel.appendChild(o); });
   $('ex-count').textContent = T.cams + ' cameras';
   sel.addEventListener('change', () => selectCam(sel.value, false));
   const camCache = {};

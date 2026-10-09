@@ -219,10 +219,10 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
 .subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s; }
 .subnav a:hover { color: var(--ink); background: var(--bg-2); }
 .subnav a.on { color: #fff; background: var(--ink); }
+.controls .combo { flex: 1 1 320px; max-width: 560px; }
 .mast { padding-top: 72px; }
 .mast h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); max-width: 18ch; }
 .sec-head .label { font-size: 0.88rem; }
-section.wide { scroll-margin-top: 130px; }
 </style>
 </head>
 <body>
@@ -420,8 +420,8 @@ section.wide { scroll-margin-top: 130px; }
     <h2>Pick a camera</h2>
   </div>
   <div class="controls">
-    <label class="label" for="ex-select">Camera</label>
-    <select class="btn" id="ex-select"></select>
+    <span class="label">Camera</span>
+    <select id="ex-select" aria-label="Camera" data-combo data-placeholder="Search by name, state or ecosystem"></select>
     <button class="btn" id="ex-roi" aria-pressed="true">Measured blocks</button>
   </div>
   <div class="ex-grid">
@@ -560,6 +560,8 @@ section.wide { scroll-margin-top: 130px; }
     <div><h4>Project</h4><ul><li><a href="https://github.com/shourya0mehta/fuel-gauge">GitHub</a></li><li><a href="https://github.com/shourya0mehta/fuel-gauge/blob/main/CITATION.cff">Cite</a></li><li><a href="#methods">Data credits</a></li></ul></div>
   </div>
 </footer>
+<script src="combo.js" defer></script>
+<script src="anchors.js" defer></script>
 <script src="app.js" defer></script>
 <script>
 (() => {
