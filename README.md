@@ -34,7 +34,7 @@ Thousands of cameras already watch wildland for fire. California alone runs 1,30
   </tr>
   <tr>
     <td align="center" width="33%"><h3>1.4M acres</h3><sub>burned since 2020 by fires that started where no camera could see the smoke</sub></td>
-    <td align="center" width="33%"><h3>88%</h3><sub>of that out-of-view acreage seen by ten cameras placed by the siting search</sub></td>
+    <td align="center" width="33%"><h3>88%</h3><sub>of all burn area out of every camera's view that ten new cameras from the siting search would have seen</sub></td>
     <td align="center" width="33%"><h3>8 cameras</h3><sub>calibrated, live, and measured every morning by GitHub Actions</sub></td>
   </tr>
 </table>
