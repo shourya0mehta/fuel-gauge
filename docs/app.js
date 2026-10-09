@@ -605,7 +605,7 @@
 
   /* ---------------- toolkit, limits, methods ---------------- */
   $('tk-code').innerHTML = `<span class="c"># install</span>
-pip install "fuelgauge[geo,seg,eval] @ git+https://github.com/shourya0mehta/fuel-gauge"
+pip install "fuelgauge[geo,seg,eval]"
 
 <span class="c"># daily photos from one fixed camera -> registered colours</span>
 fuelgauge register-archive photos/ out/mycam

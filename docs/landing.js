@@ -545,7 +545,7 @@
   function terminal() {
     const pre = $('term-body'); if (!pre) return;
     const script = [
-      ['$', 'pip install "fuelgauge[geo,seg] @ git+https://github.com/shourya0mehta/fuel-gauge"'],
+      ['$', 'pip install "fuelgauge[geo,seg]"'],
       ['ok', 'Successfully installed fuelgauge-0.3.0'],
       ['$', 'fuelgauge run sangabriel/ out/sangabriel'],
       ['o', '1052 of 1052 photos dated, 2008-05-21 to 2016-03-23'],

@@ -102,7 +102,7 @@ pre.doc.mod { color: var(--ink); font-size: 0.98rem; }
     <div class="content">
 <section id="install"><h2>Install</h2>
 <p>Python 3.10 or newer. The core package needs NumPy, SciPy, pandas, OpenCV and Pillow. Extras add what each stage needs:</p>
-<pre class="code">pip install "fuelgauge[geo,seg,eval] @ git+https://github.com/shourya0mehta/fuel-gauge"</pre>
+<pre class="code">pip install "fuelgauge[geo,seg,eval]"</pre>
 <table class="ref"><tbody>
 <tr><td><code>geo</code></td><td>rasterio, pystac-client, planetary-computer: terrain and land cover from Microsoft Planetary Computer, GeoTIFF output</td></tr>
 <tr><td><code>seg</code></td><td>onnxruntime: the SegFormer-B2 model for sky and vegetation (about 100 MB, downloaded once to <code>~/.cache/fuelgauge</code>, override with <code>FUELGAUGE_CACHE</code>)</td></tr>

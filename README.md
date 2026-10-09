@@ -3,6 +3,7 @@
 </p>
 
 <p align="center">
+  <a href="https://pypi.org/project/fuelgauge/"><img src="https://img.shields.io/pypi/v/fuelgauge?color=FF5B1F&label=pypi" alt="PyPI"></a>
   <a href="https://github.com/shourya0mehta/fuel-gauge/actions/workflows/tests.yml"><img src="https://github.com/shourya0mehta/fuel-gauge/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
   <a href="https://github.com/shourya0mehta/fuel-gauge/actions/workflows/site.yml"><img src="https://img.shields.io/badge/live_network-updated_daily-FF5B1F" alt="Live network updated daily"></a>
   <img src="https://img.shields.io/badge/python-3.10%2B-0E0E0E" alt="Python 3.10+">
