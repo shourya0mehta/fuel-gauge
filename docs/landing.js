@@ -35,7 +35,8 @@
 
   /* copy */
   document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
-    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copied'; } catch (e) { b.textContent = 'Select it'; }
+    b.textContent = 'Copied'; // say so at once; correct it if the clipboard refuses
+    try { await navigator.clipboard.writeText(b.dataset.copy); } catch (e) { b.textContent = 'Select it'; }
     setTimeout(() => { b.textContent = 'Copy'; }, 1600);
   }));
 
