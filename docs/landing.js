@@ -9,7 +9,9 @@
   const NS = 'http://www.w3.org/2000/svg';
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
   const getJSON = (u) => fetch(u).then((r) => { if (!r.ok) throw new Error(u); return r.json(); });
-  const css = (v) => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  // colour tokens are fixed (one theme), so read each once
+  const cssCache = {};
+  const css = (v) => cssCache[v] ?? (cssCache[v] = getComputedStyle(document.documentElement).getPropertyValue(v).trim());
   const fmt = (n, d = 0) => Number(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
   const pct = (x) => Math.round(x * 100) + '%';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -455,20 +457,28 @@
     if (img.complete && img.naturalWidth) draw(); else img.addEventListener('load', draw);
     addEventListener('resize', draw);
     const cv2 = $('green-chart'), cal = CD.calendar; let rowsShown = reduced ? cal.rows.length : 0;
+    // straw to green in 64 steps, built once
+    const straw = [214, 176, 92], green = [24, 104, 72];
+    const pal = Array.from({ length: 64 }, (_, i) => `rgb(${straw.map((cc, j) => Math.round(cc + (green[j] - cc) * i / 63)).join(',')})`);
+    let G = null;
+    const drawRows = (a, b) => {
+      const { g, lab, top, rowH, cw } = G;
+      for (let y = a; y < b; y++) {
+        const row = cal.rows[y];
+        for (let d = 0; d < row.length; d++) {
+          const ch = row[d]; if (ch === '.') continue;
+          g.fillStyle = pal[B64.indexOf(ch)];
+          g.fillRect(lab + d * cw, top + y * rowH, cw + 0.6, rowH - 2);
+        }
+      }
+    };
     const chart = () => {
       const ny = cal.rows.length, lab = 38, w = cv2.clientWidth || 600, rowH = Math.max(11, Math.min(17, Math.floor(280 / ny))), top = 18, h = top + ny * rowH;
       const dpr = window.devicePixelRatio || 1; cv2.width = w * dpr; cv2.height = h * dpr; cv2.style.height = h + 'px';
       const g = cv2.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
-      const cw = (w - lab) / 366, straw = [214, 176, 92], green = [24, 104, 72];
+      const cw = (w - lab) / 366; G = { g, lab, top, rowH, cw };
       g.fillStyle = css('--bg-2'); g.fillRect(lab, top, w - lab, ny * rowH);
-      cal.rows.slice(0, rowsShown).forEach((row, y) => {
-        for (let d = 0; d < row.length; d++) {
-          const ch = row[d]; if (ch === '.') continue;
-          const k = B64.indexOf(ch) / 63;
-          g.fillStyle = `rgb(${straw.map((cc, j) => Math.round(cc + (green[j] - cc) * k)).join(',')})`;
-          g.fillRect(lab + d * cw, top + y * rowH, cw + 0.6, rowH - 2);
-        }
-      });
+      drawRows(0, rowsShown);
       g.fillStyle = css('--slate'); g.font = '11px ' + css('--mono'); g.textBaseline = 'middle';
       cal.years.forEach((y, i) => { if (i % 3 === 0 || i === ny - 1) g.fillText(String(y), 0, top + (i + 0.5) * rowH); });
       ['Jan', 'Apr', 'Jul', 'Oct'].forEach((m, j) => g.fillText(m, lab + [0, 90, 181, 273][j] * cw, 8));
@@ -476,7 +486,7 @@
     chart(); let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { chart(); }, 150); });
     onView($('roi-img').parentElement, () => {
       run();
-      const t0 = performance.now(); const step = (now) => { rowsShown = Math.min(cal.rows.length, Math.floor((now - t0) / 110)); chart(); if (rowsShown < cal.rows.length) requestAnimationFrame(step); };
+      const t0 = performance.now(); const step = (now) => { const k = Math.min(cal.rows.length, Math.floor((now - t0) / 110)); if (k > rowsShown) { drawRows(rowsShown, k); rowsShown = k; } if (rowsShown < cal.rows.length) requestAnimationFrame(step); };
       if (!reduced) requestAnimationFrame(step);
     });
     if (S && S.pooled && S.summary) {
