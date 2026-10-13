@@ -3,6 +3,8 @@
 (async function () {
   'use strict';
   const $ = (id) => document.getElementById(id);
+  // let a press paint before the redraw it triggers
+  const afterPaint = (f) => requestAnimationFrame(() => setTimeout(f, 0));
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   const NS = 'http://www.w3.org/2000/svg';
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
@@ -305,7 +307,7 @@
   sel.addEventListener('change', () => selectCam(sel.value, false));
   const camCache = {};
   let CD = null, CS = null, unit = 0, exRoi = true;
-  $('ex-roi').addEventListener('click', (e) => { exRoi = !exRoi; e.currentTarget.setAttribute('aria-pressed', String(exRoi)); drawExOverlay(); });
+  $('ex-roi').addEventListener('click', (e) => { exRoi = !exRoi; e.currentTarget.setAttribute('aria-pressed', String(exRoi)); afterPaint(drawExOverlay); });
   async function selectCam(cam, scroll) {
     selCam = cam; sel.value = cam;
     drawMap(); drawBoard();
@@ -338,7 +340,7 @@
       const b = document.createElement('button'); b.className = 'btn'; b.setAttribute('aria-pressed', String(i === unit));
       const [site, sp] = u.split(' | ');
       b.textContent = `${site}: ${sp.split(' ')[0][0]}. ${sp.split(' ').slice(1).join(' ')}`;
-      b.addEventListener('click', () => { unit = i; [...ub.children].forEach((c, j) => c.setAttribute('aria-pressed', String(j === i))); drawExPred(); });
+      b.addEventListener('click', () => { unit = i; [...ub.children].forEach((c, j) => c.setAttribute('aria-pressed', String(j === i))); afterPaint(() => { if (unit === i) drawExPred(); }); });
       ub.appendChild(b);
     });
     drawExOverlay(); drawCalendar(); drawExPred();
