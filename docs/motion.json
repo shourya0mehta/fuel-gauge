@@ -1,0 +1,30 @@
+{
+  "profile": "expressive",
+  "durations": {
+    "sm": 240,
+    "md": 400,
+    "lg": 500
+  },
+  "ease": {
+    "enter": "cubic-bezier(0, 0, 0.3, 1)",
+    "exit": "cubic-bezier(0.4, 0.14, 1, 1)",
+    "move": "cubic-bezier(0.4, 0.14, 0.3, 1)"
+  },
+  "spring": "damping ratio 0.8 at stiffness 380 and 200 (0.6 at 800 for small elements only); or Apple bounce 0.15 to 0.3",
+  "maxOvershoot": "5% (9.5% for small elements)",
+  "source": "IBM Carbon expressive tokens; Material 3 Expressive motion scheme; Apple WWDC23",
+  "inferredFrom": [
+    "2 table or grid element(s)",
+    "keyboard listeners on the page",
+    "a display-size heading (40 px or more) in the first viewport",
+    "touch-action rules in the CSS",
+    "signals: 2 controls in view, 2 tables, 35% prose, 0% imagery, hero no, display heading yes, drag surfaces yes",
+    "signals are weak or close, so the default (Productive) applies"
+  ],
+  "scores": {
+    "productive": 2.9,
+    "expressive": 2,
+    "calm": 2.755191741508736,
+    "physical": 2.5
+  }
+}

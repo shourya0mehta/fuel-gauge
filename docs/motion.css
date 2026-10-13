@@ -1,0 +1,39 @@
+/*
+ * Motion tokens: Expressive profile (written by kymo, approve before use)
+ * Source: IBM Carbon expressive tokens; Material 3 Expressive motion scheme; Apple WWDC23
+ * Why this profile:
+ *   - 2 table or grid element(s)
+ *   - keyboard listeners on the page
+ *   - a display-size heading (40 px or more) in the first viewport
+ *   - touch-action rules in the CSS
+ *   - signals: 2 controls in view, 2 tables, 35% prose, 0% imagery, hero no, display heading yes, drag surfaces yes
+ *   - signals are weak or close, so the default (Productive) applies
+ * Springs, if the app uses a spring library: damping ratio 0.8 at stiffness 380 and 200 (0.6 at 800 for small elements only); or Apple bounce 0.15 to 0.3
+ * Max overshoot: 5% (9.5% for small elements)
+ *
+ * Use sm for small state changes (toggles, presses), md for menus, toasts and panels,
+ * lg for dialogs and large surfaces. Enter decelerates, exit accelerates, move does both.
+ * Keyboard-triggered and very frequent actions should not animate at all.
+ */
+:root {
+  --motion-duration-sm: 240ms;
+  --motion-duration-md: 400ms;
+  --motion-duration-lg: 500ms;
+  --motion-ease-enter: cubic-bezier(0, 0, 0.3, 1);
+  --motion-ease-exit: cubic-bezier(0.4, 0.14, 1, 1);
+  --motion-ease-move: cubic-bezier(0.4, 0.14, 0.3, 1);
+  --motion-distance: 1; /* multiply translate distances by this */
+}
+
+/*
+ * Reduced motion: no movement, at most a short crossfade. Distances collapse to 0 when written as
+ * calc(16px * var(--motion-distance)); transforms written without it still need their own
+ * @media (prefers-reduced-motion: reduce) rule. Colour and opacity changes may stay.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-md: 150ms;
+    --motion-duration-lg: 200ms;
+    --motion-distance: 0;
+  }
+}
