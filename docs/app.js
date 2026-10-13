@@ -470,7 +470,7 @@
     const p = (ang, r) => [17 + r * Math.sin(ang * Math.PI / 180), 17 - r * Math.cos(ang * Math.PI / 180)];
     const [x1, y1] = p(a - half, 14), [x2, y2] = p(a + half, 14);
     b.innerHTML = `<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="currentColor" stroke-opacity="0.35"/><path d="M17 17 L${x1.toFixed(1)} ${y1.toFixed(1)} A14 14 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z" fill="currentColor" fill-opacity="0.75"/><text x="17" y="6.5" font-size="5" text-anchor="middle" fill="currentColor" font-family="monospace">N</text></svg><span>${esc(c.short)}<small>${esc(c.dir_label)}</small></span>`;
-    b.addEventListener('click', () => { camIdx = i; [...camList.children].forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); loadCam(); });
+    b.addEventListener('click', () => { camIdx = i; [...camList.children].forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); afterPaint(() => { if (camIdx === i) loadCam(); }); });
     camList.appendChild(b);
   });
   document.querySelectorAll('#ov-modes .btn').forEach((b) => b.addEventListener('click', () => {
