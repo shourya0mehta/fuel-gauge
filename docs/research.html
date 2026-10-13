@@ -220,6 +220,8 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
 .subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s; }
 .subnav a:hover { color: var(--ink); background: var(--bg-2); }
 .subnav a.on { color: #fff; background: var(--ink); }
+.net-error { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 14px; border-radius: 10px; background: var(--signal-soft); color: var(--signal-ink); font-size: 0.92rem; }
+.net-error[hidden] { display: none; }
 .controls .combo { flex: 1 1 320px; max-width: 560px; }
 .mast { padding-top: 72px; }
 .mast h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); max-width: 18ch; }
@@ -501,6 +503,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
   </div>
   <div class="prose col" id="net-prose"></div>
   <div class="cam-list" id="cam-list" role="group" aria-label="Live camera"></div>
+  <p class="net-error" id="net-error" role="alert" hidden><span></span> <button type="button" class="btn">Try again</button></p>
   <div class="net">
     <div class="viewer">
       <div class="photo" id="net-photo" style="aspect-ratio: 3 / 2">

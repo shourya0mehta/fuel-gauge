@@ -474,9 +474,18 @@
   document.querySelectorAll('#ov-modes .btn').forEach((b) => b.addEventListener('click', () => {
     mode = b.dataset.mode; document.querySelectorAll('#ov-modes .btn').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); renderLive();
   }));
+  $('net-error').querySelector('button').addEventListener('click', () => loadCam());
   async function loadCam() {
     const c = L.cams[camIdx];
-    if (!blocksCache[c.id]) { try { const B = await getJSON(c.blocks); B.uidx = []; B.usable.forEach((u, i) => { if (u) B.uidx.push(i); }); blocksCache[c.id] = B; } catch (e) { blocksCache[c.id] = null; } }
+    const err = $('net-error'); err.hidden = true;
+    if (!blocksCache[c.id]) {
+      try { const B = await getJSON(c.blocks); B.uidx = []; B.usable.forEach((u, i) => { if (u) B.uidx.push(i); }); blocksCache[c.id] = B; }
+      catch (e) {
+        // keep the photo, say what is missing, and offer a retry (nothing is cached, so the retry refetches)
+        err.querySelector('span').textContent = `Couldn't load the ground lookup for ${c.short}, so the distance, land cover and drying overlays are off. The photo is still shown.`;
+        err.hidden = false;
+      }
+    }
     const lv = liveOf(c), im = $('net-img');
     const want = lv && lv.latest ? lv.latest.url : c.img_oct;
     im.onerror = () => { if (im.getAttribute('src') !== c.img_oct) { im.src = c.img_oct; photoNote = 'median of late September and early October 2026 photos (live photo unavailable)'; renderLive(); } };
