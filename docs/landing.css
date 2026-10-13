@@ -101,7 +101,7 @@
 .pd-arrow { color: var(--signal); }
 .pd-arrow svg { width: 56px; height: 24px; display: block; }
 .pd-arrow path { stroke-dasharray: 6 6; animation: march 0.8s linear infinite; }
-.pd-json { margin: 0; overflow-x: auto; background: var(--ink); color: #EDEDED; border-radius: 12px; padding: 16px 18px; font-size: 0.8rem; line-height: 1.75; min-height: 214px; white-space: pre-wrap; }
+.pd-json { margin: 0; overflow-x: auto; background: var(--ink); color: #EDEDED; border-radius: 12px; padding: 16px 18px; font-size: 0.8rem; line-height: 1.75; min-height: 232px; white-space: pre; }
 .pd-json .k { color: #A8A8A8; }
 .pd-json .v { color: var(--signal-2); }
 @media (max-width: 960px) { .pixel { grid-template-columns: minmax(0, 1fr); } }

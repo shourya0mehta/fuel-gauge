@@ -41,6 +41,15 @@
   (() => {
     const t = $('typed'); if (!t || reduced) return;
     const words = ['fire lookout', 'webcam', 'PhenoCam', 'ridge camera', 'trail camera'];
+    // reserve the tallest the headline gets with any word (or none), so typing never moves the copy below it
+    const h1 = t.closest('h1');
+    const reserve = () => {
+      const keep = t.textContent; h1.style.minHeight = '';
+      let tallest = 0; for (const s of ['', ...words]) { t.textContent = s; tallest = Math.max(tallest, h1.offsetHeight); }
+      t.textContent = keep; h1.style.minHeight = tallest + 'px';
+    };
+    reserve(); if (document.fonts) document.fonts.ready.then(reserve);
+    let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(reserve, 150); });
     let w = 0, i = words[0].length, del = true;
     const tick = () => {
       const word = words[w];
