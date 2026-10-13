@@ -67,7 +67,7 @@
       steps.forEach((s, k) => { if (s.getBoundingClientRect().top < mid) act = k; });
       links.forEach((a, k) => { a.classList.toggle('active', k === act); a.classList.toggle('done', k < act); });
       const r = box.getBoundingClientRect(); const p = Math.max(0, Math.min(1, (mid - r.top) / r.height));
-      if (fill) fill.style.height = (p * 100).toFixed(1) + '%';
+      if (fill) fill.style.transform = `scaleY(${p.toFixed(3)})`;
     };
     addEventListener('scroll', upd, { passive: true }); addEventListener('resize', upd); upd();
   })();

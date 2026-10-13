@@ -120,10 +120,10 @@
 .rail { position: sticky; top: 104px; display: grid; grid-template-columns: 3px 1fr; gap: 18px; min-width: 0; }
 .tour > *, .step > *, .steps > * { min-width: 0; }
 .rail-bar { background: var(--line); border-radius: 3px; position: relative; overflow: hidden; }
-.rail-bar i { position: absolute; left: 0; right: 0; top: 0; height: 0%; background: var(--signal); border-radius: 3px; transition: height .2s linear; }
+.rail-bar i { position: absolute; inset: 0; background: var(--signal); border-radius: 3px; transform: scaleY(0); transform-origin: top; transition: transform var(--motion-duration-sm) var(--motion-ease-move); }
 .rail ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .rail a { display: flex; gap: 12px; align-items: center; padding: 9px 0; text-decoration: none; color: var(--slate); font-weight: 550; font-size: 1rem; transition: color .2s; }
-.rail a span { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 0.8rem; font-family: var(--mono); transition: all .25s; background: var(--bg); }
+.rail a span { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 0.8rem; font-family: var(--mono); transition: background-color var(--motion-duration-sm) var(--motion-ease-move), color var(--motion-duration-sm) var(--motion-ease-move), border-color var(--motion-duration-sm) var(--motion-ease-move), box-shadow var(--motion-duration-sm) var(--motion-ease-move); background: var(--bg); }
 .rail a:hover { color: var(--ink); }
 .rail a.done span { background: var(--ink); color: #fff; border-color: var(--ink); }
 .rail a.active { color: var(--ink); }
