@@ -13,6 +13,8 @@
   const fmt = (n, d = 0) => Number(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
   const pct = (x) => Math.round(x * 100) + '%';
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // let a press paint before the redraw it triggers
+  const afterPaint = (f) => requestAnimationFrame(() => setTimeout(f, 0));
   const LC = { 10: ['Tree cover', '#2F7D3B'], 20: ['Shrubland', '#A3A033'], 30: ['Grassland', '#DDB64C'], 40: ['Cropland', '#C38D60'], 50: ['Built-up', '#B04A3B'], 60: ['Bare ground', '#A99A8A'], 80: ['Water', '#3B78C2'], 90: ['Wetland', '#3B9C9C'] };
   const COMPASS = ['north', 'north-east', 'east', 'south-east', 'south', 'south-west', 'west', 'north-west'];
   const facing = (a) => COMPASS[Math.round(((a % 360) + 360) % 360 / 45) % 8];
@@ -120,7 +122,9 @@
     let cur = null, B = null, hover = -1, userHover = false, tourIdx = 0, tourPts = [], showLive = false, tel = null;
 
     function show(id, first) {
-      const c = byId[id], s = SK[id]; heroCam = id; listeners.forEach((f) => f(id));
+      const c = byId[id], s = SK[id]; heroCam = id;
+      // the hero repaints now; the sections that follow the hero camera redraw after that paint
+      if (first) listeners.forEach((f) => f(id)); else afterPaint(() => { if (heroCam === id) listeners.forEach((f) => f(id)); });
       showLive = false; img.src = c.img_oct; img.alt = `${c.name}, ${c.dir_label.toLowerCase()}, autumn 2026 composite`;
       pipImg.src = RT(id); pipImg.onerror = () => { pip.hidden = true; }; pip.hidden = false;
       $('cb-name').textContent = c.short + (c.dir_label ? ' ' + c.dir_label.replace('Looking ', '').replace(/^\w/, (m) => m.toUpperCase()) : '');
