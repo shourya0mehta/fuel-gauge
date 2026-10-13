@@ -40,6 +40,8 @@ pre.doc { margin: 0; font-family: var(--font); white-space: pre-wrap; font-size:
 pre.doc.mod { color: var(--ink); font-size: 0.98rem; }
 .intro { display: grid; gap: 12px; padding-top: 56px; }
 @media (max-width: 860px) { .docs { grid-template-columns: minmax(0, 1fr); } .side { position: static; max-height: none; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* phones: every control is at least 44 px to the thumb */
+@media (max-width: 760px) { .side a { min-height: 44px; display: flex; align-items: center; } }
 </style>
 </head>
 <body>

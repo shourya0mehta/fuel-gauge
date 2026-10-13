@@ -125,6 +125,15 @@ pre.code .s { color: #FFD3BD; }
 .foot a:hover { color: var(--ink); }
 @media (max-width: 760px) { .foot .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 
+/* phones: every control is at least 44 px to the thumb */
+@media (max-width: 760px) {
+  .brand { min-height: 44px; }
+  .nav .btn.small { height: 44px; min-width: 44px; }
+  .install button { height: 44px; }
+  .combo .combo-btn { height: 44px; }
+  .foot ul { gap: 0; }
+  .foot a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; }
+}
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 
 /* searchable dropdown (combo.js) */

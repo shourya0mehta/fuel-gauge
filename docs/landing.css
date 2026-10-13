@@ -310,3 +310,9 @@
 
 .night-note { margin: -14px 0 18px; font-size: 0.9rem; color: var(--slate); }
 @media (max-width: 560px) { .wide-only { display: none; } }
+
+/* phones: every control is at least 44 px to the thumb */
+@media (max-width: 760px) {
+  .seg button { min-height: 44px; }
+  .rail a { min-height: 44px; }
+}
