@@ -215,7 +215,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
 /* sub-navigation: where you are on this page */
-.subnav { position: sticky; top: 64px; z-index: 20; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); border-block: 1px solid var(--line); margin-top: 40px; }
+.subnav { position: sticky; top: 64px; z-index: 20; background: var(--bg); border-block: 1px solid var(--line); margin-top: 40px; }
 .subnav .wide { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 8px; }
 .subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s; }
 .subnav a:hover { color: var(--ink); background: var(--bg-2); }

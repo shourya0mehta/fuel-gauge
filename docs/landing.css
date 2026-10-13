@@ -61,7 +61,7 @@
 .pip-tag { position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 0.7rem; color: #fff;
   background: rgba(0,0,0,.6); border-radius: 999px; padding: 3px 9px 3px 8px; }
 .readout { position: absolute; left: 14px; bottom: 14px; width: 280px; background: rgba(255, 255, 255, .94); color: var(--ink); border-radius: 12px;
-  padding: 14px 16px; font-size: 0.86rem; line-height: 1.45; pointer-events: none; backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  padding: 14px 16px; font-size: 0.86rem; line-height: 1.45; pointer-events: none; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
 .readout .big { font-size: 1.7rem; font-weight: 650; letter-spacing: -0.04em; line-height: 1.05; }
 .readout .big small { font-size: 0.9rem; color: var(--slate); font-weight: 500; letter-spacing: 0; }
 .readout dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; margin: 10px 0 0; }
@@ -151,7 +151,7 @@
 @media (max-width: 760px) { .hood ul { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 960px) {
   .tour { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .rail { position: sticky; top: 64px; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); grid-template-columns: 1fr; gap: 0; padding: 8px 0; margin-inline: -16px; padding-inline: 16px; border-bottom: 1px solid var(--line); }
+  .rail { position: sticky; top: 64px; z-index: 5; background: var(--bg); grid-template-columns: 1fr; gap: 0; padding: 8px 0; margin-inline: -16px; padding-inline: 16px; border-bottom: 1px solid var(--line); }
   .rail-bar { display: none; }
   .rail ol { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
   .rail a { padding: 4px 10px 4px 4px; font-size: 0.88rem; white-space: nowrap; border-radius: 999px; }
