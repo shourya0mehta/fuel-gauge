@@ -63,7 +63,7 @@ code, pre, kbd { font-family: var(--mono); }
 
 /* nav */
 .nav { position: sticky; top: 0; z-index: 30; background: var(--bg);
-  border-bottom: 1px solid transparent; transition: border-color .2s; }
+  border-bottom: 1px solid transparent; transition: border-color var(--motion-duration-sm) var(--motion-ease-move); }
 .nav.scrolled { border-bottom-color: var(--line); }
 .nav .wrap { display: flex; align-items: center; gap: 30px; height: 64px; }
 .brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; font-weight: 650; font-size: 1.12rem; letter-spacing: -0.04em; }
@@ -78,7 +78,7 @@ code, pre, kbd { font-family: var(--mono); }
 /* buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 20px; border-radius: 999px; border: 1px solid var(--line);
   background: var(--bg); color: var(--ink); font: inherit; font-size: 0.95rem; font-weight: 550; letter-spacing: -0.01em; text-decoration: none; cursor: pointer; white-space: nowrap;
-  transition: transform .15s ease, background-color .15s, border-color .15s, box-shadow .15s; }
+  transition: transform var(--motion-duration-sm) var(--motion-ease-move), background-color var(--motion-duration-sm) var(--motion-ease-move), border-color var(--motion-duration-sm) var(--motion-ease-move), box-shadow var(--motion-duration-sm) var(--motion-ease-move); }
 .btn:hover { border-color: var(--ink); }
 .btn:active { transform: translateY(1px); }
 .btn.primary { background: var(--signal); border-color: var(--signal); color: #fff; box-shadow: 0 6px 20px -8px rgba(255, 91, 31, .7); }
@@ -87,7 +87,7 @@ code, pre, kbd { font-family: var(--mono); }
 .btn.dark:hover { background: #2A2A2A; }
 .btn.small { height: 38px; padding: 0 15px; font-size: 0.88rem; }
 .btn svg { width: 17px; height: 17px; }
-.btn .arr { transition: transform .15s; }
+.btn .arr { transition: transform var(--motion-duration-sm) var(--motion-ease-move); }
 .btn:hover .arr { transform: translateX(3px); }
 
 /* install chip */
@@ -112,7 +112,7 @@ pre.code .s { color: #FFD3BD; }
 .section-head.center .kicker { justify-self: center; }
 
 /* reveal: one gentle rise for content as it arrives; nothing moves with reduced motion */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity var(--motion-duration-lg) var(--motion-ease-enter), transform var(--motion-duration-lg) var(--motion-ease-enter); }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
@@ -140,14 +140,14 @@ pre.code .s { color: #FFD3BD; }
 .combo-native { position: absolute !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none !important; overflow: hidden; }
 .combo { position: relative; display: inline-block; min-width: 220px; max-width: 100%; }
 .combo-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; height: 42px; padding: 0 14px 0 16px; border: 1px solid var(--line);
-  border-radius: 999px; background: var(--bg); color: var(--ink); font: inherit; font-size: 0.92rem; font-weight: 500; cursor: pointer; text-align: left; transition: border-color .15s, box-shadow .15s; }
+  border-radius: 999px; background: var(--bg); color: var(--ink); font: inherit; font-size: 0.92rem; font-weight: 500; cursor: pointer; text-align: left; transition: border-color var(--motion-duration-sm) var(--motion-ease-move), box-shadow var(--motion-duration-sm) var(--motion-ease-move); }
 .combo-btn:hover, .combo.open .combo-btn { border-color: var(--ink); }
 .combo.open .combo-btn { box-shadow: 0 0 0 4px var(--signal-soft); }
 .combo-val { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.combo-btn svg { width: 16px; height: 16px; flex: none; color: var(--slate); transition: transform .2s; }
+.combo-btn svg { width: 16px; height: 16px; flex: none; color: var(--slate); transition: transform var(--motion-duration-sm) var(--motion-ease-move); }
 .combo.open .combo-btn svg { transform: rotate(180deg); }
 .combo-pop { position: absolute; left: 0; top: calc(100% + 8px); z-index: 40; width: max(100%, 300px); max-width: min(92vw, 520px); background: var(--bg); border: 1px solid var(--line);
-  border-radius: 16px; box-shadow: 0 24px 60px -24px rgba(14, 14, 14, .35), 0 2px 6px rgba(0,0,0,.05); overflow: hidden; animation: pop .16s ease-out; }
+  border-radius: 16px; box-shadow: 0 24px 60px -24px rgba(14, 14, 14, .35), 0 2px 6px rgba(0,0,0,.05); overflow: hidden; animation: pop var(--motion-duration-sm) var(--motion-ease-enter); }
 .combo.up .combo-pop { top: auto; bottom: calc(100% + 8px); }
 @keyframes pop { from { opacity: 0; transform: translateY(-4px) scale(.98); } }
 .combo-search { display: flex; align-items: center; gap: 10px; padding: 0 14px; border-bottom: 1px solid var(--line); }

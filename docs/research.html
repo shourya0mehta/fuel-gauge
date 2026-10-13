@@ -217,7 +217,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
 /* sub-navigation: where you are on this page */
 .subnav { position: sticky; top: 64px; z-index: 20; background: var(--bg); border-block: 1px solid var(--line); margin-top: 40px; }
 .subnav .wide { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 8px; }
-.subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s; }
+.subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background-color var(--motion-duration-sm) var(--motion-ease-move), color var(--motion-duration-sm) var(--motion-ease-move); }
 .subnav a:hover { color: var(--ink); background: var(--bg-2); }
 .subnav a.on { color: #fff; background: var(--ink); }
 .net-error { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 14px; border-radius: 10px; background: var(--signal-soft); color: var(--signal-ink); font-size: 0.92rem; }
