@@ -5,7 +5,9 @@
   const $ = (id) => document.getElementById(id);
   // let a press paint before the redraw it triggers
   const afterPaint = (f) => requestAnimationFrame(() => setTimeout(f, 0));
-  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  // colour tokens are fixed (the site has one theme), so read each once instead of forcing a style pass per mark
+  const cssCache = {};
+  const css = (name) => cssCache[name] ?? (cssCache[name] = getComputedStyle(document.documentElement).getPropertyValue(name).trim());
   const NS = 'http://www.w3.org/2000/svg';
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
   const DAY = 86400000;
@@ -528,13 +530,15 @@
         g.fillStyle = col; g.fillRect((i % B.gw) * bw, Math.floor(i / B.gw) * bh, bw + 0.3, bh + 0.3);
       }
       if (mode === 'dist') {
-        g.strokeStyle = 'rgba(255,255,255,0.9)'; g.lineWidth = 1.5;
+        // all contour segments in one path, stroked once
+        g.strokeStyle = 'rgba(255,255,255,0.9)'; g.lineWidth = 1.5; g.beginPath();
         for (const D of [1000, 3000, 10000]) for (let y = 0; y < B.gh; y++) for (let x = 0; x < B.gw - 1; x++) {
           const i = y * B.gw + x, a = B.dist[i], b2 = B.dist[i + 1], c2 = y < B.gh - 1 ? B.dist[i + B.gw] : null;
           if (a == null) continue;
-          if (b2 != null && (a < D) !== (b2 < D)) { g.beginPath(); g.moveTo((x + 1) * bw, y * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); g.stroke(); }
-          if (c2 != null && (a < D) !== (c2 < D)) { g.beginPath(); g.moveTo(x * bw, (y + 1) * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); g.stroke(); }
+          if (b2 != null && (a < D) !== (b2 < D)) { g.moveTo((x + 1) * bw, y * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); }
+          if (c2 != null && (a < D) !== (c2 < D)) { g.moveTo(x * bw, (y + 1) * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); }
         }
+        g.stroke();
         key.innerHTML = '<div class="scale"><span>Ground distance from the camera, from the terrain model: white lines at 1, 3 and 10 km; deeper blue is farther.</span></div>';
       } else if (mode === 'lc') {
         const present = new Set(B.lc.filter((v, i) => B.usable[i]));
