@@ -3,7 +3,11 @@
 (async function () {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  // let a press paint before the redraw it triggers
+  const afterPaint = (f) => requestAnimationFrame(() => setTimeout(f, 0));
+  // colour tokens are fixed (the site has one theme), so read each once instead of forcing a style pass per mark
+  const cssCache = {};
+  const css = (name) => cssCache[name] ?? (cssCache[name] = getComputedStyle(document.documentElement).getPropertyValue(name).trim());
   const NS = 'http://www.w3.org/2000/svg';
   const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
   const DAY = 86400000;
@@ -305,7 +309,7 @@
   sel.addEventListener('change', () => selectCam(sel.value, false));
   const camCache = {};
   let CD = null, CS = null, unit = 0, exRoi = true;
-  $('ex-roi').addEventListener('click', (e) => { exRoi = !exRoi; e.currentTarget.setAttribute('aria-pressed', String(exRoi)); drawExOverlay(); });
+  $('ex-roi').addEventListener('click', (e) => { exRoi = !exRoi; e.currentTarget.setAttribute('aria-pressed', String(exRoi)); afterPaint(drawExOverlay); });
   async function selectCam(cam, scroll) {
     selCam = cam; sel.value = cam;
     drawMap(); drawBoard();
@@ -338,7 +342,7 @@
       const b = document.createElement('button'); b.className = 'btn'; b.setAttribute('aria-pressed', String(i === unit));
       const [site, sp] = u.split(' | ');
       b.textContent = `${site}: ${sp.split(' ')[0][0]}. ${sp.split(' ').slice(1).join(' ')}`;
-      b.addEventListener('click', () => { unit = i; [...ub.children].forEach((c, j) => c.setAttribute('aria-pressed', String(j === i))); drawExPred(); });
+      b.addEventListener('click', () => { unit = i; [...ub.children].forEach((c, j) => c.setAttribute('aria-pressed', String(j === i))); afterPaint(() => { if (unit === i) drawExPred(); }); });
       ub.appendChild(b);
     });
     drawExOverlay(); drawCalendar(); drawExPred();
@@ -468,15 +472,24 @@
     const p = (ang, r) => [17 + r * Math.sin(ang * Math.PI / 180), 17 - r * Math.cos(ang * Math.PI / 180)];
     const [x1, y1] = p(a - half, 14), [x2, y2] = p(a + half, 14);
     b.innerHTML = `<svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="none" stroke="currentColor" stroke-opacity="0.35"/><path d="M17 17 L${x1.toFixed(1)} ${y1.toFixed(1)} A14 14 0 0 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z" fill="currentColor" fill-opacity="0.75"/><text x="17" y="6.5" font-size="5" text-anchor="middle" fill="currentColor" font-family="monospace">N</text></svg><span>${esc(c.short)}<small>${esc(c.dir_label)}</small></span>`;
-    b.addEventListener('click', () => { camIdx = i; [...camList.children].forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); loadCam(); });
+    b.addEventListener('click', () => { camIdx = i; [...camList.children].forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); afterPaint(() => { if (camIdx === i) loadCam(); }); });
     camList.appendChild(b);
   });
   document.querySelectorAll('#ov-modes .btn').forEach((b) => b.addEventListener('click', () => {
     mode = b.dataset.mode; document.querySelectorAll('#ov-modes .btn').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); renderLive();
   }));
+  $('net-error').querySelector('button').addEventListener('click', () => loadCam());
   async function loadCam() {
     const c = L.cams[camIdx];
-    if (!blocksCache[c.id]) { try { const B = await getJSON(c.blocks); B.uidx = []; B.usable.forEach((u, i) => { if (u) B.uidx.push(i); }); blocksCache[c.id] = B; } catch (e) { blocksCache[c.id] = null; } }
+    const err = $('net-error'); err.hidden = true;
+    if (!blocksCache[c.id]) {
+      try { const B = await getJSON(c.blocks); B.uidx = []; B.usable.forEach((u, i) => { if (u) B.uidx.push(i); }); blocksCache[c.id] = B; }
+      catch (e) {
+        // keep the photo, say what is missing, and offer a retry (nothing is cached, so the retry refetches)
+        err.querySelector('span').textContent = `Couldn't load the ground lookup for ${c.short}, so the distance, land cover and drying overlays are off. The photo is still shown.`;
+        err.hidden = false;
+      }
+    }
     const lv = liveOf(c), im = $('net-img');
     const want = lv && lv.latest ? lv.latest.url : c.img_oct;
     im.onerror = () => { if (im.getAttribute('src') !== c.img_oct) { im.src = c.img_oct; photoNote = 'median of late September and early October 2026 photos (live photo unavailable)'; renderLive(); } };
@@ -517,13 +530,15 @@
         g.fillStyle = col; g.fillRect((i % B.gw) * bw, Math.floor(i / B.gw) * bh, bw + 0.3, bh + 0.3);
       }
       if (mode === 'dist') {
-        g.strokeStyle = 'rgba(255,255,255,0.9)'; g.lineWidth = 1.5;
+        // all contour segments in one path, stroked once
+        g.strokeStyle = 'rgba(255,255,255,0.9)'; g.lineWidth = 1.5; g.beginPath();
         for (const D of [1000, 3000, 10000]) for (let y = 0; y < B.gh; y++) for (let x = 0; x < B.gw - 1; x++) {
           const i = y * B.gw + x, a = B.dist[i], b2 = B.dist[i + 1], c2 = y < B.gh - 1 ? B.dist[i + B.gw] : null;
           if (a == null) continue;
-          if (b2 != null && (a < D) !== (b2 < D)) { g.beginPath(); g.moveTo((x + 1) * bw, y * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); g.stroke(); }
-          if (c2 != null && (a < D) !== (c2 < D)) { g.beginPath(); g.moveTo(x * bw, (y + 1) * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); g.stroke(); }
+          if (b2 != null && (a < D) !== (b2 < D)) { g.moveTo((x + 1) * bw, y * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); }
+          if (c2 != null && (a < D) !== (c2 < D)) { g.moveTo(x * bw, (y + 1) * bh); g.lineTo((x + 1) * bw, (y + 1) * bh); }
         }
+        g.stroke();
         key.innerHTML = '<div class="scale"><span>Ground distance from the camera, from the terrain model: white lines at 1, 3 and 10 km; deeper blue is farther.</span></div>';
       } else if (mode === 'lc') {
         const present = new Set(B.lc.filter((v, i) => B.usable[i]));

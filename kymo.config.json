@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://localhost:8765",
+  "routes": ["/", "/research.html", "/docs.html"],
+  "viewports": ["desktop", "mobile"]
+}

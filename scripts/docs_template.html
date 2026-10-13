@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="site.css">
 <style>
 .docs { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 56px; padding-top: 48px; }
@@ -39,6 +40,8 @@ pre.doc { margin: 0; font-family: var(--font); white-space: pre-wrap; font-size:
 pre.doc.mod { color: var(--ink); font-size: 0.98rem; }
 .intro { display: grid; gap: 12px; padding-top: 56px; }
 @media (max-width: 860px) { .docs { grid-template-columns: minmax(0, 1fr); } .side { position: static; max-height: none; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* phones: every control is at least 44 px to the thumb */
+@media (max-width: 760px) { .side a { min-height: 44px; display: flex; align-items: center; } }
 </style>
 </head>
 <body>

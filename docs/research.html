@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..800&family=Geist+Mono:wght@400..600&display=swap">
+<link rel="stylesheet" href="motion.css">
 <link rel="stylesheet" href="site.css">
 <style>
 /* Research pages: same system as the landing page (site.css); figures and tables keep their own layout. */
@@ -214,15 +215,19 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
 /* sub-navigation: where you are on this page */
-.subnav { position: sticky; top: 64px; z-index: 20; background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(12px); border-block: 1px solid var(--line); margin-top: 40px; }
+.subnav { position: sticky; top: 64px; z-index: 20; background: var(--bg); border-block: 1px solid var(--line); margin-top: 40px; }
 .subnav .wide { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; padding-block: 8px; }
-.subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background .15s, color .15s; }
+.subnav a { flex: none; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; color: var(--slate); padding: 6px 12px; border-radius: 999px; transition: background-color var(--motion-duration-sm) var(--motion-ease-move), color var(--motion-duration-sm) var(--motion-ease-move); }
 .subnav a:hover { color: var(--ink); background: var(--bg-2); }
 .subnav a.on { color: #fff; background: var(--ink); }
+.net-error { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; padding: 10px 14px; border-radius: 10px; background: var(--signal-soft); color: var(--signal-ink); font-size: 0.92rem; }
+.net-error[hidden] { display: none; }
 .controls .combo { flex: 1 1 320px; max-width: 560px; }
 .mast { padding-top: 72px; }
 .mast h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); max-width: 18ch; }
 .sec-head .label { font-size: 0.88rem; }
+/* phones: every control is at least 44 px to the thumb */
+@media (max-width: 760px) { button.btn { min-height: 44px; } .subnav a { min-height: 44px; } }
 </style>
 </head>
 <body>
@@ -255,10 +260,10 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
   <p class="kicker" style="justify-self:start"><span class="pulse"></span>Research, built with the Fuel Gauge pipeline <span id="mast-span" style="color:var(--slate);font-weight:500">2003–2026</span></p>
   <h1>What fire cameras can see, and what their photos can't</h1>
   <p class="dek">Thousands of cameras watch Western hillsides for wildfire smoke. This project ties them to the ground to measure what they can actually see, and tests whether the same photos can tell how dry the brush is.</p>
-  <p class="answer" id="answer"></p>
+  <p class="answer" id="answer"><b>Two answers.</b> California's fire cameras see less than you'd think: 46% of the state's wildland is in line of sight of one, and 21% of the big fires since 2020 started where no camera could see even a 300 m smoke column. And a camera can't read fuel moisture from how green the brush looks. Across 21 cameras and 3,832 field samples, colour and near-infrared barely beat the calendar, and satellites do only a little better.</p>
   <p class="byline">Shourya Mehta. Built only on public archives; <a href="https://github.com/shourya0mehta/fuel-gauge">code and data on GitHub</a>, <a href="./">about the pipeline</a>.</p>
-  <div class="figures" id="figures"></div>
-  <div class="findings" id="findings"></div>
+  <div class="figures" id="figures"><div><b>1,309</b><span>California fire cameras traced across the terrain</span></div><div><b>46%</b><span>of the state's wildland in line of sight of one</span></div><div><b>29,047</b><span>daily photos from 21 cameras registered onto fixed views</span></div><div><b>3,832</b><span>field samples of live fuel moisture, 31 species</span></div><div><b>8</b><span>live fire cameras, re-measured every morning</span></div></div>
+  <div class="findings" id="findings"><div><span class="k"><i style="background:var(--cov2)"></i>Coverage</span><p>46% of California's wildland is in line of sight of an ALERTCalifornia camera and 20% of two. Of 277 fires over 1,000 acres since 2020, 21% started where no camera could see a 300 m smoke column; together they burned 1.4 million acres. Looking back, ten well-placed new sites would have seen 88% of the acres burned by fires no camera could see.</p></div><div><span class="k"><i style="background:var(--cam)"></i>Fuel moisture</span><p>A colour-corrected camera beats the calendar at 10 of 21 cameras, and pooled it has the same error as season alone. Adding near-infrared on 10 cameras didn't help: its anomaly correlation was 0.02, against 0.10 for colour on the same samples.</p></div><div><span class="k"><i style="background:var(--straw)"></i>Why</span><p>Greenness carries little of the signal. Satellite infrared at the sampling site does best and still reaches an anomaly correlation of only 0.31. Year-to-year swings in fuel moisture barely show in how green a hillside looks, from a ridge or from orbit.</p></div></div>
 </header>
 
 <nav class="subnav" id="subnav" aria-label="On this page"><div class="wide">
@@ -500,6 +505,7 @@ footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--rule);
   </div>
   <div class="prose col" id="net-prose"></div>
   <div class="cam-list" id="cam-list" role="group" aria-label="Live camera"></div>
+  <p class="net-error" id="net-error" role="alert" hidden><span></span> <button type="button" class="btn">Try again</button></p>
   <div class="net">
     <div class="viewer">
       <div class="photo" id="net-photo" style="aspect-ratio: 3 / 2">
